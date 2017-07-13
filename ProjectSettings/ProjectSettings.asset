@@ -6,6 +6,7 @@ PlayerSettings:
   serializedVersion: 12
   productGUID: 6f1c150c1d09e34438d8b828344ac6d5
   AndroidProfiler: 0
+  AndroidFilterTouchesWhenObscured: 0
   defaultScreenOrientation: 4
   targetDevice: 2
   useOnDemandResources: 0
@@ -38,8 +39,6 @@ PlayerSettings:
     width: 1
     height: 1
   m_SplashScreenLogos: []
-  m_SplashScreenBackgroundLandscape: {fileID: 0}
-  m_SplashScreenBackgroundPortrait: {fileID: 0}
   m_VirtualRealitySplashScreen: {fileID: 0}
   m_HolographicTrackingLossScreen: {fileID: 0}
   defaultScreenWidth: 1024
@@ -49,7 +48,6 @@ PlayerSettings:
   m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   m_MTRendering: 1
-  m_MobileMTRendering: 0
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
   iosShowActivityIndicatorOnLoading: -1
   androidShowActivityIndicatorOnLoading: -1
@@ -64,8 +62,10 @@ PlayerSettings:
   useOSAutorotation: 1
   use32BitDisplayBuffer: 0
   disableDepthAndStencilBuffers: 0
+  androidBlitType: 0
   defaultIsFullScreen: 0
   defaultIsNativeResolution: 1
+  macRetinaSupport: 0
   runInBackground: 1
   captureSingleScreen: 0
   muteOtherAudioSources: 0
@@ -79,7 +79,7 @@ PlayerSettings:
   useMacAppStoreValidation: 0
   macAppStoreCategory: public.app-category.games
   gpuSkinning: 0
-  graphicsJobs: 0
+  graphicsJobs: 1
   xboxPIXTextureCapture: 0
   xboxEnableAvatar: 0
   xboxEnableKinect: 0
@@ -95,6 +95,7 @@ PlayerSettings:
   xboxEnableHeadOrientation: 0
   xboxEnableGuest: 0
   xboxEnablePIXSampling: 0
+  metalFramebufferOnly: 0
   n3dsDisableStereoscopicView: 0
   n3dsEnableSharedListOpt: 1
   n3dsEnableVSync: 0
@@ -103,6 +104,7 @@ PlayerSettings:
   xboxOneMonoLoggingLevel: 0
   xboxOneLoggingLevel: 1
   xboxOneDisableEsram: 0
+  xboxOnePresentImmediateThreshold: 0
   videoMemoryForVertexBuffers: 0
   psp2PowerMode: 0
   psp2AcquireBGM: 1
@@ -134,12 +136,17 @@ PlayerSettings:
     daydream:
       depthFormat: 0
       useSustainedPerformanceMode: 0
+      enableVideoLayer: 0
+      useProtectedVideoMemory: 0
     hololens:
       depthFormat: 1
   protectGraphicsMemory: 0
   useHDRDisplay: 0
+  m_ColorGamuts: 00000000
   targetPixelDensity: 0
   resolutionScalingMode: 0
+  androidSupportedAspectRatio: 1
+  androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.Company.ProductName
     Standalone: unity.Unity Technologies.Native Rendering Plugin Example
@@ -226,6 +233,8 @@ PlayerSettings:
   AndroidKeyaliasName: 
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
+  AndroidEnableTango: 0
+  AndroidTangoUsesCamera: 1
   androidEnableBanner: 1
   m_AndroidBanners:
   - width: 320
@@ -259,7 +268,7 @@ PlayerSettings:
     m_Automatic: 1
   - m_BuildTarget: iOSSupport
     m_APIs: 10000000
-    m_Automatic: 1
+    m_Automatic: 0
   m_BuildTargetVRSettings:
   - m_BuildTarget: Android
     m_Enabled: 0
@@ -315,10 +324,14 @@ PlayerSettings:
   - m_BuildTarget: tvOS
     m_Enabled: 0
     m_Devices: []
+  m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
-  webPlayerTemplate: APPLICATION:Default
   m_TemplateCustomTags: {}
+  mobileMTRendering:
+    Android: 1
+    iPhone: 1
+    tvOS: 1
   wiiUTitleID: 0005000011000000
   wiiUGroupID: 00010000
   wiiUCommonSaveSize: 4096
@@ -581,11 +594,11 @@ PlayerSettings:
   webGLUseWasm: 0
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
-    1: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;CROSS_PLATFORM_INPUT
-    4: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    7: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;CROSS_PLATFORM_INPUT;MOBILE_INPUT
+    1: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;CROSS_PLATFORM_INPUT;USES_ADDRESS_BOOK;USES_BILLING;USES_CLOUD_SERVICES;USES_GAME_SERVICES;USES_MEDIA_LIBRARY;USES_NETWORK_CONNECTIVITY;USES_NOTIFICATION_SERVICE;USES_SHARING;USES_TWITTER;USES_WEBVIEW
+    4: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;CROSS_PLATFORM_INPUT;MOBILE_INPUT;USES_ADDRESS_BOOK;USES_BILLING;USES_CLOUD_SERVICES;USES_GAME_SERVICES;USES_MEDIA_LIBRARY;USES_NETWORK_CONNECTIVITY;USES_NOTIFICATION_SERVICE;USES_SHARING;USES_TWITTER;USES_WEBVIEW
+    7: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;CROSS_PLATFORM_INPUT;MOBILE_INPUT;USES_ADDRESS_BOOK;USES_BILLING;USES_CLOUD_SERVICES;USES_GAME_SERVICES;USES_MEDIA_LIBRARY;USES_NETWORK_CONNECTIVITY;USES_NOTIFICATION_SERVICE;USES_SHARING;USES_TWITTER;USES_WEBVIEW
     13: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER
-    14: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;MOBILE_INPUT
+    14: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;MOBILE_INPUT;USES_ADDRESS_BOOK;USES_BILLING;USES_CLOUD_SERVICES;USES_GAME_SERVICES;USES_MEDIA_LIBRARY;USES_NETWORK_CONNECTIVITY;USES_NOTIFICATION_SERVICE;USES_SHARING;USES_TWITTER;USES_WEBVIEW
     17: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER;MOBILE_INPUT
     18: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER
     19: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_4;PLAYMAKER_1_8_OR_NEWER
