@@ -1,0 +1,110 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: USplashScreen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a2d17ed8d8f4a949b32f2f03720c837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NextLevel: MainMenu
+  StartWait: .5
+  m_uss:
+  - SplashLogo: {fileID: 2800000, guid: 9c6d757f56f39494da041cbc31dae6aa, type: 3}
+    CustomRect:
+      serializedVersion: 2
+      x: 126
+      y: -23
+      width: 400
+      height: 400
+    m_time: 1.70000005
+    m_fadeinspeed: 3
+    m_fadeoutspeed: 4
+    m_alpha: 1
+    m_TimeForNext: 1
+    m_splashIn: {fileID: 8300000, guid: 618a574b41342c84981eb5e32940e511, type: 3}
+    m_splashOut: {fileID: 8300000, guid: ce11a61b39bcad64ca5f5b0f5cd424a0, type: 3}
+    m_volume: 1
+    m_pitch: 1
+    isFullScreen: 1
+    m_show: 0
+  - SplashLogo: {fileID: 2800000, guid: 4956d2373300ef34999aebcb101b0505, type: 3}
+    CustomRect:
+      serializedVersion: 2
+      x: -200
+      y: -100
+      width: 400
+      height: 200
+    m_time: 2
+    m_fadeinspeed: 7
+    m_fadeoutspeed: 4
+    m_alpha: 2
+    m_TimeForNext: 1.20000005
+    m_splashIn: {fileID: 8300000, guid: f796b076a6ffdb34ca880c7f71a1dbfc, type: 3}
+    m_splashOut: {fileID: 8300000, guid: 8c508a401b0cc794080725addf53072b, type: 3}
+    m_volume: 1
+    m_pitch: 1
+    isFullScreen: 0
+    m_show: 0
+  - SplashLogo: {fileID: 2800000, guid: 5b6f3cf115cb27d43ac35c27bbb927c7, type: 3}
+    CustomRect:
+      serializedVersion: 2
+      x: -300
+      y: -100
+      width: 600
+      height: 200
+    m_time: 4
+    m_fadeinspeed: 3
+    m_fadeoutspeed: 3
+    m_alpha: 2
+    m_TimeForNext: 1
+    m_splashIn: {fileID: 8300000, guid: 88d48f011ccc2ec419575f87452e95ab, type: 3}
+    m_splashOut: {fileID: 8300000, guid: 462f56d540ffb06489293ee310eace1a, type: 3}
+    m_volume: 1
+    m_pitch: 1
+    isFullScreen: 0
+    m_show: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

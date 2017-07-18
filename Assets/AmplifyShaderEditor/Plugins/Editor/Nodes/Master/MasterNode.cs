@@ -327,6 +327,8 @@ namespace AmplifyShaderEditor
 			m_removeShaderKeywordStyle = null;
 			m_smallAddShaderKeywordItemStyle = null;
 			m_smallRemoveShaderKeywordStyle = null;
+			m_shaderKeywords.Clear();
+			m_shaderKeywords = null;
 		}
 		
 		public static void OpenShaderBody( ref string result, string name )

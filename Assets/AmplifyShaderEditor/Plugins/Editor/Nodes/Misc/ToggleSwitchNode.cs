@@ -24,6 +24,8 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private WirePortDataType m_mainDataType = WirePortDataType.FLOAT;
 
+		private int m_cachedPropertyId = -1;
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -36,6 +38,17 @@ namespace AmplifyShaderEditor
 			m_customPrefix = "Toggle Switch";
 			m_availableAttribs.Add( new PropertyAttributes( "Toggle", "[Toggle]" ) );
 			m_freeType = false;
+			m_previewShaderGUID = "beeb138daeb592a4887454f81dba2b3f";
+		}
+
+		public override void SetPreviewInputs()
+		{
+			base.SetPreviewInputs();
+
+			if ( m_cachedPropertyId == -1 )
+				m_cachedPropertyId = Shader.PropertyToID( "_Current" );
+
+			PreviewMaterial.SetInt( m_cachedPropertyId, m_currentSelectedInput );
 		}
 
 		public override void OnConnectedOutputNodeChanges( int inputPortId, int otherNodeId, int otherPortId, string name, WirePortDataType type )
@@ -118,10 +131,11 @@ namespace AmplifyShaderEditor
 			return string.Format( Constants.UniformDec, UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT ), m_propertyName );
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			dataType = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT );
 			dataName = m_propertyName;
+			return true;
 		}
 
 		public override void UpdateMaterial( Material mat )

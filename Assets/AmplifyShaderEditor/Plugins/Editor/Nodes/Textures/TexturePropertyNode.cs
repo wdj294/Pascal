@@ -61,7 +61,7 @@ namespace AmplifyShaderEditor
 		protected bool m_isNormalMap;
 
 		[SerializeField]
-		protected Type m_textureType;
+		protected System.Type m_textureType;
 
 		[SerializeField]
 		protected bool m_isTextureFetched;
@@ -594,6 +594,13 @@ namespace AmplifyShaderEditor
 			m_textureFetchedValue = string.Empty;
 		}
 
+		public override void ResetOutputLocalsIfNot( MasterNodePortCategory category )
+		{
+			base.ResetOutputLocalsIfNot( category );
+			m_isTextureFetched = false;
+			m_textureFetchedValue = string.Empty;
+		}
+
 		public override void UpdateMaterial( Material mat )
 		{
 			base.UpdateMaterial( mat );
@@ -751,10 +758,11 @@ namespace AmplifyShaderEditor
 			return string.Empty;
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			dataType = UIUtils.TextureTypeToCgType( m_currentType );
 			dataName = m_propertyName;
+			return true;
 		}
 
 		public virtual string CurrentPropertyReference

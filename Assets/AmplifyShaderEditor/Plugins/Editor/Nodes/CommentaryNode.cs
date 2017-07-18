@@ -340,7 +340,7 @@ namespace AmplifyShaderEditor
 				EditorGUIUtility.AddCursorRect( m_resizeRightIconCoords, MouseCursor.ResizeUpLeft );
 				if ( GUI.RepeatButton( m_resizeRightIconCoords, string.Empty, UIUtils.GetCustomStyle( CustomStyle.CommentaryResizeButton ) ) )
 				{
-					if ( !m_isResizingRight && !m_isResizingLeft )
+					if ( !m_isResizingRight )
 					{
 						m_isResizingRight = true;
 						ContainerGraph.ParentWindow.ForceAutoPanDir = true;
@@ -361,7 +361,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						Vector2 currSize = ( drawInfo.TransformedMousePos - m_resizeStartPoint ) / drawInfo.InvertedZoom;
+						Vector2 currSize = ( drawInfo.TransformedMousePos - m_resizeStartPoint ) /*/ drawInfo.InvertedZoom*/;
 						m_resizeStartPoint = drawInfo.TransformedMousePos;
 						if ( m_resizeAxis != eResizeAxis.Y_AXIS )
 						{
@@ -394,7 +394,7 @@ namespace AmplifyShaderEditor
 				EditorGUIUtility.AddCursorRect( m_resizeLeftIconCoords, MouseCursor.ResizeUpRight );
 				if ( GUI.RepeatButton( m_resizeLeftIconCoords, string.Empty, UIUtils.GetCustomStyle( CustomStyle.CommentaryResizeButtonInv ) ) )
 				{
-					if ( !m_isResizingRight && !m_isResizingLeft )
+					if ( !m_isResizingLeft )
 					{
 						m_isResizingLeft = true;
 						ContainerGraph.ParentWindow.ForceAutoPanDir = true;
@@ -415,7 +415,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						Vector2 currSize = ( drawInfo.TransformedMousePos - m_resizeStartPoint ) / drawInfo.InvertedZoom;
+						Vector2 currSize = ( drawInfo.TransformedMousePos - m_resizeStartPoint ) /*/ drawInfo.InvertedZoom*/;
 						m_resizeStartPoint = drawInfo.TransformedMousePos;
 						if ( m_resizeAxis != eResizeAxis.Y_AXIS )
 						{

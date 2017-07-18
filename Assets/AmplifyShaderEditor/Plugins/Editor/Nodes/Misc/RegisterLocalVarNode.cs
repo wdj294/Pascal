@@ -169,7 +169,7 @@ namespace AmplifyShaderEditor
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_autoIndexActive );
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
 			if ( m_autoOrderIndex < nodeData.OrderIndex )
 			{
@@ -181,7 +181,7 @@ namespace AmplifyShaderEditor
 				nodeData.OrderIndex -= 1;
 			}
 
-			base.PropagateNodeData( nodeData );
+			base.PropagateNodeData( nodeData , ref dataCollector );
 		}
 
 		public override void ResetNodeData()

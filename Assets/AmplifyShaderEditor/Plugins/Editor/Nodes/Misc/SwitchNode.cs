@@ -8,6 +8,7 @@ namespace AmplifyShaderEditor
 	[NodeAttributes( "Debug Switch", "Misc", "Hard Switch between any of its input ports" )]
 	public class SwitchNode : ParentNode
 	{
+		private const string Info = "This is a Debug node which only generates the source for the selected port. This means that no properties are generated for other ports and information might be lost.";
 		private const string InputPortName = "In ";
 	
 		private const string CurrSelectedStr = "Current";
@@ -28,18 +29,30 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private int m_maxAmountInputs = 2;
 
+		private int m_cachedPropertyId = -1;
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
 			for ( int i = 0; i < MaxAllowedAmount; i++ )
 			{
 				AddInputPort( WirePortDataType.FLOAT, false, InputPortName + i );
-				//m_inputPorts[ i ].IsEditable = true;
 				m_inputPorts[ i ].Visible = ( i < 2 );
 			}
 			AddOutputPort( WirePortDataType.FLOAT, m_inputPorts[0].Name );
 			m_insideSize.Set( 50, 25 );
-			m_autoWrapProperties = true;
+			m_autoWrapProperties = false;
+			m_previewShaderGUID = "a58e46feaa5e3d14383bfeac24d008bc";
+		}
+
+		public override void SetPreviewInputs()
+		{
+			base.SetPreviewInputs();
+
+			if ( m_cachedPropertyId == -1 )
+				m_cachedPropertyId = Shader.PropertyToID( "_Current" );
+
+			PreviewMaterial.SetInt( m_cachedPropertyId, m_currentSelectedInput );
 		}
 
 		public override void OnConnectedOutputNodeChanges( int inputPortId, int otherNodeId, int otherPortId, string name, WirePortDataType type )
@@ -94,6 +107,13 @@ namespace AmplifyShaderEditor
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
+			NodeUtils.DrawPropertyGroup( ref m_propertiesFoldout, Constants.ParameterLabelStr, DrawDebugOptions );
+		
+			EditorGUILayout.HelpBox( Info, MessageType.Warning );
+		}
+
+		void DrawDebugOptions()
+		{
 			EditorGUI.BeginChangeCheck();
 			m_currentSelectedInput = EditorGUILayoutIntPopup( CurrSelectedStr, m_currentSelectedInput, AvailableInputsLabels, AvailableInputsValues );
 			if ( EditorGUI.EndChangeCheck() )
@@ -131,13 +151,19 @@ namespace AmplifyShaderEditor
 			base.ReadFromString( ref nodeParams );
 			m_currentSelectedInput = Convert.ToInt32( GetCurrentParam( ref nodeParams ) );
 			m_maxAmountInputs = Convert.ToInt32( GetCurrentParam( ref nodeParams ) );
-			if ( m_maxAmountInputs > 2 )
+
+			for ( int i = 0; i < MaxAllowedAmount; i++ )
 			{
-				for ( int i = 2; i < m_maxAmountInputs; i++ )
-				{
-					m_inputPorts[ i ].Visible = true;
-				}
+				m_inputPorts[ i ].Visible = ( i < m_maxAmountInputs );
 			}
+
+			if ( m_currentSelectedInput >= m_maxAmountInputs )
+			{
+				m_currentSelectedInput = m_maxAmountInputs - 1;
+				UpdateOutput();
+			}
+
+			UpdateLabels();
 			m_sizeIsDirty = true;
 		}
 

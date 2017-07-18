@@ -13,6 +13,8 @@ namespace AmplifyShaderEditor
 		public readonly static string UndoRegisterFullGrapId = "Register Graph";
 		public readonly static string UndoAddNodeToCommentaryId = "Add node to Commentary";
 		public readonly static string UndoRemoveNodeFromCommentaryId = "Remove node from Commentary";
+		public readonly static string UndoCreateDynamicPortId = "Create Dynamic Port";
+		public readonly static string UndoDeleteDynamicPortId = "Destroy Dynamic Port";
 		public readonly static string UndoCreateNodeId = "Create Object";
 		public readonly static string UndoDeleteNodeId = "Destroy Object";
 		public readonly static string UndoDeleteConnectionId = "Destroy Connection";
@@ -44,6 +46,7 @@ namespace AmplifyShaderEditor
 		public readonly static Color ModeIconColor = new Color( 1f, 1f, 1f, 0.75f );
 
 		public readonly static Color PortTextColor = new Color( 1f, 1f, 1f, 0.5f );
+		public readonly static Color PortLockedTextColor = new Color( 1f, 1f, 1f, 0.35f );
 		public readonly static Color BoxSelectionColor = new Color( 1f, 1f, 1f, 0.5f );
 
 		public readonly static Color NodeSelectedColor = new Color( 0.5f, 0.5f, 1f, 1f );
@@ -104,7 +107,7 @@ namespace AmplifyShaderEditor
 		public readonly static string UnpackNormalScale = "UnpackNormal( {0} , {1} )";
 
 		public readonly static string NodesDumpFormat = "{0}:,{1},{2}\n";
-
+		public readonly static string TagFormat = " \"{0}\" = \"{1}\"";
 
 		public readonly static string LocalVarIdentation = "\t\t\t";
 		public readonly static string SimpleLocalValueDec = LocalVarIdentation + "{0} {1};\n";

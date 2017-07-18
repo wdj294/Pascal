@@ -1,4 +1,4 @@
-﻿Shader "Hidden/WorldSpaceLightDirHlpNode"
+Shader "Hidden/WorldSpaceLightDirHlpNode"
 {
 	SubShader
 	{
@@ -13,15 +13,16 @@
 			{
 				float2 p = 2 * i.uv - 1;
 				float r = sqrt( dot(p,p) );
+				r = saturate( r );
 				//if ( r < 1 )
 				//{
 					float2 uvs;
 					float f = ( 1 - sqrt( 1 - r ) ) / r;
 					uvs.x = p.x;
 					uvs.y = p.y;
-					float3 worldPos = float3( uvs, f-1);
+					float3 worldPos = float3( uvs, (f-1) * 2);
 
-					return float4 (UnityWorldSpaceLightDir(worldPos), 1);
+					return float4 ( normalize( UnityWorldSpaceLightDir(worldPos) ), 1);
 				//}
 				//else {
 				//	return 0;

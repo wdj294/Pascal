@@ -24,10 +24,10 @@ namespace AmplifyShaderEditor
 			m_previewShaderGUID = "61f0b80493c9b404d8c7bf56d59c3f81";
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
-			base.PropagateNodeData( nodeData );
-			UIUtils.CurrentDataCollector.DirtyNormal = true;
+			base.PropagateNodeData( nodeData , ref dataCollector );
+			dataCollector.DirtyNormal = true;
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )

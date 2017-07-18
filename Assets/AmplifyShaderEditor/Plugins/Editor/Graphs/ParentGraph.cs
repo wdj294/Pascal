@@ -117,7 +117,7 @@ namespace AmplifyShaderEditor
 		private List<ParentNode> m_selectedNodes;
 		private List<ParentNode> m_markedForDeletion;
 		private List<WireReference> m_highlightedWires;
-		private Type m_masterNodeDefaultType;
+		private System.Type m_masterNodeDefaultType;
 
 		private NodeGrid m_nodeGrid;
 
@@ -181,6 +181,19 @@ namespace AmplifyShaderEditor
 			//m_overlayThumbnail = GUI.skin.FindStyle( "ObjectFieldThumbOverlay2" );
 		}
 
+		public void UpdateRegisters()
+		{
+			m_samplerNodes.UpdateNodeArr();
+			m_propertyNodes.UpdateNodeArr();
+			m_functionInputNodes.UpdateNodeArr();
+			m_functionNodes.UpdateNodeArr();
+			m_functionOutputNodes.UpdateNodeArr();
+			m_texturePropertyNodes.UpdateNodeArr();
+			m_textureArrayNodes.UpdateNodeArr();
+			m_screenColorNodes.UpdateNodeArr();
+			m_localVarNodes.UpdateNodeArr();
+		}
+
 		public int GetValidId()
 		{
 			return m_validNodeId++;
@@ -239,7 +252,7 @@ namespace AmplifyShaderEditor
 		{
 			for ( int i = 0; i < m_nodes.Count; i++ )
 			{
-				if( m_nodes[ i ] != null )
+				if ( m_nodes[ i ] != null )
 				{
 					Undo.ClearUndo( m_nodes[ i ] );
 					m_nodes[ i ].Destroy();
@@ -958,6 +971,7 @@ namespace AmplifyShaderEditor
 			if ( nullCount == m_nodes.Count )
 				m_nodes.Clear();
 
+			ChangedLightingModel = false;
 
 			return repaint;
 		}
@@ -1424,7 +1438,7 @@ namespace AmplifyShaderEditor
 			if ( ( object ) node == null )
 				return;
 
-			if( registerUndo )
+			if ( registerUndo )
 			{
 				UIUtils.MarkUndoAction();
 				Undo.RegisterCompleteObjectUndo( ParentWindow, Constants.UndoDeleteConnectionId );
@@ -1434,7 +1448,7 @@ namespace AmplifyShaderEditor
 			if ( isInput )
 			{
 				InputPort inputPort = node.GetInputPortByUniqueId( portId );
-				if ( inputPort.IsConnected )
+				if ( inputPort != null && inputPort.IsConnected )
 				{
 
 					if ( node.ConnStatus == NodeConnectionStatus.Connected )
@@ -1461,7 +1475,7 @@ namespace AmplifyShaderEditor
 			else
 			{
 				OutputPort outputPort = node.GetOutputPortByUniqueId( portId );
-				if ( outputPort.IsConnected )
+				if ( outputPort != null && outputPort.IsConnected )
 				{
 					if ( propagateCallback )
 						node.OnOutputPortDisconnected( portId );
@@ -1805,7 +1819,7 @@ namespace AmplifyShaderEditor
 
 				//Remove node from main list
 				//Undo.RecordObject( node, "Destroying node " + ( node.Attributes != null? node.Attributes.Name: node.GetType().ToString() ) );
-				if( registerUndo )
+				if ( registerUndo )
 				{
 					UIUtils.MarkUndoAction();
 					Undo.RegisterCompleteObjectUndo( ParentWindow, Constants.UndoDeleteNodeId );
@@ -2162,10 +2176,26 @@ namespace AmplifyShaderEditor
 				m_nodes[ i ].ResetOutputLocals();
 
 				FunctionNode fnode = m_nodes[ i ] as FunctionNode;
-				if( fnode != null )
+				if ( fnode != null )
 				{
-					if( fnode.Function != null )
+					if ( fnode.Function != null )
 						fnode.FunctionGraph.ResetNodesLocalVariables();
+				}
+			}
+		}
+
+		public void ResetNodesLocalVariablesIfNot( MasterNodePortCategory category )
+		{
+			for ( int i = 0; i < m_nodes.Count; i++ )
+			{
+				m_nodes[ i ].Reset();
+				m_nodes[ i ].ResetOutputLocalsIfNot( category );
+
+				FunctionNode fnode = m_nodes[ i ] as FunctionNode;
+				if ( fnode != null )
+				{
+					if ( fnode.Function != null )
+						fnode.FunctionGraph.ResetNodesLocalVariablesIfNot( category );
 				}
 			}
 		}
@@ -2184,6 +2214,21 @@ namespace AmplifyShaderEditor
 			}
 		}
 
+		public void ResetNodesLocalVariablesIfNot( ParentNode node, MasterNodePortCategory category )
+		{
+			node.Reset();
+			node.ResetOutputLocalsIfNot( category );
+			int count = node.InputPorts.Count;
+			for ( int i = 0; i < count; i++ )
+			{
+				if ( node.InputPorts[ i ].IsConnected )
+				{
+					ResetNodesLocalVariablesIfNot( m_nodesDict[ node.InputPorts[ i ].GetConnection().NodeId ], category );
+				}
+			}
+		}
+
+
 		public override string ToString()
 		{
 			string dump = ( "Parent Graph \n" );
@@ -2196,10 +2241,9 @@ namespace AmplifyShaderEditor
 
 		public void OrderNodesByGraphDepth()
 		{
-			
-			if( CurrentMasterNode != null )
+			if ( CurrentMasterNode != null )
 			{
-				CurrentMasterNode.SetupNodeCategories();
+				CurrentMasterNode.SetupNodeCategories( );
 				int count = m_nodes.Count;
 				for ( int i = 0; i < count; i++ )
 				{
@@ -2208,7 +2252,8 @@ namespace AmplifyShaderEditor
 						m_nodes[ i ].CalculateCustomGraphDepth();
 					}
 				}
-			} else
+			}
+			else
 			{
 				//TODO: remove this dynamic list
 				List<FunctionOutput> allOutputs = new List<FunctionOutput>();
@@ -2221,7 +2266,6 @@ namespace AmplifyShaderEditor
 
 				for ( int j = 0; j < allOutputs.Count; j++ )
 				{
-
 					allOutputs[ j ].SetupNodeCategories();
 					int count = m_nodes.Count;
 					for ( int i = 0; i < count; i++ )
@@ -2308,7 +2352,7 @@ namespace AmplifyShaderEditor
 			return newNode;
 		}
 
-		public ParentNode CreateNode( Type type, bool registerUndo, int nodeId = -1, bool addLast = true )
+		public ParentNode CreateNode( System.Type type, bool registerUndo, int nodeId = -1, bool addLast = true )
 		{
 			ParentNode newNode = ScriptableObject.CreateInstance( type ) as ParentNode;
 			if ( newNode )
@@ -2320,7 +2364,7 @@ namespace AmplifyShaderEditor
 			return newNode;
 		}
 
-		public ParentNode CreateNode( Type type, bool registerUndo, Vector2 pos, int nodeId = -1, bool addLast = true )
+		public ParentNode CreateNode( System.Type type, bool registerUndo, Vector2 pos, int nodeId = -1, bool addLast = true )
 		{
 			ParentNode newNode = CreateNode( type, registerUndo, nodeId, addLast );
 			if ( newNode )
@@ -2514,7 +2558,7 @@ namespace AmplifyShaderEditor
 
 		public List<ParentNode> NodePreviewList { get { return m_nodePreviewList; } set { m_nodePreviewList = value; } }
 
-		public void SetGraphId(int id)
+		public void SetGraphId( int id )
 		{
 			m_graphId = id;
 		}
@@ -2528,6 +2572,13 @@ namespace AmplifyShaderEditor
 		{
 			get { return m_parentWindow; }
 			set { m_parentWindow = value; }
+		}
+
+		private bool m_changedLightingModel = false;
+		public bool ChangedLightingModel
+		{
+			get { return m_changedLightingModel; }
+			set { m_changedLightingModel = value; }
 		}
 	}
 }

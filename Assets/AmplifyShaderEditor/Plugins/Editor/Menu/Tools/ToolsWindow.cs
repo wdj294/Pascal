@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections.Generic;
 
 namespace AmplifyShaderEditor
 {
@@ -25,6 +26,7 @@ namespace AmplifyShaderEditor
 		FocusOnSelection,
 		ShowInfoWindow
 	}
+
 	public enum ToolbarType
 	{
 		File,
@@ -86,6 +88,18 @@ namespace AmplifyShaderEditor
 		private Rect m_areaRight = new Rect( 0, 0, 75, 40 );
 		private Rect m_boxRect;
 		private Rect m_borderRect;
+
+		private bool m_searchBarVisible = false;
+		private Rect m_searchBarSize;
+		private string m_searchBarValue = string.Empty;
+		private const string SearchBarId = "ASE_SEARCH_BAR";
+
+		private List<ParentNode> m_selectedNodes = new List<ParentNode>();
+		private bool m_refreshList = false;
+		public const double InactivityRefreshTime = 0.25;
+		private int m_currentSelected = 0;
+
+
 		// width and height are between [0,1] and represent a percentage of the total screen area
 		public ToolsWindow( AmplifyShaderEditorWindow parentWindow ) : base( parentWindow, 0, 0, 0, 64, "Tools", MenuAnchor.TOP_LEFT, MenuAutoSize.NONE )
 		{
@@ -128,6 +142,7 @@ namespace AmplifyShaderEditor
 
 			m_showInfoWindowButton = new ToolsMenuButton( m_parentWindow, ToolButtonType.ShowInfoWindow, 0, 0, -1, -1, IOUtils.ShowInfoWindowGUID, string.Empty, "Open Helper Window." );
 			m_showInfoWindowButton.ToolButtonPressedEvt += OnButtonPressedEvent;
+			m_searchBarSize = new Rect( 0, TabY + 4, 110, 60 );
 		}
 
 		void OnShowPortLegend()
@@ -143,6 +158,9 @@ namespace AmplifyShaderEditor
 				m_list[ i ].Destroy();
 			}
 			m_list = null;
+
+			m_selectedNodes.Clear();
+			m_selectedNodes = null;
 
 			m_focusOnMasterNodeButton.Destroy();
 			m_focusOnMasterNodeButton = null;
@@ -184,6 +202,70 @@ namespace AmplifyShaderEditor
 				m_list[ i ].Draw( TabX + m_transformedArea.x + m_list[ i ].ButtonSpacing, TabY );
 			}
 
+			if ( m_searchBarVisible )
+			{
+				if ( Event.current.type == EventType.keyDown )
+				{
+					KeyCode keyCode = Event.current.keyCode;
+					if ( Event.current.shift )
+					{
+						if ( keyCode == KeyCode.KeypadEnter ||
+							keyCode == KeyCode.Return ||
+							keyCode == KeyCode.F3/*&& GUI.GetNameOfFocusedControl().Equals( SearchBarId )*/ )
+							SelectPrevious();
+					}
+					else
+					{
+						if ( keyCode == KeyCode.KeypadEnter ||
+							keyCode == KeyCode.Return ||
+							keyCode == KeyCode.F3/*&& GUI.GetNameOfFocusedControl().Equals( SearchBarId )*/ )
+							SelectNext();
+					}
+
+				}
+				
+				m_searchBarSize.x = m_transformedArea.x + m_transformedArea.width - 235 - TabX;
+				EditorGUI.BeginChangeCheck();
+				{
+					GUI.SetNextControlName( SearchBarId );
+					m_searchBarValue = GUI.TextField( m_searchBarSize, m_searchBarValue, UIUtils.ToolbarSearchTextfield );
+				}
+				if ( EditorGUI.EndChangeCheck() )
+				{
+					m_refreshList = true;
+				}
+				
+				m_searchBarSize.x += m_searchBarSize.width;
+				if ( GUI.Button( m_searchBarSize, string.Empty, UIUtils.ToolbarSearchCancelButton ) )
+				{
+					m_searchBarValue = string.Empty;
+					m_selectedNodes.Clear();
+					m_currentSelected = -1;
+				}
+
+				if ( Event.current.isKey && Event.current.keyCode == KeyCode.Escape )
+				{
+					m_searchBarVisible = false;
+					m_refreshList = false;
+				}
+
+				if ( m_refreshList && ( m_parentWindow.CurrentInactiveTime > InactivityRefreshTime ) )
+				{
+					RefreshList();
+				}
+			}
+
+			if ( Event.current.control && Event.current.isKey && Event.current.keyCode == KeyCode.F )
+			{
+				if ( !m_searchBarVisible )
+				{
+					m_searchBarVisible = true;
+					m_refreshList = false;
+				}
+				GUI.FocusControl( SearchBarId );
+			}
+
+
 			GUI.color = m_focusOnMasterNodeButton.IsInside( mousePosition ) ? RightIconsColorOn : RightIconsColorOff;
 			m_focusOnMasterNodeButton.Draw( m_transformedArea.x + m_transformedArea.width - 105 - TabX, TabY );
 
@@ -195,8 +277,55 @@ namespace AmplifyShaderEditor
 
 
 			GUI.color = bufferedColor;
-
 		}
+
+		void RefreshList()
+		{
+			m_refreshList = false;
+			m_currentSelected = -1;
+			m_selectedNodes.Clear();
+			if ( !string.IsNullOrEmpty( m_searchBarValue ) )
+			{
+				List<ParentNode> nodes = m_parentWindow.CurrentGraph.AllNodes;
+				int count = nodes.Count;
+				for ( int i = 0; i < count; i++ )
+				{
+					if ( nodes[ i ].TitleContent.text.IndexOf( m_searchBarValue , StringComparison.CurrentCultureIgnoreCase ) >= 0 )
+					{
+						m_selectedNodes.Add( nodes[ i ] );
+					}
+				}
+			}
+		}
+
+		void SelectNext()
+		{
+			if ( m_refreshList )
+			{
+				RefreshList();
+			}
+
+			if ( m_selectedNodes.Count > 0 )
+			{
+				m_currentSelected = ( m_currentSelected + 1 ) % m_selectedNodes.Count;
+				m_parentWindow.FocusOnNode( m_selectedNodes[ m_currentSelected ], 1, true );
+			}
+		}
+
+		void SelectPrevious()
+		{
+			if ( m_refreshList )
+			{
+				RefreshList();
+			}
+
+			if ( m_selectedNodes.Count > 0 )
+			{
+				m_currentSelected = ( m_currentSelected > 1 ) ? ( m_currentSelected - 1 ) : ( m_selectedNodes.Count - 1 );
+				m_parentWindow.FocusOnNode( m_selectedNodes[ m_currentSelected ], 1, true );
+			}
+		}
+
 
 		public void SetStateOnButton( ToolButtonType button, int state, string tooltip )
 		{

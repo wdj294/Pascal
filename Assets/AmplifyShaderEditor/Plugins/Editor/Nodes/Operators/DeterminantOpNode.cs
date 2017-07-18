@@ -14,14 +14,12 @@ namespace AmplifyShaderEditor
 			base.CommonInit( uniqueId );
 			m_opName = "determinant";
 			m_drawPreview = false;
-			m_inputPorts[ 0 ].CreatePortRestrictions(	WirePortDataType.OBJECT,
-														WirePortDataType.FLOAT3x3,
+			m_inputPorts[ 0 ].CreatePortRestrictions(	WirePortDataType.FLOAT3x3,
 														WirePortDataType.FLOAT4x4 );
 
 			m_autoUpdateOutputPort = false;
 			m_inputPorts[ 0 ].ChangeType( WirePortDataType.FLOAT4x4, false );
 			m_outputPorts[ 0 ].ChangeType( WirePortDataType.FLOAT, false );
-
 		}
 	}
 }

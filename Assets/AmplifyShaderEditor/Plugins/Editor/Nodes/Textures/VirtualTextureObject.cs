@@ -31,12 +31,16 @@ namespace AmplifyShaderEditor
 	}
 
 	[Serializable]
-	[NodeAttributes( "Virtual Texture Object", "Textures", "Represents a Virtual Texture Asset. Can only be used alongside Texture Sample node by connecting to its Tex Input Port" , null, KeyCode.None, true, false, null, null, false, null, 1 )]
+	[NodeAttributes( "Virtual Texture Object", "Textures", "Represents a Virtual Texture Asset", null, KeyCode.None, true, false, null, null, false, null, 1 )]
 	public class VirtualTexturePropertyNode : TexturePropertyNode
 	{
 		protected const string VirtualPresetStr = "Layout Preset";
 		protected const string VirtualChannelStr = "Virtual Layer";
 
+		private const string VirtualTextureObjectInfo = "Can only be used alongside a Texture Sample node by connecting to its Tex Input Port.\n"+
+														"\nProperty name must match the value set on your Virtual Texture.\n"+
+														"Default e.g Albedo = _MainTex\n"+
+														"\nName your node according to the respective channel property in your Virtual Texture. The Albedo must be set to _MainTex ( temporary requirement ).";
 		private readonly string[] ChannelTypeStr = {
 			"Albedo - D.RGBA",
 			"Base - D.RGBA",
@@ -96,6 +100,12 @@ namespace AmplifyShaderEditor
 			{
 				m_virtualChannel = GetChannel( m_selectedChannelInt );
 			}
+		}
+
+		public override void DrawProperties()
+		{
+			base.DrawProperties();
+			EditorGUILayout.HelpBox( VirtualTextureObjectInfo, MessageType.Info );
 		}
 
 		private VirtualChannel GetChannel(int popupInt)
@@ -179,10 +189,11 @@ namespace AmplifyShaderEditor
 			return "uniform sampler2D " + PropertyName + ";";
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			dataType = "sampler2D";
 			dataName = PropertyName;
+			return true;
 		}
 
 		public override void ReadFromString( ref string[] nodeParams )

@@ -213,9 +213,9 @@ namespace AmplifyShaderEditor
 			string curvature = "float2("+ m_CurvatureVector.x + "," + m_CurvatureVector.y + ")";
 			if ( m_useCurvature )
 			{
-				UIUtils.CurrentDataCollector.AddToProperties( UniqueId, "[Header(Parallax Occlusion Mapping)]", 300 );
-				UIUtils.CurrentDataCollector.AddToProperties( UniqueId, "_CurvFix(\"Curvature Bias\", Range( 0 , 1)) = 1", 301 );
-				UIUtils.CurrentDataCollector.AddToUniforms( UniqueId, "uniform float _CurvFix;" );
+				dataCollector.AddToProperties( UniqueId, "[Header(Parallax Occlusion Mapping)]", 300 );
+				dataCollector.AddToProperties( UniqueId, "_CurvFix(\"Curvature Bias\", Range( 0 , 1)) = 1", 301 );
+				dataCollector.AddToUniforms( UniqueId, "uniform float _CurvFix;" );
 
 				if ( m_curvaturePort.IsConnected )
 					curvature = m_curvaturePort.GeneratePortInstructions( ref dataCollector );

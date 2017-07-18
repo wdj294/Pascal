@@ -372,10 +372,10 @@ namespace AmplifyShaderEditor
 			m_outputPorts[ 0 ].DirtyLabelSize = true;
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
-			base.PropagateNodeData( nodeData );
-			UIUtils.CurrentDataCollector.DirtyNormal = true;
+			base.PropagateNodeData( nodeData , ref dataCollector );
+			dataCollector.DirtyNormal = true;
 		}
 
 		public override void DrawProperties()

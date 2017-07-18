@@ -54,26 +54,27 @@ namespace AmplifyShaderEditor
 		{
 			if ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation )
 			{
-				return base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
+				string vertexVar = base.GenerateShaderForOutput( 0, ref dataCollector, ignoreLocalVar );
+				if ( outputId != 0 )
+				{
+					return GetOutputVectorItem( 0, outputId, vertexVar );
+				}
+				else if ( m_sizeOption == 0 )
+				{
+					vertexVar += ".xyz";
+				}
+
+				return vertexVar;
 			}
 			else
 			{
-				//				dataCollector.AddToInput( m_uniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_POS ), true );
-				//				dataCollector.AddToIncludes( m_uniqueId, Constants.UnityShaderVariables );
 
-				//#if UNITY_5_4_OR_NEWER
-				//				string matrix = "unity_WorldToObject";
-				//#else
-				//				string matrix = "_World2Object";
-				//#endif
-				//				string value = "mul( " + matrix + ", float4( " + Constants.InputVarStr + ".worldPos , 1 ) )";
-				//				if ( m_sizeOption == 0 )
-				//				{
-				//					value += ".xyz";
-				//				}
-				//				dataCollector.AddToLocalVariables( m_uniqueId, m_currentPrecisionType, m_outputPorts[ 0 ].DataType, "vertexPos", value );
 				string vertexVar = GeneratorUtils.GenerateVertexPositionOnFrag( ref dataCollector, UniqueId, m_currentPrecisionType );
-				if ( m_sizeOption == 0 )
+				if ( outputId != 0 )
+				{
+					return GetOutputVectorItem( 0, outputId, vertexVar );
+				}
+				else if ( m_sizeOption == 0 )
 				{
 					vertexVar += ".xyz";
 				}

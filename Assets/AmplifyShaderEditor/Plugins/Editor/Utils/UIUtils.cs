@@ -75,7 +75,9 @@ namespace AmplifyShaderEditor
 		MiniButtonTopRight,
 		ShaderFunctionBorder,
 		ShaderFunctionMode,
-		RightShaderMode
+		RightShaderMode,
+		FlatBackground,
+		DocumentationLink
 	}
 
 	public enum MasterNodePortCategory
@@ -171,6 +173,11 @@ namespace AmplifyShaderEditor
 		public static GUIStyle ObjectFieldThumb;
 		public static GUIStyle ObjectFieldThumbOverlay;
 		public static GUIStyle InspectorPopdropdownStyle;
+		public static GUIStyle BoldErrorStyle;
+		public static GUIStyle BoldWarningStyle;
+		public static GUIStyle Separator;
+		public static GUIStyle ToolbarSearchTextfield;
+		public static GUIStyle ToolbarSearchCancelButton;
 
 		public static GUIStyle TooltipBox;
 		public static GUIStyle Box;
@@ -196,7 +203,10 @@ namespace AmplifyShaderEditor
 		public static Texture MaterialIcon { get { return EditorGUIUtility.IconContent( "Material Icon" ).image; } }
 
 		//50be8291f9514914aa55c66c49da67cf
-		public static Texture ShaderFunctionIcon { get { return AssetDatabase.LoadAssetAtPath<Texture>(AssetDatabase.GUIDToAssetPath( "50be8291f9514914aa55c66c49da67cf")); } }
+		public static Texture ShaderFunctionIcon { get { return AssetDatabase.LoadAssetAtPath<Texture>( AssetDatabase.GUIDToAssetPath( "50be8291f9514914aa55c66c49da67cf" ) ); } }
+
+		public static Texture2D SmallErrorIcon = null;
+		public static Texture2D SmallWarningIcon = null;
 
 		public static Texture2D MasterNodeOnTexture = null;
 		public static Texture2D MasterNodeOffTexture = null;
@@ -212,10 +222,11 @@ namespace AmplifyShaderEditor
 		public static bool SnapEnabled = false;
 		public static WireReference SnapPort = new WireReference();
 		private static AmplifyShaderEditorWindow m_currentWindow = null;
-		public static AmplifyShaderEditorWindow CurrentWindow {
+		public static AmplifyShaderEditorWindow CurrentWindow
+		{
 			get
 			{
-				if ( m_currentWindow == null)
+				if ( m_currentWindow == null )
 				{
 					for ( int i = 0; i < IOUtils.AllOpenedWindows.Count; i++ )
 					{
@@ -233,7 +244,6 @@ namespace AmplifyShaderEditor
 			}
 			set { m_currentWindow = value; }
 		}
-		public static MasterNodeDataCollector CurrentDataCollector = null;
 
 		public static Vector2 PortsSize;
 		public static Vector3 PortsDelta;
@@ -269,8 +279,8 @@ namespace AmplifyShaderEditor
 		private static Dictionary<string, string> m_exampleMaterialIDs = new Dictionary<string, string>()
 		{
 			//Community
-			{"2Sided",						"8ebbbf2c99a544ca780a2573ef1450fc" },
-			{"DissolveBurn",	            "f144f2d7ff3daf349a2b7f0fd81ec8ac" },
+			{"2Sided",                      "8ebbbf2c99a544ca780a2573ef1450fc" },
+			{"DissolveBurn",                "f144f2d7ff3daf349a2b7f0fd81ec8ac" },
 			{"MourEnvironmentGradient",     "b64adae401bc073408ac7bff0993c107" },
 			{"ForceShield",                 "0119aa6226e2a4cfdb6c9a5ba9df7820" },
 			{"HighlightAnimated",           "3d232e7526f6e426cab994cbec1fc287" },
@@ -290,6 +300,7 @@ namespace AmplifyShaderEditor
 			{"LocalPosCutoff",              "fed8c9d33a691084c801573feeed5a62" },
 			{"ImprovedReadFromAtlasTiled",  "941b31b251ea8e74f9198d788a604c9b" },
 			{"ReadFromAtlasTiled",          "2d5537aa702f24645a1446dc3be92bbf" },
+			{"ReflectRefractSoapBubble",    "a844987c9f2e7334abaa34f12feda3b9" },
 			{"RimLight",                    "e2d3a4d723cf1dc4eab1d919f3324dbc" },
 			{"RefractedShadows",            "11818aa28edbeb04098f3b395a5bfc1d" },
 			{"TextureArray",                "0f572993ab788a346aea45f2f797b7fa" },
@@ -317,7 +328,7 @@ namespace AmplifyShaderEditor
 			{"Transmission",                "1b21506b7afef734facfc42c596caa7b" },
 			{"Transparency",                "e323a62068140c2408d5601877e8de2c" },
 			{"TriplanarProjection",         "663d512de06d4e24db5205c679f394cb" },
-			{"TwoSideWithFace",			    "c953c4b601ba78e4f870d24d038b67f6" },
+			{"TwoSideWithFace",             "c953c4b601ba78e4f870d24d038b67f6" },
 			{"Ground",                      "48df9bdf7b922d94bb3167e6db39c943" },
 			{"WaterSample",                 "288137d67ce790e41903020c572ab4d7" },
 			{"WorldPosSlices",              "013cc03f77f3d034692f902db8928787" }
@@ -498,7 +509,7 @@ namespace AmplifyShaderEditor
 		private static RectOffset SwitchNodeOverflow;
 		private static RectOffset SwitchNodePadding;
 
-		
+
 		public static void ForceExampleShaderCompilation()
 		{
 			CurrentWindow.ForceMaterialsToUpdate( ref m_exampleMaterialIDs );
@@ -523,7 +534,8 @@ namespace AmplifyShaderEditor
 			if ( IOUtils.AllOpenedWindows != null && IOUtils.AllOpenedWindows.Count > 0 )
 			{
 				return;
-			} else
+			}
+			else
 			{
 				IOUtils.AllOpenedWindows.Clear();
 			}
@@ -550,6 +562,8 @@ namespace AmplifyShaderEditor
 			UnZoomedPropertyValuesTitleStyle = null;
 			UnZoomedInputPortStyle = null;
 			UnZoomedOutputPortPortStyle = null;
+			ToolbarSearchTextfield = null;
+			ToolbarSearchCancelButton = null;
 			Box = null;
 			Button = null;
 			TextArea = null;
@@ -562,6 +576,16 @@ namespace AmplifyShaderEditor
 			Vector3Shader = null;
 			Vector4Shader = null;
 			ColorShader = null;
+
+			BoldErrorStyle = null;
+			BoldWarningStyle = null;
+			Separator = null;
+
+			Resources.UnloadAsset( SmallErrorIcon );
+			SmallErrorIcon = null;
+
+			Resources.UnloadAsset( SmallWarningIcon );
+			SmallWarningIcon = null;
 
 			Resources.UnloadAsset( MasterNodeOnTexture );
 			MasterNodeOnTexture = null;
@@ -618,15 +642,19 @@ namespace AmplifyShaderEditor
 			PreviewExpander = GetCustomStyle( CustomStyle.NodePreviewExpander );
 			PreviewCollapser = GetCustomStyle( CustomStyle.NodePreviewCollapser );
 
-			PlusStyle = new GUIStyle( ( GUIStyle ) "OL Plus" );
-			PlusStyle.imagePosition = ImagePosition.ImageOnly;
-			PlusStyle.overflow = new RectOffset( -2, 0, -4, 0 );
 
 
-			MinusStyle = new GUIStyle( ( GUIStyle ) "OL Minus" );
-			MinusStyle.contentOffset = Vector2.zero;
-			MinusStyle.imagePosition = ImagePosition.ImageOnly;
-			MinusStyle.overflow = new RectOffset( -2, 0, -4, 0 );
+			SmallErrorIcon = EditorGUIUtility.Load( "icons/d_console.erroricon.sml.png" ) as Texture2D;
+			SmallWarningIcon = EditorGUIUtility.Load( "icons/d_console.warnicon.sml.png" ) as Texture2D;
+
+			BoldErrorStyle = new GUIStyle( ( GUIStyle ) "BoldLabel" );
+			BoldErrorStyle.normal.textColor = Color.red;
+			BoldErrorStyle.alignment = TextAnchor.MiddleCenter;
+			BoldWarningStyle = new GUIStyle( ( GUIStyle ) "BoldLabel" );
+			BoldWarningStyle.normal.textColor = Color.yellow;
+			BoldWarningStyle.alignment = TextAnchor.MiddleCenter;
+
+			Separator = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.FlatBackground ] );
 
 			m_textInfo = new CultureInfo( "en-US", false ).TextInfo;
 			RangedFloatSliderStyle = new GUIStyle( GUI.skin.horizontalSlider );
@@ -666,7 +694,8 @@ namespace AmplifyShaderEditor
 			ObjectFieldThumbOverlay = new GUIStyle( ( GUIStyle ) "ObjectFieldThumbOverlay" );
 
 
-			TooltipBox = new GUIStyle( (GUIStyle) "Tooltip" );
+			TooltipBox = new GUIStyle( ( GUIStyle ) "Tooltip" );
+			TooltipBox.richText = true;
 
 			MasterNodeOnTexture = AssetDatabase.LoadAssetAtPath<Texture2D>( AssetDatabase.GUIDToAssetPath( IOUtils.MasterNodeOnTextureGUID ) );
 			MasterNodeOffTexture = AssetDatabase.LoadAssetAtPath<Texture2D>( AssetDatabase.GUIDToAssetPath( IOUtils.MasterNodeOnTextureGUID ) );
@@ -675,7 +704,7 @@ namespace AmplifyShaderEditor
 			GPUInstancedOffTexture = AssetDatabase.LoadAssetAtPath<Texture2D>( AssetDatabase.GUIDToAssetPath( IOUtils.GPUInstancedOffTextureGUID ) );
 
 			CheckNullMaterials();
-			
+
 			UsingProSkin = EditorGUIUtility.isProSkin;
 			FetchMenuItemStyles();
 			Initialized = true;
@@ -717,6 +746,17 @@ namespace AmplifyShaderEditor
 			InspectorPopdropdownStyle.alignment = TextAnchor.MiddleRight;
 			InspectorPopdropdownStyle.border.bottom = 16;
 
+			PlusStyle = ( EditorGUIUtility.isProSkin ) ? new GUIStyle( GetCustomStyle( CustomStyle.CustomExpressionAddItem ) ) : new GUIStyle( ( GUIStyle ) "OL Plus" );
+			PlusStyle.imagePosition = ImagePosition.ImageOnly;
+			PlusStyle.overflow = new RectOffset( -2, 0, -4, 0 );
+
+			MinusStyle = ( EditorGUIUtility.isProSkin ) ? new GUIStyle( GetCustomStyle( CustomStyle.CustomExpressionRemoveItem ) ) : new GUIStyle( ( GUIStyle ) "OL Minus" );
+			MinusStyle.contentOffset = Vector2.zero;
+			MinusStyle.imagePosition = ImagePosition.ImageOnly;
+			MinusStyle.overflow = new RectOffset( -2, 0, -4, 0 );
+
+			ToolbarSearchTextfield = new GUIStyle((GUIStyle) "ToolbarSeachTextField" );
+			ToolbarSearchCancelButton = new GUIStyle( ( GUIStyle ) "ToolbarSeachCancelButton" );
 		}
 
 		public static void UpdateMainSkin( DrawInfo drawInfo )
@@ -769,6 +809,9 @@ namespace AmplifyShaderEditor
 
 			SwitchNodePopUp.fontSize = ( int ) ( SwitchFontSize * drawInfo.InvertedZoom );
 
+			BoldErrorStyle.fontSize = ( int ) ( 12 * drawInfo.InvertedZoom );
+			BoldWarningStyle.fontSize = ( int ) ( 12 * drawInfo.InvertedZoom );
+
 			PropertyPopUp.fixedHeight = Constants.PropertyPickerHeight * drawInfo.InvertedZoom;
 			PropertyPopUp.fixedWidth = Constants.PropertyPickerWidth * drawInfo.InvertedZoom;
 			if ( UsingProSkin != EditorGUIUtility.isProSkin )
@@ -783,11 +826,11 @@ namespace AmplifyShaderEditor
 			PreviewCollapser.fixedHeight = Constants.PreviewExpanderHeight * drawInfo.InvertedZoom;
 			PreviewCollapser.fixedWidth = Constants.PreviewExpanderWidth * drawInfo.InvertedZoom;
 
-			MainSkin.customStyles[ ( int )CustomStyle.SamplerButton ].fontSize = ( int )( 9 * drawInfo.InvertedZoom );
-			ObjectFieldThumbOverlay.fontSize = ( int )( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int )CustomStyle.MiniButtonTopLeft ].fontSize = ( int )( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int )CustomStyle.MiniButtonTopMid ].fontSize = ( int )( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int )CustomStyle.MiniButtonTopRight ].fontSize = ( int )( 9 * drawInfo.InvertedZoom );
+			MainSkin.customStyles[ ( int ) CustomStyle.SamplerButton ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			ObjectFieldThumbOverlay.fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopLeft ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopMid ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopRight ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
 
 			CheckNullMaterials();
 		}
@@ -878,7 +921,7 @@ namespace AmplifyShaderEditor
 		public static string GetInputValueFromType( AvailableSurfaceInputs inputType ) { return m_inputTypeName[ inputType ]; }
 		private static string CreateLocalValueName( PrecisionType precision, WirePortDataType dataType, string localOutputValue, string value ) { return string.Format( Constants.LocalValueDecWithoutIdent, PrecisionWirePortToCgType( precision, dataType ), localOutputValue, value ); }
 
-		public static string CastPortType( MasterNodePortCategory portCategory, PrecisionType nodePrecision, NodeCastInfo castInfo, object value, WirePortDataType oldType, WirePortDataType newType, string parameterName = null )
+		public static string CastPortType( ref MasterNodeDataCollector dataCollector, PrecisionType nodePrecision, NodeCastInfo castInfo, object value, WirePortDataType oldType, WirePortDataType newType, string parameterName = null )
 		{
 			if ( oldType == newType || newType == WirePortDataType.OBJECT )
 			{
@@ -889,7 +932,7 @@ namespace AmplifyShaderEditor
 			string precisionStr = m_precisionTypeToCg[ currentPrecision ];
 			string newTypeStr = m_wirePortToCgType[ newType ];
 			newTypeStr = m_textInfo.ToTitleCase( newTypeStr );
-			int castId = ( portCategory == MasterNodePortCategory.Vertex || portCategory == MasterNodePortCategory.Tessellation ) ? CurrentDataCollector.AvailableVertexTempId : CurrentDataCollector.AvailableFragTempId;
+			int castId = ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation ) ? dataCollector.AvailableVertexTempId : dataCollector.AvailableFragTempId;
 			string localVarName = "temp_cast_" + castId;//m_wirePortToCgType[ oldType ] + "To" + newTypeStr + "_" + castInfo.ToString();
 			string result = string.Empty;
 			bool useRealValue = ( parameterName == null );
@@ -904,42 +947,42 @@ namespace AmplifyShaderEditor
 						case WirePortDataType.FLOAT2:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, string.Format( Constants.CastHelper, ( ( useRealValue ) ? value.ToString() : parameterName ), "xx" ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT3:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, string.Format( Constants.CastHelper, ( ( useRealValue ) ? value.ToString() : parameterName ), "xxx" ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.COLOR:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, string.Format( Constants.CastHelper, ( ( useRealValue ) ? value.ToString() : parameterName ), "xxxx" ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT4:
 						{
-							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName,string.Format( Constants.CastHelper, ( ( useRealValue ) ? value.ToString() : parameterName ) ,"xxxx"));
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, string.Format( Constants.CastHelper, ( ( useRealValue ) ? value.ToString() : parameterName ), "xxxx" ) );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT3x3:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, ( ( useRealValue ) ? value.ToString() : parameterName ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT4x4:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, ( ( useRealValue ) ? value.ToString() : parameterName ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
@@ -998,44 +1041,44 @@ namespace AmplifyShaderEditor
 							result = ( useRealValue ) ? precisionStr + "4( " + vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , 0.0 )" : precisionStr + "4( " + parameterName + " , 0.0 )";
 						}
 						break;
-						case WirePortDataType.FLOAT3x3:
-						{
-							if ( useRealValue )
-							{
-								result = precisionStr + "3x3( " + vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , " +
-															vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , " +
-															vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " )";
-							}
-							else
-							{
-								string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
-								CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
-								result = precisionStr + "3x3( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".x , " +
-													   localVarName + ".x , " + localVarName + ".y , " + localVarName + ".y , " +
-													   localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z )";
-							}
-						}
-						break;
-						case WirePortDataType.FLOAT4x4:
-						{
-							if ( useRealValue )
-							{
-								result = precisionStr + "4x4( " + vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 )";
-							}
-							else
-							{
-								string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
-								CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
-								result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 )";
-							}
-						}
-						break;
+						//case WirePortDataType.FLOAT3x3:
+						//{
+						//	if ( useRealValue )
+						//	{
+						//		result = precisionStr + "3x3( " + vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , " +
+						//									vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , " +
+						//									vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " )";
+						//	}
+						//	else
+						//	{
+						//		string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
+						//		CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+						//		result = precisionStr + "3x3( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".x , " +
+						//							   localVarName + ".x , " + localVarName + ".y , " + localVarName + ".y , " +
+						//							   localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z )";
+						//	}
+						//}
+						//break;
+						//case WirePortDataType.FLOAT4x4:
+						//{
+						//	if ( useRealValue )
+						//	{
+						//		result = precisionStr + "4x4( " + vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , 0 )";
+						//	}
+						//	else
+						//	{
+						//		string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
+						//		CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+						//		result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , 0 )";
+						//	}
+						//}
+						//break;
 					}
 				}
 				break;
@@ -1060,26 +1103,26 @@ namespace AmplifyShaderEditor
 							result = ( useRealValue ) ? precisionStr + "3( " + vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " )" : parameterName + ".xyz";
 						}
 						break;
-						case WirePortDataType.FLOAT4x4:
-						{
-							if ( useRealValue )
-							{
-								result = precisionStr + "4x4( " + vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
-														vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w )";
-							}
-							else
-							{
-								string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
-								CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
-								result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w )";
-							}
-						}
-						break;
+						//case WirePortDataType.FLOAT4x4:
+						//{
+						//	if ( useRealValue )
+						//	{
+						//		result = precisionStr + "4x4( " + vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w , " +
+						//								vecVal + ".x , " + vecVal + ".y , " + vecVal + ".z , " + vecVal + ".w )";
+						//	}
+						//	else
+						//	{
+						//		string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
+						//		CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+						//		result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w )";
+						//	}
+						//}
+						//break;
 						case WirePortDataType.COLOR:
 						{
 							result = useRealValue ? precisionStr + "4( " + vecVal.x + " , " + vecVal.y + " , " + vecVal.z + " , " + vecVal.w + " )" : parameterName;
@@ -1090,19 +1133,19 @@ namespace AmplifyShaderEditor
 				break;
 				case WirePortDataType.FLOAT3x3:
 				{
-					Matrix4x4 matrixVal = useRealValue ? ( Matrix4x4 ) value : Matrix4x4.identity;
-					switch ( newType )
-					{
-						case WirePortDataType.OBJECT:
-						case WirePortDataType.FLOAT4x4:
-						{
-							result = ( useRealValue ) ? precisionStr + "4x4(" + matrixVal.m00 + " , " + matrixVal.m01 + " , " + matrixVal.m02 + " , " + matrixVal.m03 + " , " +
-																		matrixVal.m10 + " , " + matrixVal.m11 + " , " + matrixVal.m12 + " , " + matrixVal.m10 + " , " +
-																		matrixVal.m20 + " , " + matrixVal.m21 + " , " + matrixVal.m22 + " , " + matrixVal.m20 + " , " +
-																		matrixVal.m30 + " , " + matrixVal.m31 + " , " + matrixVal.m32 + " , " + matrixVal.m30 + " )" : precisionStr + "4x4(" + parameterName + ")";
-						}
-						break;
-					}
+					//Matrix4x4 matrixVal = useRealValue ? ( Matrix4x4 ) value : Matrix4x4.identity;
+					//switch ( newType )
+					//{
+					//	case WirePortDataType.OBJECT:
+					//	case WirePortDataType.FLOAT4x4:
+					//	{
+					//		result = ( useRealValue ) ? precisionStr + "4x4(" + matrixVal.m00 + " , " + matrixVal.m01 + " , " + matrixVal.m02 + " , " + matrixVal.m03 + " , " +
+					//													matrixVal.m10 + " , " + matrixVal.m11 + " , " + matrixVal.m12 + " , " + matrixVal.m10 + " , " +
+					//													matrixVal.m20 + " , " + matrixVal.m21 + " , " + matrixVal.m22 + " , " + matrixVal.m20 + " , " +
+					//													matrixVal.m30 + " , " + matrixVal.m31 + " , " + matrixVal.m32 + " , " + matrixVal.m30 + " )" : precisionStr + "4x4(" + parameterName + ")";
+					//	}
+					//	break;
+					//}
 				}
 				break;
 				case WirePortDataType.FLOAT4x4:
@@ -1147,27 +1190,27 @@ namespace AmplifyShaderEditor
 							result = useRealValue ? precisionStr + "4( " + colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " )" : parameterName;
 						}
 						break;
-						case WirePortDataType.FLOAT4x4:
-						{
-							if ( useRealValue )
-							{
-								result = precisionStr + "4x4( " + colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
-																	colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
-																	colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
-																	colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " )";
-							}
-							else
-							{
-								string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
-								CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+						//case WirePortDataType.FLOAT4x4:
+						//{
+						//	if ( useRealValue )
+						//	{
+						//		result = precisionStr + "4x4( " + colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
+						//											colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
+						//											colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " , " +
+						//											colorValue.r + " , " + colorValue.g + " , " + colorValue.b + " , " + colorValue.a + " )";
+						//	}
+						//	else
+						//	{
+						//		string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, parameterName );
+						//		CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
 
-								result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
-														localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w )";
-							}
-						}
-						break;
+						//		result = precisionStr + "4x4( " + localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w , " +
+						//								localVarName + ".x , " + localVarName + ".y , " + localVarName + ".z , " + localVarName + ".w )";
+						//	}
+						//}
+						//break;
 					}
 				}
 				break;
@@ -1182,21 +1225,21 @@ namespace AmplifyShaderEditor
 						case WirePortDataType.FLOAT4:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, newType, localVarName, ( ( useRealValue ) ? value.ToString() : parameterName ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT3x3:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, oldType, localVarName, ( ( useRealValue ) ? value.ToString() : parameterName ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
 						case WirePortDataType.FLOAT4x4:
 						{
 							string localVal = CreateLocalValueName( currentPrecision, oldType, localVarName, ( ( useRealValue ) ? value.ToString() : parameterName ) );
-							CurrentDataCollector.AddToLocalVariables( portCategory, -1, localVal );
+							dataCollector.AddToLocalVariables( dataCollector.PortCategory, -1, localVal );
 							result = localVarName;
 						}
 						break;
@@ -1318,7 +1361,7 @@ namespace AmplifyShaderEditor
 
 		public static string UrlReplaceInvalidStrings( string originalString )
 		{
-			foreach ( KeyValuePair<string, string> kvp in Constants.UrlReplacementStringValues)
+			foreach ( KeyValuePair<string, string> kvp in Constants.UrlReplacementStringValues )
 			{
 				originalString = originalString.Replace( kvp.Key, kvp.Value );
 			}
@@ -1491,7 +1534,7 @@ namespace AmplifyShaderEditor
 			{
 				pathName = customPath;
 				shaderName = "New AmplifyShader";
-				string uniquePath = pathName.Remove(0, pathName.IndexOf( "Assets" ));
+				string uniquePath = pathName.Remove( 0, pathName.IndexOf( "Assets" ) );
 				string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath( uniquePath + shaderName + ".shader" );
 				//Debug.Log( assetPathAndName );
 				//while ( File.Exists( pathName + shaderName + ".shader" ) )
@@ -1511,6 +1554,7 @@ namespace AmplifyShaderEditor
 				CurrentWindow.titleContent.text = AmplifyShaderEditorWindow.GenerateTabTitle( shaderName );
 				CurrentWindow.titleContent.image = UIUtils.ShaderIcon;
 				CurrentWindow.CreateNewGraph( shaderName );
+				CurrentWindow.LastOpenedLocation = pathName;
 				CurrentWindow.CurrentGraph.CurrentMasterNode.SetName( shaderName );
 				newShader = CurrentWindow.CurrentGraph.FireMasterNode( pathName, true );
 				AssetDatabase.Refresh();
@@ -1541,7 +1585,7 @@ namespace AmplifyShaderEditor
 				return;
 
 			CurrentWindow.CreateNewFunctionGraph( shaderFunction );
-			CurrentWindow.SaveToDisk( false ); 
+			CurrentWindow.SaveToDisk( false );
 			CurrentWindow.ForceRepaint();
 		}
 
@@ -1556,6 +1600,12 @@ namespace AmplifyShaderEditor
 		public static GUIStyle GetCustomStyle( CustomStyle style )
 		{
 			return ( MainSkin != null ) ? MainSkin.customStyles[ ( int ) style ] : null;
+		}
+
+		public static void SetCustomStyle( CustomStyle style, GUIStyle guiStyle )
+		{
+			if ( MainSkin != null )
+				MainSkin.customStyles[ ( int ) style ] = new GUIStyle( guiStyle );
 		}
 
 		public static void OpenFile()
@@ -1808,7 +1858,7 @@ namespace AmplifyShaderEditor
 		{
 			if ( CurrentWindow != null )
 			{
-//				CurrentWindow.Focus();
+				//				CurrentWindow.Focus();
 				CurrentWindow.ForceUpdateFromMaterial();
 			}
 		}
@@ -1905,6 +1955,7 @@ namespace AmplifyShaderEditor
 		public static SamplerNode GetSamplerNode( int idx ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.SamplerNodes.GetNode( idx ) as SamplerNode; } return null; }
 		public static void UpdateSamplerDataNode( int nodeIdx, string data ) { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.SamplerNodes.UpdateDataOnNode( nodeIdx, data ); } }
 		public static int GetSamplerNodeRegisterId( int uniqueId ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.SamplerNodes.GetNodeRegisterId( uniqueId ); } return -1; }
+		public static int GetSamplerNodeAmount() { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.SamplerNodes.NodesList.Count; } return -1; }
 
 		// Texture Property
 		public static void RegisterTexturePropertyNode( TexturePropertyNode node ) { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.TexturePropertyNodes.AddNode( node ); } }
@@ -1913,6 +1964,7 @@ namespace AmplifyShaderEditor
 		public static TexturePropertyNode GetTexturePropertyNode( int idx ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.TexturePropertyNodes.GetNode( idx ) as TexturePropertyNode; } return null; }
 		public static void UpdateTexturePropertyDataNode( int nodeIdx, string data ) { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.TexturePropertyNodes.UpdateDataOnNode( nodeIdx, data ); } }
 		public static int GetTexturePropertyNodeRegisterId( int uniqueId ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.TexturePropertyNodes.GetNodeRegisterId( uniqueId ); } return -1; }
+		public static int GetTexturePropertyNodeAmount() { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.TexturePropertyNodes.NodesList.Count; } return -1; }
 
 		// Texture Array
 		public static void RegisterTextureArrayNode( TextureArrayNode node ) { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.TextureArrayNodes.AddNode( node ); } }
@@ -1958,6 +2010,7 @@ namespace AmplifyShaderEditor
 		public static ScreenColorNode GetScreenColorNode( int idx ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.ScreenColorNodes.GetNode( idx ) as ScreenColorNode; } return null; }
 		public static int GetScreenColorNodeRegisterId( int uniqueId ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.ScreenColorNodes.GetNodeRegisterId( uniqueId ); } return -1; }
 		public static void UpdateScreenColorDataNode( int nodeIdx, string data ) { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.ScreenColorNodes.UpdateDataOnNode( nodeIdx, data ); } }
+		public static int GetScreenColorNodeAmount() { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.ScreenColorNodes.NodesList.Count; } return -1; }
 
 		// Local Var Node
 		public static int RegisterLocalVarNode( RegisterLocalVarNode node ) { if ( CurrentWindow != null ) { return CurrentWindow.CurrentGraph.LocalVarNodes.AddNode( node ); } return -1; }
@@ -2041,7 +2094,7 @@ namespace AmplifyShaderEditor
 			EditorUtility.SetDirty( node );
 			return true;
 		}
-		
+
 		public static void MarkUndoAction()
 		{
 			SerializeHelperCounter = 2;

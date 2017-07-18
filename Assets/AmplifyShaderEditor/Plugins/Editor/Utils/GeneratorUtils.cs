@@ -12,10 +12,13 @@ namespace AmplifyShaderEditor
 		public const string VertexPositionStr = "ase_vertexPos";
 		public const string ScreenPositionStr = "ase_screenPos";
 		public const string WorldPositionStr = "ase_worldPos";
+		public const string LightDirStr = "ase_lightDir";
 		public const string WorldNormalStr = "ase_worldNormal";
 		public const string WorldTangentStr = "ase_worldTangent";
 		public const string WorldBitangentStr = "ase_worldBitangent";
 		public const string WorldToTangentStr = "ase_worldToTangent";
+		public const string IndirectDiffuseStr = "ase_indirectDiffuse";
+		public const string IndirectSpecularStr = "ase_indirectSpecular";
 		private const string Float3Format = "float3 {0} = {1};";
 		private const string Float4Format = "float4 {0} = {1};";
 
@@ -226,6 +229,31 @@ namespace AmplifyShaderEditor
 			string value = string.Format( "-{0}.z" , viewPos );
 			dataCollector.AddToLocalVariables( uniqueId, precision, WirePortDataType.FLOAT, ScreenDepthStr, value );
 			return ScreenDepthStr;
+		}
+
+		// INDIRECT LIGHTING (ShadeSH9)
+		static public string GenerateIndirectLighting( ref MasterNodeDataCollector dataCollector, int uniqueId, PrecisionType precision, string worldNormal )
+		{
+			dataCollector.AddLocalVariable( uniqueId, precision, WirePortDataType.FLOAT3, IndirectDiffuseStr, "ShadeSH9( float4( "+ worldNormal + ", 1 ) )" );
+			return IndirectDiffuseStr;
+		}
+
+		// INDIRECT SPECULAR LIGHT
+		static public string GenerateIndirectSpecularLight( ref MasterNodeDataCollector dataCollector, int uniqueId, PrecisionType precision, string worldNormal, string roughness, string occlusion )
+		{
+			dataCollector.AddLocalVariable( uniqueId, "Unity_GlossyEnvironmentData g;" );
+			dataCollector.AddLocalVariable( uniqueId, "g.roughness = "+ roughness + ";" );
+			dataCollector.AddLocalVariable( uniqueId, "g.reflUVW = reflect( -data.worldViewDir, "+ worldNormal + " );" );
+			dataCollector.AddLocalVariable( uniqueId, precision, WirePortDataType.FLOAT3, IndirectSpecularStr, "UnityGI_IndirectSpecular( data, "+ occlusion + ", "+worldNormal+", g )" );
+			return IndirectSpecularStr;
+		}
+
+		// LIGHT DIRECTION
+		static public string GenerateLightDirection( ref MasterNodeDataCollector dataCollector, int uniqueId, PrecisionType precision, string worldPos )
+		{
+			dataCollector.AddToIncludes( uniqueId, Constants.UnityCgLibFuncs );
+			dataCollector.AddLocalVariable( uniqueId, precision, WirePortDataType.FLOAT3, LightDirStr, "normalize( UnityWorldSpaceLightDir( " + worldPos + " ) )" );
+			return LightDirStr;
 		}
 	}
 }

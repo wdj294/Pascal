@@ -12,32 +12,28 @@ namespace AmplifyShaderEditor
 	{
 		protected override void CommonInit( int uniqueId )
 		{
+			m_dynamicRestrictions = new WirePortDataType[]
+			{
+				WirePortDataType.OBJECT,
+				WirePortDataType.FLOAT,
+				WirePortDataType.FLOAT2,
+				WirePortDataType.FLOAT3,
+				WirePortDataType.FLOAT4,
+				WirePortDataType.COLOR,
+				WirePortDataType.FLOAT3x3,
+				WirePortDataType.FLOAT4x4,
+				WirePortDataType.INT
+			};
+
 			base.CommonInit( uniqueId );
+			m_allowMatrixCheck = true;
 			m_previewShaderGUID = "5725e8300be208449973f771ab6682f2";
 		}
 
 		public override string BuildResults( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
 		{
 			base.BuildResults( outputId, ref dataCollector, ignoreLocalvar );
-			switch ( m_outputPorts[ 0 ].DataType )
-			{
-				case WirePortDataType.FLOAT:
-				case WirePortDataType.FLOAT2:
-				case WirePortDataType.FLOAT3:
-				case WirePortDataType.FLOAT4:
-				case WirePortDataType.INT:
-				case WirePortDataType.COLOR:
-				case WirePortDataType.OBJECT:
-				{
-					return "( " + m_inputA + " - " + m_inputB + " )";
-				}
-				case WirePortDataType.FLOAT3x3:
-				case WirePortDataType.FLOAT4x4:
-				{ }
-				break;
-			}
-
-			return UIUtils.InvalidParameter( this );
+			return "( " + m_inputA + " - " + m_inputB + " )";
 		}
 	}
 }

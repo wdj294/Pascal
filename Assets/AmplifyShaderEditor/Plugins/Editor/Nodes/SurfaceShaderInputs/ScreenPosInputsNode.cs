@@ -41,6 +41,8 @@ namespace AmplifyShaderEditor
 			m_textLabelWidth = 100;
 			m_autoWrapProperties = true;
 
+			m_previewShaderGUID ="a5e7295278a404175b732f1516fb68a6";
+
 			if ( UIUtils.CurrentShaderVersion() <= 2400 )
 				m_outputTypeInt = 1;
 		}

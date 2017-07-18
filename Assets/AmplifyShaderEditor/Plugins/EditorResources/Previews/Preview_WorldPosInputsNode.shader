@@ -1,4 +1,4 @@
-﻿Shader "Hidden/WorldPosInputsNode"
+Shader "Hidden/WorldPosInputsNode"
 {
 	SubShader
 	{
@@ -9,7 +9,7 @@
 			#pragma fragment frag
 			#include "UnityCG.cginc"
 
-			float4 frag(v2f_img i) : SV_Target
+			float4 frag( v2f_img i ) : SV_Target
 			{
 				float2 p = 2 * i.uv - 1;
 				float r = sqrt( dot(p,p) );

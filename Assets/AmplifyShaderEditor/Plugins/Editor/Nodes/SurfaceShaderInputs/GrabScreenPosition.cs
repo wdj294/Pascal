@@ -22,7 +22,10 @@ namespace AmplifyShaderEditor
 														"float scale{0} = 1.0;",
 														"#endif",
 														"float halfPosW{1} = {0}.w * 0.5;",
-														"{0}.y = ( {0}.y - halfPosW{1} ) * _ProjectionParams.x* scale{1} + halfPosW{1};"};
+														"{0}.y = ( {0}.y - halfPosW{1} ) * _ProjectionParams.x* scale{1} + halfPosW{1};",
+														"#ifdef UNITY_SINGLE_PASS_STEREO",
+														"{0}.xy = TransformStereoScreenSpaceTex({0}.xy, {0}.w);",
+														"#endif"};
 
 
 		private readonly string ScreenPosOnVert00Str = "{0} = ComputeScreenPos( mul( UNITY_MATRIX_MVP, {1}.vertex));";
@@ -84,7 +87,7 @@ namespace AmplifyShaderEditor
 			if ( isFragment )
 			{
 				string screenPos = GeneratorUtils.GenerateScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, true );
-				localVarName = screenPos + UniqueId;
+				localVarName = screenPos + OutputId;
 				//dataCollector.AddToInput( m_uniqueId, "float4 " + ScreenPosStr, true );
 				string value = UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + localVarName + " = " + screenPos + ";";
 				dataCollector.AddLocalVariable( UniqueId, value );
@@ -92,20 +95,23 @@ namespace AmplifyShaderEditor
 			else
 			{
 				string screenPos = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
-				localVarName = screenPos + UniqueId;
+				localVarName = screenPos + OutputId;
 				string localVarDecl = UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + localVarName;
 				string value = string.Format( ScreenPosOnVert00Str, localVarDecl, Constants.VertexShaderInputStr );
 				dataCollector.AddLocalVariable( UniqueId, value );
 				//dataCollector.AddLocalVariable( m_uniqueId, string.Format( ScreenPosOnVert01Str, localVarName ) );
 			}
 			
-			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 0 ] );
-			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 1 ], UniqueId ) );
-			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 2 ] );
-			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 3 ], UniqueId ) );
-			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 4 ] );
-			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 5 ], localVarName, UniqueId ) );
-			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 6 ], localVarName, UniqueId ) );
+			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 0 ], true );
+			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 1 ], OutputId ), true );
+			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 2 ], true );
+			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 3 ], OutputId ), true );
+			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 4 ], true );
+			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 5 ], localVarName, OutputId ), true );
+			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 6 ], localVarName, OutputId ), true );
+			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 7 ], true );
+			dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 8 ], localVarName, OutputId ), true );
+			dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 9 ], true );
 			if ( m_outputTypeInt == 0 )
 			{
 				dataCollector.AddLocalVariable( UniqueId, string.Format( ProjectionInstruction, localVarName ) );

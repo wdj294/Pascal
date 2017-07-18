@@ -19,6 +19,7 @@ namespace AmplifyShaderEditor
 		//private const string GrabVarStr = "grabScreenPos";
 
 		private const string ScreenPosStr = "screenPos";
+		private const string ScreenColorStr = "screenColor";
 		private readonly string ScreenPosOnFragStr = Constants.InputVarStr + "." + ScreenPosStr;
 		private readonly string ProjectionInstruction = "{0}.w += 0.00000000001;\n\t\t\t{0}.xyzw /= {0}.w;";
 		private readonly string[] HackInstruction = {   "#if UNITY_UV_STARTS_AT_TOP",
@@ -114,7 +115,8 @@ namespace AmplifyShaderEditor
 					}
 				}
 			}
-			
+			CheckReference();
+
 			if ( SoftValidReference )
 			{
 				m_content.text = m_referenceNode.TitleContent.text + Constants.InstancePostfixStr;
@@ -136,6 +138,40 @@ namespace AmplifyShaderEditor
 				{
 					UIUtils.FocusOnNode( m_referenceNode, 1, true );
 				}
+			}
+		}
+
+		void CheckReference()
+		{
+			if ( m_referenceType != TexReferenceType.Instance )
+			{
+				return;
+			}
+
+			if ( m_referenceArrayId > -1 )
+			{
+				ParentNode newNode = UIUtils.GetScreenColorNode( m_referenceArrayId );
+				if ( newNode == null || newNode.UniqueId != m_referenceNodeId )
+				{
+					m_referenceNode = null;
+					int count = UIUtils.GetScreenColorNodeAmount();
+					for ( int i = 0; i < count; i++ )
+					{
+						ParentNode node = UIUtils.GetScreenColorNode( i );
+						if ( node.UniqueId == m_referenceNodeId )
+						{
+							m_referenceNode = node as ScreenColorNode;
+							m_referenceArrayId = i;
+							break;
+						}
+					}
+				}
+			}
+
+			if ( m_referenceNode == null && m_referenceNodeId > -1 )
+			{
+				m_referenceNodeId = -1;
+				m_referenceArrayId = -1;
 			}
 		}
 
@@ -219,6 +255,11 @@ namespace AmplifyShaderEditor
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
+			if ( m_outputPorts[ 0 ].IsLocalValue )
+				return GetOutputColorItem( 0, outputId, m_outputPorts[ 0 ].LocalValue );
+
+			base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
+
 			string propertyName = CurrentPropertyReference;
 
 			OnPropertyNameChanged();
@@ -227,13 +268,14 @@ namespace AmplifyShaderEditor
 
 			dataCollector.AddGrabPass( emptyName?string.Empty: propertyName );
 
-			base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
 			//if ( !m_inputPorts[ 0 ].IsConnected )
 			//{
 			//	string uvChannelDeclaration = IOUtils.GetUVChannelDeclaration( propertyName, -1, 0 );
 			//	dataCollector.AddToInput( m_uniqueId, uvChannelDeclaration, true );
 			//}
 			string valueName = SetFetchedData( ref dataCollector, ignoreLocalVar);
+
+			m_outputPorts[ 0 ].SetLocalValue( valueName );
 			return GetOutputColorItem( 0, outputId, valueName );
 		}
 
@@ -259,34 +301,20 @@ namespace AmplifyShaderEditor
 
 			string samplerOp = SamplerType + ( isProjecting ? "proj" : "" ) + "( " + propertyName + ", " + GetUVCoords( ref dataCollector, ignoreLocalVar, isProjecting ) + " )";
 
-			int connectedPorts = 0;
-			for ( int i = 0; i < m_outputPorts.Count; i++ )
-			{
-				if ( m_outputPorts[ i ].IsConnected )
-				{
-					connectedPorts += 1;
-					if ( connectedPorts > 1 || m_outputPorts[ i ].ConnectionCount > 1  )
-					{
-						// Create common local var and mark as fetched
-						m_textureFetchedValue = SamplerType + "Node" + UniqueId;
-						m_isTextureFetched = true;
-
-						dataCollector.AddToLocalVariables( UniqueId, ( "float4 " ) + m_textureFetchedValue + " = " + samplerOp + ";" );
-						m_outputPorts[ 0 ].SetLocalValue( m_textureFetchedValue );
-						m_outputPorts[ 1 ].SetLocalValue( m_textureFetchedValue + ".r" );
-						m_outputPorts[ 2 ].SetLocalValue( m_textureFetchedValue + ".g" );
-						m_outputPorts[ 3 ].SetLocalValue( m_textureFetchedValue + ".b" );
-						m_outputPorts[ 4 ].SetLocalValue( m_textureFetchedValue + ".a" );
-						return m_textureFetchedValue;
-					}
-				}
-			}
-			return samplerOp;
+			dataCollector.AddLocalVariable( UniqueId, UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " +ScreenColorStr+OutputId+" = "+ samplerOp+";" );
+			return ScreenColorStr + OutputId;
 		}
 
 		public override void ResetOutputLocals()
 		{
 			base.ResetOutputLocals();
+			m_isTextureFetched = false;
+			m_textureFetchedValue = string.Empty;
+		}
+
+		public override void ResetOutputLocalsIfNot( MasterNodePortCategory category )
+		{
+			base.ResetOutputLocalsIfNot( category );
 			m_isTextureFetched = false;
 			m_textureFetchedValue = string.Empty;
 		}
@@ -305,23 +333,19 @@ namespace AmplifyShaderEditor
 			{
 				dataCollector.AddToInput( UniqueId, "float4 " + ScreenPosStr, true );
 
-				string localVarName = ScreenPosStr + UniqueId;
+				string localVarName = ScreenPosStr + OutputId;
 				string value = UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + localVarName + " = " + ScreenPosOnFragStr + ";";
-				dataCollector.AddInstructions( value, true, true );
+				dataCollector.AddLocalVariable( UniqueId, value, true );
 
-				dataCollector.AddInstructions( HackInstruction[ 0 ], true, true );
-				dataCollector.AddInstructions( string.Format( HackInstruction[ 1 ], UniqueId ), true, true );
-				dataCollector.AddInstructions( HackInstruction[ 2 ], true, true );
-				dataCollector.AddInstructions( string.Format( HackInstruction[ 3 ], UniqueId ), true, true );
-				dataCollector.AddInstructions( HackInstruction[ 4 ], true, true );
-				dataCollector.AddInstructions( string.Format( HackInstruction[ 5 ], localVarName, UniqueId ), true, true );
-				dataCollector.AddInstructions( string.Format( HackInstruction[ 6 ], localVarName, UniqueId ), true, true );
-				dataCollector.AddInstructions( string.Format( ProjectionInstruction, localVarName ), true, true );
+				dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 0 ], true );
+				dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 1 ], OutputId ), true );
+				dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 2 ], true );
+				dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 3 ], OutputId ), true );
+				dataCollector.AddLocalVariable( UniqueId, HackInstruction[ 4 ], true );
+				dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 5 ], localVarName, OutputId ), true );
+				dataCollector.AddLocalVariable( UniqueId, string.Format( HackInstruction[ 6 ], localVarName, OutputId ), true );
+				dataCollector.AddLocalVariable( UniqueId, string.Format( ProjectionInstruction, localVarName ), true );
 				return "UNITY_PROJ_COORD( " + localVarName + " )";
-
-				//dataCollector.AddToInput( m_uniqueId, "float4 " + GrabVarStr, true );
-				//dataCollector.AddVertexInstruction( Constants.VertexShaderOutputStr + "." + GrabVarStr + " = ComputeGrabScreenPos( UnityObjectToClipPos( " + Constants.VertexShaderInputStr + ".vertex ) )", m_uniqueId, true );
-				//return "UNITY_PROJ_COORD( " + Constants.InputVarStr + "." + GrabVarStr + " )";
 			}
 		}
 
@@ -428,7 +452,7 @@ namespace AmplifyShaderEditor
 			return "uniform sampler2D " + m_propertyName + ";";
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			if ( SoftValidReference )
 			{
@@ -438,12 +462,12 @@ namespace AmplifyShaderEditor
 				//	dataName = string.Empty;
 				//}
 
-				m_referenceNode.GetUniformData( out dataType, out  dataName );
-				return;
+				return m_referenceNode.GetUniformData( out dataType, out  dataName );
 			}
 
 			dataType = "sampler2D";
 			dataName  = m_propertyName;
+			return true;
 		}
 	}
 }

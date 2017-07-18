@@ -41,6 +41,8 @@ namespace AmplifyShaderEditor
 
 		protected int m_portRestrictions = 0;
 
+		private bool m_repeatButtonState = false;
+		
 		[SerializeField]
 		private Rect m_position;
 
@@ -189,7 +191,7 @@ namespace AmplifyShaderEditor
 
 		public void ChangeProperties( string newName, WirePortDataType newType, bool invalidateConnections )
 		{
-			m_name = newName;
+			Name = newName;
 			if ( m_dataType != newType )
 			{
 				DataType = newType;
@@ -518,5 +520,10 @@ namespace AmplifyShaderEditor
 			return dump;
 		}
 
+		public bool RepeatButtonState
+		{
+			get { return m_repeatButtonState; }
+			set { m_repeatButtonState = value; }
+		}
 	}
 }

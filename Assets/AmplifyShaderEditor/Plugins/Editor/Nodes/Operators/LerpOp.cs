@@ -24,29 +24,13 @@ namespace AmplifyShaderEditor
 
 		public override string BuildResults( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
 		{
+			if ( m_outputPorts[ 0 ].IsLocalValue )
+				return m_outputPorts[ 0 ].LocalValue;
+
 			base.BuildResults( outputId, ref dataCollector, ignoreLocalvar );
 			string interp = m_inputPorts[ 2 ].GenerateShaderForOutput( ref dataCollector, WirePortDataType.FLOAT, ignoreLocalvar, true );
-
-			string result = string.Empty;
-			switch ( m_outputPorts[ 0 ].DataType )
-			{
-				case WirePortDataType.FLOAT:
-				case WirePortDataType.FLOAT2:
-				case WirePortDataType.FLOAT3:
-				case WirePortDataType.FLOAT4:
-				case WirePortDataType.INT:
-				case WirePortDataType.COLOR:
-				case WirePortDataType.OBJECT:
-				{
-					result = "lerp( " + m_inputA + " , " + m_inputB + " , " + interp + " )";
-				}break;
-				case WirePortDataType.FLOAT3x3:
-				case WirePortDataType.FLOAT4x4:
-				{
-					result = UIUtils.InvalidParameter( this );
-				} break;
-			}
-			return result;
+			string result = "lerp( " + m_inputA + " , " + m_inputB + " , " + interp + " )";
+			return CreateOutputLocalVariable( 0, result, ref dataCollector );
 		}
 	}
 }

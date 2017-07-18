@@ -625,10 +625,11 @@ namespace AmplifyShaderEditor
 			return PropertyAttributes + m_propertyName + "(\"" + m_propertyInspectorName + "\", 2DArray ) = \"\" {}";
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			dataType = "UNITY_DECLARE_TEX2DARRAY(";
 			dataName = m_propertyName + " )";
+			return true;
 		}
 
 		public override void ReadFromString( ref string[] nodeParams )

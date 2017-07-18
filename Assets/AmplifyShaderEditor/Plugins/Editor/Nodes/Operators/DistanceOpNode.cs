@@ -19,28 +19,12 @@ namespace AmplifyShaderEditor
 
 		public override string BuildResults( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
 		{
-			base.BuildResults( outputId, ref dataCollector, ignoreLocalvar );
-			switch ( m_mainDataType )
-			{
+			if ( m_outputPorts[ 0 ].IsLocalValue )
+				return m_outputPorts[ 0 ].LocalValue;
 
-				case WirePortDataType.OBJECT:
-				case WirePortDataType.INT:
-				case WirePortDataType.FLOAT:
-				case WirePortDataType.FLOAT2:
-				case WirePortDataType.FLOAT3:
-				case WirePortDataType.FLOAT4:
-				case WirePortDataType.COLOR:
-				{
-					return "distance( " + m_inputA + " , " + m_inputB + " )";
-				}
-				case WirePortDataType.FLOAT3x3:
-				case WirePortDataType.FLOAT4x4:
-				{
-					UIUtils.ShowMessage( "Distance Op does not work with matrices." );
-				}
-				break;
-			}
-			return UIUtils.InvalidParameter( this );
+			base.BuildResults( outputId, ref dataCollector, ignoreLocalvar );
+			string result = "distance( " + m_inputA + " , " + m_inputB + " )";
+			return CreateOutputLocalVariable( 0, result, ref dataCollector );
 		}
 	}
 }

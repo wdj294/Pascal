@@ -43,7 +43,7 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private bool m_autoNormal = true;
 
-		private Type m_type;
+		private System.Type m_type;
 
 		private List<int> m_outputConns = new List<int>();
 		protected override void CommonInit( int uniqueId )

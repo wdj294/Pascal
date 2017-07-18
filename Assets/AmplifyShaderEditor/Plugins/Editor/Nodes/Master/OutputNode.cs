@@ -8,6 +8,8 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		protected bool m_isMainOutputNode = false;
 
+		protected MasterNodeDataCollector m_currentDataCollector;
+
 		public OutputNode() : base() { }
 		public OutputNode( int uniqueId, float x, float y, float width, float height ) : base( uniqueId, x, y, width, height ) { }
 
@@ -27,7 +29,7 @@ namespace AmplifyShaderEditor
 				{
 					NodeData nodeData = new NodeData( m_inputPorts[ i ].Category );
 					ParentNode node = m_inputPorts[ i ].GetOutputNode();
-					node.PropagateNodeData( nodeData );
+					node.PropagateNodeData( nodeData, ref m_currentDataCollector );
 				}
 			}
 		}
@@ -45,6 +47,16 @@ namespace AmplifyShaderEditor
 			if ( m_isMainOutputNode )
 			{
 				ContainerGraph.AssignMasterNode( this, true );
+			}
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			if ( m_currentDataCollector != null )
+			{
+				m_currentDataCollector.Destroy();
+				m_currentDataCollector = null;
 			}
 		}
 
@@ -67,5 +79,7 @@ namespace AmplifyShaderEditor
 				}
 			}
 		}
+
+		public MasterNodeDataCollector DataCollector { get { return m_currentDataCollector; } }
 	}
 }

@@ -11,6 +11,11 @@ namespace AmplifyShaderEditor
 	[NodeAttributes( "Get Local Var", "Misc", "Use a registered local variable" )]
 	public class GetLocalVarNode : ParentNode
 	{
+		private const float NodeButtonSizeX = 16;
+		private const float NodeButtonSizeY = 16;
+		private const float NodeButtonDeltaX = 5;
+		private const float NodeButtonDeltaY = 11;
+
 		[SerializeField]
 		private int m_referenceId = -1;
 
@@ -42,8 +47,12 @@ namespace AmplifyShaderEditor
 
 			if ( m_currentSelected != null )
 			{
-				m_drawPreviewAsSphere = m_currentSelected.SpherePreview;
-				CheckSpherePreview();
+				if ( m_drawPreviewAsSphere != m_currentSelected.SpherePreview )
+				{
+					m_drawPreviewAsSphere = m_currentSelected.SpherePreview;
+					OnNodeChange();
+				}
+				//CheckSpherePreview();
 
 				if ( m_cachedPropertyId == -1 )
 					m_cachedPropertyId = Shader.PropertyToID( "_A" );
@@ -59,18 +68,23 @@ namespace AmplifyShaderEditor
 			m_referenceId = EditorGUILayoutPopup( Constants.AvailableReferenceStr, m_referenceId, UIUtils.LocalVarNodeArr() );
 			if ( EditorGUI.EndChangeCheck() )
 			{
-				m_currentSelected = UIUtils.GetLocalVarNode( m_referenceId );
-				if ( m_currentSelected != null )
-				{
-					m_nodeId = m_currentSelected.UniqueId;
-					m_outputPorts[ 0 ].ChangeType( m_currentSelected.OutputPorts[ 0 ].DataType, false );
-					m_drawPreviewAsSphere = m_currentSelected.SpherePreview;
-					CheckSpherePreview();
-				}
-
-				m_sizeIsDirty = true;
-				m_isDirty = true;
+				UpdateFromSelected();
 			}
+		}
+
+		void UpdateFromSelected()
+		{
+			m_currentSelected = UIUtils.GetLocalVarNode( m_referenceId );
+			if ( m_currentSelected != null )
+			{
+				m_nodeId = m_currentSelected.UniqueId;
+				m_outputPorts[ 0 ].ChangeType( m_currentSelected.OutputPorts[ 0 ].DataType, false );
+				m_drawPreviewAsSphere = m_currentSelected.SpherePreview;
+				CheckSpherePreview();
+			}
+
+			m_sizeIsDirty = true;
+			m_isDirty = true;
 		}
 
 		public override void Destroy()
@@ -105,6 +119,20 @@ namespace AmplifyShaderEditor
 				}
 			}
 
+
+			Rect rect = m_globalPosition;
+			rect.x = rect.x + ( NodeButtonDeltaX - 1 ) * drawInfo.InvertedZoom + 1;
+			rect.y = rect.y + NodeButtonDeltaY * drawInfo.InvertedZoom;
+			rect.width = NodeButtonSizeX * drawInfo.InvertedZoom;
+			rect.height = NodeButtonSizeY * drawInfo.InvertedZoom;
+			EditorGUI.BeginChangeCheck();
+			m_referenceId = EditorGUIPopup( rect, m_referenceId, UIUtils.LocalVarNodeArr() , UIUtils.PropertyPopUp );
+			if ( EditorGUI.EndChangeCheck() )
+			{
+				UpdateFromSelected();
+			}
+
+
 			UpdateLocalVar();
 		}
 
@@ -112,7 +140,26 @@ namespace AmplifyShaderEditor
 		{
 			if ( m_referenceId > -1 )
 			{
-				m_currentSelected = UIUtils.GetLocalVarNode( m_referenceId );
+				ParentNode newNode = UIUtils.GetLocalVarNode( m_referenceId );
+				if ( newNode != null )
+				{
+					if ( newNode.UniqueId != m_nodeId )
+					{
+						m_currentSelected = null;
+						int count = UIUtils.LocalVarNodeAmount(); 
+						for ( int i = 0; i < count; i++ )
+						{
+							ParentNode node = UIUtils.GetLocalVarNode( i );
+							if ( node.UniqueId == m_nodeId )
+							{
+								m_currentSelected = node as RegisterLocalVarNode;
+								m_referenceId = i;
+								break;
+							}
+						}
+					}
+				}
+
 				if ( m_currentSelected != null )
 				{
 					if ( m_currentSelected.OutputPorts[ 0 ].DataType != m_outputPorts[ 0 ].DataType )
@@ -129,6 +176,7 @@ namespace AmplifyShaderEditor
 				}
 				else
 				{
+					m_nodeId = -1;
 					m_referenceId = -1;
 					m_referenceWidth = -1;
 					m_additionalContent.text = string.Empty;
@@ -149,12 +197,12 @@ namespace AmplifyShaderEditor
 			}
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData , ref MasterNodeDataCollector dataCollector )
 		{
-			base.PropagateNodeData( nodeData );
+			base.PropagateNodeData( nodeData, ref dataCollector );
 			if ( m_currentSelected != null )
 			{
-				m_currentSelected.PropagateNodeData( nodeData );
+				m_currentSelected.PropagateNodeData( nodeData , ref dataCollector );
 			}
 		}
 

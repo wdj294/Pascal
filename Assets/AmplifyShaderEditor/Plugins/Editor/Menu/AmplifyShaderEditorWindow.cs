@@ -108,9 +108,13 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private int m_graphCount = 0;
 
+		[SerializeField]
+		private double m_currentInactiveTime = 0;
+
 		private bool m_ctrlSCallback = false;
 
 		private bool m_altDragStarted = false;
+		private bool m_altPressDown = false;
 
 		// Events
 		private Vector3 m_currentMousePos;
@@ -138,6 +142,7 @@ namespace AmplifyShaderEditor
 		private GraphContextMenu m_contextMenu;
 		private ShortcutsManager m_shortcutManager;
 
+		private NodeAvailability m_currentNodeAvailability = NodeAvailability.SurfaceShader;
 		//Clipboard
 		private Clipboard m_clipboard;
 
@@ -162,7 +167,7 @@ namespace AmplifyShaderEditor
 
 		private ContextPalette m_contextPalette;
 		private PalettePopUp m_palettePopup;
-		private Type m_paletteChosenType;
+		private System.Type m_paletteChosenType;
 		private AmplifyShaderFunction m_paletteChosenFunction;
 
 		// In-Editor Message System
@@ -185,7 +190,7 @@ namespace AmplifyShaderEditor
 
 		private DrawInfo m_drawInfo;
 		private KeyCode m_lastKeyPressed = KeyCode.None;
-		private Type m_commentaryTypeNode;
+		private System.Type m_commentaryTypeNode;
 
 		private int m_onLoadDone = 0;
 
@@ -224,13 +229,14 @@ namespace AmplifyShaderEditor
 
 		private int m_lastHotControl = -1;
 
+		[SerializeField]
 		private bool m_isShaderFunctionWindow = false;
 
 		private string m_currentTitle = string.Empty;
 		private bool m_currentTitleMod = false;
 
 		//private Material m_maskingMaterial = null;
-		private int m_cachedProjectInLinearId = -1;
+		//private int m_cachedProjectInLinearId = -1;
 		private int m_cachedEditorTimeId = -1;
 		private int m_cachedEditorDeltaTimeId = -1;
 		//private float m_repaintFrequency = 15;
@@ -249,6 +255,10 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private bool m_openedAssetFromNode = false;
+
+
+		private bool m_nodesLoadedCorrectly = false;
+		private GUIContent NodesExceptionMessage = new GUIContent( "ASE is unable to load correctly due to some faulty other classes/plugin in your project. We advise to review all your imported plugins." );
 
 		// Unity Menu item
 		[MenuItem( "Window/Amplify Shader Editor/Open Canvas" )]
@@ -457,7 +467,7 @@ namespace AmplifyShaderEditor
 			return currentWindow;
 		}
 
-		double CalculateInactivityTime()
+		public double CalculateInactivityTime()
 		{
 			double currTime = EditorApplication.timeSinceStartup;
 			switch ( Event.current.type )
@@ -479,7 +489,6 @@ namespace AmplifyShaderEditor
 					return 0;
 				}
 			}
-
 			return currTime - m_inactivityTime;
 		}
 
@@ -501,10 +510,22 @@ namespace AmplifyShaderEditor
 			EditorApplication.update += UpdateTime;
 			EditorApplication.update += UpdateNodePreviewList;
 
+			if ( CurrentSelection == ASESelectionMode.ShaderFunction )
+			{
+				IsShaderFunctionWindow = true;
+				IOUtils.CurrentCanvasMode = NodeAvailability.ShaderFunction;
+			}
+			else
+			{
+				IsShaderFunctionWindow = false;
+				IOUtils.CurrentCanvasMode = NodeAvailability.SurfaceShader;
+			}
+
 			m_optionsWindow = new OptionsWindow( this );
 			m_optionsWindow.Init();
 
 			m_contextMenu = new GraphContextMenu( m_mainGraphInstance );
+			m_nodesLoadedCorrectly = m_contextMenu.CorrectlyLoaded;
 
 			m_paletteWindow = new PaletteWindow( this )
 			{
@@ -519,17 +540,6 @@ namespace AmplifyShaderEditor
 
 			m_genericMessageUI = new GenericMessageUI();
 			m_genericMessageUI.OnMessageDisplayEvent += ShowMessageImmediately;
-
-			if ( CurrentGraph.CurrentShaderFunction != null )
-			{
-				IsShaderFunctionWindow = true;
-				IOUtils.CurrentCanvasMode = NodeAvailability.ShaderFunction;
-			}
-			else
-			{
-				IsShaderFunctionWindow = false;
-				IOUtils.CurrentCanvasMode = NodeAvailability.SurfaceShader;
-			}
 
 			Selection.selectionChanged += OnProjectSelectionChanged;
 			EditorApplication.projectWindowChanged += OnProjectWindowChanged;
@@ -599,11 +609,11 @@ namespace AmplifyShaderEditor
 
 
 			m_shortcutManager.RegisterEditorShortcut( true, KeyCode.W, "Toggle Colored Line Mode", () =>
-		   {
-			   m_optionsWindow.ColoredPorts = !m_optionsWindow.ColoredPorts;
-			   ForceRepaint();
+			{
+				m_optionsWindow.ColoredPorts = !m_optionsWindow.ColoredPorts;
+				ForceRepaint();
 
-		   } );
+			} );
 
 			m_shortcutManager.RegisterEditorShortcut( true, EventModifiers.Control, KeyCode.W, "Toggle Multi-Line Mode", () =>
 			{
@@ -612,12 +622,12 @@ namespace AmplifyShaderEditor
 			} );
 
 			m_shortcutManager.RegisterEditorShortcut( true, KeyCode.P, "Global Preview", () =>
-		   {
-			   GlobalPreview = !GlobalPreview;
-			   EditorPrefs.SetBool( "GlobalPreview", GlobalPreview );
+			{
+				GlobalPreview = !GlobalPreview;
+				EditorPrefs.SetBool( "GlobalPreview", GlobalPreview );
 
-			   ForceRepaint();
-		   } );
+				ForceRepaint();
+			} );
 
 			m_shortcutManager.RegisterEditorShortcut( true, KeyCode.Delete, "Delete selected nodes", DeleteSelectedNodeWithRepaint );
 			m_shortcutManager.RegisterEditorShortcut( true, KeyCode.Backspace, "Delete selected nodes", DeleteSelectedNodeWithRepaint );
@@ -1154,8 +1164,8 @@ namespace AmplifyShaderEditor
 			UIUtils.DirtyMask = false;
 			m_mainGraphInstance.CreateNewEmptyFunction( shaderFunction );
 			m_mainGraphInstance.CurrentShaderFunction = shaderFunction;
-
-			m_lastOpenedLocation = string.Empty;
+			
+			m_lastOpenedLocation = AssetDatabase.GetAssetPath( shaderFunction ); //string.Empty;
 			UIUtils.DirtyMask = true;
 			//return m_mainGraphInstance.CurrentMasterNode.CurrentShader;
 		}
@@ -1172,7 +1182,7 @@ namespace AmplifyShaderEditor
 				return false;
 			}
 
-			CultureInfo userCurrentCulture = Thread.CurrentThread.CurrentCulture;
+			
 			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
 			m_customGraph = null;
@@ -1204,7 +1214,7 @@ namespace AmplifyShaderEditor
 					IOUtils.StartSaveThread( GenerateGraphInfo(), newShader );
 					AssetDatabase.Refresh();
 					LoadFromDisk( newShader );
-					Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+					Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 					return true;
 				}
 			}
@@ -1217,7 +1227,7 @@ namespace AmplifyShaderEditor
 					Material material = m_mainGraphInstance.CurrentMaterial;
 					m_lastpath = ( material != null ) ? AssetDatabase.GetAssetPath( material ) : AssetDatabase.GetAssetPath( currShader );
 					EditorPrefs.SetString( IOUtils.LAST_OPENED_OBJ_ID, m_lastpath );
-					Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+					Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 					return true;
 				}
 				else
@@ -1231,7 +1241,7 @@ namespace AmplifyShaderEditor
 						m_mainGraphInstance.FireMasterNode( pathName, true );
 						m_lastpath = pathName;
 						EditorPrefs.SetString( IOUtils.LAST_OPENED_OBJ_ID, pathName );
-						Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+						Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 						return true;
 					}
 				}
@@ -1282,11 +1292,11 @@ namespace AmplifyShaderEditor
 				AssetDatabase.Refresh();
 				IOUtils.FunctionNodeChanged = true;
 				m_lastpath = AssetDatabase.GetAssetPath( m_mainGraphInstance.CurrentShaderFunction );
-				Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+				Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 				//EditorPrefs.SetString( IOUtils.LAST_OPENED_OBJ_ID, AssetDatabase.GetAssetPath( m_mainGraphInstance.CurrentShaderFunction ) );
 				return true;
 			}
-			Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+			Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 			return false;
 		}
 
@@ -2289,6 +2299,7 @@ namespace AmplifyShaderEditor
 				UIUtils.LatestOpenedFolder = latestOpenedFolder.Substring( 0, latestOpenedFolder.LastIndexOf( '/' ) + 1 );
 				result = LoadFromDisk( assetDatapath, shaderFunction );
 				CurrentSelection = ASESelectionMode.ShaderFunction;
+				IsShaderFunctionWindow = true;
 				titleContent.text = GenerateTabTitle( shaderFunction.FunctionName );
 				titleContent.image = UIUtils.ShaderFunctionIcon;
 				m_lastpath = assetDatapath;
@@ -2327,6 +2338,7 @@ namespace AmplifyShaderEditor
 				if ( material != null )
 				{
 					CurrentSelection = ASESelectionMode.Material;
+					IsShaderFunctionWindow = false;
 					titleContent.text = GenerateTabTitle( material.name );
 					titleContent.image = UIUtils.MaterialIcon;
 					if ( material.HasProperty( IOUtils.DefaultASEDirtyCheckId ) )
@@ -2339,6 +2351,7 @@ namespace AmplifyShaderEditor
 				else
 				{
 					CurrentSelection = ASESelectionMode.Shader;
+					IsShaderFunctionWindow = false;
 					titleContent.text = GenerateTabTitle( shader.name );
 					titleContent.image = UIUtils.ShaderIcon;
 					m_lastpath = AssetDatabase.GetAssetPath( shader );
@@ -2600,6 +2613,11 @@ namespace AmplifyShaderEditor
 
 		void OnKeyboardUp()
 		{
+			if ( m_altPressDown )
+			{
+				m_altPressDown = false;
+			}
+
 			if ( m_shortcutManager.ActivateShortcut( m_currentEvent.modifiers, m_lastKeyPressed, false ) )
 			{
 				ForceRepaint();
@@ -2647,8 +2665,9 @@ namespace AmplifyShaderEditor
 				PasteFromClipboard( false );
 			}
 
-			if ( OnKeyboardPress( KeyCode.LeftAlt ) || OnKeyboardPress( KeyCode.RightAlt ) || OnKeyboardPress( KeyCode.AltGr ) )
+			if ( !m_altPressDown && ( OnKeyboardPress( KeyCode.LeftAlt ) || OnKeyboardPress( KeyCode.RightAlt ) || OnKeyboardPress( KeyCode.AltGr ) ) )
 			{
+				m_altPressDown = true;
 				m_altKeyStartPos = m_currentMousePos2D;
 			}
 
@@ -2673,7 +2692,10 @@ namespace AmplifyShaderEditor
 			float dynamicMaxZoom = m_mainGraphInstance.MaxNodeDist / minCam;
 
 			Vector2 canvasPos = TranformPosition( pivot );
-			CameraZoom = Mathf.Clamp( m_cameraZoom + zoomIncrement * Constants.CAMERA_ZOOM_SPEED, Constants.CAMERA_MIN_ZOOM, Mathf.Max( Constants.CAMERA_MAX_ZOOM, dynamicMaxZoom ) );
+			if ( zoomIncrement < 0 )
+				CameraZoom = Mathf.Max( m_cameraZoom + zoomIncrement * Constants.CAMERA_ZOOM_SPEED, Constants.CAMERA_MIN_ZOOM );
+			else if ( CameraZoom < Mathf.Max( Constants.CAMERA_MAX_ZOOM, dynamicMaxZoom ) )
+				CameraZoom = m_cameraZoom + zoomIncrement * Constants.CAMERA_ZOOM_SPEED;// Mathf.Min( m_cameraZoom + zoomIncrement * Constants.CAMERA_ZOOM_SPEED, Mathf.Max( Constants.CAMERA_MAX_ZOOM, dynamicMaxZoom ) );
 			m_cameraOffset.x = pivot.x * m_cameraZoom - canvasPos.x;
 			m_cameraOffset.y = pivot.y * m_cameraZoom - canvasPos.y;
 		}
@@ -2705,7 +2727,7 @@ namespace AmplifyShaderEditor
 		ParentNode CreateNodeFromClipboardData( int clipId )
 		{
 			string[] parameters = m_clipboard.CurrentClipboardStrData[ clipId ].Data.Split( IOUtils.FIELD_SEPARATOR );
-			Type nodeType = Type.GetType( parameters[ IOUtils.NodeTypeId ] );
+			System.Type nodeType = System.Type.GetType( parameters[ IOUtils.NodeTypeId ] );
 			NodeAttributes attributes = m_contextMenu.GetNodeAttributesForType( nodeType );
 			if ( attributes != null && !UIUtils.GetNodeAvailabilityInBitArray( attributes.NodeAvailabilityFlags, IOUtils.CurrentCanvasMode ) )
 				return null;
@@ -2964,10 +2986,10 @@ namespace AmplifyShaderEditor
 							{
 								case IOUtils.NodeParam:
 								{
-									Type type = Type.GetType( parameters[ IOUtils.NodeTypeId ] );
+									System.Type type = System.Type.GetType( parameters[ IOUtils.NodeTypeId ] );
 									if ( type != null )
 									{
-										Type oldType = type;
+										System.Type oldType = type;
 										NodeAttributes attribs = contextMenu.GetNodeAttributesForType( type );
 										if ( attribs == null )
 										{
@@ -3166,7 +3188,6 @@ namespace AmplifyShaderEditor
 
 		public ShaderLoadResult LoadFromDisk( string pathname, AmplifyShaderFunction shaderFunction = null )
 		{
-			CultureInfo userCurrentCulture = Thread.CurrentThread.CurrentCulture;
 			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
 			FullCleanUndoStack();
@@ -3310,10 +3331,10 @@ namespace AmplifyShaderEditor
 							{
 								case IOUtils.NodeParam:
 								{
-									Type type = Type.GetType( parameters[ IOUtils.NodeTypeId ] );
+									System.Type type = System.Type.GetType( parameters[ IOUtils.NodeTypeId ] );
 									if ( type != null )
 									{
-										Type oldType = type;
+										System.Type oldType = type;
 										NodeAttributes attribs = m_contextMenu.GetNodeAttributesForType( type );
 										if ( attribs == null )
 										{
@@ -3528,7 +3549,9 @@ namespace AmplifyShaderEditor
 			UIUtils.DirtyMask = true;
 			m_checkInvalidConnections = true;
 
-			Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+			m_mainGraphInstance.UpdateRegisters();
+
+			Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 			return loadResult;
 		}
 
@@ -3599,7 +3622,6 @@ namespace AmplifyShaderEditor
 				Init();
 			}
 			
-			CultureInfo userCurrentCulture = Thread.CurrentThread.CurrentCulture;
 			Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
 			if ( m_refreshOnUndo )
@@ -3616,7 +3638,7 @@ namespace AmplifyShaderEditor
 
 			m_mainGraphInstance.OnDuplicateEventWrapper();
 
-			double inactiveTime = CalculateInactivityTime();
+			m_currentInactiveTime = CalculateInactivityTime();
 
 			if ( m_nodeParametersWindow != null && EditorVariablesManager.NodeParametersMaximized.Value != m_nodeParametersWindow.IsMaximized )
 				EditorVariablesManager.NodeParametersMaximized.Value = m_nodeParametersWindow.IsMaximized;
@@ -3629,11 +3651,11 @@ namespace AmplifyShaderEditor
 				m_mainGraphInstance.DeleteInvalidConnections();
 			}
 
-			if ( m_repaintIsDirty )
-			{
-				m_repaintIsDirty = false;
-				ForceRepaint();
-			}
+			//if ( m_repaintIsDirty )
+			//{
+			//	m_repaintIsDirty = false;
+			//	ForceRepaint();
+			//}
 
 			if ( m_forcingMaterialUpdateFlag )
 			{
@@ -3668,11 +3690,6 @@ namespace AmplifyShaderEditor
 				GUIUtility.keyboardControl = 0;
 			}
 
-			//if ( m_mainGraphInstance.UpdateMarkForDeletion() )
-			//{
-			//	ForceRepaint();
-			//}
-
 			Vector2 pos = Event.current.mousePosition;
 			pos.x += position.x;
 			pos.y += position.y;
@@ -3694,6 +3711,7 @@ namespace AmplifyShaderEditor
 				m_mainGraphInstance.UpdateMaterialOnMasterNode( m_delayedMaterialSet );
 				m_mainGraphInstance.SetMaterialModeOnGraph( m_delayedMaterialSet );
 				CurrentSelection = ASESelectionMode.Material;
+				IsShaderFunctionWindow = false;
 				m_delayedMaterialSet = null;
 			}
 
@@ -3929,7 +3947,7 @@ namespace AmplifyShaderEditor
 				GUI.backgroundColor = original;
 			}
 
-			bool isResizing = m_toolsWindow.IsResizing || m_paletteWindow.IsResizing;
+			bool isResizing = m_nodeParametersWindow.IsResizing || m_paletteWindow.IsResizing;
 			//Test boundaries for auto-pan
 			if ( !isResizing && m_autoPanDirActive )
 			{
@@ -3965,7 +3983,7 @@ namespace AmplifyShaderEditor
 			{
 				if ( m_saveIsDirty )
 				{
-					if ( m_liveShaderEditing && focusedWindow && inactiveTime > InactivitySaveTime )
+					if ( m_liveShaderEditing && focusedWindow && m_currentInactiveTime > InactivitySaveTime )
 					{
 						m_saveIsDirty = false;
 						if ( m_mainGraphInstance.CurrentMasterNodeId != Constants.INVALID_NODE_ID )
@@ -3997,7 +4015,8 @@ namespace AmplifyShaderEditor
 			if ( m_repaintIsDirty )
 			{
 				m_repaintIsDirty = false;
-				ForceRepaint();
+				Repaint();
+				//ForceRepaint();
 			}
 
 			if ( m_cacheSaveOp )
@@ -4032,9 +4051,13 @@ namespace AmplifyShaderEditor
 			//m_previousShaderFunction = CurrentGraph.CurrentShaderFunction;
 			if ( CheckFunctions )
 				CheckFunctions = false;
-			Thread.CurrentThread.CurrentCulture = userCurrentCulture;
+			Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
 
 			UIUtils.CurrentWindow = cacheWindow;
+			if ( !m_nodesLoadedCorrectly )
+			{
+				ShowNotification( NodesExceptionMessage );
+			}
 		}
 
 		public bool CheckFunctions = false;
@@ -4074,7 +4097,7 @@ namespace AmplifyShaderEditor
 			m_saveIsDirty = true && UIUtils.DirtyMask;
 		}
 
-		public void OnPaletteNodeCreate( Type type, string name, AmplifyShaderFunction function )
+		public void OnPaletteNodeCreate( System.Type type, string name, AmplifyShaderFunction function )
 		{
 			m_mainGraphInstance.DeSelectAll();
 			m_paletteChosenType = type;
@@ -4082,7 +4105,7 @@ namespace AmplifyShaderEditor
 			m_palettePopup.Activate( name );
 		}
 
-		public void OnContextPaletteNodeCreate( Type type, string name, AmplifyShaderFunction function )
+		public void OnContextPaletteNodeCreate( System.Type type, string name, AmplifyShaderFunction function )
 		{
 			m_mainGraphInstance.DeSelectAll();
 			ParentNode newNode = CreateNode( type, m_contextPalette.StartDropPosition * m_cameraZoom - m_cameraOffset, function );
@@ -4156,7 +4179,7 @@ namespace AmplifyShaderEditor
 			}
 		}
 		public void DestroyNode( ParentNode node, bool registerUndo = true ) { m_mainGraphInstance.DestroyNode( node, registerUndo ); }
-		public ParentNode CreateNode( Type type, Vector2 position, AmplifyShaderFunction function = null, bool selectNode = true )
+		public ParentNode CreateNode( System.Type type, Vector2 position, AmplifyShaderFunction function = null, bool selectNode = true )
 		{
 			ParentNode node;
 			if ( function == null )
@@ -4235,8 +4258,8 @@ namespace AmplifyShaderEditor
 			double deltaTime = Time.realtimeSinceStartup - m_time;
 			m_time = Time.realtimeSinceStartup;
 
-			if ( m_cachedProjectInLinearId == -1 )
-				m_cachedProjectInLinearId = Shader.PropertyToID( "_ProjectInLinear" );
+			//if ( m_cachedProjectInLinearId == -1 )
+			//	m_cachedProjectInLinearId = Shader.PropertyToID( "_ProjectInLinear" );
 
 			if ( m_cachedEditorTimeId == -1 )
 				m_cachedEditorTimeId = Shader.PropertyToID( "_EditorTime" );
@@ -4244,7 +4267,7 @@ namespace AmplifyShaderEditor
 			if ( m_cachedEditorDeltaTimeId == -1 )
 				m_cachedEditorDeltaTimeId = Shader.PropertyToID( "_EditorDeltaTime" );
 
-			Shader.SetGlobalFloat( "_ProjectInLinear", ( float ) ( PlayerSettings.colorSpace == ColorSpace.Linear ? 1 : 0 ) );
+			//Shader.SetGlobalFloat( "_ProjectInLinear", ( float ) ( PlayerSettings.colorSpace == ColorSpace.Linear ? 1 : 0 ) );
 			Shader.SetGlobalFloat( "_EditorTime", ( float ) m_time );
 			Shader.SetGlobalFloat( "_EditorDeltaTime", ( float ) deltaTime );
 		}
@@ -4271,7 +4294,8 @@ namespace AmplifyShaderEditor
 		public void ForceRepaint()
 		{
 			m_repaintCount += 1;
-			Repaint();
+			m_repaintIsDirty = true;
+			//Repaint();
 		}
 
 		public void ForceUpdateFromMaterial() { m_forceUpdateFromMaterialFlag = true; }
@@ -4504,6 +4528,20 @@ namespace AmplifyShaderEditor
 			}
 		}
 
+		public NodeAvailability CurrentNodeAvailability
+		{
+			get { return m_currentNodeAvailability; }
+			set
+			{
+				NodeAvailability cache = m_currentNodeAvailability;
+				m_currentNodeAvailability = value;
+
+				if ( cache != value )
+					RefreshAvaibleNodes();
+			}
+		}
+
+		public bool LmbPressed { get { return m_lmbPressed; } }
 		public PaletteWindow CurrentPaletteWindow { get { return m_paletteWindow; } }
 		public PreMadeShaders PreMadeShadersInstance { get { return m_preMadeShaders; } }
 		public Rect CameraInfo { get { return m_cameraInfo; } }
@@ -4518,7 +4556,7 @@ namespace AmplifyShaderEditor
 		public DrawInfo CameraDrawInfo { get { return m_drawInfo; } }
 		public VersionInfo CurrentVersionInfo { get { return m_versionInfo; } }
 		public string Lastpath { get { return m_lastpath; } set { m_lastpath = value; } }
-		public string LastOpenedLocation { get { return m_lastOpenedLocation; } }
+		public string LastOpenedLocation { get { return m_lastOpenedLocation; } set { m_lastOpenedLocation = value; } }
 		public float AvailableCanvasWidth { get { return ( m_cameraInfo.width - m_paletteWindow.RealWidth - m_nodeParametersWindow.RealWidth ); } }
 		public float AvailableCanvasHeight { get { return ( m_cameraInfo.height ); } }
 		public float CameraZoom { get { return m_cameraZoom; } set { m_cameraZoom = value; m_zoomChanged = true; } }
@@ -4533,5 +4571,7 @@ namespace AmplifyShaderEditor
 		public bool ExpandedRenderingPlatforms { get { return m_expandedRenderingPlatforms; } set { m_expandedRenderingPlatforms = value; } }
 		public bool ExpandedRenderingOptions { get { return m_expandedRenderingOptions; } set { m_expandedRenderingOptions = value; } }
 		public bool ExpandedProperties { get { return m_expandedProperties; } set { m_expandedProperties = value; } }
+		public bool NodesLoadedCorrectly { get { return m_nodesLoadedCorrectly; }set { m_nodesLoadedCorrectly = value; } }
+		public double CurrentInactiveTime { get { return m_currentInactiveTime; } }
 	}
 }

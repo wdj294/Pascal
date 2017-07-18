@@ -1,7 +1,163 @@
 Release Notes:
+v1.1.0 dev 01:
+* Fixes:
+    * Fixed issue with being able to open recently created shader multiple times
+
+* Improvements:
+    * Added preview for 'Screen Position' node
+    * 'Append' output type can be selected from node body
+    * Small overall optimizations
+
+v1.0.0 dev 12:
+* Fixes:
+    * Fixed wrong casting issues on dynamic type nodes
+    * Fixed lost reference when deleting 'Grab Screen Color' node
+
+v1.0.0 dev 11:
+* New features:
+    * Additional includes (.cginc) can now be used into an ASE shader via the Additional Includes sections on the Output node
+        * Their contents can be accessed via the 'Custom Expression' node
+    * Added Node Search bar to quickly find nodes on the canvas
+        * Ctrl + F: Shows Search Bar
+        * Enter/Return/F3: Goes to next occurrence
+        * Shift + (Enter/Return/F3): Goes to previous occurrence
+        * Escape: Hides Search Bar
+
+* New samples:
+    * UV Light Reveal 
+
+* Fixes:
+    * Fixed issue on creating unnecessary casts from floats
+    * Fixed minor issue on GPU Instancing sample
+    * Fixed minor UI issues on 'Reflect' and 'Refract' nodes
+    * Fixing shader paths for Community Shaders
+    * Fixed issue on incorrect cast when using Floats and Ints in certain nodes
+    * Fixed issue on resetting in certain situations vertex local variables generated during Output Node fragment code generation
+    * Fixed issue on property name update in 'Grab Screen Color' node
+
+* Improvements:
+    * Improved nodes local variables reset behavior to prevent future issues
+    * Added previews to 'Gamma To Linear' and 'Linear To Gamma' nodes
+    * Forcing 'Dot' and 'Normalize' nodes to store results in local value and prevent with power operations
+
+v1.0.0 dev 10:
+* Fixes:
+    * Fixed issue with temporary variable assignment Id on 'Texture Coordinates' node
+
+v1.0.0 dev 09:
+* New features:
+    * New 'Static Switch' node which allows creation of shader variants
+
+* Fixes:
+    * Fixed minor issue on reading inputs from dynamic 'Add' and 'Multiply' nodes on older shader versions
+    * Fixed issue on Parent Graph attempting to delete in-existent connections
+    * Fixed issue with always disabling Light Maps when using Tessellation
+    * Fixed issue with Texture Nodes reference drop down selector showing incorrect labels both on 'Texture Sampler' and 'Texture Coordinates' nodes
+    * Fixed issues on incorrect loosing references with 'Texture Sampler' node on Reference mode
+
+* Improvements:
+    * Improved 'Append' node connection management
+    * Added Local Var selector directly on 'Get Local Var' node body
+
+v1.0.0 dev 08:
+* New features:
+    * New Output node Rendering Options
+        * Disable Batching
+        * Ignore Projector
+        * Force No Shadow Casting
+
+* Fixes:
+    * Fixed issue with new dynamic 'Add' and 'Multiply' nodes not registering port creation/destruction into Undo system
+    * Fixed issue on 'Grab Screen Color' node duplicating code
+    * Fixed issue with Opacity Mask port being incorrectly Enabled/Disabled on certain situations
+    * Fixed issue on 'Get Local Var' nodes getting wrong ids on certain situations when a 'Register Local Var' node is deleted
+    * Small fix to force property name update when changing type on property nodes
+    * Fixed issue where 'View Dir' node was generating code in the wrong space when in vertex function for both world space and tangent space
+    
+v1.0.0 dev 07:
+* Fixes:
+    * Fixed name conflict on 'Custom Expression' node
+    * Fixed issue for both normal input in indirect lighting nodes that were asking from normal in world space instead of tangent space
+
+v1.0.0 dev 06:
+* New features:
+    * Added LOD Cross Fade support for LOD groups ( located in the Output node Rendering Options tab )
+
+* Improvements:
+    * 'Add' and 'Multiply' nodes can have more than 2 input ports ( max 10 )
+    * Minor improvements on several nodes
+    * Refraction port use Unity's grabpass by default so it can pick other refraction materials
+    * Avoiding possible compiler misunderstandings with System.Type calls
+    * Ensuring variables/functions created by custom expressions have unique names
+    * Auto enabling instance mode on material ( if on Unity 5.6 or above ) when detecting instance mode on ASE shader
+    * Improved zoom behavior
+
+* Fixes:
+    * Fixed issue when remapping ports from very old shaders
+    * Fixed swizzle issue on 'Vertex Position' node
+    * Fixed matrix 'Invert' node
+    * Fixed SimpleGPUInstancing sample not fully batching on Unity 5.6
+    * Fixed opening a SF in more than one tab after creation
+    * Fixed header click to edit name when zoomed out
+    * Fixed both Commentary node side menus resize not following the mouse movement correctly
+
+* New Shader Functions: ( AmplifyShaderEditor/Examples/Assets/ShaderFunctions )
+    * Simple HUE
+    * SphereMask
+
+v1.0.0 dev 05:
+* Fixes:
+    * Fixed issue with conditional 'If' node
+    * Fixed issue with 'Vertex Position' node swizzle in Local Vertex Ports
+
+* Improvements:
+    * Caching instanced property nodes into local variables to prevent multiple UNITY_ACCESS_INSTANCED_PROP() on them
+    * Added support for samplers types into 'Custom Expression' node
+
+v1.0.0 dev 04:
+* Fixes:
+    * Fixed node drag and drop issue from palette
+    * Fixed issue with online reference button having a "too-large" click box
+    * Palette Menus now display the correct cursor on mouse hover
+    * Fixed clicking Enter on palette without selecting a node
+    * Changing lighting models should now show the error messages correctly
+    * Fixed issue of Custom Light nodes not loading properly
+
+* Improvements:
+    * Added Per Renderer Data tag to Properties available Attributes
+    * Adding help box into 'Virtual Texture Object' with additional info
+
+v1.0.0 dev 03:
+* New features:
+    * Custom Lighting 
+        * New Nodes: ( can only be used on this light model )
+            * Indirect Diffuse Light
+            * Indirect Specular Light
+            * Light Attenuation
+
+* New Samples:
+    * Custom Lighting Toon
+
+* Fixes:
+    * Fixed issue when zooming with Alt + Right Mouse button
+    * Fixed issue with window not detecting graph type on Unity load
+    * Fixed issue on 'Debug Switch' node not loading properly
+    * Fixed issue on assigning invalid cultures when an error/exception occurred inside ASE
+
+* Improvements:
+    * Context Palettes now allow  Tab / Shift Tab to select between nodes instead of mouse selection (confirms with Return/Enter key)
+    * Added previews for 'Debug Switch' and 'Toggle Switch' nodes
+    * Added link to node documentation on its tooltip
+    * Small optimization on all nodes overall
+    * Preventing ASE to crash if some faulty class/dll is present on the project
+
+v1.0.0 dev 02:
+* Fixes:
+    * Preventing shadow caster error on using 'Vertex TexCoord' with 'Vertex Normal'
+
 v1.0.0 dev 01:
 * Fixes:
-    * Fixed issue on not recognizing Tessellation port correcty when at Lambert or BlinnPhong light models
+    * Fixed issue on not recognizing Tessellation port correctly when at Lambert or BlinnPhong light models
     * Fixed issue on dragging nodes via Alt mode not respecting ports unique ids when creating connections
     * Fixed minor typo on 'Switch by Face' node
     * Fixed minor issue when loading LoadPolyWater example

@@ -78,6 +78,8 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private float m_referenceWidth = -1;
 
+		private string m_previousAdditionalText = string.Empty;
+
 		private bool m_forceSamplerUpdate = false;
 		private bool m_forceInputTypeCheck = false;
 
@@ -514,7 +516,21 @@ namespace AmplifyShaderEditor
 					GUI.enabled = false;
 				}
 
+				EditorGUI.BeginChangeCheck();
 				m_referenceArrayId = EditorGUILayoutPopup( Constants.AvailableReferenceStr, m_referenceArrayId, arr );
+				if ( EditorGUI.EndChangeCheck() )
+				{
+					m_referenceSampler = UIUtils.GetSamplerNode( m_referenceArrayId );
+					if ( m_referenceSampler != null )
+					{
+						m_referenceNodeId = m_referenceSampler.UniqueId;
+					}
+					else
+					{
+						m_referenceArrayId = -1;
+						m_referenceNodeId = -1;
+					}
+				}
 				GUI.enabled = guiEnabledBuffer;
 
 				DrawSamplerOptions();
@@ -559,6 +575,8 @@ namespace AmplifyShaderEditor
 				OnPropertyNameChanged();
 			}
 
+			CheckReference();
+
 			if ( m_isVisible )
 			{
 				if ( SoftValidReference )
@@ -577,9 +595,54 @@ namespace AmplifyShaderEditor
 				else
 				{
 					SetTitleText( m_propertyInspectorName );
-					SetAdditonalTitleText( string.Format( Constants.PropertyValueLabel, GetPropertyValStr() ) );
+
+					//small optimization, string format on every frame is killer
+					string tempVal = GetPropertyValStr();
+					if ( !m_previousAdditionalText.Equals( tempVal ) )
+					{
+						m_previousAdditionalText = tempVal;
+						m_additionalContent.text = string.Concat( "Value( ", tempVal, " )" );
+						//m_additionalContent.text = string.Format( Constants.PropertyValueLabel, tempVal );
+						m_sizeIsDirty = true;
+					}
+
+					//SetAdditonalTitleText( string.Format( Constants.PropertyValueLabel, GetPropertyValStr() ) );
 					m_drawPicker = true;
 				}
+			}
+		}
+
+		void CheckReference()
+		{
+			if ( m_referenceType != TexReferenceType.Instance )
+			{
+				return;
+			}
+
+			if ( m_referenceArrayId > -1 )
+			{
+				ParentNode newNode = UIUtils.GetSamplerNode( m_referenceArrayId );
+				if ( newNode == null || newNode.UniqueId != m_referenceNodeId )
+				{
+					m_referenceSampler = null;
+					int count = UIUtils.GetSamplerNodeAmount();
+					for ( int i = 0; i < count; i++ )
+					{
+						ParentNode node = UIUtils.GetSamplerNode( i );
+						if ( node.UniqueId == m_referenceNodeId )
+						{
+							m_referenceSampler = node as SamplerNode;
+							m_referenceArrayId = i;
+							break;
+						}
+					}
+				}
+			}
+
+			if ( m_referenceSampler == null && m_referenceNodeId > -1 )
+			{
+				m_referenceNodeId = -1;
+				m_referenceArrayId = -1;
 			}
 		}
 
@@ -655,7 +718,7 @@ namespace AmplifyShaderEditor
 			{
 				DrawPreview( drawInfo, m_previewRect );
 				GUI.Box( newPos, string.Empty, UIUtils.GetCustomStyle( CustomStyle.SamplerFrame ) );
-				UIUtils.GetCustomStyle( CustomStyle.SamplerButton ).fontSize = ( int )Mathf.Round( 9 * drawInfo.InvertedZoom );
+				//UIUtils.GetCustomStyle( CustomStyle.SamplerButton ).fontSize = ( int )Mathf.Round( 9 * drawInfo.InvertedZoom );
 			}
 		}
 
@@ -1332,21 +1395,21 @@ namespace AmplifyShaderEditor
 			return base.GetUniformValue();
 		}
 
-		public override void GetUniformData( out string dataType, out string dataName )
+		public override bool GetUniformData( out string dataType, out string dataName )
 		{
 			if ( SoftValidReference )
 			{
-				 m_referenceSampler.TextureProperty.GetUniformData( out dataType, out dataName);
-				return;
+				return  m_referenceSampler.TextureProperty.GetUniformData( out dataType, out dataName);
 			}
 			else if ( m_texPort.IsConnected && TextureProperty != null )
 			{
-				TextureProperty.GetUniformData( out dataType, out dataName );
-				return;
+				return TextureProperty.GetUniformData( out dataType, out dataName );
+				
 			}
 
-			base.GetUniformData( out dataType, out dataName );
+			return base.GetUniformData( out dataType, out dataName );
 		}
+
 		public string UVCoordsName { get { return Constants.InputVarStr + "." + IOUtils.GetUVChannelName( CurrentPropertyReference, m_textureCoordSet ); } }
 
 		public override string CurrentPropertyReference

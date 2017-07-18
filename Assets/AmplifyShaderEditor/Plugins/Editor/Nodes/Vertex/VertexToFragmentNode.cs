@@ -40,18 +40,18 @@ namespace AmplifyShaderEditor
 
 			bool dirtyVertexVarsBefore = dataCollector.DirtyVertexVariables;
 
-			ContainerGraph.ResetNodesLocalVariables( this );
+			ContainerGraph.ResetNodesLocalVariablesIfNot( this, MasterNodePortCategory.Vertex );
 
-			string vertexVarValue = m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector)+";";
+			string vertexVarValue = m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector ) + ";";
 			dataCollector.AddLocalVariable( UniqueId, Constants.VertexShaderOutputStr + "." + interpName, vertexVarValue );
-			
+
 			dataCollector.PortCategory = portCategory;
 
 			if ( !dirtyVertexVarsBefore && dataCollector.DirtyVertexVariables )
 			{
-				dataCollector.AddVertexInstruction( UIUtils.CurrentDataCollector.VertexLocalVariables, UniqueId, false );
-				UIUtils.CurrentDataCollector.ClearVertexLocalVariables();
-				ContainerGraph.ResetNodesLocalVariables( this );
+				dataCollector.AddVertexInstruction( dataCollector.VertexLocalVariables, UniqueId, false );
+				dataCollector.ClearVertexLocalVariables();
+				ContainerGraph.ResetNodesLocalVariablesIfNot( this, MasterNodePortCategory.Vertex );
 			}
 
 			//dataCollector.AddVertexInstruction( Constants.VertexShaderOutputStr + "." + interpName + " = interp" + m_uniqueId, m_uniqueId );

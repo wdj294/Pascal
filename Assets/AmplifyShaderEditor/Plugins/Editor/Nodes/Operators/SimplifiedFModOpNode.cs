@@ -25,24 +25,8 @@ namespace AmplifyShaderEditor
 			}
 
 			base.BuildResults( outputId, ref dataCollector, ignoreLocalvar );
-			switch ( m_outputPorts[ 0 ].DataType )
-			{
-				case WirePortDataType.FLOAT:
-				case WirePortDataType.FLOAT2:
-				case WirePortDataType.FLOAT3:
-				case WirePortDataType.FLOAT4:
-				case WirePortDataType.INT:
-				case WirePortDataType.COLOR:
-				case WirePortDataType.OBJECT:
-				{
-					RegisterLocalVariable( 0, string.Format( FmodCustomOp, m_inputA, m_inputB ), ref dataCollector, ("fmodResult"+ OutputId ) );
-					return m_outputPorts[ 0 ].LocalValue;
-				}
-				case WirePortDataType.FLOAT3x3:
-				case WirePortDataType.FLOAT4x4: { } break;
-			}
-
-			return UIUtils.InvalidParameter( this );
+			RegisterLocalVariable( 0, string.Format( FmodCustomOp, m_inputA, m_inputB ), ref dataCollector, ( "fmodResult" + OutputId ) );
+			return m_outputPorts[ 0 ].LocalValue;
 		}
 	}
 }

@@ -18,11 +18,11 @@ namespace AmplifyShaderEditor
 			m_searchFilterControl += "CONTEXTPALETTE";
 		}
 
-		public override void OnEnterPressed()
+		public override void OnEnterPressed(int index = 0)
 		{
 			if ( m_searchFilter.Length > 0 && m_currentItems.Count > 0 )
 			{
-				FireNodeCreateEvent( m_currentItems[ 0 ].NodeType, m_currentItems[ 0 ].Name, m_currentItems[ 0 ].Function );
+				FireNodeCreateEvent( m_currentItems[ index ].NodeType, m_currentItems[ index ].Name, m_currentItems[ index ].Function );
 			}
 			else
 			{
@@ -73,7 +73,7 @@ namespace AmplifyShaderEditor
 		//	return GUILayout.Button( content, style );
 		//}
 
-		void OnOptionSelected( Type type, string name, AmplifyShaderFunction function )
+		void OnOptionSelected( System.Type type, string name, AmplifyShaderFunction function )
 		{
 			Disable();
 		}

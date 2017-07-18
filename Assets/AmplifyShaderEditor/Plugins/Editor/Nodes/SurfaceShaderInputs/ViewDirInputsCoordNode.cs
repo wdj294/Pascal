@@ -24,16 +24,16 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private ViewDirSpace m_viewDirSpace = ViewDirSpace.World;
 
-		[SerializeField]
-		private bool m_addInstruction = false;
+		//[SerializeField]
+		//private bool m_addInstruction = false;
 
 		private int m_cachedPropertyId = -1;
 
-		public override void Reset()
-		{
-			base.Reset();
-			m_addInstruction = true;
-		}
+		//public override void Reset()
+		//{
+		//	base.Reset();
+		//	m_addInstruction = true;
+		//}
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -68,31 +68,40 @@ namespace AmplifyShaderEditor
 		{
 			base.SetPreviewInputs();
 
-			if( m_cachedPropertyId == -1 )
+			if ( m_cachedPropertyId == -1 )
 				m_cachedPropertyId = Shader.PropertyToID( "_TangentSpace" );
 
 			PreviewMaterial.SetFloat( m_cachedPropertyId, ( m_viewDirSpace == ViewDirSpace.Tangent ? 1 : 0 ) );
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
-			base.PropagateNodeData( nodeData );
+			base.PropagateNodeData( nodeData, ref dataCollector );
 			if ( m_viewDirSpace == ViewDirSpace.Tangent )
-				UIUtils.CurrentDataCollector.DirtyNormal = true;
+				dataCollector.DirtyNormal = true;
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
 			if ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation )
 			{
-				if ( m_addInstruction )
+				if ( m_viewDirSpace == ViewDirSpace.World )
 				{
 					string precision = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT3 );
-					dataCollector.AddVertexInstruction( precision + " viewDir = normalize( _WorldSpaceCameraPos - " + Constants.VertexShaderInputStr + ".vertex )", UniqueId );
-					m_addInstruction = false;
-				}
+					string worldPos = GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId );
 
-				return GetOutputVectorItem( 0, outputId, "viewDir" );
+					dataCollector.AddLocalVariable( UniqueId, precision + " worldViewDir = normalize( UnityWorldSpaceViewDir( " + worldPos + " ) );" );
+					return GetOutputVectorItem( 0, outputId, "worldViewDir" );
+				}
+				else
+				{
+					string precision = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT3 );
+					string worldPos = GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId );
+					string worldToTangent = GeneratorUtils.GenerateWorldToTangentMatrix( ref dataCollector, UniqueId, m_currentPrecisionType );
+
+					dataCollector.AddLocalVariable( UniqueId, precision + " tangentViewDir = mul( " + worldToTangent + ", normalize( UnityWorldSpaceViewDir( " + worldPos + " ) ) );" );
+					return GetOutputVectorItem( 0, outputId, "tangentViewDir" );
+				}
 			}
 			else
 			{

@@ -124,5 +124,6 @@ namespace AmplifyShaderEditor
 		public static EditorVariableBool ExpandedVertexOptions = new EditorVariableBool( "ASEExpandedVertexOptions", " ExpandedVertexOptions", false );
 		public static EditorVariableBool ExpandedFunctionInputs = new EditorVariableBool( "ASEExpandedFunctionInputs", " ExpandedFunctionInputs", false );
 		public static EditorVariableBool ExpandedFunctionOutputs = new EditorVariableBool( "ASEExpandedFunctionOutputs", " ExpandedFunctionOutputs", false );
+		public static EditorVariableBool ExpandedAdditionalIncludes = new EditorVariableBool( "ASEExpandedAdditionalIncludes", " ExpandedAdditionalIncludes", false );
 	}
 }

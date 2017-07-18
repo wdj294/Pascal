@@ -104,8 +104,10 @@ namespace AmplifyShaderEditor
 				{
 					if ( m_isResizing )
 					{
-						float delta = Event.current.delta.x;
-						m_resizeDelta += delta;
+						if ( m_anchor == MenuAnchor.TOP_LEFT )
+							m_resizeDelta = ( Event.current.mousePosition.x - m_maximizedArea.width );
+						else if ( m_anchor == MenuAnchor.TOP_RIGHT )
+							m_resizeDelta = Event.current.mousePosition.x - ( parentPosition.width - m_maximizedArea.width);
 					}
 				}
 

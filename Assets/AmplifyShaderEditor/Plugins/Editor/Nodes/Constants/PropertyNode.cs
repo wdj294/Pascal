@@ -119,6 +119,7 @@ namespace AmplifyShaderEditor
 			m_availableAttribs.Add( new PropertyAttributes( "Hide in Inspector", "[HideInInspector]" ) );
 			m_availableAttribs.Add( new PropertyAttributes( "HDR", "[HDR]" ) );
 			m_availableAttribs.Add( new PropertyAttributes( "Gamma", "[Gamma]" ) );
+			m_availableAttribs.Add( new PropertyAttributes( "Per Renderer Data", "[PerRendererData]" ) );
 		}
 
 		public override void AfterCommonInit()
@@ -341,6 +342,7 @@ namespace AmplifyShaderEditor
 					if ( parameterType != m_currentParameterType )
 					{
 						ChangeParameterType( parameterType );
+						BeginPropertyFromInspectorCheck();
 					}
 				}
 
@@ -384,7 +386,7 @@ namespace AmplifyShaderEditor
 			if ( m_freeType || m_freeName )
 			{
 				NodeUtils.DrawPropertyGroup( ref m_propertiesFoldout, Constants.ParameterLabelStr, DrawMainPropertyBlock );
-				if( m_drawAttributes )
+				if ( m_drawAttributes )
 					NodeUtils.DrawPropertyGroup( ref m_visibleAttribsFoldout, Constants.AttributesLaberStr, DrawAttributes, DrawAttributesAddRemoveButtons );
 				CheckPropertyFromInspector();
 			}
@@ -470,7 +472,7 @@ namespace AmplifyShaderEditor
 
 		public override void OnNodeDoubleClicked( Vector2 currentMousePos2D )
 		{
-			if ( currentMousePos2D.y - m_globalPosition.y > Constants.NODE_HEADER_HEIGHT + Constants.NODE_HEADER_EXTRA_HEIGHT )
+			if ( currentMousePos2D.y - m_globalPosition.y > ( Constants.NODE_HEADER_HEIGHT + Constants.NODE_HEADER_EXTRA_HEIGHT ) * ContainerGraph.ParentWindow.CameraDrawInfo.InvertedZoom )
 			{
 				ContainerGraph.ParentWindow.ParametersWindow.IsMaximized = !ContainerGraph.ParentWindow.ParametersWindow.IsMaximized;
 			}
@@ -542,12 +544,14 @@ namespace AmplifyShaderEditor
 				if ( m_currentParameterType != PropertyType.Constant )
 				{
 					SetTitleText( m_propertyInspectorName );
-					SetAdditonalTitleText( string.Format( Constants.PropertyValueLabel, GetPropertyValStr() ) );
+					SetAdditonalTitleText( string.Concat( "Value( ", GetPropertyValStr(), " )"  ) );
+					//SetAdditonalTitleText( string.Format( Constants.PropertyValueLabel, GetPropertyValStr() ) );
 				}
 				else
 				{
 					SetTitleText( m_propertyInspectorName );
-					SetAdditonalTitleText( string.Format( Constants.ConstantsValueLabel, GetPropertyValStr() ) );
+					SetAdditonalTitleText( string.Concat( "Const( ", GetPropertyValStr(), " )" ) );
+					//SetAdditonalTitleText( string.Format( Constants.ConstantsValueLabel, GetPropertyValStr() ) );
 				}
 				m_sizeIsDirty = true;
 			}
@@ -567,6 +571,7 @@ namespace AmplifyShaderEditor
 				if ( parameterType != m_currentParameterType )
 				{
 					ChangeParameterType( parameterType );
+					BeginPropertyFromInspectorCheck();
 				}
 			}
 		}
@@ -631,8 +636,8 @@ namespace AmplifyShaderEditor
 					dataCollector.AddToProperties( UniqueId, GetPropertyValue(), OrderIndex );
 					string dataType = string.Empty;
 					string dataName = string.Empty;
-					GetUniformData( out dataType, out dataName );
-					dataCollector.AddToUniforms( UniqueId, dataType, dataName );
+					if ( GetUniformData( out dataType, out dataName ) )
+						dataCollector.AddToUniforms( UniqueId, dataType, dataName );
 					//dataCollector.AddToUniforms( m_uniqueId, GetUniformValue() );
 				}
 				break;
@@ -646,21 +651,25 @@ namespace AmplifyShaderEditor
 				{
 					string dataType = string.Empty;
 					string dataName = string.Empty;
-					GetUniformData( out dataType, out dataName );
-					dataCollector.AddToUniforms( UniqueId, dataType, dataName );
+					if ( GetUniformData( out dataType, out dataName ) )
+						dataCollector.AddToUniforms( UniqueId, dataType, dataName );
 					//dataCollector.AddToUniforms( m_uniqueId, GetUniformValue() );
 				}
 				break;
 				case PropertyType.Constant: break;
 			}
 			dataCollector.AddPropertyNode( this );
+			if ( m_currentParameterType == PropertyType.InstancedProperty && !m_outputPorts[ 0 ].IsLocalValue )
+			{
+				RegisterLocalVariable( 0, string.Format( IOUtils.InstancedPropertiesData, m_propertyName ), ref dataCollector, m_propertyName + "_Instance" );
+			}
 			return string.Empty;
 		}
 
 		public override void Destroy()
 		{
 			base.Destroy();
-			if( !string.IsNullOrEmpty( m_propertyName ) )
+			if ( !string.IsNullOrEmpty( m_propertyName ) )
 				UIUtils.ReleaseUniformName( UniqueId, m_propertyName );
 			if ( m_currentParameterType == PropertyType.InstancedProperty )
 			{
@@ -710,10 +719,11 @@ namespace AmplifyShaderEditor
 			return string.Format( Constants.UniformDec, UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ), m_propertyName );
 		}
 
-		public virtual void GetUniformData( out string dataType, out string dataName )
+		public virtual bool GetUniformData( out string dataType, out string dataName )
 		{
 			dataType = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType );
 			dataName = m_propertyName;
+			return true;
 		}
 
 		public PropertyType CurrentParameterType
@@ -822,16 +832,18 @@ namespace AmplifyShaderEditor
 			get { return m_orderIndex; }
 		}
 
-		public int OrderIndex {
+		public int OrderIndex
+		{
 			get { return m_orderIndex + m_orderIndexOffset; }
 			set { m_orderIndex = value; }
 		}
 
-		public int OrderIndexOffset {
+		public int OrderIndexOffset
+		{
 			get { return m_orderIndexOffset; }
 			set { m_orderIndexOffset = value; }
 		}
-		public string PropertyData { get { return ( m_currentParameterType == PropertyType.InstancedProperty ) ? string.Format( IOUtils.InstancedPropertiesData, m_propertyName ) : m_propertyName; } }
+		public string PropertyData { get { return ( m_currentParameterType == PropertyType.InstancedProperty ) ? m_outputPorts[ 0 ].LocalValue : m_propertyName; } }
 		public virtual string PropertyName { get { return m_propertyName; } }
 		public string PropertyInspectorName { get { return m_propertyInspectorName; } }
 		public bool FreeType { get { return m_freeType; } set { m_freeType = value; } }

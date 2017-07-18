@@ -29,8 +29,8 @@ namespace AmplifyShaderEditor
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
-			AddInputPort( WirePortDataType.FLOAT, false, "A" );
-			AddInputPort( WirePortDataType.FLOAT, false, "B" );
+			AddInputPort( WirePortDataType.FLOAT, true, "A" );
+			AddInputPort( WirePortDataType.FLOAT, true, "B" );
 			AddInputPort( WirePortDataType.FLOAT, false, "A > B" );
 			AddInputPort( WirePortDataType.FLOAT, false, "A == B" );
 			AddInputPort( WirePortDataType.FLOAT, false, "A < B" );
@@ -64,21 +64,21 @@ namespace AmplifyShaderEditor
 			UpdateConnection( portId );
 		}
 
-		void TestMainInputDataType()
-		{
-			WirePortDataType newType = WirePortDataType.FLOAT;
-			if ( m_inputPorts[ 0 ].IsConnected && UIUtils.GetPriority( m_inputPorts[ 0 ].DataType ) > UIUtils.GetPriority( newType ) )
-			{
-				newType = m_inputPorts[ 0 ].DataType;
-			}
+		//void TestMainInputDataType()
+		//{
+		//	WirePortDataType newType = WirePortDataType.FLOAT;
+		//	if ( m_inputPorts[ 0 ].IsConnected && UIUtils.GetPriority( m_inputPorts[ 0 ].DataType ) > UIUtils.GetPriority( newType ) )
+		//	{
+		//		newType = m_inputPorts[ 0 ].DataType;
+		//	}
 
-			if ( m_inputPorts[ 1 ].IsConnected && ( UIUtils.GetPriority( m_inputPorts[ 1 ].DataType ) > UIUtils.GetPriority( newType ) ) )
-			{
-				newType = m_inputPorts[ 1 ].DataType;
-			}
+		//	if ( m_inputPorts[ 1 ].IsConnected && ( UIUtils.GetPriority( m_inputPorts[ 1 ].DataType ) > UIUtils.GetPriority( newType ) ) )
+		//	{
+		//		newType = m_inputPorts[ 1 ].DataType;
+		//	}
 
-			m_inputMainDataType = newType;
-		}
+		//	m_inputMainDataType = newType;
+		//}
 
 		void TestMainOutputDataType()
 		{
@@ -103,12 +103,12 @@ namespace AmplifyShaderEditor
 			m_inputPorts[ portId ].MatchPortToConnection();
 			switch ( portId )
 			{
-				case 0:
-				case 1:
-				{
-					TestMainInputDataType();
-				}
-				break;
+				//case 0:
+				//case 1:
+				//{
+				//	TestMainInputDataType();
+				//}
+				//break;
 				case 2:
 				case 3:
 				case 4:

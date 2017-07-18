@@ -113,6 +113,7 @@ namespace AmplifyShaderEditor
 		private bool m_usingWorldNormal;
 		private bool m_usingWorldReflection;
 		private bool m_usingViewDirection;
+		private bool m_usingLightAttenuation;
 
 		private bool m_usingHigherSizeTexcoords;
 
@@ -1068,6 +1069,12 @@ namespace AmplifyShaderEditor
 		{
 			get { return m_usingHigherSizeTexcoords; }
 			set { m_usingHigherSizeTexcoords = value; }
+		}
+
+		public bool UsingLightAttenuation
+		{
+			get { return m_usingLightAttenuation; }
+			set { m_usingLightAttenuation = value; }
 		}
 	}
 }

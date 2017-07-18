@@ -670,6 +670,16 @@ namespace AmplifyShaderEditor
 			return Matrix4x4.identity;
 		}
 
+		public static void SaveTextureToDisk( Texture2D tex, string pathname )
+		{
+			byte[] rawData = tex.GetRawTextureData();
+			Texture2D newTex = new Texture2D( tex.width, tex.height, tex.format,  tex.mipmapCount > 1, false );
+			newTex.LoadRawTextureData( rawData );
+			newTex.Apply();
+			byte[] pngData = newTex.EncodeToPNG();
+			File.WriteAllBytes( pathname, pngData );
+		}
+
 		//public static void SaveObjToList( string newObj )
 		//{
 		//	Debug.Log( UIUtils.CurrentWindow.Lastpath );

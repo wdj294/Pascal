@@ -64,9 +64,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1558406644921800}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0.7004089, z: -0, w: -0.7137419}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.0000001, y: 1, z: 1.0000001}
   m_Children:
   - {fileID: 4064492650699266}
   m_Father: {fileID: 0}
@@ -81,7 +81,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -97,7 +96,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -127,13 +125,13 @@ MonoBehaviour:
   Meshes:
   - {fileID: 4300000, guid: 940538042eca54e42b404360c5a948a2, type: 2}
   RenderQueue: 3000
-  RenderQueueOffset: 1
-  PinchPower: 10.76
-  PinchOffset: 0
+  RenderQueueOffset: -1
+  PinchPower: 50
+  PinchOffset: 0.011
   EdgeFade: 2
-  EdgeFadePower: 2
+  EdgeFadePower: 4.62
   HoleColor: {r: 0, g: 0, b: 0, a: 1}
-  HolePower: 17.74
+  HolePower: 254.6
   Tint: 0
   TintColor: {r: 1, g: 0, b: 0, a: 1}
   TintPower: 2

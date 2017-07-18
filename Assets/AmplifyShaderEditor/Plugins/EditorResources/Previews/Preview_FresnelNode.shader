@@ -1,4 +1,4 @@
-﻿Shader "Hidden/FresnelNode"
+Shader "Hidden/FresnelNode"
 {
 	Properties
 	{
@@ -22,7 +22,7 @@
 			sampler2D _D;
 			sampler2D _E;
 
-			float _ProjectInLinear;
+			//float _ProjectInLinear;
 			float _Connected;
 
 			float4 frag(v2f_img i) : SV_Target

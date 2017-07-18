@@ -42,11 +42,11 @@ namespace AmplifyShaderEditor
 			base.Destroy();
 		}
 
-		public override void PropagateNodeData( NodeData nodeData )
+		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
-			base.PropagateNodeData( nodeData );
+			base.PropagateNodeData( nodeData , ref dataCollector );
 			if ( m_inputPorts[ 0 ].IsConnected )
-				UIUtils.CurrentDataCollector.DirtyNormal = true;
+				dataCollector.DirtyNormal = true;
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )

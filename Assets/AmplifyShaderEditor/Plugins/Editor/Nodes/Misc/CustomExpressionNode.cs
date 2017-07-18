@@ -38,7 +38,11 @@ namespace AmplifyShaderEditor
 																"Float4",
 																"Color",
 																"Float3x3",
-																"Float4x4"};
+																"Float4x4",
+																"Sampler1D",
+																"Sampler2D",
+																"Sampler3D",
+																"SamplerCUBE"};
 
 		private readonly WirePortDataType[] AvailableWireTypes = {  WirePortDataType.INT,
 																	WirePortDataType.FLOAT,
@@ -47,16 +51,24 @@ namespace AmplifyShaderEditor
 																	WirePortDataType.FLOAT4,
 																	WirePortDataType.COLOR,
 																	WirePortDataType.FLOAT3x3,
-																	WirePortDataType.FLOAT4x4};
+																	WirePortDataType.FLOAT4x4,
+																	WirePortDataType.SAMPLER1D,
+																	WirePortDataType.SAMPLER2D,
+																	WirePortDataType.SAMPLER3D,
+																	WirePortDataType.SAMPLERCUBE };
 
-		private readonly Dictionary<WirePortDataType, int> WireToIdx = new Dictionary<WirePortDataType, int> {  { WirePortDataType.INT,     0},
-																												{ WirePortDataType.FLOAT,   1},
-																												{ WirePortDataType.FLOAT2,  2},
-																												{ WirePortDataType.FLOAT3,  3},
-																												{ WirePortDataType.FLOAT4,  4},
-																												{ WirePortDataType.COLOR,   5},
-																												{ WirePortDataType.FLOAT3x3,6},
-																												{ WirePortDataType.FLOAT4x4,7}};
+		private readonly Dictionary<WirePortDataType, int> WireToIdx = new Dictionary<WirePortDataType, int> {  { WirePortDataType.INT,			0},
+																												{ WirePortDataType.FLOAT,		1},
+																												{ WirePortDataType.FLOAT2,		2},
+																												{ WirePortDataType.FLOAT3,		3},
+																												{ WirePortDataType.FLOAT4,		4},
+																												{ WirePortDataType.COLOR,		5},
+																												{ WirePortDataType.FLOAT3x3,	6},
+																												{ WirePortDataType.FLOAT4x4,	7},
+																												{ WirePortDataType.SAMPLER1D,	8},
+																												{ WirePortDataType.SAMPLER2D,	9},
+																												{ WirePortDataType.SAMPLER3D,	10},
+																												{ WirePortDataType.SAMPLERCUBE,	11}};
 		[SerializeField]
 		private string m_customExpressionName = string.Empty;
 
@@ -156,14 +168,14 @@ namespace AmplifyShaderEditor
 			EditorGUILayout.HelpBox( CustomExpressionInfo, MessageType.Info );
 		}
 
-		string WrapCodeInFunction()
+		string WrapCodeInFunction( string functionName )
 		{
 			//Hack to be used util indent is properly used
 			int currIndent = UIUtils.ShaderIndentLevel;
 			UIUtils.ShaderIndentLevel = 1;
 
 			UIUtils.ShaderIndentLevel++;
-			string functionName = UIUtils.RemoveInvalidCharacters( m_customExpressionName );
+			//string functionName = UIUtils.RemoveInvalidCharacters( m_customExpressionName );
 			string functionBody = UIUtils.ShaderIndentTabs + UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + functionName + "( ";
 			int count = m_inputPorts.Count;
 			for ( int i = 0; i < count; i++ )
@@ -338,7 +350,7 @@ namespace AmplifyShaderEditor
 			if ( m_outputPorts[ 0 ].IsLocalValue )
 				return m_outputPorts[ 0 ].LocalValue;
 
-			string expressionName = UIUtils.RemoveInvalidCharacters( m_customExpressionName );
+			string expressionName = UIUtils.RemoveInvalidCharacters( m_customExpressionName ) + OutputId;
 			int count = m_inputPorts.Count;
 			if ( m_inputPorts.Count > 0 )
 			{
@@ -346,7 +358,7 @@ namespace AmplifyShaderEditor
 				if ( m_code.Contains( ReturnHelper ) )
 				{
 
-					string function = WrapCodeInFunction();
+					string function = WrapCodeInFunction( expressionName );
 					dataCollector.AddFunction( expressionName, function );
 					string functionCall = expressionName + "( ";
 					for ( int i = 0; i < count; i++ )

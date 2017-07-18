@@ -11,13 +11,18 @@ namespace AmplifyShaderEditor
 	[NodeAttributes( "Append", "Misc", "Append channels to create a new component" )]
 	public sealed class AppendNode : ParentNode
 	{
+		private const float NodeButtonSizeX = 16;
+		private const float NodeButtonSizeY = 16;
+		private const float NodeButtonDeltaX = 5;
+		private const float NodeButtonDeltaY = 11;
+
 		private const string OutputTypeStr = "Output type";
 
 		[SerializeField]
 		private WirePortDataType _selectedOutputType = WirePortDataType.FLOAT4;
 
 		[SerializeField]
-		private int _selectedOutputTypeInt = 2;
+		private int m_selectedOutputTypeInt = 2;
 
 		[SerializeField]
 		private float[] _defaultValues = { 0, 0, 0, 0 };
@@ -41,24 +46,45 @@ namespace AmplifyShaderEditor
 			m_previewShaderGUID = "d80ac81aabf643848a4eaa76f2f88d65";
 		}
 
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			Rect rect = m_globalPosition;
+			rect.x = rect.x + ( NodeButtonDeltaX - 1 ) * drawInfo.InvertedZoom + 1;
+			rect.y = rect.y + NodeButtonDeltaY * drawInfo.InvertedZoom;
+			rect.width = NodeButtonSizeX * drawInfo.InvertedZoom;
+			rect.height = NodeButtonSizeY * drawInfo.InvertedZoom;
+			EditorGUI.BeginChangeCheck();
+			m_selectedOutputTypeInt = EditorGUIPopup( rect,m_selectedOutputTypeInt, _outputValueTypes, UIUtils.PropertyPopUp );
+			if ( EditorGUI.EndChangeCheck() )
+			{
+				SetupPorts();
+			}
+		}
+
+		void SetupPorts()
+		{
+			switch ( m_selectedOutputTypeInt )
+			{
+				case 0: _selectedOutputType = WirePortDataType.FLOAT2; break;
+				case 1: _selectedOutputType = WirePortDataType.FLOAT3; break;
+				case 2: _selectedOutputType = WirePortDataType.FLOAT4; break;
+				case 3: _selectedOutputType = WirePortDataType.COLOR; break;
+			}
+
+			UpdatePorts();
+		}
+
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
 			EditorGUILayout.BeginVertical();
 
 			EditorGUI.BeginChangeCheck();
-			_selectedOutputTypeInt = EditorGUILayoutPopup( OutputTypeStr, _selectedOutputTypeInt, _outputValueTypes );
+			m_selectedOutputTypeInt = EditorGUILayoutPopup( OutputTypeStr, m_selectedOutputTypeInt, _outputValueTypes );
 			if ( EditorGUI.EndChangeCheck() )
 			{
-				switch ( _selectedOutputTypeInt )
-				{
-					case 0: _selectedOutputType = WirePortDataType.FLOAT2; break;
-					case 1: _selectedOutputType = WirePortDataType.FLOAT3; break;
-					case 2: _selectedOutputType = WirePortDataType.FLOAT4; break;
-					case 3: _selectedOutputType = WirePortDataType.COLOR; break;
-				}
-
-				UpdatePorts();
+				SetupPorts();
 			}
 
 			int count = 0;
@@ -119,7 +145,8 @@ namespace AmplifyShaderEditor
 					m_inputPorts[ 1 ].Visible = true;
 					m_inputPorts[ 2 ].Visible = true;
 					m_inputPorts[ 3 ].Visible = false;
-					UIUtils.DeleteConnection( true, UniqueId, 3, false, true );
+					if ( m_inputPorts[ 3 ].IsConnected )
+						UIUtils.DeleteConnection( true, UniqueId, 3, false, true );
 				}
 				break;
 				case WirePortDataType.FLOAT2:
@@ -127,10 +154,12 @@ namespace AmplifyShaderEditor
 					m_inputPorts[ 0 ].Visible = true;
 					m_inputPorts[ 1 ].Visible = true;
 					m_inputPorts[ 2 ].Visible = false;
-					UIUtils.DeleteConnection( true, UniqueId, 2, false, true );
+					if ( m_inputPorts[ 2 ].IsConnected )
+						UIUtils.DeleteConnection( true, UniqueId, 2, false, true );
 
 					m_inputPorts[ 3 ].Visible = false;
-					UIUtils.DeleteConnection( true, UniqueId, 3, false, true );
+					if ( m_inputPorts[ 3 ].IsConnected )
+						UIUtils.DeleteConnection( true, UniqueId, 3, false, true );
 				}
 				break;
 				case WirePortDataType.FLOAT:
@@ -205,10 +234,10 @@ namespace AmplifyShaderEditor
 			_selectedOutputType = ( WirePortDataType ) Enum.Parse( typeof( WirePortDataType ), GetCurrentParam( ref nodeParams ) );
 			switch ( _selectedOutputType )
 			{
-				case WirePortDataType.FLOAT2: _selectedOutputTypeInt = 0; break;
-				case WirePortDataType.FLOAT3: _selectedOutputTypeInt = 1; break;
-				case WirePortDataType.FLOAT4: _selectedOutputTypeInt = 2; break;
-				case WirePortDataType.COLOR: _selectedOutputTypeInt = 3; break;
+				case WirePortDataType.FLOAT2: m_selectedOutputTypeInt = 0; break;
+				case WirePortDataType.FLOAT3: m_selectedOutputTypeInt = 1; break;
+				case WirePortDataType.FLOAT4: m_selectedOutputTypeInt = 2; break;
+				case WirePortDataType.COLOR: m_selectedOutputTypeInt = 3; break;
 			}
 			for ( int i = 0; i < _defaultValues.Length; i++ )
 			{
