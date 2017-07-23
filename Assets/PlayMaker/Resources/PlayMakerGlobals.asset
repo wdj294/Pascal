@@ -14,11 +14,41 @@ MonoBehaviour:
   variables:
     floatVariables:
     - useVariable: 1
+      name: Density
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: Mass
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: Volume
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
+      name: currentPressure
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0
+    - useVariable: 1
       name: emissionValue
       tooltip: 
       showInInspector: 0
       networkSync: 0
       value: 0
+    - useVariable: 1
+      name: sphereRadius
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: 0.5
     intVariables: []
     boolVariables: []
     stringVariables: []
@@ -42,5 +72,5 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 0000000000000000
+    variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000
   events: []
