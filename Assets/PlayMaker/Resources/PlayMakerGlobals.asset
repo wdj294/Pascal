@@ -60,7 +60,13 @@ MonoBehaviour:
     stringVariables: []
     vector2Variables: []
     vector3Variables: []
-    colorVariables: []
+    colorVariables:
+    - useVariable: 1
+      name: ambientColor
+      tooltip: 
+      showInInspector: 0
+      networkSync: 0
+      value: {r: 0, g: 0, b: 0, a: 1}
     rectVariables: []
     quaternionVariables: []
     gameObjectVariables: []
@@ -78,5 +84,5 @@ MonoBehaviour:
     enumVariables: []
     categories:
     - 
-    variableCategoryIDs: 0000000000000000000000000000000000000000000000000000000000000000
+    variableCategoryIDs: 000000000000000000000000000000000000000000000000000000000000000000000000
   events: []
