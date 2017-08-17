@@ -20,18 +20,17 @@ public class NewBehaviourScript : MonoBehaviour {
 			if (Input.GetKey (KeyCode.LeftShift) && !overheating) {
 				temperature = Math.Min (maxTemperature, temperature + tempChange);
 				if (temperature == maxTemperature) {
-					overheating = true;
+					overheating = false;
 					// overheating, no sprinting allowed until you cool down
 					// you don't have to have this in your app, just an example
 				}
-			} else if (!Input.GetKey (KeyCode.W)) {
-				temperature = Math.Max (minTemperature, temperature - tempChange);
-				if (temperature == minTemperature) {
-					overheating = false;
+
+			} //else if (!Input.GetKey (KeyCode.W)) {
+				//temperature = Math.Max (minTemperature, temperature - tempChange);
+				//if (temperature == minTemperature) {
+					//overheating = false;
 				}
 					
 			}
 		}
-	}
-}
 
