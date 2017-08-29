@@ -9,7 +9,7 @@ public class MouseOrbitImproved : MonoBehaviour
 
 
     public Transform target;
-    public float distance = 3f;
+    public float distance = 30f;
     //    public int cameraSpeed= 5 ;
 
     public float xSpeed = 175.0f;
@@ -93,14 +93,14 @@ public class MouseOrbitImproved : MonoBehaviour
     {
         if (closeUp) return;
         distance -= Input.GetAxis("Mouse ScrollWheel")*0.5f;
-        distance = Mathf.Clamp(distance, 0.55f, 10);
+        distance = Mathf.Clamp(distance, 0.55f, 100);
         {
 
 
 
             //Detect mouse drag;
 
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(0))
             {
 
                 x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
