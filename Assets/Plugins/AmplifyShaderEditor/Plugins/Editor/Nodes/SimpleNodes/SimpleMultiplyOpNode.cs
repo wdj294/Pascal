@@ -7,11 +7,9 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Multiply", "Operators", "Simple multiplication of two variables", null, KeyCode.M )]
+	[NodeAttributes( "Multiply", "Math Operators", "Multiplication of two or more values ( A * B * .. )\nIt also handles Matrices multiplication", null, KeyCode.M )]
 	public sealed class SimpleMultiplyOpNode : DynamicTypeNode
 	{
-		private int m_cachedPropertyId = -1;
-
 		protected override void CommonInit( int uniqueId )
 		{
 			m_dynamicRestrictions = new WirePortDataType[]
@@ -37,10 +35,16 @@ namespace AmplifyShaderEditor
 		{
 			base.SetPreviewInputs();
 
-			if ( m_cachedPropertyId == -1 )
-				m_cachedPropertyId = Shader.PropertyToID( "_Count" );
+			int count = 0;
+			int inputCount = m_inputPorts.Count;
+			for ( int i = 2; i < inputCount; i++ )
+			{
+				count++;
+				if ( !m_inputPorts[ i ].IsConnected )
+					PreviewMaterial.SetTexture( ( "_" + Convert.ToChar( i + 65 )), UnityEditor.EditorGUIUtility.whiteTexture );
+			}
 
-			PreviewMaterial.SetInt( m_cachedPropertyId, m_inputPorts.Count );
+			m_previewMaterialPassId = count;
 		}
 
 		public override string BuildResults( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )

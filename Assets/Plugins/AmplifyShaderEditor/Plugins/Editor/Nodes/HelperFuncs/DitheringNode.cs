@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Dithering", "Generic", "Generates a dithering pattern" )]
+	[NodeAttributes( "Dithering", "Camera And Screen", "Generates a dithering pattern" )]
 	public sealed class DitheringNode : ParentNode
 	{
 		private const string InputTypeStr = "Pattern";
@@ -23,30 +23,81 @@ namespace AmplifyShaderEditor
 		private readonly string[] PatternsFuncStr = { "4x4Bayer", "8x8Bayer" };
 		private readonly string[] PatternsStr = { "4x4 Bayer Matrix", "8x8 Bayer Matrix" };
 
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
 			AddOutputPort( WirePortDataType.FLOAT, Constants.EmptyPortValue );
 			m_textLabelWidth = 100;
 			m_autoWrapProperties = true;
+			SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, PatternsStr[ m_selectedPatternInt ] ) );
 			GeneratePattern();
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			m_upperLeftWidget = null;
+		}
+
+
+		public override void AfterCommonInit()
+		{
+			base.AfterCommonInit();
+			if( PaddingTitleLeft == 0 )
+			{
+				PaddingTitleLeft = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+				if( PaddingTitleRight == 0 )
+					PaddingTitleRight = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+			}
+		}
+
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_selectedPatternInt = m_upperLeftWidget.DrawWidget( this, m_selectedPatternInt, PatternsStr );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				GeneratePattern();
+			}
 		}
 
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
-			EditorGUILayout.BeginVertical();
 			EditorGUI.BeginChangeCheck();
 			m_selectedPatternInt = EditorGUILayoutPopup( "Pattern", m_selectedPatternInt, PatternsStr );
 			if ( EditorGUI.EndChangeCheck() )
 			{
 				GeneratePattern();
 			}
-			EditorGUILayout.EndVertical();
 		}
 
 		private void GeneratePattern()
 		{
+			SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, PatternsStr[ m_selectedPatternInt ] ) );
 			switch ( m_selectedPatternInt )
 			{
 				default:
@@ -103,17 +154,24 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				if ( isFragment )
+				if ( dataCollector.IsTemplate )
 				{
-					dataCollector.AddToInput( UniqueId, "float4 " + CustomScreenPosStr, true );
-					string screenPos = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
-					string vertexInstruction = Constants.VertexShaderOutputStr + "." + CustomScreenPosStr + " = " + screenPos+";";
-					dataCollector.AddToVertexLocalVariables( UniqueId, vertexInstruction );
-					varName = Constants.InputVarStr + "." + CustomScreenPosStr;
+					varName = dataCollector.TemplateDataCollectorInstance.GetScreenPos();
 				}
 				else
 				{
-					varName = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
+					if ( isFragment )
+					{
+						dataCollector.AddToInput( UniqueId, "float4 " + CustomScreenPosStr, true );
+						string screenPos = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
+						string vertexInstruction = Constants.VertexShaderOutputStr + "." + CustomScreenPosStr + " = " + screenPos + ";";
+						dataCollector.AddToVertexLocalVariables( UniqueId, vertexInstruction );
+						varName = Constants.InputVarStr + "." + CustomScreenPosStr;
+					}
+					else
+					{
+						varName = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
+					}
 				}
 			}
 

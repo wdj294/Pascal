@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Fmod", "Operators", "Remainder of x/y with the same sign as x" )]
+	[NodeAttributes( "Fmod", "Math Operators", "Floating point remainder of x/y with the same sign as x" )]
 	public sealed class FmodOpNode : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

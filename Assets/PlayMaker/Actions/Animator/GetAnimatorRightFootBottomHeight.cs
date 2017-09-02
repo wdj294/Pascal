@@ -33,7 +33,12 @@ namespace HutongGames.PlayMaker.Actions
 			rightFootHeight = null;
 			everyFrame = false;
 		}
-		
+
+        public override void OnPreprocess()
+        {
+            Fsm.HandleLateUpdate = true;
+        }
+
 		public override void OnEnter()
 		{
 			// get the animator component

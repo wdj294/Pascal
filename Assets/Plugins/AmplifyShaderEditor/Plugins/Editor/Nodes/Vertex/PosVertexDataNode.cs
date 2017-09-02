@@ -17,6 +17,8 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private int m_sizeOption = 0;
 
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -25,6 +27,43 @@ namespace AmplifyShaderEditor
 			m_drawPreviewAsSphere = true;
 			m_outputPorts[ 4 ].Visible = false;
 			m_previewShaderGUID = "a5c14f759dd021b4b8d4b6eeb85ac227";
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			m_upperLeftWidget = null;
+		}
+
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_sizeOption = m_upperLeftWidget.DrawWidget( this, m_sizeOption, SizeLabels );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				UpdatePorts();
+			}
 		}
 
 		public override void DrawProperties()
@@ -52,34 +91,50 @@ namespace AmplifyShaderEditor
 		}
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
-			if ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation )
-			{
-				string vertexVar = base.GenerateShaderForOutput( 0, ref dataCollector, ignoreLocalVar );
-				if ( outputId != 0 )
-				{
-					return GetOutputVectorItem( 0, outputId, vertexVar );
-				}
-				else if ( m_sizeOption == 0 )
-				{
-					vertexVar += ".xyz";
-				}
 
-				return vertexVar;
-			}
-			else
+			if ( dataCollector.MasterNodeCategory == AvailableShaderTypes.Template )
 			{
-
-				string vertexVar = GeneratorUtils.GenerateVertexPositionOnFrag( ref dataCollector, UniqueId, m_currentPrecisionType );
-				if ( outputId != 0 )
-				{
-					return GetOutputVectorItem( 0, outputId, vertexVar );
-				}
-				else if ( m_sizeOption == 0 )
-				{
-					vertexVar += ".xyz";
-				}
-				return GetOutputVectorItem( 0, outputId, vertexVar );
+				string vertexPos = dataCollector.TemplateDataCollectorInstance.GetVertexPosition( ( m_sizeOption == 0 ) ? WirePortDataType.FLOAT3 : WirePortDataType.FLOAT4 );
+				return GetOutputVectorItem( 0, outputId, vertexPos );
 			}
+
+
+			if ( dataCollector.PortCategory == MasterNodePortCategory.Fragment || dataCollector.PortCategory == MasterNodePortCategory.Debug )
+				base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
+
+			WirePortDataType sizeType = m_sizeOption == 0 ? WirePortDataType.FLOAT3 : WirePortDataType.FLOAT4;
+
+			string vertexPosition = GeneratorUtils.GenerateVertexPosition( ref dataCollector, UniqueId, m_currentPrecisionType, sizeType );
+			return GetOutputVectorItem( 0, outputId, vertexPosition );
+
+			//if ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation )
+			//{
+			//	string vertexVar = base.GenerateShaderForOutput( 0, ref dataCollector, ignoreLocalVar );
+			//	if ( outputId != 0 )
+			//	{
+			//		return GetOutputVectorItem( 0, outputId, vertexVar );
+			//	}
+			//	else if ( m_sizeOption == 0 )
+			//	{
+			//		vertexVar += ".xyz";
+			//	}
+
+			//	return vertexVar;
+			//}
+			//else
+			//{
+
+			//	string vertexVar = GeneratorUtils.GenerateVertexPositionOnFrag( ref dataCollector, UniqueId, m_currentPrecisionType );
+			//	if ( outputId != 0 )
+			//	{
+			//		return GetOutputVectorItem( 0, outputId, vertexVar );
+			//	}
+			//	else if ( m_sizeOption == 0 )
+			//	{
+			//		vertexVar += ".xyz";
+			//	}
+			//	return GetOutputVectorItem( 0, outputId, vertexVar );
+			//}
 		}
 
 		public override void ReadFromString( ref string[] nodeParams )

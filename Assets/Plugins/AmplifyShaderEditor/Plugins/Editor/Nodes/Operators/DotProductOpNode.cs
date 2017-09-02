@@ -5,7 +5,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Dot", "Vector", "Scalar dot product of two vectors" )]
+	[NodeAttributes( "Dot", "Vector Operators", "Scalar dot product of two vectors ( A . B )" )]
 	public sealed class DotProductOpNode : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

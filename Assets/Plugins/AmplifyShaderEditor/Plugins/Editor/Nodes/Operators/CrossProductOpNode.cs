@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Cross", "Vector", "Cross product of two three-component vectors" )]
+	[NodeAttributes( "Cross", "Vector Operators", "Cross product of two three-component vectors ( A x B )" )]
 	public sealed class CrossProductOpNode : ParentNode
 	{
 		protected override void CommonInit( int uniqueId )

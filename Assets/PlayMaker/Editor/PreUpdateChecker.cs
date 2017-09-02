@@ -73,7 +73,7 @@ namespace HutongGames.PlayMakerEditor
 
         private void OnEnable()
         {
-            var titleText = string.Format("PlayMaker {0} Update Check", PlayMakerWelcomeWindow.InstallCurrentVersion);
+            var titleText = string.Format("Pre-Update Check: PlayMaker {0}", PlayMakerWelcomeWindow.InstallCurrentVersion);
 
 #if UNITY_PRE_5_1
             title = titleText;
@@ -97,7 +97,7 @@ namespace HutongGames.PlayMakerEditor
 #endif
             scrollPosition = GUILayout.BeginScrollView(scrollPosition);
 
-            GUILayout.Label("Project Scan", EditorStyles.boldLabel);
+            GUILayout.Label("PROJECT SCAN", EditorStyles.boldLabel);
             if (failedCategories.Count > 0)
             {
                 var output = "The scan found these addons in your project:\n";
@@ -114,46 +114,66 @@ namespace HutongGames.PlayMakerEditor
                 ConsoleTextArea("The scan did not find any known conflicts in your project.\n");
             }
 
-            GUILayout.Label("Update Notes", EditorStyles.boldLabel);
+            GUILayout.Label("UPDATE NOTES", EditorStyles.boldLabel);
+
+            EditorGUILayout.HelpBox("Always BACKUP projects before updating!" +
+                                    "\nUse Version Control to track changes.", MessageType.Warning);
+
+            // Version 1.8.5
+
+            GUILayout.Label("Version 1.8.5", EditorStyles.boldLabel);
+            
+            EditorGUILayout.HelpBox(
+                "\nPlayMaker 1.8.5 moved LateUpdate handling to an optional component automatically added as needed.\n" +
+                "\nIf you have custom actions that use LateUpdate you must add this to OnPreprocess:\n" +
+                "\nFsm.HandleLateUpdate = true;\n" +
+                "\nSee Rotate.cs for an example.\n",
+                MessageType.Info);
+
+            // Version 1.8.2
+
+            GUILayout.Label("Version 1.8.2", EditorStyles.boldLabel);
 
             EditorGUILayout.HelpBox("\nPlayMaker 1.8.2 added the following system events:\n" +
                                     "\nMOUSE UP AS BUTTON, JOINT BREAK, JOINT BREAK 2D, PARTICLE COLLISION." +
-                                    "\n\nPlease remove any custom proxy components you used before to send these events.\n", 
+                                    "\n\nPlease remove any custom proxy components you used before to send these events.\n",
                                     MessageType.Info);
 
+            // Version 1.8.1
 
-            EditorGUILayout.HelpBox("\nPlayMaker 1.8.1 integrated the following add-ons and actions:\n" +
-                                    "\n- Physics2D Add-on" +
-                                    "\n- Mecanim Animator Add-on" +
-                                    "\n- Vector2 Actions\n- Quaternion Actions\n- Trigonometry Actions\n",
-                                    MessageType.Info);
+            GUILayout.Label("Version 1.8.1", EditorStyles.boldLabel);
+
+            var notes181 = "\nPlayMaker 1.8.1 integrated the following add-ons and actions:\n" +
+                           "\n- Physics2D Add-on" +
+                           "\n- Mecanim Animator Add-on" +
+                           "\n- Vector2 Actions\n- Quaternion Actions\n- Trigonometry Actions\n";
 
             if (failedCategories.Count > 0)
             {
-                EditorGUILayout.HelpBox(
+                notes181 +=
                     "\nIf you imported these actions from official unitypackages the update should replace them automatically." +
                     "\n\nIf you downloaded these actions from the Ecosystem or Forums you might get errors from duplicate files after updating." +
-                    "\n\nYou can either remove these files before updating, or remove duplicate files to fix any errors after updating.\n",
-                    MessageType.Warning);
+                    "\n\nYou can either remove these files before updating, or remove duplicate files to fix any errors after updating.\n"
+                    ;
             }
             else
             {
-                EditorGUILayout.HelpBox("\nThe Update Check did not find any of these files in your project. " +
-                                        "\n\nHowever, if you think you have some of these actions in your project, " +
-                                        "you can either remove them before updating, " +
-                                        "or remove duplicate files to fix any errors after updating.\n",
-                                        MessageType.Info);
+                notes181 += "\nThe Update Check did not find any of these files in your project. " +
+                            "\n\nIf you think you have some of these actions in your project, " +
+                            "you can either remove them before updating, " +
+                            "or remove duplicate files to fix any errors after updating.\n";
             }
 
-            EditorGUILayout.HelpBox("\nThe updated files will be located under:\nAssets/PlayMaker/Actions" +
-                                    "\n\nOlder files are most likely under:\nAssets/PlayMaker Custom Actions\n",
-                                    MessageType.Info);
+            notes181 += "\nThe updated files will be located under:\nAssets/PlayMaker/Actions" +
+                        "\n\nOlder files are most likely under:\nAssets/PlayMaker Custom Actions\n";
+
+            EditorGUILayout.HelpBox(notes181, failedCategories.Count > 0 ? MessageType.Warning : MessageType.Info);
 
             GUILayout.FlexibleSpace();
             GUILayout.EndScrollView();
 	        
 	        GUILayout.BeginHorizontal();
-            if (GUILayout.Button("Run Update Check Again"))
+            if (GUILayout.Button("Run Pre-Update Check Again"))
             {
                 DoCheck();
             }

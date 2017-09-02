@@ -7,7 +7,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Divide", "Operators", "Simple divide of two variables", null, KeyCode.D )]
+	[NodeAttributes( "Divide", "Math Operators", "Division of two values ( A / B )", null, KeyCode.D )]
 	public sealed class SimpleDivideOpNode : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

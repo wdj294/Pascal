@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Max", "Operators", "Simple Maximum of two scalars or each respective component of two vectors" )]
+	[NodeAttributes( "Max", "Math Operators", "Maximum of two scalars or each respective component of two vectors" )]
 	public sealed class SimpleMaxOp : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

@@ -16,6 +16,10 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private int m_index = 0;
+
+		private Rect m_varRect;
+		private bool m_editing;
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -49,6 +53,61 @@ namespace AmplifyShaderEditor
 			}
 		}
 
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+
+			m_varRect = m_globalPosition;
+			m_varRect.x = m_varRect.x + ( Constants.NodeButtonDeltaX - 1 ) * drawInfo.InvertedZoom + 1;
+			m_varRect.y = m_varRect.y + Constants.NodeButtonDeltaY * drawInfo.InvertedZoom;
+			m_varRect.width = Constants.NodeButtonSizeX * drawInfo.InvertedZoom;
+			m_varRect.height = Constants.NodeButtonSizeY * drawInfo.InvertedZoom;
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+
+			if ( drawInfo.CurrentEventType != EventType.MouseDown )
+				return;
+
+			if ( m_varRect.Contains( drawInfo.MousePosition ) )
+			{
+				m_editing = true;
+			}
+			else if ( m_editing )
+			{
+				m_editing = false;
+			}
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+
+			if ( m_editing )
+			{
+				EditorGUI.BeginChangeCheck();
+				m_texcoordSize = EditorGUIIntPopup( m_varRect, m_texcoordSize, Constants.AvailableUVSizesStr, Constants.AvailableUVSizes, UIUtils.PropertyPopUp );
+				if ( EditorGUI.EndChangeCheck() )
+				{
+					UpdateOutput();
+					m_editing = false;
+				}
+			}
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+
+			if ( !m_isVisible )
+				return;
+
+			if ( !m_editing && ContainerGraph.LodLevel <= ParentGraph.NodeLOD.LOD4 )
+				GUI.Label( m_varRect, string.Empty, UIUtils.PropertyPopUp );
+		}
+
 		private void UpdateOutput()
 		{
 			if ( m_texcoordSize == 3 )
@@ -78,6 +137,28 @@ namespace AmplifyShaderEditor
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
+			if ( dataCollector.IsTemplate )
+			{
+				if ( dataCollector.TemplateDataCollectorInstance.HasUV( m_index ) )
+				{
+					InterpDataHelper info = dataCollector.TemplateDataCollectorInstance.GetUVInfo( m_index );
+					if ( outputId == 0 )
+					{
+						return info.VarName;
+					}
+					else if ( outputId <= TemplateHelperFunctions.DataTypeChannelUsage[info.VarType] )
+					{
+						return GetOutputVectorItem( 0, outputId, info.VarName );
+					}
+					Debug.LogWarning( "Attempting to access inexisting UV channel" );
+				}
+				else
+				{
+					Debug.LogWarning( "Attempting to access non-registered UV" );
+				}
+				return "0";
+			}
+
 			if ( dataCollector.PortCategory == MasterNodePortCategory.Fragment || dataCollector.PortCategory == MasterNodePortCategory.Debug )
 			{
 				if ( m_texcoordSize > 2 )

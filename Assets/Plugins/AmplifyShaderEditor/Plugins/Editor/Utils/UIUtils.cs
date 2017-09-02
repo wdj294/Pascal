@@ -175,9 +175,18 @@ namespace AmplifyShaderEditor
 		public static GUIStyle InspectorPopdropdownStyle;
 		public static GUIStyle BoldErrorStyle;
 		public static GUIStyle BoldWarningStyle;
+		public static GUIStyle BoldInfoStyle;
 		public static GUIStyle Separator;
 		public static GUIStyle ToolbarSearchTextfield;
 		public static GUIStyle ToolbarSearchCancelButton;
+		public static GUIStyle MiniButtonTopLeft;
+		public static GUIStyle MiniButtonTopMid;
+		public static GUIStyle MiniButtonTopRight;
+
+		public static GUIStyle MiniObjectFieldThumbOverlay;
+		public static GUIStyle MiniSamplerButton;
+
+		public static GUIStyle EmptyStyle = new GUIStyle();
 
 		public static GUIStyle TooltipBox;
 		public static GUIStyle Box;
@@ -197,6 +206,8 @@ namespace AmplifyShaderEditor
 		public static GUIStyle MenuItemEnableStyle;
 		public static GUIStyle MenuItemBackgroundStyle;
 		public static GUIStyle MenuItemToolbarStyle;
+		public static GUIStyle MenuItemInspectorDropdownStyle;
+
 		public static bool UsingProSkin = false;
 
 		public static Texture ShaderIcon { get { return EditorGUIUtility.IconContent( "Shader Icon" ).image; } }
@@ -205,8 +216,12 @@ namespace AmplifyShaderEditor
 		//50be8291f9514914aa55c66c49da67cf
 		public static Texture ShaderFunctionIcon { get { return AssetDatabase.LoadAssetAtPath<Texture>( AssetDatabase.GUIDToAssetPath( "50be8291f9514914aa55c66c49da67cf" ) ); } }
 
+		public static Texture2D WireNodeSelection = null;
+		public static Texture2D SliderButton = null;
+
 		public static Texture2D SmallErrorIcon = null;
 		public static Texture2D SmallWarningIcon = null;
+		public static Texture2D SmallInfoIcon = null;
 
 		public static Texture2D MasterNodeOnTexture = null;
 		public static Texture2D MasterNodeOffTexture = null;
@@ -214,13 +229,9 @@ namespace AmplifyShaderEditor
 		public static Texture2D GPUInstancedOnTexture = null;
 		public static Texture2D GPUInstancedOffTexture = null;
 
-		public static WireReference InputPortReference = new WireReference();
-		public static WireReference SwitchPortReference = new WireReference();
-		public static WireReference OutputPortReference = new WireReference();
+		
 		public static bool ShowContextOnPick = true;
-		public static Vector2 SnapPosition = Vector2.zero;
-		public static bool SnapEnabled = false;
-		public static WireReference SnapPort = new WireReference();
+		
 		private static AmplifyShaderEditorWindow m_currentWindow = null;
 		public static AmplifyShaderEditorWindow CurrentWindow
 		{
@@ -276,6 +287,14 @@ namespace AmplifyShaderEditor
 		private static string m_latestOpenedFolder = string.Empty;
 		private static Dictionary<int, UndoParentNode> m_undoHelper = new Dictionary<int, UndoParentNode>();
 
+		private static Dictionary<string, int> AvailableKeywordsDict = new Dictionary<string, int>();
+		public static readonly string[] AvailableKeywords = 
+		{
+			"Custom",
+			"ETC1_EXTERNAL_ALPHA",
+			"PIXELSNAP_ON"
+		};
+
 		private static Dictionary<string, string> m_exampleMaterialIDs = new Dictionary<string, string>()
 		{
 			//Community
@@ -292,6 +311,7 @@ namespace AmplifyShaderEditor
 			{"BurnEffect",                  "0b019675a8064414b97862a02f644166" },
 			{"CubemapReflections",          "2c299f827334e9c459a60931aea62260" },
 			{"DitheringFade",               "610507217b7dcad4d97e6e03e9844171" },
+			{"DoubleLayerCustomSurface",    "846aec4914103104d99e9e31a217b548" },
 			{"NormalExtrusion",             "70a5800fbba039f46b438a2055bc6c71" },
 			{"MatcapSample",                "da8aaaf01fe8f2b46b2fbcb803bd7af4" },
 			{"ParallaxMappingIterations",   "a0cea9c3f318ac74d89cd09134aad000" },
@@ -339,36 +359,31 @@ namespace AmplifyShaderEditor
 		private static Dictionary<TextureType, string> m_textureTypeToCgType = new Dictionary<TextureType, string>() {{TextureType.Texture1D,"sampler1D" },
 																													{TextureType.Texture2D,"sampler2D" },
 																													{TextureType.Texture3D,"sampler3D" },
-																													{TextureType.Cube ,"samplerCUBE"} };
+																													{TextureType.Cube ,"samplerCUBE"},
+																													{TextureType.Texture2DArray,"sampler2D" }};
 
 
-		private static Dictionary<string, Color> m_nodeCategoryToColor = new Dictionary<string, Color>() {{ "Master",                           new Color( 0.26f, 0.35f, 0.44f, 1.0f )},
-																										{ "Default",                            new Color( 0.1f, 0.35f, 0.44f, 1.0f )},
-																										{ "Vertex Data",                        new Color( 0.75f, 0.10f, 0.30f, 1.0f )},
-																										{ "Operators",                          new Color( 0.10f, 0.27f, 0.45f, 1.0f) },
-																										{ "Logical Operators",                  new Color( 0.11f, 0.28f, 0.47f, 1.0f) },
-																										{ "Trigonometry",                       new Color( 0.8f, 0.07f, 0.18f, 1.0f)},
-																										{ "Image Effects",                      new Color( 0.12f, 0.47f, 0.88f, 1.0f)},
-																										{ "Misc",                               new Color( 0.49f, 0.32f, 0.60f, 1.0f)},
-																										{ "Camera And Screen",                  new Color( 0.17f, 0.22f, 0.07f, 1.0f) },
-																										{ "Constants",                          new Color( 0.42f, 0.70f, 0.22f, 1.0f) },
-																										{ "Surface Standard Inputs",            new Color( 0.92f, 0.73f, 0.03f, 1.0f)},
-																										{ "Transform",                          new Color( 0.09f, 0.43f, 0.2f, 1.0f) },
-																										{ "Time",                               new Color( 0.89f, 0.59f, 0.0f, 1.0f) },
+		private static Dictionary<string, Color> m_nodeCategoryToColor = new Dictionary<string, Color>() {{ "Master",                           new Color( 0.6f, 0.52f, 0.43f, 1.0f )},
+																										{ "Default",                            new Color( 0.26f, 0.35f, 0.44f, 1.0f )},
+																										{ "Vertex Data",                        new Color( 0.8f, 0.07f, 0.18f, 1.0f)},//new Color( 0.75f, 0.10f, 0.30f, 1.0f )},
+																										{ "Math Operators",                     new Color( 0.26f, 0.35f, 0.44f, 1.0f )},//new Color( 0.10f, 0.27f, 0.45f, 1.0f) },
+																										{ "Logical Operators",                  new Color( 0.0f, 0.55f, 0.45f, 1.0f)},//new Color( 0.11f, 0.28f, 0.47f, 1.0f) },
+																										{ "Trigonometry Operators",             new Color( 0.1f, 0.20f, 0.35f, 1.0f)},//new Color( 0.8f, 0.07f, 0.18f, 1.0f)},
+																										{ "Image Effects",                      new Color( 0.5f, 0.2f, 0.90f, 1.0f)},//new Color( 0.12f, 0.47f, 0.88f, 1.0f)},
+																										{ "Miscellaneous",                      new Color( 0.49f, 0.32f, 0.60f, 1.0f)},
+																										{ "Camera And Screen",                  new Color( 0.75f, 0.10f, 0.30f, 1.0f )},//new Color( 0.17f, 0.22f, 0.07f, 1.0f) },
+																										{ "Constants And Properties",           new Color( 0.42f, 0.70f, 0.22f, 1.0f) },
+																										{ "Surface Data",						new Color( 0.92f, 0.73f, 0.03f, 1.0f)},
+																										{ "Matrix Transform",                   new Color( 0.09f, 0.43f, 0.2f, 1.0f) },
+																										{ "Time",                               new Color( 0.25f, 0.25f, 0.25f, 1.0f)},//new Color( 0.89f, 0.59f, 0.0f, 1.0f) },
 																										{ "Functions",                          new Color( 1.00f, 0.4f, 0.0f, 1.0f) },
-																										{ "Vector",                             new Color( 0.1f, 0.20f, 0.35f, 1.0f)},
-																										{ "Debug",                              new Color( 0.78f, 0.05f, 0.43f, 1.0f)},
-																										{ "Matrix",                             new Color( 0.45f, 0.9f, 0.20f, 1.0f) },
-																										{ "Fog And Ambient",                    new Color( 0.35f, 0.35f, 0.35f, 1.0f)},
+																										{ "Vector Operators",                   new Color( 0.22f, 0.20f, 0.45f, 1.0f)},
+																										{ "Matrix Operators",                   new Color( 0.45f, 0.9f, 0.20f, 1.0f) },
 																										{ "Light",                              new Color( 1.0f, 0.9f, 0.0f, 1.0f) },
-																										{ "Various",                            new Color( 0.8f, 0.8f, 0.8f, 0.8f) },
-																										{ "Master Log",                         new Color( 0.80f, 0.22f, 0.22f, 1.0f )},
 																										{ "Textures",                           new Color( 0.15f, 0.40f, 0.8f, 1.0f)},
-																										{ "Commentary",                         new Color( 0.30f, 0.45f, 0.70f, 1.0f)},
-																										{ "Vertex-lit",                         new Color( 0.15f, 0.4f, 0.49f, 1.0f)},
-																										{ "Screen Space",                       new Color( 0.15f, 0.4f, 0.49f, 1.0f)},
-																										{ "Forward Render",                     new Color( 0.15f, 0.4f, 0.49f, 1.0f)},
-																										{ "Generic",                            new Color( 0.15f, 0.4f, 0.49f, 1.0f)},
+																										{ "Commentary",                         new Color( 0.7f, 0.7f, 0.7f, 1.0f)},
+																										{ "UV Coordinates",                     new Color( 0.89f, 0.59f, 0.0f, 1.0f) },
+																										{ "Object Transform",                   new Color( 0.15f, 0.4f, 0.49f, 1.0f)},
 																										{ "Vertex Transform",                   new Color( 0.15f, 0.4f, 0.49f, 1.0f)}};
 
 		private static Dictionary<ToolButtonType, List<string>> m_toolButtonTooltips = new Dictionary<ToolButtonType, List<string>> {  { ToolButtonType.New,              new List<string>() { "Create new shader." } },
@@ -384,7 +399,7 @@ namespace AmplifyShaderEditor
 																																		{ ToolButtonType.FocusOnSelection, new List<string>() { "Focus on selection fit to screen ( if none selected )." } }};
 
 		private static Color[] m_dataTypeToColorMonoMode = { new Color( 0.5f, 0.5f, 0.5f, 1.0f ), Color.white };
-		private static Dictionary<WirePortDataType, Color> m_dataTypeToColor = new Dictionary<WirePortDataType, Color>() {{  WirePortDataType.OBJECT, Color.white},
+		private static Dictionary<WirePortDataType, Color> m_dataTypeToColor = new Dictionary<WirePortDataType, Color>( new WirePortDataTypeComparer() ) {{  WirePortDataType.OBJECT, Color.white},
 																															{ WirePortDataType.FLOAT, Color.gray},
 																															{ WirePortDataType.FLOAT2, new Color(1f,1f,0f,1f)},
 																															{ WirePortDataType.FLOAT3, new Color(0.5f,0.5f,1f,1f)},
@@ -441,6 +456,11 @@ namespace AmplifyShaderEditor
 																														{PrecisionType.Fixed,"fixed"}};
 
 
+		private static Dictionary<VariableQualifiers, string> m_qualifierToCg = new Dictionary<VariableQualifiers, string>(){	{VariableQualifiers.In,string.Empty},
+																																{VariableQualifiers.Out ,"out"},
+																																{VariableQualifiers.InOut,"inout"}};
+
+
 		private static Dictionary<WirePortDataType, string> m_precisionWirePortToCgType = new Dictionary<WirePortDataType, string>(){{WirePortDataType.FLOAT,   "{0}"},
 																																	{WirePortDataType.FLOAT2,   "{0}2"},
 																																	{WirePortDataType.FLOAT3,   "{0}3"},
@@ -488,15 +508,19 @@ namespace AmplifyShaderEditor
 		private static Dictionary<string, bool> m_unityNativeShaderPaths = new Dictionary<string, bool> { { "Resources/unity_builtin_extra", true }, { "Library/unity default resources", true } };
 
 
-		private static Dictionary<WirePortDataType, int> m_portPriority = new Dictionary<WirePortDataType, int>(){  {WirePortDataType.OBJECT,   0},
-																													{WirePortDataType.FLOAT3x3, 1},
-																													{WirePortDataType.FLOAT4x4, 2},
-																													{WirePortDataType.INT,      3},
-																													{WirePortDataType.FLOAT,    4},
-																													{WirePortDataType.FLOAT2,   5},
-																													{WirePortDataType.FLOAT3,   6},
-																													{WirePortDataType.FLOAT4,   7},
-																													{WirePortDataType.COLOR,    7}};
+		private static Dictionary<WirePortDataType, int> m_portPriority = new Dictionary<WirePortDataType, int>(){  {WirePortDataType.OBJECT,		0},
+																													{WirePortDataType.SAMPLER1D,	0},
+																													{WirePortDataType.SAMPLER2D,	0},
+																													{WirePortDataType.SAMPLER3D,	0},
+																													{WirePortDataType.SAMPLERCUBE,	0},
+																													{WirePortDataType.FLOAT3x3,		1},
+																													{WirePortDataType.FLOAT4x4,		2},
+																													{WirePortDataType.INT,			3},
+																													{WirePortDataType.FLOAT,		4},
+																													{WirePortDataType.FLOAT2,		5},
+																													{WirePortDataType.FLOAT3,		6},
+																													{WirePortDataType.FLOAT4,		7},
+																													{WirePortDataType.COLOR,		7}};
 
 		private static readonly string IncorrectInputConnectionErrorMsg = "Input Port {0} from node {1} has type {2}\nwhich is incompatible with connection of type {3} from port {4} on node {5}";
 		private static readonly string IncorrectOutputConnectionErrorMsg = "Output Port {0} from node {1} has type {2}\nwhich is incompatible with connection of type {3} from port {4} on node {5}";
@@ -515,20 +539,7 @@ namespace AmplifyShaderEditor
 			CurrentWindow.ForceMaterialsToUpdate( ref m_exampleMaterialIDs );
 
 		}
-
-		public static bool ValidReferences()
-		{
-			return ( InputPortReference.IsValid || OutputPortReference.IsValid );
-		}
-
-		public static void InvalidateReferences()
-		{
-			InputPortReference.Invalidate();
-			OutputPortReference.Invalidate();
-			SnapPort.Invalidate();
-			SnapEnabled = false;
-		}
-
+		
 		public static void Destroy()
 		{
 			if ( IOUtils.AllOpenedWindows != null && IOUtils.AllOpenedWindows.Count > 0 )
@@ -554,6 +565,7 @@ namespace AmplifyShaderEditor
 			MenuItemEnableStyle = null;
 			MenuItemBackgroundStyle = null;
 			MenuItemToolbarStyle = null;
+			MenuItemInspectorDropdownStyle = null;
 			ObjectFieldThumb = null;
 			ObjectFieldThumbOverlay = null;
 			InspectorPopdropdownStyle = null;
@@ -579,13 +591,24 @@ namespace AmplifyShaderEditor
 
 			BoldErrorStyle = null;
 			BoldWarningStyle = null;
+			BoldInfoStyle = null;
 			Separator = null;
+
+			MiniButtonTopLeft = null;
+			MiniButtonTopMid = null;
+			MiniButtonTopRight = null;
+
+			MiniObjectFieldThumbOverlay = null;
+			MiniSamplerButton = null;
 
 			Resources.UnloadAsset( SmallErrorIcon );
 			SmallErrorIcon = null;
 
 			Resources.UnloadAsset( SmallWarningIcon );
 			SmallWarningIcon = null;
+
+			Resources.UnloadAsset( SmallInfoIcon );
+			SmallInfoIcon = null;
 
 			Resources.UnloadAsset( MasterNodeOnTexture );
 			MasterNodeOnTexture = null;
@@ -642,10 +665,12 @@ namespace AmplifyShaderEditor
 			PreviewExpander = GetCustomStyle( CustomStyle.NodePreviewExpander );
 			PreviewCollapser = GetCustomStyle( CustomStyle.NodePreviewCollapser );
 
-
+			WireNodeSelection = AssetDatabase.LoadAssetAtPath( AssetDatabase.GUIDToAssetPath( "bfe0b03d5d60cea4f9d4b2d1d121e592" ), typeof( Texture2D ) ) as Texture2D;
+			SliderButton = AssetDatabase.LoadAssetAtPath( AssetDatabase.GUIDToAssetPath( "dd563e33152bb6443b099b4139ceecb9" ), typeof( Texture2D ) ) as Texture2D;
 
 			SmallErrorIcon = EditorGUIUtility.Load( "icons/d_console.erroricon.sml.png" ) as Texture2D;
 			SmallWarningIcon = EditorGUIUtility.Load( "icons/d_console.warnicon.sml.png" ) as Texture2D;
+			SmallInfoIcon = EditorGUIUtility.Load( "icons/d_console.infoicon.sml.png" ) as Texture2D;
 
 			BoldErrorStyle = new GUIStyle( ( GUIStyle ) "BoldLabel" );
 			BoldErrorStyle.normal.textColor = Color.red;
@@ -653,13 +678,26 @@ namespace AmplifyShaderEditor
 			BoldWarningStyle = new GUIStyle( ( GUIStyle ) "BoldLabel" );
 			BoldWarningStyle.normal.textColor = Color.yellow;
 			BoldWarningStyle.alignment = TextAnchor.MiddleCenter;
+			BoldInfoStyle = new GUIStyle( ( GUIStyle ) "BoldLabel" );
+			BoldInfoStyle.normal.textColor = Color.white;
+			BoldInfoStyle.alignment = TextAnchor.MiddleCenter;
 
 			Separator = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.FlatBackground ] );
+			MiniButtonTopLeft = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopLeft ] );
+			MiniButtonTopMid = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopMid ] );
+			MiniButtonTopRight = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopRight ] );
+
+			MiniObjectFieldThumbOverlay = new GUIStyle( ( GUIStyle ) "ObjectFieldThumbOverlay" );
+			MiniSamplerButton = new GUIStyle( MainSkin.customStyles[ ( int ) CustomStyle.SamplerButton ] );
 
 			m_textInfo = new CultureInfo( "en-US", false ).TextInfo;
 			RangedFloatSliderStyle = new GUIStyle( GUI.skin.horizontalSlider );
 			RangedFloatSliderThumbStyle = new GUIStyle( GUI.skin.horizontalSliderThumb );
-
+			RangedFloatSliderThumbStyle.normal.background = SliderButton;
+			RangedFloatSliderThumbStyle.active.background = null;
+			RangedFloatSliderThumbStyle.hover.background = null;
+			RangedFloatSliderThumbStyle.focused.background = null;
+			
 			SwitchNodePopUp = new GUIStyle( ( GUIStyle ) "Popup" );
 			// RectOffset cannot be initiliazed on constructor
 			SwitchNodeBorder = new RectOffset( 4, 15, 3, 3 );
@@ -740,8 +778,11 @@ namespace AmplifyShaderEditor
 			MenuItemToggleStyle = new GUIStyle( ( GUIStyle ) "foldout" );
 			MenuItemEnableStyle = UsingProSkin ? new GUIStyle( ( GUIStyle ) "OL ToggleWhite" ) : new GUIStyle( ( GUIStyle ) "OL Toggle" );
 			MenuItemBackgroundStyle = new GUIStyle( ( GUIStyle ) "TE NodeBackground" );
-			MenuItemToolbarStyle = new GUIStyle( ( GUIStyle ) "toolbarbutton" );
-			MenuItemToolbarStyle.fixedHeight = 20;
+			MenuItemToolbarStyle = new GUIStyle( ( GUIStyle ) "toolbarbutton" ) { fixedHeight = 20 };
+			MenuItemInspectorDropdownStyle = new GUIStyle( ( GUIStyle ) "toolbardropdown" ) { fixedHeight = 20 };
+			MenuItemInspectorDropdownStyle.margin.bottom = 2;
+
+
 			InspectorPopdropdownStyle = new GUIStyle( GUI.skin.GetStyle( "PopupCurveDropdown" ) );
 			InspectorPopdropdownStyle.alignment = TextAnchor.MiddleRight;
 			InspectorPopdropdownStyle.border.bottom = 16;
@@ -761,10 +802,6 @@ namespace AmplifyShaderEditor
 
 		public static void UpdateMainSkin( DrawInfo drawInfo )
 		{
-			if ( ( object ) MainSkin == null )
-			{
-				InitMainSkin();
-			}
 			CurrentHeaderHeight = HeaderMaxHeight * drawInfo.InvertedZoom;
 			ScaledPortsDelta = drawInfo.InvertedZoom * PortsDelta;
 			MainSkin.textField.fontSize = ( int ) ( Constants.TextFieldFontSize * drawInfo.InvertedZoom );
@@ -811,6 +848,7 @@ namespace AmplifyShaderEditor
 
 			BoldErrorStyle.fontSize = ( int ) ( 12 * drawInfo.InvertedZoom );
 			BoldWarningStyle.fontSize = ( int ) ( 12 * drawInfo.InvertedZoom );
+			BoldInfoStyle.fontSize = ( int ) ( 12 * drawInfo.InvertedZoom );
 
 			PropertyPopUp.fixedHeight = Constants.PropertyPickerHeight * drawInfo.InvertedZoom;
 			PropertyPopUp.fixedWidth = Constants.PropertyPickerWidth * drawInfo.InvertedZoom;
@@ -828,9 +866,15 @@ namespace AmplifyShaderEditor
 
 			MainSkin.customStyles[ ( int ) CustomStyle.SamplerButton ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
 			ObjectFieldThumbOverlay.fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopLeft ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopMid ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
-			MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopRight ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MiniButtonTopLeft.fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MiniButtonTopMid.fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			MiniButtonTopRight.fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+
+			MiniObjectFieldThumbOverlay.fontSize = ( int ) ( 7 * drawInfo.InvertedZoom );
+			MiniSamplerButton.fontSize = ( int ) ( 8 * drawInfo.InvertedZoom );
+			//MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopLeft ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			//MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopMid ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
+			//MainSkin.customStyles[ ( int ) CustomStyle.MiniButtonTopRight ].fontSize = ( int ) ( 9 * drawInfo.InvertedZoom );
 
 			CheckNullMaterials();
 		}
@@ -866,6 +910,11 @@ namespace AmplifyShaderEditor
 		}
 
 		public static string TextureTypeToCgType( TextureType type ) { return m_textureTypeToCgType[ type ]; }
+
+		public static string QualifierToCg( VariableQualifiers qualifier )
+		{
+			return m_qualifierToCg[ qualifier ];
+		}
 
 		public static string WirePortToCgType( WirePortDataType type )
 		{
@@ -1341,21 +1390,36 @@ namespace AmplifyShaderEditor
 			return 0;
 		}
 
+		public static WirePortDataType GetWireTypeForChannelAmount( int channelAmount )
+		{
+			switch ( channelAmount )
+			{
+				case 1: return WirePortDataType.FLOAT;
+				case 2: return WirePortDataType.FLOAT2;
+				case 3: return WirePortDataType.FLOAT3;
+				case 4: return WirePortDataType.FLOAT4;
+				case 9: return WirePortDataType.FLOAT3x3;
+				case 16: return WirePortDataType.FLOAT4x4;
+			}
+			return WirePortDataType.FLOAT;
+		}
+
 		public static string GenerateUniformName( string dataType, string dataName ) { return string.Format( Constants.UniformDec, dataType, dataName ); }
 
-		public static string GeneratePropertyName( string name, PropertyType propertyType )
+		public static string GeneratePropertyName( string name, PropertyType propertyType, bool forceUnderscore = false )
 		{
 			if ( string.IsNullOrEmpty( name ) )
 				return name;
 
 			name = RemoveInvalidCharacters( name );
-			if ( propertyType != PropertyType.Global )
+			if ( propertyType != PropertyType.Global || forceUnderscore )
 			{
 				if ( name[ 0 ] != '_' )
 				{
 					name = '_' + name;
 				}
 			}
+
 			return name;
 		}
 
@@ -1450,19 +1514,6 @@ namespace AmplifyShaderEditor
 			return "0";
 		}
 
-		public static void ActivateSnap( Vector2 position, WirePort port )
-		{
-			SnapPort.SetReference( port );
-			SnapEnabled = true;
-			SnapPosition = position;
-		}
-
-		public static void DeactivateSnap()
-		{
-			SnapEnabled = false;
-			SnapPort.Invalidate();
-		}
-
 		public static string GetTex2DProperty( string name, TexturePropertyValues defaultValue ) { return name + "(\"" + name + "\", 2D) = \"" + defaultValue + "\" {}"; }
 		public static string AddBrackets( string value ) { return "( " + value + " )"; }
 		public static Color GetColorFromWireStatus( WireStatus status ) { return m_wireStatusToColor[ status ]; }
@@ -1536,13 +1587,58 @@ namespace AmplifyShaderEditor
 				shaderName = "New AmplifyShader";
 				string uniquePath = pathName.Remove( 0, pathName.IndexOf( "Assets" ) );
 				string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath( uniquePath + shaderName + ".shader" );
-				//Debug.Log( assetPathAndName );
-				//while ( File.Exists( pathName + shaderName + ".shader" ) )
-				//{
-				//	shaderName += "New";
-				//}
+				pathName = assetPathAndName;
+				shaderName = assetPathAndName.Remove( 0, assetPathAndName.IndexOf( shaderName ) );
+				shaderName = shaderName.Remove( shaderName.Length - 7 );
+			}
+			if ( !System.String.IsNullOrEmpty( shaderName ) && !System.String.IsNullOrEmpty( pathName ) )
+			{
+				m_latestOpenedFolder = pathName;
 
-				//pathName = pathName + shaderName + ".shader";
+				CurrentWindow.titleContent.text = AmplifyShaderEditorWindow.GenerateTabTitle( shaderName );
+				CurrentWindow.titleContent.image = ShaderIcon;
+				CurrentWindow.CreateNewGraph( shaderName );
+				CurrentWindow.LastOpenedLocation = pathName;
+				CurrentWindow.CurrentGraph.CurrentMasterNode.SetName( shaderName );
+				newShader = CurrentWindow.CurrentGraph.FireMasterNode( pathName, true );
+				AssetDatabase.Refresh();
+			}
+
+			return newShader;
+		}
+
+
+		public static Shader CreateNewEmptyTemplate( string templateGUID, string customPath = null )
+		{
+			if ( CurrentWindow == null )
+				return null;
+
+			string shaderName;
+			string pathName;
+			Shader newShader = null;
+
+
+			string path = AssetDatabase.GetAssetPath( Selection.activeObject );
+			if ( path == "" )
+			{
+				path = "Assets";
+			}
+			else if ( System.IO.Path.GetExtension( path ) != "" )
+			{
+				path = path.Replace( System.IO.Path.GetFileName( AssetDatabase.GetAssetPath( Selection.activeObject ) ), "" );
+			}
+
+
+			if ( string.IsNullOrEmpty( customPath ) )
+			{
+				IOUtils.GetShaderName( out shaderName, out pathName, "New AmplifyShader", m_latestOpenedFolder );
+			}
+			else
+			{
+				pathName = customPath;
+				shaderName = "New AmplifyShader";
+				string uniquePath = pathName.Remove( 0, pathName.IndexOf( "Assets" ) );
+				string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath( uniquePath + shaderName + ".shader" );
 				pathName = assetPathAndName;
 				shaderName = assetPathAndName.Remove( 0, assetPathAndName.IndexOf( shaderName ) );
 				shaderName = shaderName.Remove( shaderName.Length - 7 );
@@ -1553,8 +1649,7 @@ namespace AmplifyShaderEditor
 
 				CurrentWindow.titleContent.text = AmplifyShaderEditorWindow.GenerateTabTitle( shaderName );
 				CurrentWindow.titleContent.image = UIUtils.ShaderIcon;
-				CurrentWindow.CreateNewGraph( shaderName );
-				CurrentWindow.LastOpenedLocation = pathName;
+				CurrentWindow.CreateNewTemplateGraph( templateGUID );
 				CurrentWindow.CurrentGraph.CurrentMasterNode.SetName( shaderName );
 				newShader = CurrentWindow.CurrentGraph.FireMasterNode( pathName, true );
 				AssetDatabase.Refresh();
@@ -1562,6 +1657,7 @@ namespace AmplifyShaderEditor
 
 			return newShader;
 		}
+
 
 		public static void SetDelayedMaterialMode( Material material )
 		{
@@ -1795,6 +1891,15 @@ namespace AmplifyShaderEditor
 			return false;
 		}
 
+		public static int CheckUniformNameOwner( string name )
+		{
+			if ( CurrentWindow != null )
+			{
+				return CurrentWindow.DuplicatePrevBufferInstance.CheckUniformNameOwner( name );
+			}
+			return -1;
+		}
+
 		public static bool RegisterLocalVariableName( int nodeId, string name )
 		{
 			if ( CurrentWindow != null )
@@ -1929,16 +2034,16 @@ namespace AmplifyShaderEditor
 		}
 
 		public static void RemoveInstancePropertyCount() { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.RemoveInstancePropertyCount(); } }
-		public static void AddNormalDependentCount() { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.AddNormalDependentCount(); } }
-		public static void RemoveNormalDependentCount() { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.RemoveNormalDependentCount(); } }
-		public static bool IsNormalDependent()
-		{
-			if ( CurrentWindow != null )
-			{
-				return CurrentWindow.CurrentGraph.IsNormalDependent;
-			}
-			return false;
-		}
+		//public static void AddNormalDependentCount() { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.AddNormalDependentCount(); } }
+		//public static void RemoveNormalDependentCount() { if ( CurrentWindow != null ) { CurrentWindow.CurrentGraph.RemoveNormalDependentCount(); } }
+		//public static bool IsNormalDependent()
+		//{
+		//	if ( CurrentWindow != null )
+		//	{
+		//		return CurrentWindow.CurrentGraph.IsNormalDependent;
+		//	}
+		//	return false;
+		//}
 
 		public static void CopyValuesFromMaterial( Material mat )
 		{
@@ -2066,6 +2171,7 @@ namespace AmplifyShaderEditor
 				for ( int i = 0; i < m_shaderIndentLevel; i++ ) { m_shaderIndentTabs += "\t"; }
 			}
 		}
+
 		public static string ShaderIndentTabs { get { return m_shaderIndentTabs; } }
 		public static void AddLineToShaderBody( ref string ShaderBody, string line ) { ShaderBody += m_shaderIndentTabs + line; }
 		public static void AddMultiLineToShaderBody( ref string ShaderBody, string[] lines )
@@ -2108,6 +2214,25 @@ namespace AmplifyShaderEditor
 				return true;
 			}
 			return false;
+		}
+
+		public static int GetKeywordId( string keyword )
+		{
+			if ( AvailableKeywordsDict.Count != AvailableKeywords.Length )
+			{
+				AvailableKeywordsDict.Clear();
+				for ( int i = 1; i < AvailableKeywords.Length; i++ )
+				{
+					AvailableKeywordsDict.Add( AvailableKeywords[ i ], i );
+				}
+			}
+
+			if ( AvailableKeywordsDict.ContainsKey( keyword ))
+			{
+				return AvailableKeywordsDict[ keyword ];
+			}
+
+			return 0;
 		}
 	}
 }

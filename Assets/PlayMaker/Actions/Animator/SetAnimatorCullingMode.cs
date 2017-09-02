@@ -1,5 +1,9 @@
 // (c) Copyright HutongGames, LLC 2010-2016. All rights reserved.
 
+#if UNITY_5_3_OR_NEWER || UNITY_5 || UNITY_5_0
+#define UNITY_5_OR_NEWER
+#endif
+
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
@@ -58,10 +62,10 @@ namespace HutongGames.PlayMaker.Actions
 				return;
 			}
 
-			#if UNITY_5
+			#if UNITY_5_OR_NEWER
 			_animator.cullingMode = alwaysAnimate.Value?AnimatorCullingMode.AlwaysAnimate:AnimatorCullingMode.CullUpdateTransforms;
 			#else
-			_animator.cullingMode = alwaysAnimate.Value?AnimatorCullingMode.AlwaysAnimate:AnimatorCullingMode.CullUpdateTransforms;
+			_animator.cullingMode = alwaysAnimate.Value?AnimatorCullingMode.AlwaysAnimate:AnimatorCullingMode.BasedOnRenderers;
 			#endif
 			
 		}

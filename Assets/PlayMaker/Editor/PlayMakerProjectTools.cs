@@ -6,6 +6,21 @@
 #define UNITY_PRE_5_0
 #endif
 
+#if UNITY_5_3_OR_NEWER || UNITY_5
+#define UNITY_5_OR_NEWER
+#endif
+
+// Unity 5.1 introduced a new networking library. 
+// Unless we define PLAYMAKER_LEGACY_NETWORK old network actions are disabled
+#if !(UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || PLAYMAKER_LEGACY_NETWORK)
+#define UNITY_NEW_NETWORK
+#endif
+
+// Some platforms do not support networking (at least the old network library)
+#if (UNITY_FLASH || UNITY_NACL || UNITY_METRO || UNITY_WP8 || UNITY_WIIU || UNITY_PSM || UNITY_WEBGL || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE)
+#define PLATFORM_NOT_SUPPORTED
+#endif
+
 using System;
 using System.IO;
 using System.Reflection;
@@ -79,11 +94,11 @@ namespace HutongGames.PlayMakerEditor
 #else
                 EditorSceneManager.OpenScene(scene.path);
 #endif
-                
-#if UNITY_5                
+
+#if UNITY_5_OR_NEWER                
                 UpdateGetSetPropertyActions();
 #endif
-                                
+
                 ReSaveAllLoadedFSMs();
 
 #if UNITY_PRE_5_3
@@ -123,7 +138,7 @@ namespace HutongGames.PlayMakerEditor
             FsmEditor.RebuildFsmList();
         }
 
-#if UNITY_5
+#if UNITY_5_OR_NEWER
 
         private static void UpdateGetSetPropertyActions()
         {
@@ -211,14 +226,18 @@ namespace HutongGames.PlayMakerEditor
             if (component == "renderer") return FixFsmProperty(gameObject, fsmProperty, typeof(Renderer));
             if (component == "audio") return FixFsmProperty(gameObject, fsmProperty, typeof(AudioSource));
             if (component == "guiText") return FixFsmProperty(gameObject, fsmProperty, typeof(GUIText));
-            if (component == "networkView") return FixFsmProperty(gameObject, fsmProperty, typeof(NetworkView));
             if (component == "guiTexture") return FixFsmProperty(gameObject, fsmProperty, typeof(GUITexture));
             if (component == "collider") return FixFsmProperty(gameObject, fsmProperty, typeof(Collider));
             if (component == "collider2D") return FixFsmProperty(gameObject, fsmProperty, typeof(Collider2D));
             if (component == "hingeJoint") return FixFsmProperty(gameObject, fsmProperty, typeof(HingeJoint));
             if (component == "particleSystem") return FixFsmProperty(gameObject, fsmProperty, typeof(ParticleSystem));
+
 #if !UNITY_5_4_OR_NEWER
             if (component == "particleEmitter") return FixFsmProperty(gameObject, fsmProperty, typeof(ParticleEmitter));
+#endif
+
+#if !(PLATFORM_NOT_SUPPORTED || UNITY_NEW_NETWORK || PLAYMAKER_NO_NETWORK)
+            if (component == "networkView") return FixFsmProperty(gameObject, fsmProperty, typeof(NetworkView));
 #endif
             return false;
         }

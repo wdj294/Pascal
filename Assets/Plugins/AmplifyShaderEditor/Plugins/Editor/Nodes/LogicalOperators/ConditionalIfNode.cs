@@ -131,7 +131,7 @@ namespace AmplifyShaderEditor
 			m_results[ 1 ] = m_inputPorts[ 3 ].GenerateShaderForOutput( ref dataCollector, m_outputMainDataType, ignoreLocalvar, true );
 			m_results[ 2 ] = m_inputPorts[ 4 ].GenerateShaderForOutput( ref dataCollector, m_outputMainDataType, ignoreLocalvar, true );
 
-			string localVarName = "ifLocalVar" + UniqueId;
+			string localVarName = "ifLocalVar" + OutputId;
 			string localVarDec = string.Format( "{0} {1} = 0;", UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ), localVarName );
 
 			bool firstIf = true;
@@ -155,7 +155,8 @@ namespace AmplifyShaderEditor
 
 			if ( firstIf )
 			{
-				UIUtils.ShowMessage( "No result inputs connectect on If Node. Using node internal data." );
+				if( DebugConsoleWindow.DeveloperMode )
+					UIUtils.ShowMessage( "No result inputs connectect on If Node. Using node internal data." );
 				// no input nodes connected ... use port default values
 				for ( int i = 2; i < 5; i++ )
 				{

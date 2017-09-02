@@ -6,10 +6,12 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Break To Components", "Misc", "Break a data connection into its components" )]
+	[NodeAttributes( "Break To Components", "Vector Operators", "Breaks the input data into its individual components" )]
 	public sealed class BreakToComponentsNode : ParentNode
 	{
 		private WirePortDataType m_currentType = WirePortDataType.FLOAT;
+		private readonly string[] ColorPortNames = { "R", "G", "B", "A" };
+		private readonly string[] VectorPortNames = { "X", "Y", "Z", "W" };
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -60,7 +62,7 @@ namespace AmplifyShaderEditor
 				{
 					for ( int i = 0; i < 2; i++ )
 					{
-						m_outputPorts[ i ].ChangeProperties( "[" + i + "]", WirePortDataType.FLOAT, false );
+						m_outputPorts[ i ].ChangeProperties( VectorPortNames[ i ], WirePortDataType.FLOAT, false );
 						m_outputPorts[ i ].Visible = true;
 					}
 					for ( int i = 2; i < m_outputPorts.Count; i++ )
@@ -73,7 +75,7 @@ namespace AmplifyShaderEditor
 				{
 					for ( int i = 0; i < 3; i++ )
 					{
-						m_outputPorts[ i ].ChangeProperties( "[" + i + "]", WirePortDataType.FLOAT, false );
+						m_outputPorts[ i ].ChangeProperties( VectorPortNames[ i ], WirePortDataType.FLOAT, false );
 						m_outputPorts[ i ].Visible = true;
 					}
 					for ( int i = 3; i < m_outputPorts.Count; i++ )
@@ -86,7 +88,7 @@ namespace AmplifyShaderEditor
 				{
 					for ( int i = 0; i < 4; i++ )
 					{
-						m_outputPorts[ i ].ChangeProperties( "[" + i + "]", WirePortDataType.FLOAT, false );
+						m_outputPorts[ i ].ChangeProperties( VectorPortNames[ i ], WirePortDataType.FLOAT, false );
 						m_outputPorts[ i ].Visible = true;
 					}
 					for ( int i = 4; i < m_outputPorts.Count; i++ )
@@ -121,7 +123,7 @@ namespace AmplifyShaderEditor
 				{
 					for ( int i = 0; i < 4; i++ )
 					{
-						m_outputPorts[ i ].ChangeProperties( "[" + i + "]", WirePortDataType.FLOAT, false );
+						m_outputPorts[ i ].ChangeProperties( ColorPortNames[ i ], WirePortDataType.FLOAT, false );
 						m_outputPorts[ i ].Visible = true;
 					}
 					for ( int i = 4; i < m_outputPorts.Count; i++ )
@@ -133,7 +135,7 @@ namespace AmplifyShaderEditor
 				case WirePortDataType.INT:
 				{
 					m_outputPorts[ 0 ].Visible = true;
-					m_outputPorts[ 0 ].ChangeProperties( "", WirePortDataType.INT, false );
+					m_outputPorts[ 0 ].ChangeProperties( Constants.EmptyPortValue, WirePortDataType.INT, false );
 					for ( int i = 1; i < m_outputPorts.Count; i++ )
 					{
 						m_outputPorts[ i ].Visible = false;

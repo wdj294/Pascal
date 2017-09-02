@@ -1,5 +1,16 @@
 ﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
 
+// Unity 5.1 introduced a new networking library. 
+// Unless we define PLAYMAKER_LEGACY_NETWORK old network actions are disabled
+#if !(UNITY_4_3 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || PLAYMAKER_LEGACY_NETWORK)
+#define UNITY_NEW_NETWORK
+#endif
+
+// Some platforms do not support networking (at least the old network library)
+#if (UNITY_FLASH || UNITY_NACL || UNITY_METRO || UNITY_WP8 || UNITY_WIIU || UNITY_PSM || UNITY_WEBGL || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE)
+#define PLATFORM_NOT_SUPPORTED
+#endif
+
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions
@@ -8,58 +19,65 @@ namespace HutongGames.PlayMaker.Actions
     // Caches the component for performance
     public abstract class ComponentAction<T> : FsmStateAction where T : Component
     {
-        private GameObject cachedGameObject;
-        private T component;
+		/// <summary>
+		/// The cached GameObject. Call UpdateCache() first
+		/// </summary>
+        protected GameObject cachedGameObject;
+
+		/// <summary>
+		/// The cached component. Call UpdateCache() first
+		/// </summary>
+        protected T cachedComponent;
 
         protected Rigidbody rigidbody
         {
-            get { return component as Rigidbody; }
+            get { return cachedComponent as Rigidbody; }
         }
 
         protected Rigidbody2D rigidbody2d
         {
-            get { return component as Rigidbody2D; }
+            get { return cachedComponent as Rigidbody2D; }
         }
 
         protected Renderer renderer
         {
-            get { return component as Renderer; }
+            get { return cachedComponent as Renderer; }
         }
 
         protected Animation animation
         {
-            get { return component as Animation; }
+            get { return cachedComponent as Animation; }
         }
 
         protected AudioSource audio
         {
-            get { return component as AudioSource; }
+            get { return cachedComponent as AudioSource; }
         }
 
         protected Camera camera
         {
-            get { return component as Camera; }
+            get { return cachedComponent as Camera; }
         }
 
         protected GUIText guiText
         {
-            get { return component as GUIText; }
+            get { return cachedComponent as GUIText; }
         }
 
         protected GUITexture guiTexture
         {
-            get { return component as GUITexture; }
+            get { return cachedComponent as GUITexture; }
         }
 
         protected Light light
         {
-            get { return component as Light; }
+            get { return cachedComponent as Light; }
         }
 
-#if !(UNITY_FLASH || UNITY_NACL || UNITY_METRO || UNITY_WP8 || UNITY_WIIU || UNITY_PSM || UNITY_WEBGL || UNITY_PS3 || UNITY_PS4 || UNITY_XBOXONE)
+#if !(PLATFORM_NOT_SUPPORTED || UNITY_NEW_NETWORK || PLAYMAKER_NO_NETWORK)
         protected NetworkView networkView
         {
-            get { return component as NetworkView; }
+            get { return cachedComponent as NetworkView; }
         }
 #endif
         protected bool UpdateCache(GameObject go)
@@ -69,18 +87,18 @@ namespace HutongGames.PlayMaker.Actions
                 return false;
             }
 
-            if (component == null || cachedGameObject != go)
+            if (cachedComponent == null || cachedGameObject != go)
             {
-                component = go.GetComponent<T>();
+                cachedComponent = go.GetComponent<T>();
                 cachedGameObject = go;
 
-                if (component == null)
+                if (cachedComponent == null)
                 {
                     LogWarning("Missing component: " + typeof(T).FullName + " on: " + go.name);
                 }
             }
 
-            return component != null;
+            return cachedComponent != null;
         }
     }
 }

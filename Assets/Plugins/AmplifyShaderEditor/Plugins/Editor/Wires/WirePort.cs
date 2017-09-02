@@ -25,6 +25,27 @@ namespace AmplifyShaderEditor
 		SAMPLERCUBE = 1 << 13
 	}
 
+	public enum VariableQualifiers
+	{
+		In = 0,
+		Out,
+		InOut
+	}
+
+	public struct WirePortDataTypeComparer : IEqualityComparer<WirePortDataType>
+	{
+		public bool Equals( WirePortDataType x, WirePortDataType y )
+		{
+			return x == y;
+		}
+
+		public int GetHashCode( WirePortDataType obj )
+		{
+			// you need to do some thinking here,
+			return ( int ) obj;
+		}
+	}
+
 	[System.Serializable]
 	public class WirePort
 	{
@@ -45,6 +66,9 @@ namespace AmplifyShaderEditor
 		
 		[SerializeField]
 		private Rect m_position;
+
+		[SerializeField]
+		private Rect m_labelPosition;
 
 		[SerializeField]
 		protected int m_nodeId = -1;
@@ -192,24 +216,31 @@ namespace AmplifyShaderEditor
 		public void ChangeProperties( string newName, WirePortDataType newType, bool invalidateConnections )
 		{
 			Name = newName;
-			if ( m_dataType != newType )
-			{
-				DataType = newType;
-				if ( invalidateConnections )
-				{
-					InvalidateAllConnections();
-				}
-				else
-				{
-					NotifyExternalRefencesOnChange();
-				}
-			}
+			ChangeType( newType, invalidateConnections );
+			//if ( m_dataType != newType )
+			//{
+			//	DataType = newType;
+			//	if ( invalidateConnections )
+			//	{
+			//		InvalidateAllConnections();
+			//	}
+			//	else
+			//	{
+			//		NotifyExternalRefencesOnChange();
+			//	}
+			//}
 		}
 
 		public void ChangeType( WirePortDataType newType, bool invalidateConnections )
 		{
 			if ( m_dataType != newType )
 			{
+				//ParentNode node = UIUtils.GetNode( m_nodeId );
+				//if ( node )
+				//{
+				//	Undo.RegisterCompleteObjectUndo( node.ContainerGraph.ParentWindow, Constants.UndoChangeTypeNodesId );
+				//	Undo.RecordObject( node, Constants.UndoChangeTypeNodesId );
+				//}
 				DataType = newType;
 				if ( invalidateConnections )
 				{
@@ -368,7 +399,7 @@ namespace AmplifyShaderEditor
 			{
 				GUI.Label( textPos, m_name, style );
 			}
-			//GUI.Box( textPos, string.Empty );
+			//GUI.Label( textPos, string.Empty );
 			return changeFlag;
 		}
 
@@ -397,8 +428,13 @@ namespace AmplifyShaderEditor
 		public Rect Position
 		{
 			get { return m_position; }
-
 			set { m_position = value; }
+		}
+
+		public Rect LabelPosition
+		{
+			get { return m_labelPosition; }
+			set { m_labelPosition = value; }
 		}
 
 		public int PortId

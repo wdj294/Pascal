@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Clamp", "Operators", "Value clamped to the range [min,max]" )]
+	[NodeAttributes( "Clamp", "Math Operators", "Value clamped to the range [min,max]" )]
 	public sealed class ClampOpNode : ParentNode
 	{
 
@@ -84,16 +84,18 @@ namespace AmplifyShaderEditor
 				case WirePortDataType.COLOR:
 				case WirePortDataType.OBJECT:
 				{
-					result =  "clamp( " + value + " , " + min + " , " + max + " )";
-				}break;
+					result = "clamp( " + value + " , " + min + " , " + max + " )";
+				}
+				break;
 				case WirePortDataType.FLOAT3x3:
 				case WirePortDataType.FLOAT4x4:
 				{
-					result = UIUtils.InvalidParameter(this);
-				} break;
+					return UIUtils.InvalidParameter( this );
+				}
 			}
 
-			return CreateOutputLocalVariable( 0, result, ref dataCollector );
+			RegisterLocalVariable( 0, result, ref dataCollector, "clampResult" + OutputId );
+			return m_outputPorts[ 0 ].LocalValue;
 		}
 
 	}

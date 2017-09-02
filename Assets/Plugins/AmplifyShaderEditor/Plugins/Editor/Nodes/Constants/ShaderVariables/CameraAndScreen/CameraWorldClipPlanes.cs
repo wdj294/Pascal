@@ -23,29 +23,79 @@ namespace AmplifyShaderEditor
 	{
 		[SerializeField]
 		private BuiltInShaderClipPlanesTypes m_selectedType = BuiltInShaderClipPlanesTypes.Left;
-		[SerializeField]
-		private BuiltInShaderClipPlanesTypes m_oldVarType = BuiltInShaderClipPlanesTypes.Left;
-
+		
 		private const string LabelStr = "Plane";
 		private const string ValueStr = "unity_CameraWorldClipPlanes";
+
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
 			ChangeOutputProperties( 0, "ABCD", WirePortDataType.FLOAT4 );
 			m_textLabelWidth = 55;
 			m_autoWrapProperties = true;
+			SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, m_selectedType ) );
+		}
+
+		public override void AfterCommonInit()
+		{
+			base.AfterCommonInit();
+			if( PaddingTitleLeft == 0 )
+			{
+				PaddingTitleLeft = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+				if( PaddingTitleRight == 0 )
+					PaddingTitleRight = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+			}
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			m_upperLeftWidget = null;
+		}
+
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_selectedType = (BuiltInShaderClipPlanesTypes)m_upperLeftWidget.DrawWidget( this, m_selectedType );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, m_selectedType ) );
+				SetSaveIsDirty();
+			}
 		}
 
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
-			EditorGUILayout.BeginVertical();
+			EditorGUI.BeginChangeCheck();
 			m_selectedType = ( BuiltInShaderClipPlanesTypes ) EditorGUILayoutEnumPopup( LabelStr, m_selectedType );
-			EditorGUILayout.EndVertical();
-
-			if ( m_selectedType != m_oldVarType )
+			if ( EditorGUI.EndChangeCheck() )
 			{
-				m_oldVarType = m_selectedType;
+				SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, m_selectedType ) );
 				SetSaveIsDirty();
 			}
 		}
@@ -60,6 +110,7 @@ namespace AmplifyShaderEditor
 		{
 			base.ReadFromString( ref nodeParams );
 			m_selectedType = ( BuiltInShaderClipPlanesTypes ) Enum.Parse( typeof( BuiltInShaderClipPlanesTypes ), GetCurrentParam( ref nodeParams ) );
+			SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, m_selectedType ) );
 		}
 
 		public override void WriteToString( ref string nodeInfo, ref string connectionsInfo )

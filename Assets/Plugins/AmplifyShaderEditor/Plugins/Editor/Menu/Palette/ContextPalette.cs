@@ -33,9 +33,9 @@ namespace AmplifyShaderEditor
 		public override void OnEscapePressed()
 		{
 			Disable();
-			if ( UIUtils.ValidReferences() )
+			if ( m_parentWindow.WireReferenceUtils.ValidReferences() )
 			{
-				UIUtils.InvalidateReferences();
+				m_parentWindow.WireReferenceUtils.InvalidateReferences();
 			}
 		}
 

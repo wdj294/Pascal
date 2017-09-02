@@ -94,7 +94,11 @@ namespace HutongGames.PlayMaker.Actions
 				storeText.Value = wwwObject.text;
 				storeTexture.Value = wwwObject.texture;
 
+#if UNITY_5_6_OR_NEWER
+                storeMovieTexture.Value = wwwObject.GetMovieTexture();
+#else
                 storeMovieTexture.Value = wwwObject.movie;
+#endif
 
 				errorString.Value = wwwObject.error;
 

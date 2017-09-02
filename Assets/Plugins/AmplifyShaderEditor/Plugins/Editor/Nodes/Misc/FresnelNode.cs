@@ -9,7 +9,7 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Fresnel", "Misc", "Simple Fresnel effect" )]
+	[NodeAttributes( "Fresnel", "Surface Data", "Simple Fresnel effect" )]
 	public sealed class FresnelNode : ParentNode
 	{
 		private const string WorldDirVarStr = "worldViewDir";
@@ -21,12 +21,10 @@ namespace AmplifyShaderEditor
 		private const string FresnesDotOp = "float {0} = dot( {1},{2} );";
 		private const string FresnesFinalOp = "float {0} = {1};";
 
-		private int m_cachedPropertyId = -1;
-
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
-			AddInputPort( WirePortDataType.FLOAT3, false, "Normal" );
+			AddInputPort( WirePortDataType.FLOAT3, false, "World Normal" );
 			AddInputPort( WirePortDataType.FLOAT, false, "Bias" );
 			AddInputPort( WirePortDataType.FLOAT, false, "Scale" );
 			AddInputPort( WirePortDataType.FLOAT, false, "Power" );
@@ -42,10 +40,10 @@ namespace AmplifyShaderEditor
 		{
 			base.SetPreviewInputs();
 
-			if ( m_cachedPropertyId == -1 )
-				m_cachedPropertyId = Shader.PropertyToID( "_Connected" );
-
-			PreviewMaterial.SetFloat( m_cachedPropertyId, ( m_inputPorts[ 0 ].IsConnected ? 1 : 0 ) );
+			if ( m_inputPorts[ 0 ].IsConnected )
+				m_previewMaterialPassId = 1;
+			else
+				m_previewMaterialPassId = 0;
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
@@ -56,12 +54,13 @@ namespace AmplifyShaderEditor
 			dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_POS ), true );
 			if ( dataCollector.IsFragmentCategory )
 			{
-				dataCollector.AddLocalVariable( UniqueId, m_currentPrecisionType, WirePortDataType.FLOAT3, WorldDirVarStr, string.Format( WorldDirFuncStr, Constants.InputVarStr + ".worldPos" ) );
+				string worldPosVar = dataCollector.IsTemplate ? dataCollector.TemplateDataCollectorInstance.GetWorldPos() : Constants.InputVarStr + ".worldPos";
+				dataCollector.AddLocalVariable( UniqueId, m_currentPrecisionType, WirePortDataType.FLOAT3, WorldDirVarStr, string.Format( WorldDirFuncStr, worldPosVar ) );
 
 			}
 			else
 			{
-				string worldPosVar = GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId ); 
+				string worldPosVar = dataCollector.IsTemplate ? dataCollector.TemplateDataCollectorInstance.GetWorldPos() : GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId ); 
 				dataCollector.AddLocalVariable( UniqueId, m_currentPrecisionType, WirePortDataType.FLOAT3, WorldDirVarStr, string.Format( WorldDirFuncStr, worldPosVar ) );
 			}
 
@@ -74,7 +73,7 @@ namespace AmplifyShaderEditor
 			{
 				dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_NORMAL ), true );
 				dataCollector.AddToInput( UniqueId, Constants.InternalData, false );
-				normal = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
+				normal = dataCollector.IsTemplate ? dataCollector.TemplateDataCollectorInstance.GetWorldNormal() : GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
 				//string normalWorld = "WorldNormalVector( " + Constants.InputVarStr + ", float3( 0, 0, 1 ) );";
 				//dataCollector.AddToLocalVariables( m_uniqueId, "float3 worldNormal = "+ normalWorld );
 				//normal = "worldNormal";

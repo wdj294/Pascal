@@ -44,6 +44,9 @@ PluginImporter:
     OSXUniversal:
       enabled: 1
       settings: {}
+    PS4:
+      enabled: 1
+      settings: {}
     WP8:
       enabled: 0
       settings:
@@ -71,17 +74,20 @@ PluginImporter:
         DontProcess: False
         PlaceholderPath: 
         SDK: AnySDK
+        ScriptingBackend: AnyScriptingBackend
+    XboxOne:
+      enabled: 1
+      settings: {}
     iOS:
       enabled: 1
       settings:
         CompileFlags: 
         FrameworkDependencies: 
-    XboxOne:
-      enabled: 1 
-      settings: {} 
-    PS4:
-      enabled: 1 
-      settings: {} 
+    tvOS:
+      enabled: 1
+      settings:
+        CompileFlags: 
+        FrameworkDependencies: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 

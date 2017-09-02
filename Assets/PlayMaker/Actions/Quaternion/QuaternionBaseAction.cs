@@ -17,9 +17,17 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void Awake()
 	    {
-	       if (everyFrame && everyFrameOption == everyFrameOptions.FixedUpdate)
-			{
-				Fsm.HandleFixedUpdate = true;
+	        if (everyFrame)
+		    {
+		        switch (everyFrameOption)
+		        {
+		            case everyFrameOptions.FixedUpdate:
+		                Fsm.HandleFixedUpdate = true;
+		                break;
+		            case everyFrameOptions.LateUpdate:
+		                Fsm.HandleLateUpdate = true;
+		                break;
+		        }
 			}	
 	    }
 		

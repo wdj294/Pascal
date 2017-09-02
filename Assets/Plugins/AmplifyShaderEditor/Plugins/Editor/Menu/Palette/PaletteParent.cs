@@ -69,7 +69,7 @@ namespace AmplifyShaderEditor
 		public override void Draw( Rect parentPosition, Vector2 mousePosition, int mouseButtonId, bool hasKeyboadFocus )
 		{
 			base.Draw( parentPosition, mousePosition, mouseButtonId, hasKeyboadFocus );
-			if ( m_previousWindowIsFunction != ParentWindow.IsShaderFunctionWindow )
+			if( m_previousWindowIsFunction != ParentWindow.IsShaderFunctionWindow )
 			{
 				m_forceUpdate = true;
 			}
@@ -78,61 +78,60 @@ namespace AmplifyShaderEditor
 
 			List<ContextMenuItem> allItems = ParentWindow.ContextMenuInstance.MenuItems;
 
-			if ( m_searchLabelSize < 0 )
+			if( m_searchLabelSize < 0 )
 			{
 				m_searchLabelSize = GUI.skin.label.CalcSize( new GUIContent( m_searchFilterStr ) ).x;
 			}
 
-			if ( m_foldoutStyle == null )
+			if( m_foldoutStyle == null )
 			{
 				m_foldoutStyle = new GUIStyle( GUI.skin.GetStyle( "foldout" ) );
 				m_foldoutStyle.fontStyle = FontStyle.Bold;
 			}
 
-			if ( m_buttonStyle == null )
+			if( m_buttonStyle == null )
 			{
 				m_buttonStyle = UIUtils.Label;
 			}
 
 			GUILayout.BeginArea( m_transformedArea, m_content, m_style );
 			{
-
-				for ( int i = 0; i < m_initialSeparatorAmount; i++ )
+				for( int i = 0; i < m_initialSeparatorAmount; i++ )
 				{
 					EditorGUILayout.Separator();
 				}
 
-				if ( Event.current.type == EventType.keyDown )
+				if( Event.current.type == EventType.keyDown )
 				{
 					KeyCode key = Event.current.keyCode;
 					//if ( key == KeyCode.Return || key == KeyCode.KeypadEnter )
 					//	OnEnterPressed();
 
-					if ( ( Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return ) && Event.current.type == EventType.KeyDown )
+					if( ( Event.current.keyCode == KeyCode.KeypadEnter || Event.current.keyCode == KeyCode.Return ) && Event.current.type == EventType.KeyDown )
 					{
 						int index = m_currentItems.FindIndex( x => GUI.GetNameOfFocusedControl().Equals( x.ItemUIContent.text + m_resizable ) );
-						if ( index > -1 )
+						if( index > -1 )
 							OnEnterPressed( index );
 						else
 							OnEnterPressed();
 					}
 
-					if ( key == KeyCode.Escape )
+					if( key == KeyCode.Escape )
 						OnEscapePressed();
 
-					if ( m_isMouseInside || hasKeyboadFocus )
+					if( m_isMouseInside || hasKeyboadFocus )
 					{
-						if ( key == ShortcutsManager.ScrollUpKey )
+						if( key == ShortcutsManager.ScrollUpKey )
 						{
 							m_currentScrollPos.y -= 10;
-							if ( m_currentScrollPos.y < 0 )
+							if( m_currentScrollPos.y < 0 )
 							{
 								m_currentScrollPos.y = 0;
 							}
 							Event.current.Use();
 						}
 
-						if ( key == ShortcutsManager.ScrollDownKey )
+						if( key == ShortcutsManager.ScrollDownKey )
 						{
 							m_currentScrollPos.y += 10;
 							Event.current.Use();
@@ -147,13 +146,13 @@ namespace AmplifyShaderEditor
 				{
 					GUI.SetNextControlName( m_searchFilterControl + m_resizable );
 					m_searchFilter = EditorGUILayout.TextField( m_searchFilterStr, m_searchFilter );
-					if ( m_focusOnSearch )
+					if( m_focusOnSearch )
 					{
 						m_focusOnSearch = false;
 						EditorGUI.FocusTextInControl( m_searchFilterControl + m_resizable );
 					}
 				}
-				if ( EditorGUI.EndChangeCheck() )
+				if( EditorGUI.EndChangeCheck() )
 					m_forceUpdate = true;
 
 				EditorGUIUtility.labelWidth = width;
@@ -162,19 +161,19 @@ namespace AmplifyShaderEditor
 				m_currScrollBarDims.y = m_transformedArea.height - 2 - 16 - 2 - 7 * m_initialSeparatorAmount - 2;
 				m_currentScrollPos = EditorGUILayout.BeginScrollView( m_currentScrollPos/*, GUILayout.Width( 242 ), GUILayout.Height( 250 - 2 - 16 - 2 - 7 - 2) */);
 				{
-					if ( m_forceUpdate )
+					if( m_forceUpdate )
 					{
 						m_forceUpdate = false;
 
 						m_currentItems.Clear();
 						m_currentCategories.Clear();
 
-						if ( usingSearchFilter )
+						if( usingSearchFilter )
 						{
-							for ( int i = 0; i < allItems.Count; i++ )
+							for( int i = 0; i < allItems.Count; i++ )
 							{
 								m_currentItems.Add( allItems[ i ] );
-								if ( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
+								if( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
 								{
 									m_currentCategories.Add( allItems[ i ].Category, new PaletteFilterData( m_defaultCategoryVisible ) );
 									m_currentCategories[ allItems[ i ].Category ].HasCommunityData = allItems[ i ].NodeAttributes.FromCommunity || m_currentCategories[ allItems[ i ].Category ].HasCommunityData;
@@ -184,14 +183,14 @@ namespace AmplifyShaderEditor
 						}
 						else
 						{
-							for ( int i = 0; i < allItems.Count; i++ )
+							for( int i = 0; i < allItems.Count; i++ )
 							{
-								if ( allItems[ i ].Name.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0 ||
+								if( allItems[ i ].Name.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0 ||
 										allItems[ i ].Category.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0
 									)
 								{
 									m_currentItems.Add( allItems[ i ] );
-									if ( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
+									if( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
 									{
 										m_currentCategories.Add( allItems[ i ].Category, new PaletteFilterData( m_defaultCategoryVisible ) );
 										m_currentCategories[ allItems[ i ].Category ].HasCommunityData = allItems[ i ].NodeAttributes.FromCommunity || m_currentCategories[ allItems[ i ].Category ].HasCommunityData;
@@ -201,7 +200,7 @@ namespace AmplifyShaderEditor
 							}
 						}
 						var categoryEnumerator = m_currentCategories.GetEnumerator();
-						while ( categoryEnumerator.MoveNext() )
+						while( categoryEnumerator.MoveNext() )
 						{
 							categoryEnumerator.Current.Value.Contents.Sort( ( x, y ) => x.CompareTo( y, usingSearchFilter ) );
 						}
@@ -209,10 +208,10 @@ namespace AmplifyShaderEditor
 
 					string watching = string.Empty;
 					//bool downDirection = true;
-					if ( Event.current.keyCode == KeyCode.Tab )
+					if( Event.current.keyCode == KeyCode.Tab )
 					{
 						ContextMenuItem item = m_currentItems.Find( x => GUI.GetNameOfFocusedControl().Equals( x.ItemUIContent.text + m_resizable ) );
-						if ( item != null )
+						if( item != null )
 						{
 							watching = item.ItemUIContent.text + m_resizable;
 							//if ( Event.current.modifiers == EventModifiers.Shift )
@@ -234,19 +233,19 @@ namespace AmplifyShaderEditor
 					var enumerator = m_currentCategories.GetEnumerator();
 
 					float cache = EditorGUIUtility.labelWidth;
-					while ( enumerator.MoveNext() )
+					while( enumerator.MoveNext() )
 					{
 						var current = enumerator.Current;
 						bool visible = GUILayout.Toggle( current.Value.Visible, current.Key, m_foldoutStyle );
-						if ( m_validButtonId == mouseButtonId )
+						if( m_validButtonId == mouseButtonId )
 						{
 							current.Value.Visible = visible;
 						}
 
 						currPos += ItemSize;
-						if ( m_searchFilter.Length > 0 || current.Value.Visible )
+						if( m_searchFilter.Length > 0 || current.Value.Visible )
 						{
-							for ( int i = 0; i < current.Value.Contents.Count; i++ )
+							for( int i = 0; i < current.Value.Contents.Count; i++ )
 							{
 								//if ( !IsItemVisible( currPos ) )
 								//{
@@ -274,7 +273,7 @@ namespace AmplifyShaderEditor
 										Rect thisRect = EditorGUILayout.GetControlRect( false, 16f, EditorStyles.label );
 										//if ( m_resizable )
 										{
-											if ( GUI.RepeatButton( thisRect, string.Empty, EditorStyles.label ) )
+											if( GUI.RepeatButton( thisRect, string.Empty, EditorStyles.label ) )
 											{
 												int controlID = GUIUtility.GetControlID( FocusType.Passive );
 												GUIUtility.hotControl = controlID;
@@ -287,14 +286,14 @@ namespace AmplifyShaderEditor
 										EditorGUIUtility.labelWidth = thisRect.width;
 										EditorGUI.Toggle( thisRect, current.Value.Contents[ i ].ItemUIContent.text, false, EditorStyles.label );
 										EditorGUIUtility.labelWidth = cache;
-										if ( watching == current.Value.Contents[ i ].ItemUIContent.text + m_resizable )
+										if( watching == current.Value.Contents[ i ].ItemUIContent.text + m_resizable )
 										{
 											bool boundBottom = currPos - m_currentScrollPos.y > m_currScrollBarDims.y;
 											bool boundTop = currPos - m_currentScrollPos.y - 4 <= 0;
 
-											if ( boundBottom )
+											if( boundBottom )
 												m_currentScrollPos.y = currPos - m_currScrollBarDims.y + 2;
-											else if ( boundTop )
+											else if( boundTop )
 												m_currentScrollPos.y = currPos - 18;
 											//else if ( boundBottom && !downDirection )
 											//	m_currentScrollPos.y = currPos - m_currScrollBarDims.y + 2;
@@ -323,28 +322,44 @@ namespace AmplifyShaderEditor
 			string InitialCategoriesFormat = "[[#{0}|{0}]]<br>\n";
 			string InitialCategories = string.Empty;
 			string CurrentCategoryFormat = "\n== {0} ==\n\n";
-			string NodesFootFormat = "[[Unity Products:Amplify Shader Editor/{0} | Learn More]] -\n[[#Top|Back to Categories]]\n";
+			//string NodesFootFormat = "[[Unity Products:Amplify Shader Editor/{0} | Learn More]] -\n[[#Top|Back to Categories]]\n";
 			string NodesFootFormatSep = "----\n";
 			string OverallFoot = "[[Category:Nodes]]";
 
-			string NodeInfoBeginFormat = "{| cellpadding=\"10\"\n";
-			string nodeInfoBodyFormat = "|- style=\"vertical-align:top;\"\n| http://amplify.pt/Nodes/{0}.jpg\n| [[Unity Products:Amplify Shader Editor/{1} | <span style=\"font-size: 120%;\"><span id=\"{2}\"></span>'''{2}'''<span> ]] <br> {3}\n";
-			string NodeInfoEndFormat = "|}\n";
+			string NodeInfoBeginFormat = "<div style=\"display: inline-block; max-width:370px;\">\n";
+			string nodeInfoBodyFormat = "{{| id=\"{2}\" class=\"wikitable\" style=\"width: 100%; margin: 0px;\" |\n" +
+				"|- style=\"height: 100%;\" | \n" +
+				"| style=\"height: 100%; padding: 4px;\" | <div>[[Unity Products:Amplify Shader Editor/{1}|<img class=\"responsive-img\" style=\"float:left;\" src=\"http://amplify.pt/Nodes/{0}.jpg\">]]</div>\n" +
+				"<div>\n" +
+				"{{| style=\"width: 100%; height: 150px;\"\n" +
+				"|-\n" +
+				"| [[Unity Products:Amplify Shader Editor/{1}|'''{2}''']]\n" +
+				"|- style=\"vertical-align:top; height: 100%;\" |\n" +
+				"| {3}\n" +
+				"|- style=\"text-align:right;\" |\n" +
+				"| [[Unity Products:Amplify Shader Editor/{1} | Learn More]]\n" +
+				"|}}</div>\n" +
+				"|}}\n";
+			string NodeInfoEndFormat = "</div>\n";
+
+			//string NodeInfoBeginFormat = "{| cellpadding=\"10\"\n";
+			//string nodeInfoBodyFormat = "|- style=\"vertical-align:top;\"\n| http://amplify.pt/Nodes/{0}.jpg\n| [[Unity Products:Amplify Shader Editor/{1} | <span style=\"font-size: 120%;\"><span id=\"{2}\"></span>'''{2}'''<span> ]] <br> {3}\n";
+			//string NodeInfoEndFormat = "|}\n";
 
 			string nodesInfo = string.Empty;
-			BuildFullList( true ); 
+			BuildFullList( true );
 			var enumerator = m_currentCategories.GetEnumerator();
-			while ( enumerator.MoveNext() )
+			while( enumerator.MoveNext() )
 			{
 				var current = enumerator.Current;
-				if ( fromCommunity && current.Value.HasCommunityData || !fromCommunity )
+				if( fromCommunity && current.Value.HasCommunityData || !fromCommunity )
 				{
 					InitialCategories += string.Format( InitialCategoriesFormat, current.Key );
 					nodesInfo += string.Format( CurrentCategoryFormat, current.Key );
 					int count = current.Value.Contents.Count;
-					for ( int i = 0; i < count; i++ )
+					for( int i = 0; i < count; i++ )
 					{
-						if ( ( fromCommunity && current.Value.Contents[ i ].NodeAttributes.FromCommunity ) ||
+						if( ( fromCommunity && current.Value.Contents[ i ].NodeAttributes.FromCommunity ) ||
 							( !fromCommunity && !current.Value.Contents[ i ].NodeAttributes.FromCommunity ) )
 						{
 							string nodeFullName = current.Value.Contents[ i ].Name;
@@ -357,21 +372,22 @@ namespace AmplifyShaderEditor
 							string nodeDescription = current.Value.Contents[ i ].ItemUIContent.tooltip;
 
 							string nodeInfoBody = string.Format( nodeInfoBodyFormat, pictureFilename, pageFilename, nodeFullName, nodeDescription );
-							string nodeInfoFoot = string.Format( NodesFootFormat, pageFilename );
+							//string nodeInfoFoot = string.Format( NodesFootFormat, pageFilename );
 
-							nodesInfo += ( NodeInfoBeginFormat + nodeInfoBody + NodeInfoEndFormat + nodeInfoFoot );
-							if ( i != ( count - 1 ) )
-							{
-								nodesInfo += NodesFootFormatSep;
-							}
+							nodesInfo += ( NodeInfoBeginFormat + nodeInfoBody + NodeInfoEndFormat );
+							//if ( i != ( count - 1 ) )
+							//{
+							//	nodesInfo += NodesFootFormatSep;
+							//}
 						}
 					}
+					nodesInfo += NodesFootFormatSep;
 				}
 			}
 
 			string finalText = noTOCHeader + nodesHeader + InitialCategories + nodesInfo + OverallFoot;
 
-			if ( !System.IO.Directory.Exists( pathname ) )
+			if( !System.IO.Directory.Exists( pathname ) )
 			{
 				System.IO.Directory.CreateDirectory( pathname );
 			}
@@ -384,7 +400,7 @@ namespace AmplifyShaderEditor
 
 		public virtual bool CheckButton( GUIContent content, GUIStyle style, int buttonId )
 		{
-			if ( buttonId != m_validButtonId )
+			if( buttonId != m_validButtonId )
 			{
 				GUILayout.Label( content, style );
 				return false;
@@ -393,13 +409,13 @@ namespace AmplifyShaderEditor
 			return GUILayout.RepeatButton( content, style );
 		}
 
-		public void FillList( ref List<ContextMenuItem> list , bool forceAllItems )
+		public void FillList( ref List<ContextMenuItem> list, bool forceAllItems )
 		{
-			List<ContextMenuItem> allList = forceAllItems? ParentWindow.ContextMenuInstance.ItemFunctions : ParentWindow.ContextMenuInstance.MenuItems;
+			List<ContextMenuItem> allList = forceAllItems ? ParentWindow.ContextMenuInstance.ItemFunctions : ParentWindow.ContextMenuInstance.MenuItems;
 
 			list.Clear();
 			int count = allList.Count;
-			for ( int i = 0; i < count; i++ )
+			for( int i = 0; i < count; i++ )
 			{
 				list.Add( allList[ i ] );
 			}
@@ -408,21 +424,21 @@ namespace AmplifyShaderEditor
 		public Dictionary<string, PaletteFilterData> BuildFullList( bool forceAllNodes = false )
 		{
 			//Only need to build if search filter is active and list is set according to it
-			if ( m_searchFilter.Length > 0 || !m_isActive || m_currentCategories.Count == 0 )
+			if( m_searchFilter.Length > 0 || !m_isActive || m_currentCategories.Count == 0 )
 			{
 				m_currentItems.Clear();
 				m_currentCategories.Clear();
 
 				List<ContextMenuItem> allItems = forceAllNodes ? ParentWindow.ContextMenuInstance.ItemFunctions : ParentWindow.ContextMenuInstance.MenuItems;
 
-				for ( int i = 0; i < allItems.Count; i++ )
+				for( int i = 0; i < allItems.Count; i++ )
 				{
-					if ( allItems[ i ].Name.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0 ||
+					if( allItems[ i ].Name.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0 ||
 							allItems[ i ].Category.IndexOf( m_searchFilter, StringComparison.InvariantCultureIgnoreCase ) >= 0
 						)
 					{
 						m_currentItems.Add( allItems[ i ] );
-						if ( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
+						if( !m_currentCategories.ContainsKey( allItems[ i ].Category ) )
 						{
 							m_currentCategories.Add( allItems[ i ].Category, new PaletteFilterData( m_defaultCategoryVisible ) );
 							m_currentCategories[ allItems[ i ].Category ].HasCommunityData = allItems[ i ].NodeAttributes.FromCommunity || m_currentCategories[ allItems[ i ].Category ].HasCommunityData;
@@ -432,7 +448,7 @@ namespace AmplifyShaderEditor
 				}
 
 				var categoryEnumerator = m_currentCategories.GetEnumerator();
-				while ( categoryEnumerator.MoveNext() )
+				while( categoryEnumerator.MoveNext() )
 				{
 					categoryEnumerator.Current.Value.Contents.Sort( ( x, y ) => x.CompareTo( y, false ) );
 				}
@@ -445,7 +461,7 @@ namespace AmplifyShaderEditor
 
 		private bool IsItemVisible( float currPos )
 		{
-			if ( ( currPos < m_currentScrollPos.y && ( currPos + ItemSize ) < m_currentScrollPos.y ) ||
+			if( ( currPos < m_currentScrollPos.y && ( currPos + ItemSize ) < m_currentScrollPos.y ) ||
 									( currPos > ( m_currentScrollPos.y + m_currScrollBarDims.y ) &&
 									( currPos + ItemSize ) > ( m_currentScrollPos.y + m_currScrollBarDims.y ) ) )
 			{

@@ -18,7 +18,7 @@ namespace HutongGames.PlayMakerEditor
     public class PlayMakerWelcomeWindow : EditorWindow
     {
         // Remember to update version info since it's used by export scripts!
-        public const string InstallCurrentVersion = "1.8.4";
+        public const string InstallCurrentVersion = "1.8.5";
         public const string InstallBetaVersion = "";
         public const string Version = InstallCurrentVersion + " " + InstallBetaVersion;
 
@@ -44,6 +44,7 @@ namespace HutongGames.PlayMakerEditor
         private static string currentVersionLabel;
         private static string currentVersionShort;
         private static int majorVersion; // 1.8 -> 18 for easier comparisons
+        private static bool isStudentVersion;
 
         private enum Page
         {
@@ -82,7 +83,7 @@ namespace HutongGames.PlayMakerEditor
 
         private static bool stylesInitialized;
 
-#if PLAYMAKER_1_8_4
+#if PLAYMAKER_1_8_5
         [MenuItem("PlayMaker/Welcome Screen", false, 500)]
 #elif PLAYMAKER
         [MenuItem("PlayMaker/Update PlayMaker", false, 500)]
@@ -111,6 +112,9 @@ namespace HutongGames.PlayMakerEditor
 
             // Try to get current playmaker version if installed
             GetPlayMakerVersion();
+
+            // Is this the install for the student version?
+            isStudentVersion = AssetGUIDs.IsStudentVersionInstall();
 
             // Is PlayMakerPhotonWizard available?
             setupPhoton = PlayMakerEditorStartup.GetType("PlayMakerPhotonWizard") != null;
@@ -321,10 +325,20 @@ namespace HutongGames.PlayMakerEditor
             GUILayout.BeginVertical();
             GUILayout.FlexibleSpace();
 
-            DrawLink(samplesIcon,
-                     "Install PlayMaker",
-                     "Import the latest version of PlayMaker.",
-                     GotoPage, Page.Install);
+            if (isStudentVersion)
+            {
+                DrawLink(samplesIcon,
+                    "Install PlayMaker Student Version",
+                    "Import the latest student version of PlayMaker.",
+                    GotoPage, Page.Install);
+            }
+            else
+            {
+                DrawLink(samplesIcon,
+                    "Install PlayMaker",
+                    "Import the latest version of PlayMaker.",
+                    GotoPage, Page.Install);
+            }
 
             DrawLink(docsIcon,
                      "Upgrade Guide",
@@ -357,17 +371,27 @@ namespace HutongGames.PlayMakerEditor
                      "Check for potential update issues.",
                      PreUpdateCheck, null);
 
-            DrawLink(samplesIcon,
-                     "Install PlayMaker " + InstallCurrentVersion,
-                     "The current official release.",
-                     InstallLatest, null);
+            if (isStudentVersion)
+            {
+                DrawLink(samplesIcon,
+                    "Install PlayMaker Student Version " + InstallCurrentVersion,
+                    "The current official release.",
+                    InstallLatestStudent, null);
+            }
+            else
+            {
+                DrawLink(samplesIcon,
+                    "Install PlayMaker " + InstallCurrentVersion,
+                    "The current official release.",
+                    InstallLatest, null);
+            }
 
             if (!string.IsNullOrEmpty(InstallBetaVersion))
             {
-            DrawLink(samplesIcon,
-                     "Install PlayMaker " + InstallBetaVersion,
-                     "The latest public beta version.",
-                     InstallBeta, null);
+                DrawLink(samplesIcon,
+                         "Install PlayMaker " + InstallBetaVersion,
+                         "The latest public beta version.",
+                         InstallBeta, null);
             }
 
             GUILayout.FlexibleSpace();
@@ -405,32 +429,48 @@ namespace HutongGames.PlayMakerEditor
 
         private void DoUpgradeGuidePage()
         {
-            ShowBackupHelpBox();
-
             scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition);
 
+            ShowBackupHelpBox();
+
             GUILayout.Label("Version 1.8+", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("FSMs saved with 1.8+ cannot be opened in earlier versions of PlayMaker! Please BACKUP projects!", MessageType.Warning);
+            EditorGUILayout.HelpBox(
+                "FSMs saved with 1.8+ cannot be opened in earlier versions of PlayMaker! Please BACKUP projects!",
+                MessageType.Warning);
+
+            GUILayout.Label("Version 1.8.5", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox(
+                "\nPlayMaker 1.8.5 moved LateUpdate handling to an optional component automatically added as needed.\n" +
+                "\nIf you have custom actions that use LateUpdate you must add this to OnPreprocess:\n" +
+                "\nFsm.HandleLateUpdate = true;\n" +
+                "\nSee Rotate.cs for an example." +
+                "\n",
+                MessageType.Warning);
 
             GUILayout.Label("Version 1.8.2", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("PlayMaker 1.8.2 added the following system events:\n" +
+            EditorGUILayout.HelpBox("\nPlayMaker 1.8.2 added the following system events:\n" +
                                     "\nMOUSE UP AS BUTTON, JOINT BREAK, JOINT BREAK 2D, PARTICLE COLLISION." +
-                                    "\n\nPlease remove any custom proxy components you used before to send these events.",
+                                    "\n\nPlease remove any custom proxy components you used before to send these events." +
+                                    "\n",
                                     MessageType.Warning);
 
             GUILayout.Label("Version 1.8.1", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("PlayMaker 1.8.1 integrated the following add-ons and actions:\n"+
+            EditorGUILayout.HelpBox("\nPlayMaker 1.8.1 integrated the following add-ons and actions:\n"+
                                     "\n- Physics2D Add-on" +
                                     "\n- Mecanim Animator Add-on" +
                                     "\n- Vector2, Quaternion, and Trigonometry actions"+
                                     "\n\nThe new versions of these files are under \"Assets/PlayMaker/Actions\""+
                                     "\n\nIf you imported these add-ons, the old versions are likely under \"Assets/PlayMaker Custom Actions\". "+
-                                    "If you get errors from duplicate files after updating please delete the old files!", 
+                                    "If you get errors from duplicate files after updating please delete the old files!" +
+                                    "\n", 
                                     MessageType.Warning);
 
             GUILayout.Label("Unity 5 Upgrade Notes", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("If you run into problems updating a Unity 4.x project please check the Troubleshooting guide on the PlayMaker Wiki.", MessageType.Warning);
-            EditorGUILayout.HelpBox("Unity 5 removed component property shortcuts from GameObject. " +
+            EditorGUILayout.HelpBox(
+                "\nIf you run into problems updating a Unity 4.x project please check the Troubleshooting guide on the PlayMaker Wiki." +
+                "\n",
+                MessageType.Warning);
+            EditorGUILayout.HelpBox("\nUnity 5 removed component property shortcuts from GameObject. " +
                                     "\n\nThe Unity auto update process replaces these properties with GetComponent calls. " +
                                     "In many cases this is fine, but some third party actions and addons might need manual updating! " +
                                     "Please post on the PlayMaker forums and contact the original authors for help." +
@@ -440,9 +480,9 @@ namespace HutongGames.PlayMakerEditor
                                     "\n", MessageType.Warning);
 
             GUILayout.Label("Unity 4.6 Upgrade Notes", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Find support for the new Unity GUI online in our Addons page.", MessageType.Info);
-            EditorGUILayout.HelpBox("PlayMakerGUI is only needed if you use OnGUI Actions. " +
-                                    "If you don't use OnGUI actions un-check Auto-Add PlayMakerGUI in PlayMaker Preferences.", MessageType.Info);
+            EditorGUILayout.HelpBox("\nFind support for the new Unity GUI online in our Addons page.\n", MessageType.Info);
+            EditorGUILayout.HelpBox("\nPlayMakerGUI is only needed if you use OnGUI Actions. " +
+                                    "If you don't use OnGUI actions un-check Auto-Add PlayMakerGUI in PlayMaker Preferences.\n", MessageType.Info);
 
             EditorGUILayout.EndScrollView();
             //FsmEditorGUILayout.Divider();
@@ -587,7 +627,17 @@ namespace HutongGames.PlayMakerEditor
                                                         "\n\nNOTE: Projects saved with PlayMaker 1.8+ cannot be opened in older versions of PlayMaker!"))
             {
                 EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
-                ImportPackage(AssetDatabase.GUIDToAssetPath(AssetGUIDs.PlayMakerUnitypackage184));
+                ImportPackage(AssetDatabase.GUIDToAssetPath(AssetGUIDs.LatestInstall));
+            }
+        }
+
+        private static void InstallLatestStudent(object userData)
+        {
+            if (DisplayInstallDialog("Student Version " + InstallCurrentVersion, "The latest student version of PlayMaker." +
+                                                            "\n\nNOTE: The Student Version is limited to built in actions only."))
+            {
+                EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
+                ImportPackage(AssetDatabase.GUIDToAssetPath(AssetGUIDs.LatestStudentInstall));
             }
         }
 

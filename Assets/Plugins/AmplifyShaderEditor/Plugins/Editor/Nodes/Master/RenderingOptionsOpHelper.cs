@@ -23,6 +23,10 @@ namespace AmplifyShaderEditor
 		private readonly static GUIContent DisableBatchingContent = new GUIContent( " Disable Batching", "\nDisables objects to be batched and used with DrawCallBatching Default: False" );
 		private readonly static GUIContent IgnoreProjectorContent = new GUIContent( " Ignore Projector", "\nIf True then an object that uses this shader will not be affected by Projectors Default: False" );
 		private readonly static GUIContent ForceNoShadowCastingContent = new GUIContent( " Force No Shadow Casting", "\nIf True then an object that is rendered using this subshader will never cast shadows Default: False" );
+		private readonly static GUIContent EnableInstancingContent = new GUIContent( " Enable Instancing", "\nIf True enables instancing on shader independent of having instanced properties" );
+
+		[SerializeField]
+		private bool m_enableInstancing = false;
 
 		[SerializeField]
 		private bool m_lodCrossfade = false;
@@ -38,6 +42,7 @@ namespace AmplifyShaderEditor
 
 		[SerializeField]
 		private List<CodeGenerationData> m_codeGenerationDataList;
+
 		public RenderingOptionsOpHelper()
 		{
 			m_codeGenerationDataList = new List<CodeGenerationData>();
@@ -55,7 +60,7 @@ namespace AmplifyShaderEditor
 			m_codeGenerationDataList.Add( new CodeGenerationData( " Add Pass", "noforwardadd" ) );
 		}
 
-		public void Draw( UndoParentNode owner )
+		public void Draw( ParentNode owner )
 		{
 			bool value = EditorVariablesManager.ExpandedRenderingOptions.Value;
 			NodeUtils.DrawPropertyGroup( ref value, RenderingOptionsStr, () =>
@@ -69,6 +74,16 @@ namespace AmplifyShaderEditor
 				m_lodCrossfade = owner.EditorGUILayoutToggleLeft( LODCrossfadeContent, m_lodCrossfade );
 				m_ignoreProjector = owner.EditorGUILayoutToggleLeft( IgnoreProjectorContent, m_ignoreProjector );
 				m_forceNoShadowCasting = owner.EditorGUILayoutToggleLeft( ForceNoShadowCastingContent, m_forceNoShadowCasting );
+				if ( owner.ContainerGraph.IsInstancedShader )
+				{
+					GUI.enabled = false;
+					owner.EditorGUILayoutToggleLeft( EnableInstancingContent, true );
+					GUI.enabled = true;
+				}
+				else
+				{
+					m_enableInstancing = owner.EditorGUILayoutToggleLeft( EnableInstancingContent, m_enableInstancing );
+				}
 				m_disableBatching = ( DisableBatchingTagValues ) owner.EditorGUILayoutEnumPopup( DisableBatchingContent, m_disableBatching );
 			} );
 			EditorVariablesManager.ExpandedRenderingOptions.Value = value;
@@ -85,6 +100,13 @@ namespace AmplifyShaderEditor
 					OptionalParameters += m_codeGenerationDataList[ i ].Value + Constants.OptionalParametersSep;
 				}
 			}
+
+#if UNITY_2017_1_OR_NEWER
+		if( m_lodCrossfade )
+		{
+			OptionalParameters += Constants.LodCrossFadeOption2017 + Constants.OptionalParametersSep;
+		}
+#endif
 		}
 
 		public void ReadFromString( ref uint index, ref string[] nodeParams )
@@ -105,6 +127,11 @@ namespace AmplifyShaderEditor
 				m_ignoreProjector = Convert.ToBoolean( nodeParams[ index++ ] );
 				m_forceNoShadowCasting = Convert.ToBoolean( nodeParams[ index++ ] );
 			}
+
+			if ( UIUtils.CurrentShaderVersion() > 11002 )
+			{
+				m_enableInstancing = Convert.ToBoolean( nodeParams[ index++ ] );
+			}
 		}
 
 		public void WriteToString( ref string nodeInfo )
@@ -118,6 +145,7 @@ namespace AmplifyShaderEditor
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_disableBatching );
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_ignoreProjector );
 			IOUtils.AddFieldValueToString( ref nodeInfo, m_forceNoShadowCasting );
+			IOUtils.AddFieldValueToString( ref nodeInfo, m_enableInstancing );
 		}
 
 		public void Destroy()
@@ -125,6 +153,8 @@ namespace AmplifyShaderEditor
 			m_codeGenerationDataList.Clear();
 			m_codeGenerationDataList = null;
 		}
+
+		public bool EnableInstancing { get { return m_enableInstancing; } }
 
 		public bool LodCrossfade { get { return m_lodCrossfade; } }
 		public bool IgnoreProjectorValue { get { return m_ignoreProjector; } set{ m_ignoreProjector = value; } }

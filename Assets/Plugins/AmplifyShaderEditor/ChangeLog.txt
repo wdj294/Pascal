@@ -1,4 +1,236 @@
 Release Notes:
+v1.3.0 dev 01:
+* Fixes:
+    * Fixed issue on copy-pasting custom lighting nodes
+    * Fixed issue on null pointer reference on preview material when hitting play mode 
+
+* Improvements:
+    * Added upper left widgets into several nodes to change important properties directly on node body
+    * Added secondary title into several nodes to show its current state directly from node body
+
+v1.3.0 dev 03:
+* Improvements:
+    * Completely refactored and changed the graph and node rendering to use a semi-MVC model
+        * Improves the overall performance in several orders of magnitude
+    * Various small visual fixes and improvements
+    * Various changes to prevent most memory allocations heavily reducing GC
+    * Changed zoom and auto-pan to a smooth version and fixed its auto-boundaries
+        * This should make the editor feel more snappy and responsive
+    * New object pickers for 'Substance Sampler' and 'Triplanar Sampler'
+    * New outline for selected Wire nodes
+        * Now is easier to see in all situations
+    * Various previews were added,improved or fixed
+        * 'Texture Sampler' nodes now properly display default values
+    * Tweaked Input Type labels on 'Custom Expression' nodes to match shader variable type names
+    * Custom Lighting nodes now show internal data and have additional Normal options
+
+* Fixes:
+    * Fixed 'Texture Array' node issue when referencing an un-connected node
+    * Fixed UI issue on 'Custom Expression' qualifiers
+    * Fixed issue on shader name being overwritten when changing template
+    * Fixed issue on copy/cut/paste not being correctly caught by nodes search bar
+
+v1.3.0 dev 02:
+* Fixes:
+    * Fixed issue with Output Node Opacity Mask port not working with Custom Lighting 
+    * Fixed errors with some nodes inside shader function
+
+* Improvements:
+    * Improved internal file reader to be more robust in case of trying to load in-existent files
+    * Templates Manager can now also be initialized by its post processor in case of an ASE window is not open
+    * 'Blend Operations' node show current selected Blend Op on node body
+    * Locked Custom Light nodes from being used on Templates
+
+v1.3.0 dev 01:
+* New Features:
+    * Templates
+        * Create new shaders from already existing ones which serves as base/templates
+
+* Fixes:
+    * Fixed issue on ports internal data not showing on 'Append' node
+    * Fixed infinite loop on 'Texture Coordinates' and 'Texel Size' nodes
+
+v1.2.1 dev 02:
+* Fixes:
+    * Fixed issues with previews on 'Multiply' node
+    * Fixed incorrect tooltip on 'Face' node
+    * Fixed issue on 'Standard Surface Light' node where GI wasn't correctly picking normals
+    * Fixed 'Texture Sampler' node not correctly generating code when connected to relays or shader functions
+    * Fixed issue on 'Texel Size' and 'Texture Coordinate' nodes when referencing nodes not connected to Master Node
+
+* Improvements:
+    * 'Grab Screen Color' node now uses Unity default grab texture and allows overriding it like it's previous behavior
+
+v1.2.1 dev 01:
+* Improvements:
+   * Major refactor on all nodes categories and colors to improve consistency
+   * Added subtitle to 'Swizzle' and 'Component Mask' nodes to reflect their options
+   * Added configurable background color for 'Commentary' nodes
+
+* Fixes:
+    * Fixed issue with lightmaps when using the 'Standard Surface Light' node on Custom Lighting Light Model
+    * Fixed issue on overwriting default texture values on 'Texture Sample' node when loading values from material
+
+v1.2.0 dev 02:
+* Improvements:
+    * Adding Call Mode into 'Custom Expression' node
+        * On this mode all code written into the Code area will be directly injected into the shader code without being assigned to a local variable
+        * The result written on the output port will be what is directly connected to the first input port ( named In ) which is not taken into account by the code expression. The In/Out pair will act as a simple relay.
+
+v1.2.0 dev 01:
+* Fixes:
+    * Fixed issue on generating UI exception when sometimes iterating between Search Node Bar results
+    * Fixed issue on Output node size increasing infinitely with shader name
+    * Fixed issue on incorrect serialization on 'Texture Sampler' node
+
+* Improvements:
+    * Texture Object type nodes no longer auto-set the 'Texture Sampler' Normal Map option
+        * Normal Map option was renamed to Unpack Normal Map 
+        * A warning is shown if a Texture Object marked as normal map is connected to a 'Texture Sampler' node with the Unpack Normal Map options turned off
+
+v1.1.0 dev 13:
+* Fixes:
+    * Fixed issue with reading incorrect legacy port info into 'Lerp' node
+    * Fixed issue on cycling through deleted nodes when using the Nodes Search Bar
+    * Fixed issue with incorrectly moving nodes nested into multiple 'Commentary' nodes
+    * Fixed issue on Undo not registering internal node movement on 'Commentary' nodes
+    * Fixed issue when using 'Virtual Texture Object' node on Vertex ports
+    * Fixed issue with incorrectly moving selected nodes while resizing side menus
+
+* Improvements:
+    * 'Simple Contrast' node now always store its result on a local variable
+    * Greatly improved 'Commentary' node:
+        * You now can use box selection inside the node body
+        * You now can create Wire nodes by double clicking on a wire inside the node body
+        * You now select and drag the node via its header or by pressing anywhere on the node body having the Alt key down
+        * You now need to double click the node header to be able to modify its comment directly from there
+
+v1.1.0 dev 12:
+* Fixes:
+    * Fixed issue with creating legacy code for LOD Cross Fade on Unity v.2017 and above
+    * Fixed issue on 'Lerp' node not adjusting correctly when disconnecting input ports
+    * Fixing issue with node drag with snap 
+        * Now done by having both Ctrl+Shift pressed
+
+* Improvements:
+    * 'Blend Operations' node now automatically adapts to input ports
+    * Improving Search Bar focus behavior
+
+v1.1.0 dev 11:
+* Fixes:
+    * Fixed incorrect behavior on creating connections through Alt + Shift
+    * Fixed out of bounds exception caused by removing ports on shader functions
+    * Fixed issue with 'Triplanar Sampler' node not deleting correctly in some occasions
+    * Fixed ordering issues with Stencil Buffer example
+
+* Improvements:
+    * Overall improvements on nodes descriptions
+
+v1.1.0 dev 10:
+* Fixes:
+    * Fixed new Billboard Ignore Rotation option incorrectly ignoring game object translation
+
+v1.1.0 dev 09:
+* Fixes:
+    * Fixed issue with deprecated nodes warning message throwing an exception on recent Unity versions
+    * Fixed 'Texel Size' node issues on Shader Functions
+
+v1.1.0 dev 08:
+* New Features:
+    * New 'Keyword Switch' node
+
+* Improvements:
+    * Improved 'Lerp' and 'Clamp' nodes behavior
+    * Added new improved dynamic 'Append' node which adapts to inputs and deprecated the old one
+    * Billboards can now ignore object original rotation via its new Ignore Rotation toggle
+    * New Soft Light option was added to 'Blend Operations' node
+
+v1.1.0 dev 07:
+* New Features:
+    * Added support for Custom Subshader Tags on Output Node properties
+
+* Fixes:
+    * Fixed issue with having 'Custom Expression' nodes with similar port names
+
+* Improvements
+    * Small improvements on canvas zoom behavior 
+
+v1.1.0 dev 06:
+* New Features:
+    * Added new nodes:
+        * 'World Transform Params'
+        * 'Vertex Bitangent'
+        * 'Vertex Tangent Sign'
+
+* Improvements:
+    * Able to specify an HDR color on 'Color' node if the HDR attribute is set
+    * Added previews to nodes:
+        * Time
+        * Object Scale
+    * Improved how vertex data is being generated to prevent future issues
+
+* Fixes:
+    * Fixed incorrect order of instruction write on 'Texture Coordinates' node
+
+v1.1.0 dev 05:
+* New Features:
+    * New 'Standard Surface Light' node ( exclusive to Custom Lighting Light Model )
+
+* New Samples:
+    * Double Layer Custom Surface
+
+* Fixes:
+    * Fixed issue with pasting nodes not refreshing external references from original ones
+    * Fixed issue with generating helper local variable ids on several nodes which may lead to issues on shader functions
+    * Fixed issue on 'Depth Fade' node
+    * Fixed issue with not registering sampler dummies correctly when using 'Texture Coordinates' node with Tessellation
+    * Fixed issue on multi-tabs with breaking all tabs except the focused one when dragging wires
+
+* Improvements:
+    * Added previews to nodes:
+        *'World Space Camera Pos'
+        *'Object Space Light Dir'
+        *'World Space Light Dir'
+        *'Light Color'
+        *'Object To World'
+        *'World To Object'
+
+v1.1.0 dev 04:
+* Fixes:
+    * Fixed issue on 'Texture Coordinates' node generating wrong dummies on UV Sets different than 1
+    * Fixed issue on 'Register Local Var' node usage with shader functions
+
+* Improvements:
+    * Setting Enable Instancing option default value to false
+    * Adding Exact Conversion option into 'Gamma To Linear' and 'Linear To Gamma' nodes for more accurate results
+
+v1.1.0 dev 03:
+* Fixes:
+    * Fixed issue on 'Pi' node
+    * Fixed issue on 'Texture Coordinates' node not generating unique names when used on vertex body
+    * Fixed issue with incorrectly counting amount of 'Virtual Texture Object' nodes on graphs
+    * Fixed issue on 'Texture Array' drawers
+    * Fixed issue on 'Remap' node preview preventing division by zero
+
+* Improvements:
+    * 'Texture Array' node:
+        * Now work with shader functions 
+        * Added derivative option to 'Texture Array' node
+        * Minor tweak on tooltip text
+
+* New Features:
+    * New Community Node 'GlobalArray' submitted by Vincent van Brummen and created by Johann van Berkel
+    * Added new Enable Instancing toggle into Rendering Options to be able to activate instancing without having to use Property nodes
+
+v1.1.0 dev 02:
+* Improvements:
+    * 'Vertex TexCoord' and 'Swizzle' node types can be selected from node body
+
+* Fixes:
+    * Fixed issue with 'Grab Screen Color', 'Get Local Var' and 'Texture Sample' nodes loosing references inside Shader Functions
+    * Fixed issue on not correctly registering all Grab Passes from multiple 'Grab Screen Color' nodes
+    * Fixed small issue on 'Commentary' node not being able to focus on comment text field when created
+
 v1.1.0 dev 01:
 * Fixes:
     * Fixed issue with being able to open recently created shader multiple times
@@ -14,7 +246,7 @@ v1.0.0 dev 12:
     * Fixed lost reference when deleting 'Grab Screen Color' node
 
 v1.0.0 dev 11:
-* New features:
+* New Features:
     * Additional includes (.cginc) can now be used into an ASE shader via the Additional Includes sections on the Output node
         * Their contents can be accessed via the 'Custom Expression' node
     * Added Node Search bar to quickly find nodes on the canvas
@@ -45,7 +277,7 @@ v1.0.0 dev 10:
     * Fixed issue with temporary variable assignment Id on 'Texture Coordinates' node
 
 v1.0.0 dev 09:
-* New features:
+* New Features:
     * New 'Static Switch' node which allows creation of shader variants
 
 * Fixes:
@@ -60,7 +292,7 @@ v1.0.0 dev 09:
     * Added Local Var selector directly on 'Get Local Var' node body
 
 v1.0.0 dev 08:
-* New features:
+* New Features:
     * New Output node Rendering Options
         * Disable Batching
         * Ignore Projector
@@ -80,7 +312,7 @@ v1.0.0 dev 07:
     * Fixed issue for both normal input in indirect lighting nodes that were asking from normal in world space instead of tangent space
 
 v1.0.0 dev 06:
-* New features:
+* New Features:
     * Added LOD Cross Fade support for LOD groups ( located in the Output node Rendering Options tab )
 
 * Improvements:
@@ -128,7 +360,7 @@ v1.0.0 dev 04:
     * Adding help box into 'Virtual Texture Object' with additional info
 
 v1.0.0 dev 03:
-* New features:
+* New Features:
     * Custom Lighting 
         * New Nodes: ( can only be used on this light model )
             * Indirect Diffuse Light
@@ -167,7 +399,7 @@ v0.7.2 dev 08:
     * Fixed issue generating input ports instructions on 'Custom Expression' node
 
 v0.7.2 dev 07:
-* New features:
+* New Features:
     * Added support for multiple ASE windows opened simultaneously
 
 * New Samples:
@@ -189,7 +421,7 @@ v0.7.2 dev 07:
     * Fixed small issue with shader function nodes being stuck on selection when double clicking on them
 
 v0.7.2 dev 06:
-* New features:
+* New Features:
     * Added 'HSV To RGB' and 'RGB To HSV' nodes
 
 * Improvements:
@@ -243,7 +475,7 @@ v0.7.2 dev 02:
     * Texture Objects node family  can now be set as Globals
 
 v0.7.2 dev 01:
-* New features:
+* New Features:
     * Added Shader Functions
     * Added new 'Object Scale' node
 
@@ -284,7 +516,7 @@ v0.7.1 dev 02:
     * Dithering sample now works while Tessellation is active
 
 v0.7.1 dev 01:
-* New features:
+* New Features:
     * Alt + Node Drag to Auto-(dis)connect node on existing wire connection
 
 * Improvements:
@@ -296,7 +528,7 @@ v0.7.1 dev 01:
     * Fixed issue on horizontal scroll bar not appearing on Helper Window
 
 v0.7.0 dev 03:
-* New features:
+* New Features:
     * Added 'Face' node
     * Added 'Switch by Face' node
 
@@ -354,7 +586,7 @@ v0.6.1 dev 04:
     * Fixed small typo on Tessellation Shader Model warning message
 
 v0.6.1 dev 03:
-* New features:
+* New Features:
     * Adding Fallback shader picker on Master Node
     * Adding Shader LOD value modifier on Master Node
 
@@ -370,7 +602,7 @@ v0.6.1 dev 03:
     * Fixed issues on Live mode not catching node connections and creation correctly
 
 v0.6.1 dev 02:
-* New features:
+* New Features:
     * Added 'Triplanar Sampler' node
     * Added Vertex Output ( can now change from Relative/Local Vertex Offset to Absolute/Local Vertex Position )
     * Added Smear Sample
@@ -990,7 +1222,7 @@ v0.1.1 dev 001
 * Fixed Vector2 Append Node bug
 * Fixed Int to Float cast issues
 * Added Shader title area on top canvas to forbidden node interaction area
-* Adjusted Auto-Pan behaviour
+* Adjusted Auto-Pan behavior
 * Fixed issue with nodes infinite loop detection
 * Tweaked mouse detection inside main canvas
 * Fixed Queue Order typo when building shader

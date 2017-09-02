@@ -7,7 +7,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Normalize", "Vector", "Normalizes a vector", null, KeyCode.N )]
+	[NodeAttributes( "Normalize", "Vector Operators", "Normalizes a vector", null, KeyCode.N )]
 	public sealed class NormalizeNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

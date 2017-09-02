@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Transpose", "Matrix", "Transpose matrix of a matrix" )]
+	[NodeAttributes( "Transpose", "Matrix Operators", "Transpose matrix of a matrix" )]
 	public sealed class TransposeOpNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

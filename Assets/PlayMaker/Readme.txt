@@ -1,31 +1,37 @@
 ------------------------------------------------------
-Playmaker - Visual scripting for Unity
+PlayMaker - Visual Scripting for Unity
 ------------------------------------------------------
 
-Realize your creative vision without knowing how to program!
-
-PLEASE BACKUP PROJECTS BEFORE UPDATING PLAYMAKER!!
-
-NOTE: The Playmaker/Asset Store license is for a single user at a time. If multiple people use Playmaker, you need multiple licenses!
+NOTE: The PlayMaker/Asset Store license is for a single user at a time. If multiple people use PlayMaker, you need multiple licenses!
 
 ------------------------------------------------------
 INSTALLATION:
 ------------------------------------------------------
 
-To install PlayMaker simply import all files from the unitypackage.
+PLEASE BACKUP PROJECTS BEFORE IMPORTING OR UPDATING PLAYMAKER!!
 
-Sample Scenes are now a separate download at www.hutonggames.com/tutorials.html
+Import the latest version of PlayMaker from the Asset Store or Hutong Games Store.
+This imports the PlayMaker Installer and various update tools.
+
+To install PlayMaker select Install PlayMaker from the PlayMaker Welcome Screen.
+The Welcome Screen should launch automatically, but it can also be found here:
+Unity Main Menu > PlayMaker.
+
+If the project has errors the Welcome Screen may not be available. Ideally, you should fix errors in the project first, but you can also manually import the PlayMaker unitypackage here: Assets\PlayMaker\Editor\Install\
+
+Download Sample Scenes at www.hutonggames.com/tutorials.html
 
 NOTE: IMPORT SAMPLE SCENES INTO A NEW PROJECT TO AVOID OVERWRITING YOUR PROJECT FILES!!
 
 ------------------------------------------------------
-UPGRADE NOTES:
+UPDATE NOTES:
 ------------------------------------------------------
 
-To Upgrade:
+To Update PlayMaker:
 
-- Backup your project.
-- Import the latest playmaker.unitypackage.
+- Backup your project and close the PlayMaker editor.
+- Import the latest version of PlayMaker from the Asset Store.
+- Select Install PlayMaker from the PlayMaker Welcome Screen (see above)
 - Restart Unity.
 
 Obsolete Actions: 

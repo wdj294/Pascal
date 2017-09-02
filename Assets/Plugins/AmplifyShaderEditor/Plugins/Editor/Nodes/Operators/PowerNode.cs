@@ -7,7 +7,7 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Power", "Operators", "Base to the Exp-th power of scalars and vectors", null, KeyCode.E )]
+	[NodeAttributes( "Power", "Math Operators", "Base to the Exp-th power of scalars and vectors", null, KeyCode.E )]
 	public sealed class PowerNode : ParentNode
 	{
 		protected override void CommonInit( int uniqueId )

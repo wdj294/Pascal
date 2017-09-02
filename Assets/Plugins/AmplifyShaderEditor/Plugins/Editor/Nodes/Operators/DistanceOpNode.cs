@@ -5,7 +5,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Distance", "Operators", "Euclidean distance between two points" )]
+	[NodeAttributes( "Distance", "Math Operators", "Euclidean distance between two points" )]
 	public sealed class DistanceOpNode : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

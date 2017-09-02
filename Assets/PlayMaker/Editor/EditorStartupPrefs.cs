@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Reflection;
 using UnityEngine;
 using UnityEditor;
 
@@ -74,11 +76,16 @@ namespace HutongGames.PlayMakerEditor
             }
         }
 
+        public static bool AutoUpdateProject
+        {
+            get { return Instance.lastAutoUpdateSignature != GetProjectSignature(); }
+        }
 
         [SerializeField] private string welcomeScreenVersion;
         [SerializeField] private string playmakerVersion;
         [SerializeField] private bool showWelcomeScreen = true;
         [SerializeField] private bool showUpgradeGuide;
+        [SerializeField] private string lastAutoUpdateSignature;
 
         public static void ResetForExport()
         {
@@ -106,6 +113,24 @@ namespace HutongGames.PlayMakerEditor
                 EditorUtility.CopySerialized(copy, instance);
             }
             EditorUtility.SetDirty(Instance);
+        }
+
+        public static void ProjectUpdated(bool state)
+        {
+            Instance.lastAutoUpdateSignature = state ? GetProjectSignature() : string.Empty;
+        }
+
+        // Get a unique signature for this project to avoid repeatedly auto updating the same project
+        // NOTE: might be a better way to do this. Currently doesn't catch project changes like imports...
+        private static string GetProjectSignature()
+        {
+            return Application.unityVersion + "__" + Application.dataPath + "__" + GetInformationalVersion(Assembly.GetExecutingAssembly()); ;
+        }
+
+        public static string GetInformationalVersion(Assembly assembly)
+        {
+            if (assembly == null) return "PlayMaker_SourceCode_Version";
+            return FileVersionInfo.GetVersionInfo(assembly.Location).ProductVersion;
         }
 
     }

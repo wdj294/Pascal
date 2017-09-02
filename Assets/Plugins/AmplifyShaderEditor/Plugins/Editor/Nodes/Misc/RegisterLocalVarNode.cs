@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Register Local Var", "Misc", "Forces a local variable to be written" )]
+	[NodeAttributes( "Register Local Var", "Miscellaneous", "Forces a local variable to be written with the given name. Can then be fetched at any place with a <b>Get Local Var</b> node." )]
 	public sealed class RegisterLocalVarNode : SignalGeneratorNode
 	{
 		private const string LocalDefaultNameStr = "myVarName";
@@ -81,7 +81,7 @@ namespace AmplifyShaderEditor
 				m_variableName = UIUtils.RemoveInvalidCharacters( m_variableName );
 				if ( string.IsNullOrEmpty( m_variableName ) )
 				{
-					m_variableName = LocalDefaultNameStr + UniqueId;
+					m_variableName = LocalDefaultNameStr + OutputId;
 				}
 
 				if ( UIUtils.IsLocalvariableNameAvailable( m_variableName ) )
@@ -130,11 +130,11 @@ namespace AmplifyShaderEditor
 		{
 			if ( m_outputPorts[ 0 ].IsLocalValue )
 			{
-				return m_variableName;
+				return m_outputPorts[ 0 ].LocalValue;
 			}
 			string result = m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector );
-			RegisterLocalVariable( 0, result, ref dataCollector, m_variableName );
-			return m_variableName;
+			RegisterLocalVariable( 0, result, ref dataCollector, m_variableName + OutputId );
+			return m_outputPorts[ 0 ].LocalValue;
 		}
 
 		public override void ReadFromString( ref string[] nodeParams )
@@ -181,7 +181,7 @@ namespace AmplifyShaderEditor
 				nodeData.OrderIndex -= 1;
 			}
 
-			base.PropagateNodeData( nodeData , ref dataCollector );
+			base.PropagateNodeData( nodeData, ref dataCollector );
 		}
 
 		public override void ResetNodeData()

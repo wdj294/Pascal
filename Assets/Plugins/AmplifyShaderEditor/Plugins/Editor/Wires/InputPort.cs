@@ -404,6 +404,7 @@ namespace AmplifyShaderEditor
 				{
 					m_internalData += ".0";
 				}
+				m_previewInternalFloat = value;
 			}
 			get
 			{
@@ -422,6 +423,12 @@ namespace AmplifyShaderEditor
 				return data;
 			}
 		}
+
+		private float m_previewInternalFloat = 0;
+		private Vector2 m_previewInternalVec2 = Vector2.zero;
+		private Vector3 m_previewInternalVec3 = Vector3.zero;
+		private Vector4 m_previewInternalVec4 = Vector4.zero;
+		private Color m_previewInternalColor = Color.clear;
 
 		public int IntInternalData
 		{
@@ -446,7 +453,7 @@ namespace AmplifyShaderEditor
 
 		public Vector2 Vector2InternalData
 		{
-			set { InternalData = value.x.ToString() + IOUtils.VECTOR_SEPARATOR + value.y.ToString(); }
+			set { InternalData = value.x.ToString() + IOUtils.VECTOR_SEPARATOR + value.y.ToString(); m_previewInternalVec2 = value; }
 			get
 			{
 				Vector2 data = new Vector2();
@@ -484,6 +491,8 @@ namespace AmplifyShaderEditor
 				InternalData = value.x.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.y.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.z.ToString();
+
+				m_previewInternalVec3 = value;
 			}
 			get
 			{
@@ -523,6 +532,7 @@ namespace AmplifyShaderEditor
 								value.y.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.z.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.w.ToString();
+				m_previewInternalVec4 = value;
 			}
 			get
 			{
@@ -563,6 +573,7 @@ namespace AmplifyShaderEditor
 								value.g.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.b.ToString() + IOUtils.VECTOR_SEPARATOR +
 								value.a.ToString();
+				m_previewInternalColor = value;
 			}
 			get
 			{
@@ -688,6 +699,7 @@ namespace AmplifyShaderEditor
 			set { m_dataName = value; }
 		}
 
+		public bool IsFragment { get { return m_category == MasterNodePortCategory.Fragment || m_category == MasterNodePortCategory.Debug; } }
 		public MasterNodePortCategory Category
 		{
 			set { m_category = value; }
@@ -731,19 +743,28 @@ namespace AmplifyShaderEditor
 
 		public void SetPreviewInputTexture()
 		{
-			if( string.IsNullOrEmpty( m_propertyName) )
+			if ( m_propertyNameInt != PortId || string.IsNullOrEmpty( m_propertyName ) )
+			{
+				m_propertyNameInt = PortId;
 				m_propertyName = "_" + Convert.ToChar( PortId + 65 );
+				m_cachedPropertyId = Shader.PropertyToID( m_propertyName );
+			}
 
 			if ( m_cachedPropertyId == -1 )
 				m_cachedPropertyId = Shader.PropertyToID( m_propertyName );
 
-			UIUtils.GetNode( NodeId ).PreviewMaterial.SetTexture( m_cachedPropertyId, GetOutputConnection( 0 ).OutputPreviewTexture );
+			if ( ( object ) m_node == null )
+				m_node = UIUtils.GetNode( NodeId );
+			m_node.PreviewMaterial.SetTexture( m_cachedPropertyId, GetOutputConnection( 0 ).OutputPreviewTexture );
 		}
 
 		public void SetPreviewInputValue()
 		{
 			if ( m_inputPreviewTexture == null )
+			{
 				m_inputPreviewTexture = new RenderTexture( 128, 128, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear );
+				m_inputPreviewTexture.wrapMode = TextureWrapMode.Repeat;
+			}
 
 			switch ( DataType )
 			{
@@ -755,7 +776,7 @@ namespace AmplifyShaderEditor
 						InputPreviewMaterial.shader = m_inputPreviewShader;
 					}
 
-					float f = FloatInternalData;
+					float f = m_previewInternalFloat;// FloatInternalData;
 					InputPreviewMaterial.SetFloat( CachedFloatPropertyID, f );
 				}
 				break;
@@ -767,7 +788,7 @@ namespace AmplifyShaderEditor
 						InputPreviewMaterial.shader = m_inputPreviewShader;
 					}
 
-					Vector2 v2 = Vector2InternalData;
+					Vector2 v2 = m_previewInternalVec2;// Vector2InternalData;
 					InputPreviewMaterial.SetVector( CachedVectorPropertyID, new Vector4( v2.x, v2.y, 0, 0 ) );
 				}
 				break;
@@ -779,7 +800,7 @@ namespace AmplifyShaderEditor
 						InputPreviewMaterial.shader = m_inputPreviewShader;
 					}
 
-					Vector3 v3 = Vector3InternalData;
+					Vector3 v3 = m_previewInternalVec3;// Vector3InternalData;
 					InputPreviewMaterial.SetVector( CachedVectorPropertyID, new Vector4( v3.x, v3.y, v3.z, 0 ) );
 				}
 				break;
@@ -791,7 +812,7 @@ namespace AmplifyShaderEditor
 						InputPreviewMaterial.shader = m_inputPreviewShader;
 					}
 
-					InputPreviewMaterial.SetVector( CachedVectorPropertyID, Vector4InternalData );
+					InputPreviewMaterial.SetVector( CachedVectorPropertyID, m_previewInternalVec4/*Vector4InternalData*/ );
 				}
 				break;
 				case WirePortDataType.COLOR:
@@ -802,7 +823,7 @@ namespace AmplifyShaderEditor
 						InputPreviewMaterial.shader = m_inputPreviewShader;
 					}
 
-					InputPreviewMaterial.SetColor( CachedColorPropertyID, ColorInternalData );
+					InputPreviewMaterial.SetColor( CachedColorPropertyID, m_previewInternalColor/*ColorInternalData*/ );
 				}
 				break;
 				case WirePortDataType.FLOAT3x3:
@@ -835,14 +856,24 @@ namespace AmplifyShaderEditor
 			Graphics.Blit( null, m_inputPreviewTexture, InputPreviewMaterial );
 			RenderTexture.active = temp;
 
-			if ( string.IsNullOrEmpty( m_propertyName ) )
+
+			if ( m_propertyNameInt != PortId || string.IsNullOrEmpty( m_propertyName ) )
+			{
+				m_propertyNameInt = PortId;
 				m_propertyName = "_" + Convert.ToChar( PortId + 65 );
+				m_cachedPropertyId = Shader.PropertyToID( m_propertyName );
+			}
 
 			if ( m_cachedPropertyId == -1 )
 				m_cachedPropertyId = Shader.PropertyToID( m_propertyName );
 
-			UIUtils.GetNode( NodeId ).PreviewMaterial.SetTexture( m_propertyName, m_inputPreviewTexture );
+			if ( ( object ) m_node == null )
+				m_node = UIUtils.GetNode( NodeId );
+			m_node.PreviewMaterial.SetTexture( m_propertyName, m_inputPreviewTexture );
 		}
+
+		private int m_propertyNameInt = 0;
+		private ParentNode m_node = null;
 		
 		public override void Destroy()
 		{
@@ -860,6 +891,8 @@ namespace AmplifyShaderEditor
 			m_inputPreviewMaterial = null;
 
 			m_inputPreviewShader = null;
+
+			m_node = null;
 		}
 
 		public Shader InputPreviewShader

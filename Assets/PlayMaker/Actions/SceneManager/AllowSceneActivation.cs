@@ -9,7 +9,8 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Scene)]
-	[Tooltip("Create an empty new scene with the given name additively. The path of the new scene will be empty")]
+	[Tooltip("Allow scenes to be activated as soon as it is ready.")]
+	[Obsolete("Use LoadSceneAsynch instead")]
 	public class AllowSceneActivation : FsmStateAction
 	{
 		[RequiredField]

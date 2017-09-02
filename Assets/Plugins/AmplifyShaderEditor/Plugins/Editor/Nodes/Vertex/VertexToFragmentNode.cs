@@ -9,7 +9,7 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[System.Serializable]
-	[NodeAttributes( "Vertex To Fragment", "Vertex Data", "Pass vertex data to the pixel shader", null, KeyCode.None, true, false, null, null, true )]
+	[NodeAttributes( "Vertex To Fragment", "Miscellaneous", "Pass vertex data to the pixel shader", null, KeyCode.None, true, false, null, null, true )]
 	public sealed class VertexToFragmentNode : SingleInputOp
 	{
 
@@ -31,7 +31,7 @@ namespace AmplifyShaderEditor
 
 			string tpName = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, m_inputPorts[ 0 ].DataType );
 
-			string interpName = "data" + UniqueId;
+			string interpName = "data" + OutputId;
 			dataCollector.AddToInput( UniqueId, tpName + " " + interpName, true );
 
 			MasterNodePortCategory portCategory = dataCollector.PortCategory;

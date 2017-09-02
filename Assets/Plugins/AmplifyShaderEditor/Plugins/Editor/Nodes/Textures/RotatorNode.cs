@@ -11,7 +11,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Rotator", "Textures", "Rotates UVs with time but can also be used to rotate other Vector2 values", null, KeyCode.None, true, false, null, null, true )]
+	[NodeAttributes( "Rotator", "UV Coordinates", "Rotates UVs with time but can also be used to rotate other Vector2 values", null, KeyCode.None, true, false, null, null, true )]
 	public sealed class RotatorNode : ParentNode
 	{
 		private int m_cachedUsingEditorId = -1;
@@ -66,13 +66,13 @@ namespace AmplifyShaderEditor
 
 			result += uv;
 
-			string cosVar = "cos" + UniqueId;
-			string sinVar = "sin" + UniqueId;
+			string cosVar = "cos" + OutputId;
+			string sinVar = "sin" + OutputId;
 			dataCollector.AddLocalVariable( UniqueId, "float " + cosVar + " = cos( "+time+" );");
 			dataCollector.AddLocalVariable( UniqueId, "float " + sinVar + " = sin( "+time+" );");
 
 
-			string rotatorVar = "rotator" + UniqueId;
+			string rotatorVar = "rotator" + OutputId;
 			dataCollector.AddLocalVariable( UniqueId, "float2 " + rotatorVar + " = mul(" + result + " - "+anchor+", float2x2("+cosVar+",-"+sinVar+","+sinVar+","+cosVar+")) + "+anchor+";" );
 
 			return GetOutputVectorItem( 0, outputId, rotatorVar );

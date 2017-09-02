@@ -152,7 +152,10 @@ namespace AmplifyShaderEditor
 			get
 			{
 				if ( m_outputPreview == null )
+				{
 					m_outputPreview = new RenderTexture( 128, 128, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear );
+					m_outputPreview.wrapMode = TextureWrapMode.Repeat;
+				}
 
 				return m_outputPreview;
 			}

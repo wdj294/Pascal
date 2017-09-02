@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Inverse", "Matrix", "Inverse matrix of a matrix" )]
+	[NodeAttributes( "Inverse", "Matrix Operators", "Inverse matrix of a matrix" )]
 	public sealed class InverseOpNode : SingleInputOp
 	{
 		private string Inverse4x4Header = "Inverse4x4( {0} )";
@@ -126,16 +126,22 @@ namespace AmplifyShaderEditor
 				{
 					//Hack to be used util indent is properly used
 					int currIndent = UIUtils.ShaderIndentLevel;
-					UIUtils.ShaderIndentLevel = 1;
-
-					UIUtils.ShaderIndentLevel++;
+					if ( dataCollector.IsTemplate )
+					{
+						UIUtils.ShaderIndentLevel = 0;
+					}
+					else
+					{
+						UIUtils.ShaderIndentLevel = 1;
+						UIUtils.ShaderIndentLevel++;
+					}
 					string finalFunction = string.Empty;
 					for ( int i = 0; i < Inverse3x3Function.Length; i++ )
 					{
 						finalFunction += UIUtils.ShaderIndentTabs + ( Inverse3x3FunctionFlags[ i ] ? string.Format( Inverse3x3Function[ i ], precisionString ) : Inverse3x3Function[ i ] );
 					}
 
-					UIUtils.ShaderIndentLevel--;
+					
 					UIUtils.ShaderIndentLevel = currIndent;
 
 					dataCollector.AddFunction( Inverse3x3Header, finalFunction );
@@ -149,16 +155,24 @@ namespace AmplifyShaderEditor
 				{
 					//Hack to be used util indent is properly used
 					int currIndent = UIUtils.ShaderIndentLevel;
-					UIUtils.ShaderIndentLevel = 1;
 
-					UIUtils.ShaderIndentLevel++;
+					if ( dataCollector.IsTemplate )
+					{
+						UIUtils.ShaderIndentLevel = 0;
+					}
+					else
+					{
+						UIUtils.ShaderIndentLevel = 1;
+						UIUtils.ShaderIndentLevel++;
+					}
+
 					string finalFunction = string.Empty;
 					for ( int i = 0; i < Inverse4x4Function.Length; i++ )
 					{
 						finalFunction += UIUtils.ShaderIndentTabs + ( Inverse4x4FunctionFlags[ i ] ? string.Format( Inverse4x4Function[ i ], precisionString ) : Inverse4x4Function[ i ] );
 					}
 
-					UIUtils.ShaderIndentLevel--;
+					
 					UIUtils.ShaderIndentLevel = currIndent;
 
 					dataCollector.AddFunction( Inverse4x4Header, finalFunction );

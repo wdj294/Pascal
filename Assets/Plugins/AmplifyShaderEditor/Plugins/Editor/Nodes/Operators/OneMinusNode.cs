@@ -7,7 +7,7 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "One Minus", "Operators", "1 - input value", null, KeyCode.O )]
+	[NodeAttributes( "One Minus", "Math Operators", "1 - input value", null, KeyCode.O )]
 	public sealed class OneMinusNode : ParentNode
 	{
 		protected override void CommonInit( int uniqueId )

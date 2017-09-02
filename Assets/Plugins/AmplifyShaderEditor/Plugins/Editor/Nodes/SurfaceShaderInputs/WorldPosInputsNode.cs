@@ -7,18 +7,9 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[System.Serializable]
-	[NodeAttributes( "World Position", "Surface Standard Inputs", "World space position" )]
+	[NodeAttributes( "World Position", "Surface Data", "World space position" )]
 	public sealed class WorldPosInputsNode : SurfaceShaderINParentNode
 	{
-		//[SerializeField]
-		//private bool m_addInstruction = false;
-
-		//public override void Reset()
-		//{
-		//	base.Reset();
-		//	m_addInstruction = true;
-		//}
-
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -30,6 +21,12 @@ namespace AmplifyShaderEditor
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
+			if ( dataCollector.IsTemplate )
+			{
+				string varName = dataCollector.TemplateDataCollectorInstance.GetWorldPos();
+				return GetOutputVectorItem( 0, outputId, varName );
+			}
+
 			if ( dataCollector.PortCategory == MasterNodePortCategory.Fragment || dataCollector.PortCategory == MasterNodePortCategory.Debug )
 				base.GenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
 

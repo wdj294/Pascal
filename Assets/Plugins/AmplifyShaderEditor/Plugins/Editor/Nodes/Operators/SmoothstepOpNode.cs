@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Smoothstep", "Operators", "Interpolate smoothly between two input values based on a third" )]
+	[NodeAttributes( "Smoothstep", "Math Operators", "Interpolate smoothly between two input values based on a third" )]
 	public sealed class SmoothstepOpNode : ParentNode
 	{
 

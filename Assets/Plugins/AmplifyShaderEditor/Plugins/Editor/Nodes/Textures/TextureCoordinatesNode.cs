@@ -9,14 +9,14 @@ using System.Collections.Generic;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Texture Coordinates", "Surface Standard Inputs", "Texture UV coordinates set", null, KeyCode.U )]
+	[NodeAttributes( "Texture Coordinates", "UV Coordinates", "Texture UV coordinates set, if <b>Tex</b> is connected to a texture object it will use that texture scale factors, otherwise uses <b>Tilling</b> and <b>Offset</b> port values", null, KeyCode.U )]
 	public sealed class TextureCoordinatesNode : ParentNode
 	{
 
-		private const string DummyPropertyDec = "[HideInInspector] _DummyTex( \"\", 2D ) = \"white\"";
-		private const string DummyUniformDec = "uniform sampler2D _DummyTex;";
-		private const string DummyTexCoordDef = "uv{0}_DummyTex";
-		private const string DummyTexCoordSurfDef = "float2 texCoordDummy{0} = {1}.uv{2}_DummyTex*{3} + {4};";
+		private const string DummyPropertyDec = "[HideInInspector] _DummyTex{0}( \"\", 2D ) = \"white\"";
+		private const string DummyUniformDec = "uniform sampler2D _DummyTex{0};";
+		private const string DummyTexCoordDef = "uv{0}_DummyTex{0}";
+		private const string DummyTexCoordSurfDef = "float2 texCoordDummy{0} = {1}.uv{2}_DummyTex{2}*{3} + {4};";
 		private const string DummyTexCoordSurfVar = "texCoordDummy{0}";
 
 		private readonly string[] Dummy = { string.Empty };
@@ -46,7 +46,6 @@ namespace AmplifyShaderEditor
 		[SerializeField]
 		private TexturePropertyNode m_inputReferenceNode = null;
 
-		private bool m_forceNodeUpdate = false;
 		private TexturePropertyNode m_referenceNode = null;
 
 		private InputPort m_texPort = null;
@@ -228,27 +227,6 @@ namespace AmplifyShaderEditor
 		public override void Draw( DrawInfo drawInfo )
 		{
 			base.Draw( drawInfo );
-
-			if ( m_forceNodeUpdate )
-			{
-				m_forceNodeUpdate = false;
-				if ( UIUtils.CurrentShaderVersion() > 2404 )
-				{
-					m_referenceNode = UIUtils.GetNode( m_referenceNodeId ) as TexturePropertyNode;
-					m_referenceArrayId = UIUtils.GetTexturePropertyNodeRegisterId( m_referenceNodeId );
-				}
-				else
-				{
-					m_referenceNode = UIUtils.GetTexturePropertyNode( m_referenceArrayId );
-					if ( m_referenceNode != null )
-					{
-						m_referenceNodeId = m_referenceNode.UniqueId;
-					}
-				}
-				UpdateTitle();
-				UpdatePorts();
-			}
-
 			CheckReference();
 		}
 
@@ -297,8 +275,6 @@ namespace AmplifyShaderEditor
 				{
 					m_referenceArrayId = Convert.ToInt32( GetCurrentParam( ref nodeParams ) );
 				}
-
-				m_forceNodeUpdate = true;
 			}
 
 			if ( UIUtils.CurrentShaderVersion() > 5001 )
@@ -308,11 +284,35 @@ namespace AmplifyShaderEditor
 			}
 		}
 
+
+		public override void RefreshExternalReferences()
+		{
+			base.RefreshExternalReferences();
+			if ( UIUtils.CurrentShaderVersion() > 2402 )
+			{
+				if ( UIUtils.CurrentShaderVersion() > 2404 )
+				{
+					m_referenceNode = UIUtils.GetNode( m_referenceNodeId ) as TexturePropertyNode;
+					m_referenceArrayId = UIUtils.GetTexturePropertyNodeRegisterId( m_referenceNodeId );
+				}
+				else
+				{
+					m_referenceNode = UIUtils.GetTexturePropertyNode( m_referenceArrayId );
+					if ( m_referenceNode != null )
+					{
+						m_referenceNodeId = m_referenceNode.UniqueId;
+					}
+				}
+				UpdateTitle();
+				UpdatePorts();
+			}
+		}
+
 		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
 			if ( dataCollector != null && dataCollector.TesselationActive )
 			{
-				base.PropagateNodeData( nodeData , ref dataCollector);
+				base.PropagateNodeData( nodeData, ref dataCollector );
 				return;
 			}
 
@@ -332,7 +332,7 @@ namespace AmplifyShaderEditor
 				if ( m_inputPorts[ i ].IsConnected )
 				{
 					//m_inputPorts[ i ].GetOutputNode().PropagateNodeCategory( category );
-					m_inputPorts[ i ].GetOutputNode().PropagateNodeData( nodeData , ref dataCollector );
+					m_inputPorts[ i ].GetOutputNode().PropagateNodeData( nodeData, ref dataCollector );
 				}
 			}
 		}
@@ -377,6 +377,50 @@ namespace AmplifyShaderEditor
 			if ( m_texPort.IsConnected )
 				m_texPort.GeneratePortInstructions( ref dataCollector );
 
+			if( m_referenceArrayId > -1 )
+			{
+				TexturePropertyNode temp = UIUtils.GetTexturePropertyNode( m_referenceArrayId );
+				if ( temp != null )
+				{
+					temp.BaseGenerateShaderForOutput( outputId, ref dataCollector, ignoreLocalVar );
+				}
+			}
+//TEMPLATES
+			if ( dataCollector.MasterNodeCategory == AvailableShaderTypes.Template )
+			{
+				if ( m_outputPorts[ 0 ].IsLocalValue )
+					return GetOutputVectorItem( 0, outputId, m_outputPorts[ 0 ].LocalValue );
+
+				string uvName = string.Empty;
+				if ( dataCollector.TemplateDataCollectorInstance.HasUV( m_textureCoordChannel ) )
+				{
+					uvName = dataCollector.TemplateDataCollectorInstance.GetUVName( m_textureCoordChannel );
+				}
+				else
+				{
+					uvName = dataCollector.TemplateDataCollectorInstance.RegisterUV( m_textureCoordChannel );
+					//string uvName = TemplateHelperFunctions.GenerateTextureSemantic( ref dataCollector, m_textureCoordChannel );
+					//uvName = ( dataCollector.IsFragmentCategory ? Constants.InputVarStr : Constants.VertexShaderInputStr ) + "." + uvName;
+				}
+				string currPropertyName = GetValidPropertyName();
+				if ( !string.IsNullOrEmpty( currPropertyName ) )
+				{
+					string finalTexCoordName = "uv" + currPropertyName;
+					string dummyPropertyTexcoords = currPropertyName + "_ST";
+					dataCollector.AddToUniforms(  UniqueId, "float4", dummyPropertyTexcoords );
+					RegisterLocalVariable( 0, string.Format( Constants.TilingOffsetFormat, uvName, dummyPropertyTexcoords+".xy", dummyPropertyTexcoords+".zw" ), ref dataCollector, finalTexCoordName );
+				}
+				else
+				{
+					string finalTexCoordName = "uv" + OutputId;
+					string tiling = m_tilingPort.GeneratePortInstructions( ref dataCollector );
+					string offset = m_offsetPort.GeneratePortInstructions( ref dataCollector );
+					RegisterLocalVariable( 0, string.Format( Constants.TilingOffsetFormat, uvName, tiling, offset ), ref dataCollector, finalTexCoordName );
+				}
+				return GetOutputVectorItem( 0, outputId, m_outputPorts[ 0 ].LocalValue );
+			}
+
+			//SURFACE
 			string propertyName = GetValidPropertyName();
 			if ( !string.IsNullOrEmpty( propertyName ) /*m_referenceArrayId > -1*/ )
 			{
@@ -392,12 +436,13 @@ namespace AmplifyShaderEditor
 
 				if ( isVertex )
 				{
-					uvName = IOUtils.GetUVChannelName( propertyName, coordSet );
+					uvName = IOUtils.GetUVChannelName( propertyName, coordSet ) + m_texcoordSize.ToString() + coordSet.ToString();
 					string vertexInput = Constants.VertexShaderInputStr + ".texcoord";
 					if ( coordSet > 0 )
 					{
 						vertexInput += coordSet.ToString();
 					}
+
 					dataCollector.AddToVertexLocalVariables( UniqueId, "float" + m_texcoordSize + " " + uvName + " = " + vertexInput + ";" );
 					dataCollector.AddToVertexLocalVariables( UniqueId, uvName + ".xy = " + vertexInput + ".xy * " + propertyName + "_ST.xy + " + propertyName + "_ST.zw;" );
 				}
@@ -484,7 +529,7 @@ namespace AmplifyShaderEditor
 
 				if ( tessVertexMode )
 				{
-					dataCollector.AddVertexInstruction( vertexUV + " = " + vertexUV + " * " + tiling + " + " + offset, UniqueId );
+					dataCollector.AddToVertexLocalVariables(UniqueId, vertexUV + " = " + vertexUV + " * " + tiling + " + " + offset+";");
 					m_surfaceTexcoordName = Constants.VertexShaderInputStr + "." + IOUtils.GetVertexUVChannelName( m_textureCoordChannel ) + ".xy";
 				}
 				else
@@ -493,14 +538,16 @@ namespace AmplifyShaderEditor
 					{
 						if ( isVertex )
 						{
-							dataCollector.AddVertexInstruction( vertexUV + " = " + vertexUV + " * " + tiling + " + " + offset, UniqueId );
+							dataCollector.AddToVertexLocalVariables( UniqueId, vertexUV + " = " + vertexUV + " * " + tiling + " + " + offset+";");
 							m_surfaceTexcoordName = Constants.VertexShaderOutputStr + "." + texcoordName;
 						}
 						else
 						{
-							dataCollector.AddToProperties( UniqueId, DummyPropertyDec + " {}", -1 );
-							dataCollector.AddToUniforms( UniqueId, DummyUniformDec );
 							string texCoordPrefix = ( m_textureCoordChannel == 0 ) ? string.Empty : ( m_textureCoordChannel + 1 ).ToString();
+
+							dataCollector.AddToProperties( UniqueId, string.Format( DummyPropertyDec, texCoordPrefix ) + " {}", -1 );
+							dataCollector.AddToUniforms( UniqueId, string.Format( DummyUniformDec, texCoordPrefix ) );
+
 							dataCollector.AddToInput( UniqueId, "float2 " + string.Format( DummyTexCoordDef, texCoordPrefix ), true );
 							dataCollector.AddToSpecialLocalVariables( UniqueId, string.Format( DummyTexCoordSurfDef, OutputId, Constants.InputVarStr, texCoordPrefix, tiling, offset ) );
 							m_surfaceTexcoordName = string.Format( DummyTexCoordSurfVar, OutputId );
@@ -508,7 +555,7 @@ namespace AmplifyShaderEditor
 					}
 					else
 					{
-						dataCollector.AddVertexInstruction( Constants.VertexShaderOutputStr + "." + texcoordName + ".xy = " + vertexUV + " * " + tiling + " + " + offset, UniqueId );
+						dataCollector.AddToVertexLocalVariables(UniqueId, Constants.VertexShaderOutputStr + "." + texcoordName + ".xy = " + vertexUV + " * " + tiling + " + " + offset +";");
 						m_surfaceTexcoordName = ( isVertex ? Constants.VertexShaderOutputStr : Constants.InputVarStr ) + "." + texcoordName;
 					}
 				}
@@ -526,9 +573,12 @@ namespace AmplifyShaderEditor
 			string tiling = m_tilingPort.GenerateShaderForOutput( ref dataCollector, WirePortDataType.FLOAT2, false, true );
 			string offset = m_offsetPort.GenerateShaderForOutput( ref dataCollector, WirePortDataType.FLOAT2, false, true );
 
-			dataCollector.AddToProperties( UniqueId, DummyPropertyDec + " {}", -1 );
-			dataCollector.AddToUniforms( UniqueId, DummyUniformDec );
 			string texCoordPrefix = ( m_textureCoordChannel == 0 ) ? string.Empty : ( m_textureCoordChannel + 1 ).ToString();
+
+
+			dataCollector.AddToProperties( UniqueId, string.Format( DummyPropertyDec, texCoordPrefix ) + " {}", -1 );
+			dataCollector.AddToUniforms( UniqueId, string.Format( DummyUniformDec, texCoordPrefix ) );
+
 			dataCollector.AddToInput( UniqueId, "float2 " + string.Format( DummyTexCoordDef, texCoordPrefix ), true );
 			dataCollector.AddToSpecialLocalVariables( UniqueId, string.Format( DummyTexCoordSurfDef, OutputId, Constants.InputVarStr, texCoordPrefix, tiling, offset ) );
 			m_surfaceTexcoordName = string.Format( DummyTexCoordSurfVar, OutputId );

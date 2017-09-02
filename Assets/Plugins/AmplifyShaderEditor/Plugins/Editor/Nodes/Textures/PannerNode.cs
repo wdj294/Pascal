@@ -7,7 +7,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Panner", "Textures", "Pans UV texture coordinates according to its inputs" )]
+	[NodeAttributes( "Panner", "UV Coordinates", "Pans UV texture coordinates according to its inputs" )]
 	public sealed class PannerNode : ParentNode
 	{
 		private const string _speedXStr = "Speed X";

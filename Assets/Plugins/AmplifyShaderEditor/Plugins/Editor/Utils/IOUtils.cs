@@ -14,6 +14,7 @@ namespace AmplifyShaderEditor
 	public enum ShaderLoadResult
 	{
 		LOADED,
+		TEMPLATE_LOADED,
 		FILE_NOT_FOUND,
 		ASE_INFO_NOT_FOUND,
 		UNITY_NATIVE_PATHS
@@ -68,14 +69,20 @@ namespace AmplifyShaderEditor
 		public static readonly string PropertiesBegin = "\tProperties\n\t{\n";
 		public static readonly string PropertiesEnd = "\t}\n";
 		public static readonly string PropertiesElement = "\t\t{0}\n";
+		public static readonly string PropertiesElementsRaw = "{0}\n";
 
 		public static readonly string PragmaTargetHeader = "\t\t#pragma target {0}\n";
-		public static readonly string InstancedPropertiesHeader = "\t\t#pragma multi_compile_instancing\n";
+		public static readonly string InstancedPropertiesHeader = "multi_compile_instancing";
 		public static readonly string VirtualTexturePragmaHeader = "multi_compile _ _VT_SINGLE_MODE";
 
-		public static readonly string InstancedPropertiesBegin = "\t\tUNITY_INSTANCING_CBUFFER_START({0})\n";
-		public static readonly string InstancedPropertiesEnd = "\t\tUNITY_INSTANCING_CBUFFER_END\n";
-		public static readonly string InstancedPropertiesElement = "\t\t\tUNITY_DEFINE_INSTANCED_PROP({0}, {1})\n";
+		public static readonly string InstancedPropertiesBeginTabs		= "\t\tUNITY_INSTANCING_CBUFFER_START({0})\n";
+		public static readonly string InstancedPropertiesEndTabs		= "\t\tUNITY_INSTANCING_CBUFFER_END\n";
+		public static readonly string InstancedPropertiesElementTabs	= "\t\t\tUNITY_DEFINE_INSTANCED_PROP({0}, {1})\n";
+
+
+		public static readonly string InstancedPropertiesBegin		= "UNITY_INSTANCING_CBUFFER_START({0})";
+		public static readonly string InstancedPropertiesEnd		= "UNITY_INSTANCING_CBUFFER_END";
+		public static readonly string InstancedPropertiesElement	= "UNITY_DEFINE_INSTANCED_PROP({0}, {1})";
 		public static readonly string InstancedPropertiesData = "UNITY_ACCESS_INSTANCED_PROP({0})";
 
 		public static readonly string MetaBegin = "defaultTextures:";
@@ -127,7 +134,7 @@ namespace AmplifyShaderEditor
 		//public static string ASEFolderPath;
 
 		//public static bool IsShaderFunctionWindow = false;
-		public static NodeAvailability CurrentCanvasMode = NodeAvailability.SurfaceShader;
+		
 
 		public static int DefaultASEDirtyCheckId;
 
@@ -371,19 +378,25 @@ namespace AmplifyShaderEditor
 		public static string LoadTextFileFromDisk( string pathName )
 		{
 			string result = string.Empty;
-			StreamReader fileReader = new StreamReader( pathName );
-			try
-			{
-				result = fileReader.ReadToEnd();
-			}
-			catch ( Exception e )
-			{
-				Debug.LogException( e );
-			}
-			finally
-			{
-				fileReader.Close();
-			}
+            if ( !string.IsNullOrEmpty( pathName ) && File.Exists( pathName ) )
+            {
+
+                StreamReader fileReader = null;
+                try
+                {
+                    fileReader = new StreamReader( pathName );
+                    result = fileReader.ReadToEnd();
+                }
+                catch ( Exception e )
+                {
+                    Debug.LogException( e );
+                }
+                finally
+                {
+                    if( fileReader != null)
+                        fileReader.Close();
+                }
+            }
 			return result;
 		}
 

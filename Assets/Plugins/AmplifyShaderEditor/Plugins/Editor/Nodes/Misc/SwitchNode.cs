@@ -5,7 +5,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Debug Switch", "Misc", "Hard Switch between any of its input ports" )]
+	[NodeAttributes( "Debug Switch", "Logical Operators", "Hard Switch between any of its input ports" )]
 	public class SwitchNode : ParentNode
 	{
 		private const string Info = "This is a Debug node which only generates the source for the selected port. This means that no properties are generated for other ports and information might be lost.";
@@ -30,6 +30,9 @@ namespace AmplifyShaderEditor
 		private int m_maxAmountInputs = 2;
 
 		private int m_cachedPropertyId = -1;
+
+		private Rect m_varRect;
+		private bool m_editing;
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -88,20 +91,58 @@ namespace AmplifyShaderEditor
 			m_sizeIsDirty = true;
 		}
 
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+
+			m_varRect = m_remainingBox;
+			m_varRect.width = 40 * drawInfo.InvertedZoom;
+			m_varRect.height = 25 * drawInfo.InvertedZoom;
+			m_varRect.x += m_remainingBox.width * 0.5f - m_varRect.width * 0.5f;
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+
+			if ( drawInfo.CurrentEventType != EventType.MouseDown )
+				return;
+
+			if ( m_varRect.Contains( drawInfo.MousePosition ) )
+			{
+				m_editing = true;
+			}
+			else if ( m_editing )
+			{
+				m_editing = false;
+			}
+		}
+
 		public override void Draw( DrawInfo drawInfo )
 		{
 			base.Draw( drawInfo );
-			Rect newPos = m_remainingBox;
-			newPos.width = 40 * drawInfo.InvertedZoom;
-			newPos.height = 25 * drawInfo.InvertedZoom;
-			newPos.x += m_remainingBox.width * 0.5f - newPos.width * 0.5f;
 
-			EditorGUI.BeginChangeCheck();
-			m_currentSelectedInput = EditorGUIIntPopup( newPos, m_currentSelectedInput, AvailableInputsLabels, AvailableInputsValues, UIUtils.SwitchNodePopUp );
-			if ( EditorGUI.EndChangeCheck() )
+			if( m_editing )
 			{
-				UpdateOutput();
+				EditorGUI.BeginChangeCheck();
+				m_currentSelectedInput = EditorGUIIntPopup( m_varRect, m_currentSelectedInput, AvailableInputsLabels, AvailableInputsValues, UIUtils.SwitchNodePopUp );
+				if ( EditorGUI.EndChangeCheck() )
+				{
+					UpdateOutput();
+					m_editing = false;
+				}
 			}
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+
+			if ( !m_isVisible )
+				return;
+
+			if ( !m_editing && ContainerGraph.LodLevel <= ParentGraph.NodeLOD.LOD4 )
+				GUI.Label( m_varRect, AvailableInputsLabels[ m_currentSelectedInput ], UIUtils.SwitchNodePopUp );
 		}
 
 		public override void DrawProperties()

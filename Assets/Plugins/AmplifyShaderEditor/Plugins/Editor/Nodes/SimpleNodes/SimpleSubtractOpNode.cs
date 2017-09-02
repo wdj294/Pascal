@@ -7,7 +7,7 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Subtract", "Operators", "Simple subtraction of two variables", null, UnityEngine.KeyCode.S )]
+	[NodeAttributes( "Subtract", "Math Operators", "Subtraction of two values ( A - B )", null, UnityEngine.KeyCode.S )]
 	public sealed class SimpleSubtractOpNode : DynamicTypeNode
 	{
 		protected override void CommonInit( int uniqueId )

@@ -313,7 +313,7 @@ namespace AmplifyShaderEditor
 			{
 				if ( m_inputPorts[ i ].IsConnected )
 				{
-					if ( newNode.InputPorts != null && newNode.InputPorts[ i ] != null )
+					if ( newNode.InputPorts != null && i < newNode.InputPorts.Count && newNode.InputPorts[ i ] != null )
 					{
 						ContainerGraph.CreateConnection( newNode.InputPorts[ i ].NodeId, newNode.InputPorts[ i ].PortId, m_inputPorts[ i ].ExternalReferences[ 0 ].NodeId, m_inputPorts[ i ].ExternalReferences[ 0 ].PortId );
 					}

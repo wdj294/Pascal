@@ -10,7 +10,8 @@ namespace AmplifyShaderEditor
 	{
 		SurfaceShader = 1 << 0,
 		ShaderFunction = 1 << 1,
-		CustomLighting = 1 << 2
+		CustomLighting = 1 << 2,
+		TemplateShader	= 1 << 3
 	}
 
 

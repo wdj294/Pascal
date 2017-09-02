@@ -9,10 +9,9 @@ namespace AmplifyShaderEditor
 	public class AdditionalIncludesHelper
 	{
 		private const string AdditionalIncludesStr = " Additional Includes";
-		
-		
 		private const float ShaderKeywordButtonLayoutWidth = 15;
 		private ParentNode m_currentOwner;
+
 		[SerializeField]
 		private List<string> m_additionalIncludes = new List<string>();
 
@@ -24,14 +23,15 @@ namespace AmplifyShaderEditor
 			EditorVariablesManager.ExpandedAdditionalIncludes.Value = value;
 
 		}
+
 		void DrawButtons()
 		{
-					EditorGUILayout.Separator();
+			EditorGUILayout.Separator();
 
 			// Add keyword
 			if ( GUILayout.Button( string.Empty, UIUtils.PlusStyle, GUILayout.Width( ShaderKeywordButtonLayoutWidth ) ) )
 			{
-				m_additionalIncludes.Insert( 0, "" );
+				m_additionalIncludes.Insert( 0, string.Empty );
 			}
 
 			//Remove keyword
@@ -61,7 +61,7 @@ namespace AmplifyShaderEditor
 					// Add new port
 					if ( m_currentOwner.GUILayoutButton( string.Empty, UIUtils.PlusStyle, GUILayout.Width( ShaderKeywordButtonLayoutWidth ) ) )
 					{
-						m_additionalIncludes.Insert( i, "" );
+						m_additionalIncludes.Insert( i, string.Empty );
 					}
 
 					//Remove port
@@ -80,13 +80,7 @@ namespace AmplifyShaderEditor
 			EditorGUILayout.Separator();
 			EditorGUILayout.HelpBox( "Please add your includes without the #include \"\" keywords", MessageType.Info );
 		}
-
-		public void Destroy()
-		{
-			m_additionalIncludes.Clear();
-			m_additionalIncludes = null;
-		}
-
+		
 		public void ReadFromString( ref uint index, ref string[] nodeParams )
 		{
 			int count = Convert.ToInt32( nodeParams[ index++ ] );
@@ -112,6 +106,13 @@ namespace AmplifyShaderEditor
 				if( !string.IsNullOrEmpty( m_additionalIncludes[ i ])) 
 					dataCollector.AddToIncludes( -1, m_additionalIncludes[ i ] );
 			}
+		}
+
+		public void Destroy()
+		{
+			m_additionalIncludes.Clear();
+			m_additionalIncludes = null;
+			m_currentOwner = null;
 		}
 	}
 }

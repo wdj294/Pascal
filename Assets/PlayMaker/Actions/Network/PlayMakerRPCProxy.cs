@@ -12,7 +12,7 @@
 using UnityEngine;
 using System.Collections;
 
-
+[AddComponentMenu("PlayMaker/Misc/RPC Proxy")]
 public class PlayMakerRPCProxy : MonoBehaviour
 {
     public PlayMakerFSM[] fsms;

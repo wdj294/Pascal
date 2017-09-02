@@ -5,7 +5,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "World Space Light Dir", "Forward Render", "Computes normalized world space light direction" )]
+	[NodeAttributes( "World Space Light Dir", "Light", "Computes normalized world space light direction" )]
 	public sealed class WorldSpaceLightDirHlpNode : HelperParentNode
 	{
 		protected override void CommonInit( int uniqueId )
@@ -23,14 +23,17 @@ namespace AmplifyShaderEditor
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalvar )
 		{
-			if ( m_outputPorts[ 0 ].IsLocalValue )
-				return m_outputPorts[ 0 ].LocalValue;
+			if ( dataCollector.IsTemplate )
+				return dataCollector.TemplateDataCollectorInstance.GetWorldSpaceLightDir();
+
+			//if ( m_outputPorts[ 0 ].IsLocalValue )
+			//	return m_outputPorts[ 0 ].LocalValue;
 
 			dataCollector.AddToIncludes( UniqueId, Constants.UnityCgLibFuncs );
 			dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_POS ), true );
 
 			string worldPos = GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId );
-			return GeneratorUtils.GenerateLightDirection( ref dataCollector, UniqueId, m_currentPrecisionType, worldPos );
+			return GeneratorUtils.GenerateWorldLightDirection( ref dataCollector, UniqueId, m_currentPrecisionType, worldPos );
 
 			//dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_NORMAL ), true );
 

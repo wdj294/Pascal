@@ -56,8 +56,13 @@ PluginImporter:
         DontProcess: False
         PlaceholderPath: Assets/Plugins/PlayMaker/PlayMaker.dll
         SDK: AnySDK
-        ScriptingBackend: AnyScriptingBackend
+        ScriptingBackend: DotNet
     iOS:
+      enabled: 0
+      settings:
+        CompileFlags: 
+        FrameworkDependencies: 
+    tvOS:
       enabled: 0
       settings:
         CompileFlags: 

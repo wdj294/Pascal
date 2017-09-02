@@ -51,6 +51,11 @@ namespace HutongGames.PlayMaker.Actions
 			everyFrame = true;
 		}
 
+        public override void OnPreprocess()
+        {
+            Fsm.HandleLateUpdate = true;
+        }
+
 		public override void OnEnter()
 		{
 			DoLookAt();

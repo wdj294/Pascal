@@ -6,11 +6,9 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "World Reflection", "Surface Standard Inputs", "Per pixel world reflection vector", null, KeyCode.R )]
+	[NodeAttributes( "World Reflection", "Surface Data", "Per pixel world reflection vector, accepts a <b>Normal</b> vector in tangent space (ie: normalmap)", null, KeyCode.R )]
 	public sealed class WorldReflectionVector : ParentNode
 	{
-		private int m_cachedPropertyId = -1;
-
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -18,24 +16,24 @@ namespace AmplifyShaderEditor
 			AddOutputVectorPorts( WirePortDataType.FLOAT3, "XYZ" );
 			m_drawPreviewAsSphere = true;
 			m_previewShaderGUID = "8e267e9aa545eeb418585a730f50273e";
-			UIUtils.AddNormalDependentCount();
+			//UIUtils.AddNormalDependentCount();
 		}
 
 		public override void SetPreviewInputs()
 		{
 			base.SetPreviewInputs();
 
-			if ( m_cachedPropertyId == -1 )
-				m_cachedPropertyId = Shader.PropertyToID( "_Connected" );
-
-			PreviewMaterial.SetFloat( m_cachedPropertyId, ( m_inputPorts[ 0 ].IsConnected ? 1 : 0 ) );
+			if ( m_inputPorts[ 0 ].IsConnected )
+				m_previewMaterialPassId = 1;
+			else
+				m_previewMaterialPassId = 0;
 		}
 
-		public override void Destroy()
-		{
-			ContainerGraph.RemoveNormalDependentCount();
-			base.Destroy();
-		}
+		//public override void Destroy()
+		//{
+		//	ContainerGraph.RemoveNormalDependentCount();
+		//	base.Destroy();
+		//}
 
 		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
@@ -46,6 +44,24 @@ namespace AmplifyShaderEditor
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
+			if ( dataCollector.IsTemplate )
+			{
+				if ( m_inputPorts[ 0 ].IsConnected )
+				{
+					if ( m_outputPorts[ 0 ].IsLocalValue )
+						return m_outputPorts[ 0 ].LocalValue;
+
+
+					string value = dataCollector.TemplateDataCollectorInstance.GetWorldReflection( m_inputPorts[ 0 ].GeneratePortInstructions( ref dataCollector ) );
+					RegisterLocalVariable( 0, value, ref dataCollector, "worldRefl" + OutputId );
+					return m_outputPorts[ 0 ].LocalValue;
+				}
+				else
+				{
+					return GetOutputVectorItem( 0, outputId, dataCollector.TemplateDataCollectorInstance.GetWorldReflection() );
+				}
+			}
+
 			bool isVertex = ( dataCollector.PortCategory == MasterNodePortCategory.Tessellation || dataCollector.PortCategory == MasterNodePortCategory.Vertex );
 			if ( isVertex )
 			{

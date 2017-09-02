@@ -17,14 +17,9 @@ namespace AmplifyShaderEditor
 	}
 
 	[Serializable]
-	[NodeAttributes( "Fog And Ambient Colors", "Fog And Ambient", "Fog and Ambient colors" )]
+	[NodeAttributes( "Fog And Ambient Colors", "Light", "Fog and Ambient colors" )]
 	public sealed class FogAndAmbientColorsNode : ShaderVariablesNode
 	{
-		[SerializeField]
-		private BuiltInFogAndAmbientColors m_selectedType = BuiltInFogAndAmbientColors.UNITY_LIGHTMODEL_AMBIENT;
-		[SerializeField]
-		private BuiltInFogAndAmbientColors m_oldVarType = BuiltInFogAndAmbientColors.UNITY_LIGHTMODEL_AMBIENT;
-
 		private const string ColorLabelStr = "Color";
 		private readonly string[] ColorValuesStr = {
 														"Ambient light ( Legacy )",
@@ -34,6 +29,11 @@ namespace AmplifyShaderEditor
 														"Fog"
 													};
 
+		[SerializeField]
+		private BuiltInFogAndAmbientColors m_selectedType = BuiltInFogAndAmbientColors.UNITY_LIGHTMODEL_AMBIENT;
+		
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
+
 		protected override void CommonInit( int uniqueId )
 		{
 			base.CommonInit( uniqueId );
@@ -42,14 +42,62 @@ namespace AmplifyShaderEditor
 			m_autoWrapProperties = true;
 		}
 
+		public override void AfterCommonInit()
+		{
+			base.AfterCommonInit();
+			if( PaddingTitleLeft == 0 )
+			{
+				PaddingTitleLeft = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+				if( PaddingTitleRight == 0 )
+					PaddingTitleRight = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+			}
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			m_upperLeftWidget = null;
+		}
+
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_selectedType = (BuiltInFogAndAmbientColors)m_upperLeftWidget.DrawWidget( this, (int)m_selectedType, ColorValuesStr );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				ChangeOutputName( 0, ColorValuesStr[ (int)m_selectedType ] );
+			}
+		}
+		
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
+			EditorGUI.BeginChangeCheck();
 			m_selectedType = ( BuiltInFogAndAmbientColors ) EditorGUILayoutPopup( ColorLabelStr, ( int ) m_selectedType, ColorValuesStr );
 
-			if ( m_selectedType != m_oldVarType )
+			if ( EditorGUI.EndChangeCheck() )
 			{
-				m_oldVarType = m_selectedType;
 				ChangeOutputName( 0, ColorValuesStr[ ( int ) m_selectedType ] );
 			}
 		}

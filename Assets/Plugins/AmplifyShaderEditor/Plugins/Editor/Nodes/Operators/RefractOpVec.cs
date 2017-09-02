@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Refract", "Vector", "Computes a refraction vector" )]
+	[NodeAttributes( "Refract", "Vector Operators", "Computes a refraction vector" )]
 	public sealed class RefractOpVec : DynamicTypeNode
 	{
 		override protected void AddPorts()

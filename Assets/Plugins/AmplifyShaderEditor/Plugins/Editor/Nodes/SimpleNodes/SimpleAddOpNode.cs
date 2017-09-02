@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Add", "Operators", "Simple add of two variables", null, KeyCode.A )]
+	[NodeAttributes( "Add", "Math Operators", "Addition of two or more values ( A + B + .. )", null, KeyCode.A )]
 	public sealed class SimpleAddOpNode : DynamicTypeNode
 	{
 		private int m_cachedPropertyId = -1;

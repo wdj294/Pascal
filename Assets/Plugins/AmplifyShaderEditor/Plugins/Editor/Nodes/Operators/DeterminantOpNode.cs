@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Determinant", "Matrix", "Scalar determinant of a square matrix" )]
+	[NodeAttributes( "Determinant", "Matrix Operators", "Scalar determinant of a square matrix" )]
 	public sealed class DeterminantOpNode : SingleInputOp
 	{
 		protected override void CommonInit( int uniqueId )

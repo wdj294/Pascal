@@ -8,13 +8,11 @@ using UnityEngine;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Grab Screen Position", "Surface Standard Inputs", "Screen position correctly transformed to be used with Grab Screen Color" )]
+	[NodeAttributes( "Grab Screen Position", "Camera And Screen", "Screen position correctly transformed to be used with Grab Screen Color" )]
 	public sealed class GrabScreenPosition : ParentNode
 	{
 		private const string ProjectStr = "Project";
 		private const string ScreenPosStr = "screenPos";
-		//private readonly string ScreenPosOnFragStr = Constants.InputVarStr + "." + ScreenPosStr;
-
 		private readonly string ProjectionInstruction = "{0}.xyzw /= {0}.w;";
 		private readonly string[] HackInstruction = {   "#if UNITY_UV_STARTS_AT_TOP",
 														"float scale{0} = -1.0;",
@@ -29,15 +27,13 @@ namespace AmplifyShaderEditor
 
 
 		private readonly string ScreenPosOnVert00Str = "{0} = ComputeScreenPos( mul( UNITY_MATRIX_MVP, {1}.vertex));";
-	//	private readonly string ScreenPosOnVert01Str = "{0}.xyz /= {0}.w;";
-
-
+	
 		private readonly string[] m_outputTypeStr = { "Normalized", "Screen" };
-		//[SerializeField]
-		//private bool m_project = true;
-
+	
 		[SerializeField]
 		private int m_outputTypeInt = 0;
+
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -45,15 +41,64 @@ namespace AmplifyShaderEditor
 			AddOutputVectorPorts( WirePortDataType.FLOAT4, "XYZW" );
 			m_autoWrapProperties = true;
 			m_textLabelWidth = 65;
+			ConfigureHeader();
+		}
+
+		public override void AfterCommonInit()
+		{
+			base.AfterCommonInit();
+
+			if( PaddingTitleLeft == 0 )
+			{
+				PaddingTitleLeft = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+				if( PaddingTitleRight == 0 )
+					PaddingTitleRight = Constants.PropertyPickerWidth + Constants.IconsLeftRightMargin;
+			}
+		}
+
+		public override void Destroy()
+		{
+			base.Destroy();
+			m_upperLeftWidget = null;
+		}
+		
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_outputTypeInt = m_upperLeftWidget.DrawWidget( this, m_outputTypeInt, m_outputTypeStr );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				ConfigureHeader();
+			}
 		}
 
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
-			//m_project = EditorGUILayout.Toggle( ProjectStr, m_project );
-
+			
 			EditorGUI.BeginChangeCheck();
-			m_outputTypeInt = EditorGUILayoutPopup( "Output", m_outputTypeInt, m_outputTypeStr );
+			m_outputTypeInt = EditorGUILayoutPopup( "Type", m_outputTypeInt, m_outputTypeStr );
 			if ( EditorGUI.EndChangeCheck() )
 			{
 				ConfigureHeader();
@@ -62,16 +107,7 @@ namespace AmplifyShaderEditor
 
 		void ConfigureHeader()
 		{
-			switch ( m_outputTypeInt )
-			{
-				case 0:
-				default:
-				SetAdditonalTitleText( "( Normalized )" );
-				break;
-				case 1:
-				SetAdditonalTitleText( string.Empty );
-				break;
-			}
+			SetAdditonalTitleText( string.Format( Constants.SubTitleTypeFormatStr, m_outputTypeStr[ m_outputTypeInt ] ) );
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
@@ -86,7 +122,7 @@ namespace AmplifyShaderEditor
 
 			if ( isFragment )
 			{
-				string screenPos = GeneratorUtils.GenerateScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, true );
+				string screenPos = dataCollector.IsTemplate? dataCollector.TemplateDataCollectorInstance.GetScreenPos():GeneratorUtils.GenerateScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, true );
 				localVarName = screenPos + OutputId;
 				//dataCollector.AddToInput( m_uniqueId, "float4 " + ScreenPosStr, true );
 				string value = UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + localVarName + " = " + screenPos + ";";
@@ -94,10 +130,10 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				string screenPos = GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
+				string screenPos = dataCollector.IsTemplate ? dataCollector.TemplateDataCollectorInstance.GetScreenPos() : GeneratorUtils.GenerateVertexScreenPosition( ref dataCollector, UniqueId, m_currentPrecisionType, false );
 				localVarName = screenPos + OutputId;
 				string localVarDecl = UIUtils.PrecisionWirePortToCgType( m_currentPrecisionType, m_outputPorts[ 0 ].DataType ) + " " + localVarName;
-				string value = string.Format( ScreenPosOnVert00Str, localVarDecl, Constants.VertexShaderInputStr );
+				string value = string.Format( ScreenPosOnVert00Str, localVarDecl, dataCollector.IsTemplate ? dataCollector.TemplateDataCollectorInstance.CurrentTemplateData.VertexFunctionData.InVarName : Constants.VertexShaderInputStr );
 				dataCollector.AddLocalVariable( UniqueId, value );
 				//dataCollector.AddLocalVariable( m_uniqueId, string.Format( ScreenPosOnVert01Str, localVarName ) );
 			}

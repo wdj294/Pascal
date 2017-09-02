@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Static Switch", "Constants", "Creates a shader keyword toggle", Available = true )]
+	[NodeAttributes( "Static Switch", "Logical Operators", "Creates a shader keyword toggle", Available = true )]
 	public sealed class StaticSwitch : PropertyNode
 	{
 		[SerializeField]

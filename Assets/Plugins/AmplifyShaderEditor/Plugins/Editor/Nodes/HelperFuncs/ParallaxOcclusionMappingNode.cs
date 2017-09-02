@@ -5,7 +5,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Parallax Occlusion Mapping", "Generic", "Calculates offseted UVs for parallax occlusion mapping" )]
+	[NodeAttributes( "Parallax Occlusion Mapping", "UV Coordinates", "Calculates offseted UVs for parallax occlusion mapping" )]
 	public sealed class ParallaxOcclusionMappingNode : ParentNode
 	{
 		[SerializeField]
@@ -181,24 +181,52 @@ namespace AmplifyShaderEditor
 				if ( !dataCollector.DirtyNormal )
 					dataCollector.ForceNormal = true;
 
-				string inputViewDirTan = UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.VIEW_DIR );
-				dataCollector.AddToInput( UniqueId, inputViewDirTan, true );
-				viewDirTan = Constants.InputVarStr + "." + UIUtils.GetInputValueFromType( AvailableSurfaceInputs.VIEW_DIR );
-			} else
+				
+				if ( dataCollector.IsTemplate )
+				{
+					viewDirTan = dataCollector.TemplateDataCollectorInstance.GetTangenViewDir();
+				}
+				else
+				{
+					string inputViewDirTan = UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.VIEW_DIR );
+					dataCollector.AddToInput( UniqueId, inputViewDirTan, true );
+					viewDirTan = Constants.InputVarStr + "." + UIUtils.GetInputValueFromType( AvailableSurfaceInputs.VIEW_DIR );
+				}
+			}
+			else
 			{
 				viewDirTan = m_viewdirTanPort.GenerateShaderForOutput( ref dataCollector, WirePortDataType.FLOAT3, false, true );
 			}
 
 			//generate world normal
-			dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_NORMAL ), true );
-			dataCollector.AddToInput( UniqueId, Constants.InternalData, false );
-			string normalWorld = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
+			string normalWorld = string.Empty;
+			if ( dataCollector.IsTemplate )
+			{
+				normalWorld = dataCollector.TemplateDataCollectorInstance.GetWorldNormal();
+			}
+			else
+			{
+				dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_NORMAL ), true );
+				dataCollector.AddToInput( UniqueId, Constants.InternalData, false );
+				normalWorld = GeneratorUtils.GenerateWorldNormal( ref dataCollector, UniqueId );
+			}
+
 			//string normalWorld = "WorldNormalVector( " + Constants.InputVarStr + ", float3( 0, 0, 1 ) )";
 
 			//generate viewDir in world space
-			dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_POS ), true );
-			dataCollector.AddToLocalVariables( UniqueId, m_currentPrecisionType, WirePortDataType.FLOAT3, WorldDirVarStr, "normalize( UnityWorldSpaceViewDir( " + Constants.InputVarStr + ".worldPos ) )" );
 
+			string worldPos = string.Empty;
+			if ( dataCollector.IsTemplate )
+			{
+				worldPos = dataCollector.TemplateDataCollectorInstance.GetWorldPos();
+			}
+			else
+			{
+				dataCollector.AddToInput( UniqueId, UIUtils.GetInputDeclarationFromType( m_currentPrecisionType, AvailableSurfaceInputs.WORLD_POS ), true );
+				worldPos = Constants.InputVarStr + ".worldPos";
+			}
+			dataCollector.AddToLocalVariables( UniqueId, m_currentPrecisionType, WirePortDataType.FLOAT3, WorldDirVarStr, string.Format( "normalize( UnityWorldSpaceViewDir( {0} ) )", worldPos ) );
+			
 			//dataCollector.AddToInput( m_uniqueId, string.Format( WorldDirVarDecStr, UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT3 ), WorldDirVarStr ), false );
 			//dataCollector.AddVertexInstruction( WorldDirVarDefStr, m_uniqueId );
 

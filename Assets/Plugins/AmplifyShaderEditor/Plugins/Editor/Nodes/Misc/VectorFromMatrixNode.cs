@@ -11,7 +11,7 @@ namespace AmplifyShaderEditor
 	}
 
 	[Serializable]
-	[NodeAttributes( "Vector From Matrix", "Misc", "Retrieve vector data from a matrix" )]
+	[NodeAttributes( "Vector From Matrix", "Matrix Operators", "Retrieve vector data from a matrix" )]
 	public sealed class VectorFromMatrixNode : ParentNode
 	{
 		private const string IndexStr = "Index";

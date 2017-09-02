@@ -6,34 +6,24 @@ using UnityEditor;
 
 namespace AmplifyShaderEditor
 {
-	public enum ViewDirSpace
+	public enum ViewSpace
 	{
 		Tangent,
 		World
 	}
 
 	[Serializable]
-	[NodeAttributes( "View Dir", "Surface Standard Inputs", "View direction vector" )]
+	[NodeAttributes( "View Dir", "Camera And Screen", "View direction vector, you can select between <b>World</b> space or <b>Tangent</b> space" )]
 	public sealed class ViewDirInputsCoordNode : SurfaceShaderINParentNode
 	{
 		private const string SpaceStr = "Space";
 		private const string WorldDirVarStr = "worldViewDir";
-		//private readonly string WorldDirVarDecStr = "{0} {1};";
-		//private readonly string WorldDirVarDefStr = string.Format( "{0}.{1} = normalize( _WorldSpaceCameraPos - {2}.vertex )", Constants.VertexShaderOutputStr, WorldDirVarStr , Constants.VertexShaderInputStr );
-		//private readonly string WorldDirVarOnFrag = Constants.InputVarStr + "." + WorldDirVarStr;
-		[SerializeField]
-		private ViewDirSpace m_viewDirSpace = ViewDirSpace.World;
+		private const string SubLabelFormat = "Space( {0} )";
 
-		//[SerializeField]
-		//private bool m_addInstruction = false;
+		[ SerializeField]
+		private ViewSpace m_viewDirSpace = ViewSpace.World;
 
-		private int m_cachedPropertyId = -1;
-
-		//public override void Reset()
-		//{
-		//	base.Reset();
-		//	m_addInstruction = true;
-		//}
+		private UpperLeftWidgetHelper m_upperLeftWidget = new UpperLeftWidgetHelper();
 
 		protected override void CommonInit( int uniqueId )
 		{
@@ -49,15 +39,47 @@ namespace AmplifyShaderEditor
 
 		private void UpdateTitle()
 		{
-			m_additionalContent.text = string.Format( "( {0} )", m_viewDirSpace.ToString() );
+			m_additionalContent.text = string.Format( SubLabelFormat, m_viewDirSpace.ToString() );
 			m_sizeIsDirty = true;
+		}
+
+		
+		public override void OnNodeLayout( DrawInfo drawInfo )
+		{
+			base.OnNodeLayout( drawInfo );
+			m_upperLeftWidget.OnNodeLayout( m_globalPosition, drawInfo );
+		}
+		
+		public override void DrawGUIControls( DrawInfo drawInfo )
+		{
+			base.DrawGUIControls( drawInfo );
+			m_upperLeftWidget.DrawGUIControls( drawInfo );
+		}
+		
+		public override void OnNodeRepaint( DrawInfo drawInfo )
+		{
+			base.OnNodeRepaint( drawInfo );
+			if( !m_isVisible )
+				return;
+			m_upperLeftWidget.OnNodeRepaint( ContainerGraph.LodLevel );
+		}
+
+		public override void Draw( DrawInfo drawInfo )
+		{
+			base.Draw( drawInfo );
+			EditorGUI.BeginChangeCheck();
+			m_viewDirSpace = (ViewSpace)m_upperLeftWidget.DrawWidget ( this, m_viewDirSpace );
+			if( EditorGUI.EndChangeCheck() )
+			{
+				UpdateTitle();
+			}
 		}
 
 		public override void DrawProperties()
 		{
 			base.DrawProperties();
 			EditorGUI.BeginChangeCheck();
-			m_viewDirSpace = ( ViewDirSpace ) EditorGUILayoutEnumPopup( SpaceStr, m_viewDirSpace );
+			m_viewDirSpace = ( ViewSpace ) EditorGUILayoutEnumPopup( SpaceStr, m_viewDirSpace );
 			if ( EditorGUI.EndChangeCheck() )
 			{
 				UpdateTitle();
@@ -68,24 +90,32 @@ namespace AmplifyShaderEditor
 		{
 			base.SetPreviewInputs();
 
-			if ( m_cachedPropertyId == -1 )
-				m_cachedPropertyId = Shader.PropertyToID( "_TangentSpace" );
-
-			PreviewMaterial.SetFloat( m_cachedPropertyId, ( m_viewDirSpace == ViewDirSpace.Tangent ? 1 : 0 ) );
+			if ( m_viewDirSpace == ViewSpace.World )
+				m_previewMaterialPassId = 0;
+			else if ( m_viewDirSpace == ViewSpace.Tangent )
+				m_previewMaterialPassId = 1;
 		}
 
 		public override void PropagateNodeData( NodeData nodeData, ref MasterNodeDataCollector dataCollector )
 		{
 			base.PropagateNodeData( nodeData, ref dataCollector );
-			if ( m_viewDirSpace == ViewDirSpace.Tangent )
+			if ( m_viewDirSpace == ViewSpace.Tangent )
 				dataCollector.DirtyNormal = true;
 		}
 
 		public override string GenerateShaderForOutput( int outputId, ref MasterNodeDataCollector dataCollector, bool ignoreLocalVar )
 		{
+			if ( dataCollector.IsTemplate )
+			{
+				string varName = ( m_viewDirSpace == ViewSpace.World )?	dataCollector.TemplateDataCollectorInstance.GetNormalizedViewDir():
+																			dataCollector.TemplateDataCollectorInstance.GetTangenViewDir();
+				return GetOutputVectorItem( 0, outputId, varName );
+			}
+
+
 			if ( dataCollector.PortCategory == MasterNodePortCategory.Vertex || dataCollector.PortCategory == MasterNodePortCategory.Tessellation )
 			{
-				if ( m_viewDirSpace == ViewDirSpace.World )
+				if ( m_viewDirSpace == ViewSpace.World )
 				{
 					string precision = UIUtils.FinalPrecisionWirePortToCgType( m_currentPrecisionType, WirePortDataType.FLOAT3 );
 					string worldPos = GeneratorUtils.GenerateWorldPosition( ref dataCollector, UniqueId );
@@ -105,7 +135,7 @@ namespace AmplifyShaderEditor
 			}
 			else
 			{
-				if ( m_viewDirSpace == ViewDirSpace.World )
+				if ( m_viewDirSpace == ViewSpace.World )
 				{
 					if ( dataCollector.DirtyNormal )
 					{
@@ -130,7 +160,7 @@ namespace AmplifyShaderEditor
 		{
 			base.ReadFromString( ref nodeParams );
 			if ( UIUtils.CurrentShaderVersion() > 2402 )
-				m_viewDirSpace = ( ViewDirSpace ) Enum.Parse( typeof( ViewDirSpace ), GetCurrentParam( ref nodeParams ) );
+				m_viewDirSpace = ( ViewSpace ) Enum.Parse( typeof( ViewSpace ), GetCurrentParam( ref nodeParams ) );
 
 			UpdateTitle();
 		}

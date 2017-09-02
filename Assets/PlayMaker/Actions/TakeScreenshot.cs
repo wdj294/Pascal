@@ -85,7 +85,14 @@ namespace HutongGames.PlayMaker.Actions
                 Debug.Log("TakeScreenshot: " + screenshotFullPath);
             }
 
+#if UNITY_2017_1_OR_NEWER
 		    ScreenCapture.CaptureScreenshot(screenshotFullPath, superSize.Value);
+#else
+            Application.CaptureScreenshot(screenshotFullPath, superSize.Value);
+#endif
+
+
+
 
 		    Finish();
 		}

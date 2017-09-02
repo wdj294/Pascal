@@ -8,7 +8,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Scale And Offset", "Operators", "Scales and offsets a value" )]
+	[NodeAttributes( "Scale And Offset", "Math Operators", "Scales and offsets an input value\n( ( <b>Value</b> * <b>Scale</b> ) + <b>Offset</b> )" )]
 	public sealed class ScaleAndOffsetNode : ParentNode
 	{
 		private const string ScaleOffsetOpStr = "({0}*{1} + {2})";

@@ -6,7 +6,7 @@ using System;
 namespace AmplifyShaderEditor
 {
 	[Serializable]
-	[NodeAttributes( "Simplified Fmod", "Operators", "Remainder of x/y" )]
+	[NodeAttributes( "Simplified Fmod", "Math Operators", "Floating point remainder of x/y" )]
 	public sealed class SimplifiedFModOpNode : DynamicTypeNode
 	{
 		private const string FmodCustomOp = "frac({0}/{1})*{1}";
