@@ -56,7 +56,7 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 9
     m_Resolution: 2
-    m_BakeResolution: 40
+    m_BakeResolution: 15
     m_TextureWidth: 1024
     m_TextureHeight: 1024
     m_AO: 1
@@ -65,9 +65,9 @@ LightmapSettings:
     m_CompAOExponentDirect: 1.63
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
-    m_LightmapsBakeMode: 1
+    m_LightmapsBakeMode: 0
     m_TextureCompression: 1
-    m_FinalGather: 0
+    m_FinalGather: 1
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
@@ -4684,10 +4684,10 @@ MonoBehaviour:
   MapToLDR: 0
   RemoveColorBanding: 1
   MatrixVP:
-    e00: 0.7951963
+    e00: 1.8852586
     e01: 0
-    e02: 0.79519624
-    e03: 0.7951949
+    e02: 1.8852583
+    e03: 1.8852553
     e10: -0.608141
     e11: 1.2282666
     e12: 0.60814106
@@ -5774,7 +5774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &800689436
 Light:
   m_ObjectHideFlags: 0
@@ -5785,7 +5785,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.38
+  m_Intensity: 0.44
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
@@ -6207,7 +6207,7 @@ MonoBehaviour:
   FogTransitionSize: 5
   MaxLightDistance: 128
   AboveFogPercent: 0.1
-  Offset: {x: 476.276, y: 476.276, z: 0}
+  Offset: {x: 481.5507, y: 481.5507, z: 0}
 --- !u!1001 &890997547
 Prefab:
   m_ObjectHideFlags: 0
@@ -6615,7 +6615,7 @@ MonoBehaviour:
   FogTransitionSize: 5
   MaxLightDistance: 128
   AboveFogPercent: 0.1
-  Offset: {x: 462.30844, y: 462.30844, z: 0}
+  Offset: {x: 467.58313, y: 467.58313, z: 0}
 --- !u!1001 &1020954066
 Prefab:
   m_ObjectHideFlags: 0
@@ -9868,7 +9868,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 707470638
+  randomSeed: 1074609976
   InitialModule:
     serializedVersion: 3
     enabled: 1
