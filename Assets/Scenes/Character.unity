@@ -48,7 +48,7 @@ LightmapSettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
-    m_AlbedoBoost: 1
+    m_AlbedoBoost: 3.14
     m_TemporalCoherenceThreshold: 1
     m_EnvironmentLightingMode: 0
     m_EnableBakedLightmaps: 1
@@ -4618,6 +4618,90 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 498943996}
+--- !u!1001 &511983049
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.2854061
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.64694935
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0.6469493
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.28540608
+      objectReference: {fileID: 0}
+    - target: {fileID: 4679255094661164, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_RootOrder
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 95741290284290332, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b0a17bb3b01014d53adb4d9d1e2909ca, type: 2}
+    - target: {fileID: 95741290284290332, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973722902942050, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973722902942050, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4973722902942050, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.595
+      objectReference: {fileID: 0}
+    - target: {fileID: 198998302867526352, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: randomSeed
+      value: 1042384162
+      objectReference: {fileID: 0}
+    - target: {fileID: 198998302867526352, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 0.30167344
+      objectReference: {fileID: 0}
+    - target: {fileID: 198998302867526352, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: ShapeModule.radius.value
+      value: 0.16622141
+      objectReference: {fileID: 0}
+    - target: {fileID: 198998302867526352, guid: a210c72a572a3429a8c375605bd79204,
+        type: 2}
+      propertyPath: ShapeModule.angle
+      value: 66.72974
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a210c72a572a3429a8c375605bd79204, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &519056096
 GameObject:
   m_ObjectHideFlags: 0
@@ -4801,66 +4885,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 522388711}
   m_Mesh: {fileID: 136535122}
---- !u!114 &524731605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6eb1e3901d6a40d19282460c74e68c7, type: 3}
-  m_Name: ActionCharFollow(Clone)
-  m_EditorClassIdentifier: 
-  id: 0
-  category: 2
-  title: NPC follow
-  description: Makes an NPC follow another Character, whether it be a fellow NPC or
-    the Player. If they exceed a maximum distance from their target, they will run
-    towards them. Note that making an NPC move via another Action will make them stop
-    following anyone.
-  isDisplayed: 1
-  showComment: 0
-  comment: 
-  showOutputSockets: 1
-  numSockets: 1
-  willWait: 0
-  isRunning: 0
-  lastResult:
-    resultAction: 0
-    skipAction: -10
-    skipActionActual: {fileID: 0}
-    linkedCutscene: {fileID: 0}
-    linkedAsset: {fileID: 0}
-  endAction: 1
-  skipAction: -1
-  skipActionActual: {fileID: 0}
-  linkedCutscene: {fileID: 0}
-  linkedAsset: {fileID: 0}
-  isEnabled: 1
-  isAssetFile: 0
-  isMarked: 0
-  isBreakPoint: 0
-  nodeRect:
-    serializedVersion: 2
-    x: 13
-    y: 113
-    width: 300
-    height: 230
-  nodeHeight: 0
-  npcToMoveParameterID: -1
-  charToFollowParameterID: -1
-  npcToMoveID: 0
-  charToFollowID: 0
-  npcToMove: {fileID: 0}
-  charToFollow: {fileID: 0}
-  followPlayer: 1
-  faceWhenIdle: 0
-  updateFrequency: 2
-  followDistance: 1
-  followDistanceMax: 15
-  followType: 0
-  randomDirection: 0
 --- !u!1 &525857220
 GameObject:
   m_ObjectHideFlags: 0
@@ -5419,7 +5443,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 572305198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.711, y: 3.919, z: -2.377}
+  m_LocalPosition: {x: -0.187, y: 5.063, z: -1.542}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8723,52 +8747,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5d703d0885f1d248a141274d7623801, type: 2}
   m_IsPrefabParent: 0
---- !u!114 &1048760494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9289eb0ca58ef471f9062a5f77161403, type: 3}
-  m_Name: ActionPause(Clone)
-  m_EditorClassIdentifier: 
-  id: 0
-  category: 5
-  title: Wait
-  description: Waits a set time before continuing.
-  isDisplayed: 1
-  showComment: 0
-  comment: 
-  showOutputSockets: 1
-  numSockets: 1
-  willWait: 0
-  isRunning: 0
-  lastResult:
-    resultAction: 0
-    skipAction: -10
-    skipActionActual: {fileID: 0}
-    linkedCutscene: {fileID: 0}
-    linkedAsset: {fileID: 0}
-  endAction: 0
-  skipAction: -1
-  skipActionActual: {fileID: 0}
-  linkedCutscene: {fileID: 0}
-  linkedAsset: {fileID: 0}
-  isEnabled: 1
-  isAssetFile: 0
-  isMarked: 0
-  isBreakPoint: 0
-  nodeRect:
-    serializedVersion: 2
-    x: 14
-    y: 14
-    width: 300
-    height: 86
-  nodeHeight: 0
-  parameterID: -1
-  timeToPause: 0
 --- !u!1001 &1055441429
 Prefab:
   m_ObjectHideFlags: 0
@@ -12906,6 +12884,66 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1962335353}
+--- !u!114 &1963340271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6eb1e3901d6a40d19282460c74e68c7, type: 3}
+  m_Name: ActionCharFollow(Clone)
+  m_EditorClassIdentifier: 
+  id: 0
+  category: 2
+  title: NPC follow
+  description: Makes an NPC follow another Character, whether it be a fellow NPC or
+    the Player. If they exceed a maximum distance from their target, they will run
+    towards them. Note that making an NPC move via another Action will make them stop
+    following anyone.
+  isDisplayed: 1
+  showComment: 0
+  comment: 
+  showOutputSockets: 1
+  numSockets: 1
+  willWait: 0
+  isRunning: 0
+  lastResult:
+    resultAction: 0
+    skipAction: -10
+    skipActionActual: {fileID: 0}
+    linkedCutscene: {fileID: 0}
+    linkedAsset: {fileID: 0}
+  endAction: 1
+  skipAction: -1
+  skipActionActual: {fileID: 0}
+  linkedCutscene: {fileID: 0}
+  linkedAsset: {fileID: 0}
+  isEnabled: 1
+  isAssetFile: 0
+  isMarked: 0
+  isBreakPoint: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 13
+    y: 113
+    width: 300
+    height: 230
+  nodeHeight: 0
+  npcToMoveParameterID: -1
+  charToFollowParameterID: -1
+  npcToMoveID: 0
+  charToFollowID: 0
+  npcToMove: {fileID: 0}
+  charToFollow: {fileID: 0}
+  followPlayer: 1
+  faceWhenIdle: 0
+  updateFrequency: 2
+  followDistance: 1
+  followDistanceMax: 15
+  followType: 0
+  randomDirection: 0
 --- !u!1001 &1977432850
 Prefab:
   m_ObjectHideFlags: 0
@@ -13348,6 +13386,52 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea5605f542385014ea876b897f9b30b9, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &2017354596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9289eb0ca58ef471f9062a5f77161403, type: 3}
+  m_Name: ActionPause(Clone)
+  m_EditorClassIdentifier: 
+  id: 0
+  category: 5
+  title: Wait
+  description: Waits a set time before continuing.
+  isDisplayed: 1
+  showComment: 0
+  comment: 
+  showOutputSockets: 1
+  numSockets: 1
+  willWait: 0
+  isRunning: 0
+  lastResult:
+    resultAction: 0
+    skipAction: -10
+    skipActionActual: {fileID: 0}
+    linkedCutscene: {fileID: 0}
+    linkedAsset: {fileID: 0}
+  endAction: 0
+  skipAction: -1
+  skipActionActual: {fileID: 0}
+  linkedCutscene: {fileID: 0}
+  linkedAsset: {fileID: 0}
+  isEnabled: 1
+  isAssetFile: 0
+  isMarked: 0
+  isBreakPoint: 0
+  nodeRect:
+    serializedVersion: 2
+    x: 14
+    y: 14
+    width: 300
+    height: 86
+  nodeHeight: 0
+  parameterID: -1
+  timeToPause: 0
 --- !u!4 &2019574158 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 788965b17f099b44db9059d48d238f0c, type: 2}
