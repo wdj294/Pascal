@@ -1,0 +1,600 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e62d8d078be49cf8ad9ebe2efcaeb2, type: 3}
+  m_Name: Virgil_SpeechManager
+  m_EditorClassIdentifier: 
+  scrollSubtitles: 1
+  scrollNarration: 1
+  textScrollSpeed: 50
+  textScrollCLip: {fileID: 0}
+  narrationTextScrollCLip: {fileID: 0}
+  playScrollAudioEveryCharacter: 0
+  displayForever: 0
+  displayNarrationForever: 0
+  canSkipWithMouseClicks: 1
+  minimumDisplayTime: 1
+  screenTimeFactor: 0.1
+  allowSpeechSkipping: 0
+  allowGameplaySpeechSkipping: 0
+  skipThresholdTime: 0
+  endScrollBeforeSkip: 0
+  scrollingTextFactorsLength: 0
+  searchAudioFiles: 1
+  autoNameSpeechFiles: 1
+  forceSubtitles: 1
+  translateAudio: 1
+  fallbackAudio: 0
+  keepTextInBuffer: 0
+  relegateBackgroundSpeechAudio: 0
+  usePlayerRealName: 0
+  placeAudioInSubfolders: 0
+  separateLines: 0
+  separateLinePause: 1
+  lines:
+  - isPlayer: 0
+    lineID: 63
+    scene: 
+    owner: 
+    text: Use
+    description: 
+    textType: 4
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 64
+    scene: 
+    owner: 
+    text: Talk to
+    description: 
+    textType: 4
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 65
+    scene: 
+    owner: 
+    text: Look at
+    description: 
+    textType: 4
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 66
+    scene: 
+    owner: ResumeButton
+    text: Resume
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 67
+    scene: 
+    owner: OptionsButton
+    text: Options
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 68
+    scene: 
+    owner: SaveButton
+    text: Save
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 69
+    scene: 
+    owner: LoadButton
+    text: Load
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 70
+    scene: 
+    owner: QuitButton
+    text: Quit
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 71
+    scene: 
+    owner: TitleLabel
+    text: Options
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 72
+    scene: 
+    owner: SpeechSlider
+    text: Speech volume
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 73
+    scene: 
+    owner: MusicSlider
+    text: Music volume
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 74
+    scene: 
+    owner: SFXSlider
+    text: SFX volume
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 75
+    scene: 
+    owner: LanguageCycle
+    text: Language
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 76
+    scene: 
+    owner: SubtitlesToggle
+    text: Subtitles
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 77
+    scene: 
+    owner: BackButton
+    text: Back
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 78
+    scene: 
+    owner: TitleLabel
+    text: Save game
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 88
+    scene: 
+    owner: SavesList
+    text: New save
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 79
+    scene: 
+    owner: BackButton
+    text: Back
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 80
+    scene: 
+    owner: TitleLabel
+    text: Load game
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 81
+    scene: 
+    owner: BackButton
+    text: Back
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 89
+    scene: Character
+    owner: Narrator
+    text: In a galaxy far far away....
+    description: 'From: intro'
+    textType: 0
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: 0
+    orderID: 0
+    orderPrefix: intro_-471224_
+  - isPlayer: 0
+    lineID: 90
+    scene: Character
+    owner: 
+    text: npc1
+    description: 
+    textType: 1
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 91
+    scene: Character
+    owner: 
+    text: cloudout
+    description: 
+    textType: 1
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 92
+    scene: Character
+    owner: 
+    text: Virgil
+    description: 
+    textType: 10
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 93
+    scene: 
+    owner: 
+    text: Use
+    description: 
+    textType: 6
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 94
+    scene: 
+    owner: 
+    text: on
+    description: 
+    textType: 6
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 95
+    scene: 
+    owner: 
+    text: Give
+    description: 
+    textType: 6
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 96
+    scene: 
+    owner: 
+    text: to
+    description: 
+    textType: 6
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 97
+    scene: 
+    owner: 
+    text: Walk to
+    description: 
+    textType: 6
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 98
+    scene: 
+    owner: ProfilesButton
+    text: Profiles
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 99
+    scene: 
+    owner: SubtitlesToggle
+    text: On
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 100
+    scene: 
+    owner: SubtitlesToggle
+    text: Off
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 101
+    scene: 
+    owner: TitleLabel
+    text: Profiles
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 102
+    scene: 
+    owner: CurrentLabel
+    text: 'Current:'
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 103
+    scene: 
+    owner: NewButton
+    text: Create new profile
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  - isPlayer: 0
+    lineID: 104
+    scene: 
+    owner: BackButton
+    text: Back
+    description: 
+    textType: 5
+    translationText: []
+    customAudioClip: {fileID: 0}
+    customLipsyncFile: {fileID: 0}
+    customTranslationAudioClips: []
+    customTranslationLipsyncFiles: []
+    tagID: -1
+    orderID: -1
+    orderPrefix: 
+  languages:
+  - Original
+  languageIsRightToLeft: 00
+  ignoreOriginalText: 0
+  sfxDucking: 0
+  musicDucking: 0
+  lipSyncMode: 0
+  lipSyncOutput: 0
+  phonemes: []
+  lipSyncSpeed: 1
+  maxID: 104
+  sceneFiles:
+  - Assets/Scenes/Chapter01-a.unity
+  - Assets/Scenes/Character.unity
+  - Assets/Scenes/Pascal-MainMenu.unity
+  activeLineID: -1
+  mergeMatchingSpeechIDs: 0
+  useSpeechTags: 0
+  speechTags: []

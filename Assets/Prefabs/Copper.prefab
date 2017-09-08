@@ -1043,7 +1043,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498727669592472}
-  m_LocalRotation: {x: 0.53623605, y: -0.5362732, z: -0.30627596, w: 0.5753755}
+  m_LocalRotation: {x: 0.5362361, y: -0.53627324, z: -0.306276, w: 0.57537556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1069,7 +1069,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865712884226812}
-  m_LocalRotation: {x: -0.72913647, y: -0.34320977, z: -0.51669407, w: 0.28912717}
+  m_LocalRotation: {x: -0.7291364, y: -0.34320974, z: -0.516694, w: 0.28912714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3385,7 +3385,7 @@ MonoBehaviour:
         - 
         - 
         actionEnabled: 01010101010101010101
-        actionIsOpen: 01000001010100000000
+        actionIsOpen: 01010001010100000000
         actionStartIndex: 0000000002000000070000000c00000012000000180000001e000000200000002700000029000000
         actionHashCodes: 5ac852040cdb04050cdb040531ae6403b8ee8100b8ee81005ac85204ca51e9005ac85204ca51e900
         unityObjectParams: []
@@ -3427,9 +3427,9 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             typeName: UnityEngine.Object
-            value: {fileID: 108640603940594752}
-          TargetTypeName: UnityEngine.Light
-          PropertyName: color
+            value: {fileID: 114986586612374894}
+          TargetTypeName: LightTemperature
+          PropertyName: currentLight.color
           BoolParameter:
             useVariable: 0
             name: 
@@ -3524,7 +3524,7 @@ MonoBehaviour:
             value: {fileID: 0}
           ColorParameter:
             useVariable: 1
-            name: 
+            name: lightColor
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -4080,7 +4080,7 @@ MonoBehaviour:
         fsmVector3Params: []
         fsmColorParams:
         - useVariable: 1
-          name: ambientColor
+          name: lightColor
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -4199,7 +4199,13 @@ MonoBehaviour:
       stringVariables: []
       vector2Variables: []
       vector3Variables: []
-      colorVariables: []
+      colorVariables:
+      - useVariable: 1
+        name: lightColor
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: {r: 0, g: 0, b: 0, a: 1}
       rectVariables: []
       quaternionVariables: []
       gameObjectVariables: []
@@ -4210,7 +4216,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000
+      variableCategoryIDs: 0000000000000000000000000000000000000000000000000000000000000000
     description: 
     docUrl: 
     showStateLabel: 1
