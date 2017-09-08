@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 114614717085219120}
   - component: {fileID: 114631551554646162}
   m_Layer: 0
-  m_Name: Copper
+  m_Name: Hydrogen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1787,7 +1787,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 83784f3bf46e04387a1a401c341a0844, type: 2}
+  - {fileID: 2100000, guid: f7e327f9ac4f14d0fa4f5eedfcddc1bd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3006,13 +3006,13 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0.26635462, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 0.5
@@ -3855,21 +3855,21 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           typeName: 
-          value: {fileID: 2100000, guid: 83784f3bf46e04387a1a401c341a0844, type: 2}
+          value: {fileID: 2100000, guid: f7e327f9ac4f14d0fa4f5eedfcddc1bd, type: 2}
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
           typeName: 
-          value: {fileID: 2100000, guid: 83784f3bf46e04387a1a401c341a0844, type: 2}
+          value: {fileID: 2100000, guid: f7e327f9ac4f14d0fa4f5eedfcddc1bd, type: 2}
         - useVariable: 0
           name: 
           tooltip: 
           showInInspector: 0
           networkSync: 0
           typeName: 
-          value: {fileID: 2100000, guid: 83784f3bf46e04387a1a401c341a0844, type: 2}
+          value: {fileID: 2100000, guid: f7e327f9ac4f14d0fa4f5eedfcddc1bd, type: 2}
         - useVariable: 0
           name: 
           tooltip: 
@@ -4278,7 +4278,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967087949619150}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1384774831, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
@@ -4306,13 +4306,15 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.GetProperty
         - HutongGames.PlayMaker.Actions.SetProperty
+        - HutongGames.PlayMaker.Actions.SetProperty
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000002000000
-        actionHashCodes: 5ac852045ac85204
+        - 
+        actionEnabled: 000000
+        actionIsOpen: 010101
+        actionStartIndex: 000000000200000004000000
+        actionHashCodes: 5ac852045ac852045ac85204
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -4585,6 +4587,138 @@ MonoBehaviour:
             vector4Values: []
             objectReferences: []
           setProperty: 1
+        - TargetObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            typeName: UnityEngine.Object
+            value: {fileID: 108640603940594752}
+          TargetTypeName: UnityEngine.Light
+          PropertyName: color
+          BoolParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          FloatParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          IntParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 0
+          GameObjectParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+          StringParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: 
+          Vector2Parameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {x: 0, y: 0}
+          Vector3Parameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {x: 0, y: 0, z: 0}
+          RectParamater:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value:
+              serializedVersion: 2
+              x: 0
+              y: 0
+              width: 0
+              height: 0
+          QuaternionParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {x: 0, y: 0, z: 0, w: 0}
+          ObjectParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            typeName: UnityEngine.Color
+            value: {fileID: 0}
+          MaterialParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            typeName: 
+            value: {fileID: 0}
+          TextureParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            typeName: 
+            value: {fileID: 0}
+          ColorParameter:
+            useVariable: 1
+            name: lightColor
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {r: 0, g: 0, b: 0, a: 1}
+          EnumParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            enumName: 
+            intValue: 0
+          ArrayParameter:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
+          setProperty: 1
         layoutOptionParams: []
         fsmStringParams: []
         fsmObjectParams: []
@@ -4600,19 +4734,21 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0101
+        byteData: 010101
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 24000000010000002400000001000000
+        paramDataType: 240000000100000024000000010000002400000001000000
         paramName:
         - targetProperty
         - everyFrame
         - targetProperty
         - everyFrame
-        paramDataPos: 00000000000000000100000001000000
-        paramByteDataSize: 00000000010000000000000001000000
+        - targetProperty
+        - everyFrame
+        paramDataPos: 000000000000000001000000010000000200000002000000
+        paramByteDataSize: 000000000100000000000000010000000000000001000000
     events: []
     globalTransitions: []
     variables:
@@ -4628,7 +4764,13 @@ MonoBehaviour:
       stringVariables: []
       vector2Variables: []
       vector3Variables: []
-      colorVariables: []
+      colorVariables:
+      - useVariable: 1
+        name: lightColor
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: {r: 0, g: 0, b: 0, a: 1}
       rectVariables: []
       quaternionVariables: []
       gameObjectVariables: []
@@ -4639,7 +4781,7 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000
+      variableCategoryIDs: 0000000000000000
     description: 
     docUrl: 
     showStateLabel: 1
@@ -4649,7 +4791,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -5172,7 +5314,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1967087949619150}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98f06df795b956748836973ac3f2496b, type: 3}
   m_Name: 

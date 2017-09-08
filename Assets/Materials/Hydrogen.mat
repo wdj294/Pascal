@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Copper
-  m_Shader: {fileID: 4800000, guid: 5d055286cf26847b385f123434ab077b, type: 3}
+  m_Name: Hydrogen
+  m_Shader: {fileID: 4800000, guid: 9b8c1bb5c666c49e1b2272ea680d8546, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
@@ -56,22 +56,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
+    - _ChromaticAberration: 0.051
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionIntensity: 0.28229046
+    - _EmissionIntensity: 0.0293
     - _Float1: 1.340572
     - _Float3: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Metallic: 1
+    - _Metallic: 0.181
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 0.013
     - _Parallax: 0.02
+    - _Refraction: 0.856
     - _ShieldDistortion: 0.03
-    - _ShieldSpeed: 2.8229046
-    - _Smoothness: 0.65
+    - _ShieldSpeed: 0.293
+    - _Smoothness: 0.865
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -79,6 +82,6 @@ Material:
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Albedo: {r: 0.38235295, g: 0.24965389, b: 0.05060554, a: 1}
+    - _Albedo: {r: 0.52205884, g: 0.7626776, b: 1, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 1, g: 0.8177201, b: 0.67088854, a: 1}
+    - _EmissionColor: {r: 0.47794116, g: 0.7407709, b: 1, a: 1}
