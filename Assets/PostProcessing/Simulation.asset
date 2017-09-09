@@ -104,7 +104,7 @@ MonoBehaviour:
         threshold: 0.5
         softKnee: 0.5
         radius: 6.62
-        antiFlicker: 0
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
@@ -278,7 +278,7 @@ MonoBehaviour:
   userLut:
     m_Enabled: 0
     m_Settings:
-      lut: {fileID: 0}
+      lut: {fileID: 2800000, guid: ce603d0e52a82984fb463b7e7c80e621, type: 3}
       contribution: 1
   chromaticAberration:
     m_Enabled: 0
