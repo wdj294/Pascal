@@ -91,7 +91,8 @@ Shader "Copper"
 		void vertexDataFunc( inout appdata_full v, out Input o )
 		{
 			UNITY_INITIALIZE_OUTPUT( Input, o );
-			float simplePerlin3D11 = snoise( ( float4( v.normal , 0.0 ) + ( ( _Time * _ShieldSpeed ) / 5.0 ) ).xyz );
+			float3 ase_vertexNormal = v.normal.xyz;
+			float simplePerlin3D11 = snoise( ( float4( ase_vertexNormal , 0.0 ) + ( ( _Time * _ShieldSpeed ) / 5.0 ) ).xyz );
 			float3 temp_cast_2 = ((( _ShieldDistortion * 0.0 ) + (simplePerlin3D11 - 0.0) * (_ShieldDistortion - ( _ShieldDistortion * 0.0 )) / (1.0 - 0.0))).xxx;
 			v.vertex.xyz += temp_cast_2;
 		}
@@ -111,11 +112,11 @@ Shader "Copper"
 	CustomEditor "ASEMaterialInspector"
 }
 /*ASEBEGIN
-Version=11001
-111;83;861;649;2443.271;815.1746;2.423047;True;False
-Node;AmplifyShaderEditor.CommentaryNode;9;-2503.45,-1295.344;Float;False;830.728;358.1541;Comment;3;19;13;12;Animation Speed;0;0
+Version=13101
+0;94;1167;930;2443.271;815.1746;2.423047;True;False
+Node;AmplifyShaderEditor.CommentaryNode;9;-2503.45,-1295.344;Float;False;830.728;358.1541;Comment;3;19;13;12;Animation Speed;1,1,1,1;0;0
 Node;AmplifyShaderEditor.RangedFloatNode;13;-2444.591,-1047.29;Float;False;Property;_ShieldSpeed;ShieldSpeed;6;0;3;0;100;0;1;FLOAT
-Node;AmplifyShaderEditor.CommentaryNode;8;-1755.566,-572.8765;Float;False;1223.975;464.9008;Comment;8;21;20;18;17;16;14;11;10;Shield Distortion;0;0
+Node;AmplifyShaderEditor.CommentaryNode;8;-1755.566,-572.8765;Float;False;1223.975;464.9008;Comment;8;21;20;18;17;16;14;11;10;Shield Distortion;1,1,1,1;0;0
 Node;AmplifyShaderEditor.TimeNode;12;-2379.858,-1245.345;Float;False;0;5;FLOAT4;FLOAT;FLOAT;FLOAT;FLOAT
 Node;AmplifyShaderEditor.RangedFloatNode;17;-1731.86,-283.0043;Float;False;Constant;_Float5;Float 5;7;0;5;0;0;0;1;FLOAT
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;19;-2137.321,-1121.932;Float;False;2;2;0;FLOAT4;0.0;False;1;FLOAT;0,0,0,0;False;1;FLOAT4
@@ -129,11 +130,11 @@ Node;AmplifyShaderEditor.RangedFloatNode;6;-283.7973,-167.7811;Float;False;Prope
 Node;AmplifyShaderEditor.NoiseGeneratorNode;11;-1167.256,-477.6716;Float;False;Simplex3D;1;0;FLOAT3;0,0;False;1;FLOAT
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;18;-1147.287,-380.0736;Float;False;2;2;0;FLOAT;0.0;False;1;FLOAT;0.0;False;1;FLOAT
 Node;AmplifyShaderEditor.RangedFloatNode;1;-316.334,-60.80289;Float;False;Property;_Metallic;Metallic;0;0;0;0;1;0;1;FLOAT
-Node;AmplifyShaderEditor.TFHCRemap;21;-977.8862,-432.4345;Float;True;5;0;FLOAT;0.0;False;1;FLOAT;0.0;False;2;FLOAT;1.0;False;3;FLOAT;-0.01;False;4;FLOAT;0.01;False;1;FLOAT
 Node;AmplifyShaderEditor.RangedFloatNode;2;-325.7518,32.45255;Float;False;Property;_Smoothness;Smoothness;1;0;0;0;1;0;1;FLOAT
 Node;AmplifyShaderEditor.ColorNode;3;-144.591,-604.4686;Float;False;Property;_Albedo;Albedo;2;0;0,0,0,0;0;5;COLOR;FLOAT;FLOAT;FLOAT;FLOAT
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;7;-43.52362,-343.219;Float;False;2;2;0;COLOR;0.0;False;1;FLOAT;0,0,0,0;False;1;COLOR
-Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;127,-153;Float;False;True;2;Float;ASEMaterialInspector;0;Standard;Copper;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;0;False;0;0;Opaque;0.5;True;True;0;False;Opaque;Geometry;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;False;0;255;255;0;0;0;0;False;0;4;10;25;False;0.5;True;0;Zero;Zero;0;Zero;Zero;Add;Add;0;False;0;0,0,0,0;VertexOffset;False;Cylindrical;Relative;0;;-1;-1;-1;-1;0;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0.0;False;4;FLOAT;0.0;False;5;FLOAT;0.0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0.0;False;9;FLOAT;0.0;False;10;OBJECT;0.0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
+Node;AmplifyShaderEditor.TFHCRemap;21;-977.8862,-432.4345;Float;True;5;0;FLOAT;0.0;False;1;FLOAT;0.0;False;2;FLOAT;1.0;False;3;FLOAT;-0.01;False;4;FLOAT;0.01;False;1;FLOAT
+Node;AmplifyShaderEditor.StandardSurfaceOutputNode;0;127,-153;Float;False;True;2;Float;ASEMaterialInspector;0;0;Standard;Copper;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;Back;0;0;False;0;0;Opaque;0.5;True;True;0;False;Opaque;Geometry;All;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;True;False;0;255;255;0;0;0;0;False;0;4;10;25;False;0.5;True;0;Zero;Zero;0;Zero;Zero;Add;Add;0;False;0;0,0,0,0;VertexOffset;False;Cylindrical;False;Relative;0;;-1;-1;-1;-1;0;0;15;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;2;FLOAT3;0,0,0;False;3;FLOAT;0.0;False;4;FLOAT;0.0;False;5;FLOAT;0.0;False;6;FLOAT3;0,0,0;False;7;FLOAT3;0,0,0;False;8;FLOAT;0.0;False;9;FLOAT;0.0;False;10;OBJECT;0.0;False;11;FLOAT3;0,0,0;False;12;FLOAT3;0,0,0;False;14;FLOAT4;0,0,0,0;False;15;FLOAT3;0,0,0;False;0
 WireConnection;19;0;12;0
 WireConnection;19;1;13;0
 WireConnection;20;0;19;0
@@ -143,15 +144,15 @@ WireConnection;14;1;20;0
 WireConnection;10;0;15;0
 WireConnection;11;0;14;0
 WireConnection;18;0;15;0
+WireConnection;7;0;5;0
+WireConnection;7;1;6;0
 WireConnection;21;0;11;0
 WireConnection;21;3;18;0
 WireConnection;21;4;10;0
-WireConnection;7;0;5;0
-WireConnection;7;1;6;0
 WireConnection;0;0;3;0
 WireConnection;0;2;7;0
 WireConnection;0;3;1;0
 WireConnection;0;4;2;0
 WireConnection;0;11;21;0
 ASEEND*/
-//CHKSM=3584DBCE13E89E9A97E2013FC4B355A232C18013
+//CHKSM=7DBE634D1225FCB6A5D4F5374F6A31D2AD6F3FDE
