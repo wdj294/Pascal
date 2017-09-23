@@ -18,7 +18,7 @@ public class NewBehaviourScript : MonoBehaviour {
 		{
 			float tempChange = Time.deltaTime * temperatureFactor;
 
-			if (Input.GetButton("Fire1") && !overheating) {
+			if (Input.GetButton("Fire2") && !overheating) {
 
 				temperature = Math.Min (maxTemperature, temperature + tempChange);
 

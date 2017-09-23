@@ -1129,7 +1129,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1498727669592472}
-  m_LocalRotation: {x: 0.53623605, y: -0.5362732, z: -0.30627596, w: 0.5753755}
+  m_LocalRotation: {x: 0.5362361, y: -0.53627324, z: -0.306276, w: 0.57537556}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1155,7 +1155,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1865712884226812}
-  m_LocalRotation: {x: -0.72913647, y: -0.34320977, z: -0.51669407, w: 0.28912717}
+  m_LocalRotation: {x: -0.7291364, y: -0.34320974, z: -0.516694, w: 0.28912714}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3093,7 +3093,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 1, g: 0.7626442, b: 0.6764706, a: 1}
+  m_Color: {r: 1, g: 0.6115996, b: 0.4705882, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -3689,7 +3689,7 @@ MonoBehaviour:
         - Set Density
         - 
         actionEnabled: 01010101010101010101
-        actionIsOpen: 00000100000000000001
+        actionIsOpen: 01010100000000000001
         actionStartIndex: 000000000200000007000000090000000e000000140000001a00000020000000270000002f000000
         actionHashCodes: 5ac852040cdb04055ac852040cdb040531ae6403b8ee8100b8ee8100ca51e900ca51e9005ac85204
         unityObjectParams: []
@@ -4323,7 +4323,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 1000
+          value: 5000
         - useVariable: 1
           name: tempEmission
           tooltip: 
@@ -4530,7 +4530,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -4678,7 +4678,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hydrogen
+  m_Text: Copper
 --- !u!114 &114586610263495998
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4750,7 +4750,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3cd29fa64b4264869bcacfa50749fbe3, type: 3}
+    m_Font: {fileID: 12800000, guid: afa816953e4c142948873d910d0517e8, type: 3}
     m_FontSize: 160
     m_FontStyle: 0
     m_BestFit: 1
@@ -4941,7 +4941,7 @@ MonoBehaviour:
   Prominence: {fileID: 114707967685960446}
 --- !u!114 &114769411370892462
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272996624034054}

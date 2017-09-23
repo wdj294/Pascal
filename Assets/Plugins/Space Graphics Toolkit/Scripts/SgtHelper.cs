@@ -338,6 +338,14 @@ public static partial class SgtHelper
 		return false;
 	}
 
+	// This will begin a new need based on a seed and transform it based on a grid cell hash that tries to minimize visible symmetry
+	public static void BeginRandomSeed(int newSeed, long x, long y, long z)
+	{
+		var seed = newSeed ^ (x * (1<<8) ) ^ (y * (1<<16) ) ^ (z * (1<<24) );
+
+		BeginRandomSeed((int)(seed % int.MaxValue));
+	}
+
 	public static void BeginRandomSeed(int newSeed)
 	{
 		seedStates.Push(Random.state);

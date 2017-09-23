@@ -18,6 +18,8 @@ public class SgtTerrainObject_Editor : SgtEditor<SgtTerrainObject>
 
 		BeginDisabled();
 			DrawDefault("Prefab");
+			DrawDefault("X");
+			DrawDefault("Y");
 		EndDisabled();
 	}
 }
@@ -45,12 +47,14 @@ public class SgtTerrainObject : MonoBehaviour
 	[Tooltip("How far from the center the height samples are taken to align to the surface normal in world coordinates (0 = no alignment)")]
 	public float AlignToNormal;
 
-	public long X;
-
-	public long Y;
-
 	[Tooltip("The prefab this was instantiated from")]
 	public SgtTerrainObject Prefab;
+
+	[Tooltip("Cell column this object was spawned on")]
+	public long X;
+
+	[Tooltip("Cell row this object was spawned on")]
+	public long Y;
 
 	public void Spawn(SgtTerrain terrain, SgtTerrainLevel level, SgtVector3D localPoint)
 	{
@@ -65,8 +69,10 @@ public class SgtTerrainObject : MonoBehaviour
 		var up = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f) * Vector3.up;
 
 		// Spawn on surface
+		var twist = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f);
+
 		transform.localPosition = (Vector3)localPoint;
-		transform.localRotation = Quaternion.FromToRotation(up, terrain.transform.TransformDirection(transform.localPosition));
+		transform.localRotation = Quaternion.FromToRotation(up, terrain.transform.TransformDirection(transform.localPosition)) * twist;
 		transform.localScale    = Prefab.transform.localScale * Random.Range(ScaleMin, ScaleMax);
 		//transform.rotation   = Quaternion.FromToRotation(up, terrain.transform.TransformDirection(localPosition));
 		

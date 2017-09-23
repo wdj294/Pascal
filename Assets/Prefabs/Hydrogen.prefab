@@ -2849,7 +2849,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.47794116, g: 0.69756585, b: 1, a: 1}
+  m_Color: {r: 0.75735295, g: 0.85943204, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 3
   m_SpotAngle: 30
@@ -2910,7 +2910,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 3cd29fa64b4264869bcacfa50749fbe3, type: 3}
+    m_Font: {fileID: 12800000, guid: afa816953e4c142948873d910d0517e8, type: 3}
     m_FontSize: 160
     m_FontStyle: 0
     m_BestFit: 1
@@ -3867,7 +3867,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 0
           networkSync: 0
-          value: 1000
+          value: 3000
         - useVariable: 1
           name: tempEmission
           tooltip: 
@@ -4074,7 +4074,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -4628,7 +4628,7 @@ MonoBehaviour:
   Prominence: {fileID: 114707967685960446}
 --- !u!114 &114777728768394810
 MonoBehaviour:
-  m_ObjectHideFlags: 2
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798245736849976}

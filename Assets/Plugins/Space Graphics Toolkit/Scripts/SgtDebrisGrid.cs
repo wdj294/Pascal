@@ -179,10 +179,7 @@ public class SgtDebrisGrid : MonoBehaviour
 						{
 							if (bounds.Contains(x, y, z) == false)
 							{
-								// Calculate seed for this grid cell and try to minimize visible symmetry
-								var seed = Seed ^ (x * (1<<8) ) ^ (y * (1<<16) ) ^ (z * (1<<24) );
-
-								SgtHelper.BeginRandomSeed((int)(seed % int.MaxValue));
+								SgtHelper.BeginRandomSeed(Seed, x, y, z);
 								{
 									// Can debris potentially spawn in this cell?
 									if (Random.value < probability)

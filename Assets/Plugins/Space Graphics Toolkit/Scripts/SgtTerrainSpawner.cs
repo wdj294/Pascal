@@ -15,6 +15,7 @@ public class SgtTerrainSpawner_Editor : SgtEditor<SgtTerrainSpawner>
 		BeginError(Any(t => t.Depth < 0));
 			DrawDefault("Depth", ref updateTerrain);
 		EndError();
+		DrawDefault("Seed", ref updateTerrain);
 		DrawDefault("SpawnProbability", ref updateTerrain);
 		DrawDefault("HeightMin", ref updateTerrain);
 		DrawDefault("HeightMax", ref updateTerrain);
@@ -32,18 +33,18 @@ public class SgtTerrainSpawner_Editor : SgtEditor<SgtTerrainSpawner>
 	{
 		if (prefabs == null || prefabs.Count == 0)
 		{
-			return false;
+			return true;
 		}
 
 		for (var i = prefabs.Count - 1; i >= 0; i--)
 		{
 			if (prefabs[i] == null)
 			{
-				return false;
+				return true;
 			}
 		}
 
-		return true;
+		return false;
 	}
 }
 #endif
@@ -108,12 +109,18 @@ public class SgtTerrainSpawner : SgtTerrainModifier
 	[Tooltip("The patch depth required for these objects to spawn")]
 	public int Depth;
 
+	[Tooltip("The random seed used to spawn the prefabs")]
+	[SgtSeed]
+	public int Seed;
+
 	[Tooltip("This decides how many prefabs get spawned based on a random 0..1 sample on the x axis")]
 	[Range(0.0f, 1.0f)]
 	public float SpawnProbability;
 
+	[Tooltip("The minimum terrain height required for these prefabs to spawn")]
 	public float HeightMin = 1.0f;
 
+	[Tooltip("The maximum terrain height required for these prefabs to spawn")]
 	public float HeightMax = 1.1f;
 
 	[Tooltip("The prefabs we want to spawn on the terrain patch")]
@@ -238,6 +245,9 @@ public class SgtTerrainSpawner : SgtTerrainModifier
 
 			face.Clear(ring);
 
+			// Make sure each face and level has a unique seed
+			var z = level.GetHashCode();
+
 			for (var y = ring.Outer.minY; y <= ring.Outer.maxY; y++)
 			{
 				for (var x = ring.Outer.minX; x <= ring.Outer.maxX; x++)
@@ -247,10 +257,14 @@ public class SgtTerrainSpawner : SgtTerrainModifier
 						continue;
 					}
 
-					if (Random.value < SpawnProbability)
+					SgtHelper.BeginRandomSeed(Seed, x, y, z);
 					{
-						AddObject(face, ring, x, y);
+						if (Random.value < SpawnProbability)
+						{
+							AddObject(face, ring, x, y);
+						}
 					}
+					SgtHelper.EndRandomSeed();
 				}
 			}
 

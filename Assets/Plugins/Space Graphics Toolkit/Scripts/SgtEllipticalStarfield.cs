@@ -11,7 +11,7 @@ public class SgtEllipticalStarfield_Editor : SgtPointStarfield_Editor<SgtEllipti
 	{
 		var updateMaterial        = false;
 		var updateMeshesAndModels = false;
-		
+
 		DrawMaterial(ref updateMaterial);
 
 		Separator();
@@ -31,9 +31,9 @@ public class SgtEllipticalStarfield_Editor : SgtPointStarfield_Editor<SgtEllipti
 		DrawDefault("Symmetry", ref updateMeshesAndModels);
 		DrawDefault("Offset", ref updateMeshesAndModels);
 		DrawDefault("Inverse", ref updateMeshesAndModels);
-		
+
 		Separator();
-		
+
 		BeginError(Any(t => t.StarCount < 0));
 			DrawDefault("StarCount", ref updateMeshesAndModels);
 		EndError();
@@ -95,7 +95,7 @@ public class SgtEllipticalStarfield : SgtPointStarfield
 	[Tooltip("The maximum amount a star's size can pulse over time. A value of 1 means the star can potentially pulse between its maximum size, and 0")]
 	[Range(0.0f, 1.0f)]
 	public float StarPulseMax = 1.0f;
-	
+
 	public static SgtEllipticalStarfield CreateEllipticalStarfield(int layer = 0, Transform parent = null)
 	{
 		return CreateEllipticalStarfield(layer, parent, Vector3.zero, Quaternion.identity, Vector3.one);
