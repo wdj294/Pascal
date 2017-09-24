@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: Hydrogen
   m_Shader: {fileID: 4800000, guid: 9b8c1bb5c666c49e1b2272ea680d8546, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _SINGLECOLOR_ON
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -32,6 +32,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _DetailNormalMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Details:
+        m_Texture: {fileID: -1356567657, guid: 6a47af7dbadd7b24ca6ddc8ac72ea88d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -76,29 +80,37 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EmissionIntensity: 1.5502666
+    - _EmissionIntensity: 2.067317
     - _Float1: 1.340572
     - _Float3: 0
+    - _FlowSpeed: 1
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
-    - _Metallic: 0.36
+    - _Metallic: 0.699
     - _Mode: 0
-    - _NormalScale: 0
+    - _NormalScale: 0.18
     - _OcclusionStrength: 1
     - _Opacity: 0
     - _Parallax: 0.02
-    - _Refraction: 0.966
-    - _ShieldDistortion: 0.01
-    - _ShieldSpeed: 46.508
-    - _Smoothness: 0.977
+    - _Refraction: 0.713
+    - _Rim: 1
+    - _RimPower: 7.79
+    - _ShieldDistortion: 0
+    - _ShieldSpeed: 62.01951
+    - _SingleColor: 0
+    - _Size: 0.48
+    - _Smoothness: 0.817
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
+    - _Spots: 0.4785528
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     - __dirty: 0
     m_Colors:
-    - _Albedo: {r: 0.5441177, g: 0.5441177, b: 0.5441177, a: 0}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Albedo: {r: 0.53676474, g: 0.53676474, b: 0.53676474, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color2: {r: 1, g: 0.5586207, b: 0, a: 1}
     - _EmissionColor: {r: 0.75735295, g: 0.85943204, b: 1, a: 1}
+    - _RimColor: {r: 0.992647, g: 0.2554605, b: 0.2554605, a: 0}
