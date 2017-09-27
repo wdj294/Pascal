@@ -59,28 +59,11 @@ GameObject:
   - component: {fileID: 114717540604374672}
   - component: {fileID: 54276501169287146}
   - component: {fileID: 114429365836528150}
-  - component: {fileID: 114064925367029896}
-  - component: {fileID: 114488377578781874}
   - component: {fileID: 114119213012620898}
   - component: {fileID: 114917069357771894}
   - component: {fileID: 114614717085219120}
   m_Layer: 0
   m_Name: Hydrogen
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1499032117494486
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4773358134136072}
-  m_Layer: 0
-  m_Name: Corona
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,21 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1977837880376470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4428140700606004}
-  m_Layer: 0
-  m_Name: Prominence
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!4 &4240403850372098
 Transform:
   m_ObjectHideFlags: 1
@@ -184,19 +152,6 @@ Transform:
   m_Father: {fileID: 4505253952906874}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4428140700606004
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1977837880376470}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4505253952906874}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4505253952906874
 Transform:
   m_ObjectHideFlags: 1
@@ -209,23 +164,8 @@ Transform:
   m_Children:
   - {fileID: 4240403850372098}
   - {fileID: 224893136111416960}
-  - {fileID: 4428140700606004}
-  - {fileID: 4773358134136072}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4773358134136072
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499032117494486}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4505253952906874}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23516123678202718
 MeshRenderer:
@@ -364,18 +304,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: H
---- !u!114 &114064925367029896
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216932008021068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bfb1d3dd33d1443bdea6dd00ce03d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &114119213012620898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -457,17 +385,29 @@ MonoBehaviour:
       transitions: []
       actionData:
         actionNames:
+        - HutongGames.PlayMaker.Actions.FloatOperator
+        - HutongGames.PlayMaker.Actions.FloatMultiply
+        - HutongGames.PlayMaker.Actions.FindGameObject
         - HutongGames.PlayMaker.Actions.GetProperty
         - HutongGames.PlayMaker.Actions.GetProperty
+        - HutongGames.PlayMaker.Actions.GetComponent
         - HutongGames.PlayMaker.Actions.FloatOperator
         - HutongGames.PlayMaker.Actions.FloatOperator
         - HutongGames.PlayMaker.Actions.SetMaterialColor
         - HutongGames.PlayMaker.Actions.SetMaterialFloat
         - HutongGames.PlayMaker.Actions.SetMaterialFloat
+        - HutongGames.PlayMaker.Actions.SetMaterialFloat
         - HutongGames.PlayMaker.Actions.CallMethod
         - HutongGames.PlayMaker.Actions.CallMethod
-        - HutongGames.PlayMaker.Actions.SetProperty
+        - HutongGames.PlayMaker.Actions.FindGameObject
+        - HutongGames.PlayMaker.Actions.GetProperty
+        - HutongGames.PlayMaker.Actions.GetComponent
         customNames:
+        - 
+        - 
+        - 
+        - 
+        - 
         - 
         - 
         - 
@@ -478,13 +418,43 @@ MonoBehaviour:
         - Set Volume
         - 
         - 
-        actionEnabled: 01010101010101010101
-        actionIsOpen: 01010100010101000001
-        actionStartIndex: 000000000200000004000000090000000e000000140000001a00000020000000270000002f000000
-        actionHashCodes: 5ac852045ac852040cdb04050cdb040531ae6403b8ee8100b8ee8100ca51e900ca51e9005ac85204
+        - 
+        - 
+        actionEnabled: 0101010101010101010101010101010101
+        actionIsOpen: 0101000101000101010101010100010101
+        actionStartIndex: 0000000005000000080000000b0000000d0000000f00000012000000170000001c00000022000000280000002e000000340000003b000000430000004600000048000000
+        actionHashCodes: 0cdb04059845b305786b39025ac852045ac8520404d814020cdb04050cdb040531ae6403b8ee8100b8ee8100b8ee8100ca51e900ca51e900786b39025ac8520404d81402
         unityObjectParams: []
-        fsmGameObjectParams: []
+        fsmGameObjectParams:
+        - useVariable: 1
+          name: heat
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
+        - useVariable: 1
+          name: heat
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
         fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: heat
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         - ownerOption: 0
           gameObject:
             useVariable: 0
@@ -505,6 +475,14 @@ MonoBehaviour:
           gameObject:
             useVariable: 0
             name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: heat
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -629,7 +607,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            enumName: 
+            enumName: HutongGames.PlayMaker.None
             intValue: 0
           ArrayParameter:
             useVariable: 0
@@ -638,7 +616,7 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             type: -1
-            objectTypeName: 
+            objectTypeName: UnityEngine.Object
             floatValues: []
             intValues: 
             boolValues: 
@@ -647,12 +625,12 @@ MonoBehaviour:
             objectReferences: []
           setProperty: 0
         - TargetObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: heatTemp
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            typeName: UnityEngine.Object
+            typeName: NewBehaviourScript
             value: {fileID: 0}
           TargetTypeName: NewBehaviourScript
           PropertyName: temperature
@@ -761,7 +739,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            enumName: 
+            enumName: HutongGames.PlayMaker.None
             intValue: 0
           ArrayParameter:
             useVariable: 0
@@ -770,7 +748,7 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             type: -1
-            objectTypeName: 
+            objectTypeName: UnityEngine.Object
             floatValues: []
             intValues: 
             boolValues: 
@@ -779,15 +757,15 @@ MonoBehaviour:
             objectReferences: []
           setProperty: 0
         - TargetObject:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: heatTemp
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            typeName: UnityEngine.Object
-            value: {fileID: 114488377578781874}
-          TargetTypeName: UnityEngine.Object
-          PropertyName: 
+            typeName: NewBehaviourScript
+            value: {fileID: 0}
+          TargetTypeName: NewBehaviourScript
+          PropertyName: temperature
           BoolParameter:
             useVariable: 0
             name: 
@@ -796,8 +774,8 @@ MonoBehaviour:
             networkSync: 0
             value: 0
           FloatParameter:
-            useVariable: 0
-            name: 
+            useVariable: 1
+            name: temp
             tooltip: 
             showInInspector: 0
             networkSync: 0
@@ -862,7 +840,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            typeName: 
+            typeName: System.Single
             value: {fileID: 0}
           MaterialParameter:
             useVariable: 0
@@ -893,7 +871,7 @@ MonoBehaviour:
             tooltip: 
             showInInspector: 0
             networkSync: 0
-            enumName: 
+            enumName: HutongGames.PlayMaker.None
             intValue: 0
           ArrayParameter:
             useVariable: 0
@@ -902,16 +880,28 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             type: -1
-            objectTypeName: 
+            objectTypeName: UnityEngine.Object
             floatValues: []
             intValues: 
             boolValues: 
             stringValues: []
             vector4Values: []
             objectReferences: []
-          setProperty: 1
+          setProperty: 0
         layoutOptionParams: []
         fsmStringParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Heat
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Untagged
         - useVariable: 0
           name: 
           tooltip: 
@@ -924,6 +914,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: _EmissionIntensity
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: _RimPower
         - useVariable: 0
           name: 
           tooltip: 
@@ -942,7 +938,33 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Density
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Heat
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: Untagged
         fsmObjectParams:
+        - useVariable: 1
+          name: heatTemp
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: NewBehaviourScript
+          value: {fileID: 0}
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: 
+          value: {fileID: 2100000, guid: f7e327f9ac4f14d0fa4f5eedfcddc1bd, type: 2}
         - useVariable: 0
           name: 
           tooltip: 
@@ -978,6 +1000,13 @@ MonoBehaviour:
           networkSync: 0
           typeName: sphereDensity
           value: {fileID: 114917069357771894}
+        - useVariable: 1
+          name: heatTemp
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: NewBehaviourScript
+          value: {fileID: 0}
         fsmVarParams:
         - variableName: 
           objectType: UnityEngine.Object
@@ -1115,6 +1144,36 @@ MonoBehaviour:
           networkSync: 0
           value: 3000
         - useVariable: 1
+          name: tempRimPower
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: tempRimPower
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: -1
+        - useVariable: 1
+          name: temp
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 3000
+        - useVariable: 1
           name: tempEmission
           tooltip: 
           showInInspector: 0
@@ -1145,12 +1204,24 @@ MonoBehaviour:
           networkSync: 0
           value: 100
         - useVariable: 1
+          name: tempRimPower
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
           name: tempSpeed
           tooltip: 
           showInInspector: 0
           networkSync: 0
           value: 0
         fsmIntParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         - useVariable: 0
           name: 
           tooltip: 
@@ -1182,18 +1253,32 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 0101030000000103000000010101010100010001
+        byteData: 0300000001010101010300000001030000000101010101010001000101
         arrayParamSizes: 0100000002000000
         arrayParamTypes:
         - HutongGames.PlayMaker.FsmVar
         - HutongGames.PlayMaker.FsmVar
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 240000000100000024000000010000000f0000000f000000070000000f000000010000000f0000000f000000070000000f00000001000000140000001000000020000000120000001900000001000000140000001000000020000000120000000f00000001000000140000001000000020000000120000000f0000000100000018000000120000000c0000002700000027000000010000000100000018000000120000000c00000027000000270000002700000001000000010000002400000001000000
+        paramDataType: 0f0000000f000000070000000f000000010000000f0000000f00000001000000120000001200000013000000240000000100000024000000010000001400000018000000010000000f0000000f000000070000000f000000010000000f0000000f000000070000000f00000001000000140000001000000020000000120000001900000001000000140000001000000020000000120000000f00000001000000140000001000000020000000120000000f00000001000000140000001000000020000000120000000f0000000100000018000000120000000c0000002700000027000000010000000100000018000000120000000c00000027000000270000002700000001000000010000001200000012000000130000002400000001000000140000001800000001000000
         paramName:
+        - float1
+        - float2
+        - operation
+        - storeResult
+        - everyFrame
+        - floatVariable
+        - multiplyBy
+        - everyFrame
+        - objectName
+        - withTag
+        - store
         - targetProperty
         - everyFrame
         - targetProperty
+        - everyFrame
+        - gameObject
+        - storeComponent
         - everyFrame
         - float1
         - float2
@@ -1223,6 +1308,12 @@ MonoBehaviour:
         - namedFloat
         - floatValue
         - everyFrame
+        - gameObject
+        - materialIndex
+        - material
+        - namedFloat
+        - floatValue
+        - everyFrame
         - behaviour
         - methodName
         - parameters
@@ -1238,10 +1329,16 @@ MonoBehaviour:
         - storeResult
         - everyFrame
         - manualUI
+        - objectName
+        - withTag
+        - store
         - targetProperty
         - everyFrame
-        paramDataPos: 000000000000000001000000010000000000000001000000020000000200000006000000030000000400000007000000050000000b00000000000000000000000000000000000000000000000c00000001000000010000000100000001000000060000000d00000002000000020000000200000002000000070000000e00000003000000030000000000000000000000010000000f0000001000000004000000040000000100000002000000030000000400000011000000120000000200000013000000
-        paramByteDataSize: 00000000010000000000000001000000000000000000000004000000000000000100000000000000000000000400000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000010000000000000001000000
+        - gameObject
+        - storeComponent
+        - everyFrame
+        paramDataPos: 000000000100000000000000020000000400000003000000040000000500000000000000010000000000000000000000060000000100000007000000000000000000000008000000050000000600000009000000070000000d00000008000000090000000e0000000a00000012000000010000000000000001000000020000000000000013000000020000000100000002000000030000000b00000014000000030000000200000003000000040000000c00000015000000040000000300000004000000050000000d0000001600000005000000060000000000000000000000010000001700000018000000060000000700000001000000020000000300000004000000190000001a000000080000000900000001000000020000001b00000005000000070000001c000000
+        paramByteDataSize: 000000000000000004000000000000000100000000000000000000000100000000000000000000000000000000000000010000000000000001000000000000000000000001000000000000000000000004000000000000000100000000000000000000000400000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000010000000100000000000000000000000000000000000000000000000000000001000000010000000000000000000000000000000000000001000000000000000000000001000000
     events: []
     globalTransitions: []
     variables:
@@ -1277,6 +1374,12 @@ MonoBehaviour:
         networkSync: 0
         value: 100
       - useVariable: 1
+        name: tempRimPower
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 0
+      - useVariable: 1
         name: tempSpeed
         tooltip: 
         showInInspector: 0
@@ -1302,15 +1405,28 @@ MonoBehaviour:
         value: {r: 0, g: 0, b: 0, a: 1}
       rectVariables: []
       quaternionVariables: []
-      gameObjectVariables: []
-      objectVariables: []
+      gameObjectVariables:
+      - useVariable: 1
+        name: heat
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: {fileID: 0}
+      objectVariables:
+      - useVariable: 1
+        name: heatTemp
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        typeName: NewBehaviourScript
+        value: {fileID: 0}
       materialVariables: []
       textureVariables: []
       arrayVariables: []
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 0000000000000000000000000000000000000000000000000000000000000000
+      variableCategoryIDs: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     description: 
     docUrl: 
     showStateLabel: 1
@@ -1395,7 +1511,7 @@ MonoBehaviour:
         actionHashCodes: 4e661301
         unityObjectParams: []
         fsmGameObjectParams:
-        - useVariable: 0
+        - useVariable: 1
           name: 
           tooltip: 
           showInInspector: 0
@@ -1515,7 +1631,7 @@ MonoBehaviour:
     locked: 0
     manualUpdate: 0
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     RestartOnEnable: 1
     EnableDebugFlow: 0
@@ -1542,32 +1658,13 @@ MonoBehaviour:
     handleJointBreak2D: 0
     handleOnGUI: 0
     handleFixedUpdate: 0
-    handleLateUpdate: 1
+    handleLateUpdate: 0
     handleApplicationEvents: 0
     handleLegacyNetworking: 0
     handleAnimatorMove: 0
     handleAnimatorIK: 0
   fsmTemplate: {fileID: 0}
   eventHandlerComponentsAdded: 1
---- !u!114 &114488377578781874
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1216932008021068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d549a6d22824f5d4cbea92231a125bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distribution: 0
-  Radius: 1
-  Frequency: 1
-  Strength: 0
-  Offset: 0
-  OffsetSpeed: 0
-  HoleSize: 0
-  HolePower: 10
 --- !u!114 &114579372015264362
 MonoBehaviour:
   m_ObjectHideFlags: 1

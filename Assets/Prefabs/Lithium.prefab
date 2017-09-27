@@ -256,8 +256,6 @@ GameObject:
   - component: {fileID: 114357766400001216}
   - component: {fileID: 54663941108798588}
   - component: {fileID: 114536407772031150}
-  - component: {fileID: 114841957790178618}
-  - component: {fileID: 114368530084926324}
   - component: {fileID: 114689411802151464}
   - component: {fileID: 114573732942585798}
   - component: {fileID: 114479891128126424}
@@ -939,7 +937,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061870776699246}
-  m_LocalRotation: {x: -0.7291364, y: -0.34320974, z: -0.516694, w: 0.28912714}
+  m_LocalRotation: {x: -0.72913647, y: -0.34320977, z: -0.51669407, w: 0.28912717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1424,7 +1422,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1685976250659488}
-  m_LocalRotation: {x: 0.5362361, y: -0.53627324, z: -0.306276, w: 0.57537556}
+  m_LocalRotation: {x: 0.53623605, y: -0.5362732, z: -0.30627596, w: 0.5753755}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -3093,7 +3091,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.39705884, g: 0.39705884, b: 0.39705884, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -3559,25 +3557,6 @@ MonoBehaviour:
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114368530084926324
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d549a6d22824f5d4cbea92231a125bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distribution: 0
-  Radius: 1
-  Frequency: 1
-  Strength: 0
-  Offset: 0
-  OffsetSpeed: 0
-  HoleSize: 0
-  HolePower: 10
 --- !u!114 &114373330771664594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4154,7 +4133,7 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             typeName: UnityEngine.Object
-            value: {fileID: 114368530084926324}
+            value: {fileID: 0}
           TargetTypeName: SgtSpacetimeWell
           PropertyName: Strength
           BoolParameter:
@@ -5120,18 +5099,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prominence: {fileID: 114038002114495686}
---- !u!114 &114841957790178618
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bfb1d3dd33d1443bdea6dd00ce03d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &114895528287488410
 MonoBehaviour:
   m_ObjectHideFlags: 1

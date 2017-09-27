@@ -701,8 +701,6 @@ GameObject:
   - component: {fileID: 114978427323937744}
   - component: {fileID: 54296731515822192}
   - component: {fileID: 114216596602234578}
-  - component: {fileID: 114472836878391816}
-  - component: {fileID: 114299606425093980}
   - component: {fileID: 114825732850579972}
   - component: {fileID: 114447987147163910}
   - component: {fileID: 114285002130186632}
@@ -3932,7 +3930,7 @@ MonoBehaviour:
             showInInspector: 0
             networkSync: 0
             typeName: UnityEngine.Object
-            value: {fileID: 114299606425093980}
+            value: {fileID: 0}
           TargetTypeName: SgtSpacetimeWell
           PropertyName: Strength
           BoolParameter:
@@ -4574,25 +4572,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114299606425093980
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766186710997850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d549a6d22824f5d4cbea92231a125bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distribution: 0
-  Radius: 1
-  Frequency: 1
-  Strength: 0
-  Offset: 0
-  OffsetSpeed: 0
-  HoleSize: 0
-  HolePower: 10
 --- !u!114 &114303284718058578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4785,18 +4764,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prominence: {fileID: 114194987812598710}
---- !u!114 &114472836878391816
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1766186710997850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bfb1d3dd33d1443bdea6dd00ce03d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &114494561457126026
 MonoBehaviour:
   m_ObjectHideFlags: 1
