@@ -10,7 +10,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Virgil Online
+  companyName: Virgil
   productName: Virgil
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -61,7 +61,7 @@ PlayerSettings:
   allowedAutorotateToPortraitUpsideDown: 1
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
-  useOSAutorotation: 1
+  useOSAutorotation: 0
   use32BitDisplayBuffer: 0
   disableDepthAndStencilBuffers: 0
   defaultIsFullScreen: 0
@@ -73,7 +73,7 @@ PlayerSettings:
   Force IOS Speakers When Recording: 0
   submitAnalytics: 1
   usePlayerLog: 1
-  bakeCollisionMeshes: 1
+  bakeCollisionMeshes: 0
   forceSingleInstance: 0
   resizableWindow: 0
   useMacAppStoreValidation: 0
@@ -161,7 +161,7 @@ PlayerSettings:
   CreateWallpaper: 0
   APKExpansionFiles: 0
   keepLoadedShadersAlive: 0
-  StripUnusedMeshComponents: 1
+  StripUnusedMeshComponents: 0
   VertexChannelCompressionMask:
     serializedVersion: 2
     m_Bits: 238
@@ -342,7 +342,7 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: AR BABY
+  cameraUsageDescription: 
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNetLibKey: 
@@ -582,7 +582,7 @@ PlayerSettings:
   webGLCompressionFormat: 1
   scriptingDefineSymbols:
     1: CROSS_PLATFORM_INPUT;PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER
-    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT;PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;dUI_DoozyUI;dUI_PlayMaker
+    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT;PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER;AMPLIFY_SHADER_EDITOR;dUI_DoozyUI
     7: CROSS_PLATFORM_INPUT;MOBILE_INPUT;PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER
     13: PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER
     14: MOBILE_INPUT;PLAYMAKER;PLAYMAKER_1_8;PLAYMAKER_1_8_5;PLAYMAKER_1_8_5_OR_NEWER;PLAYMAKER_1_8_OR_NEWER
@@ -715,18 +715,18 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
     Analytics: 0
-    Build: 0
+    Build: 1
     Collab: 0
     ErrorHub: 0
     Game_Performance: 0
     Hub: 0
     Purchasing: 0
-    UNet: 0
+    UNet: 1
     Unity_Ads: 0
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
   cloudProjectId: 7ba1582b-2b17-4ce3-8b6f-34f97efc4399
-  projectName: New Unity Project (1)
+  projectName: Virgil
   organizationId: virgil-online
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
