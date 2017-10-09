@@ -1,0 +1,112 @@
+http://displayfab.techooka.com 
+DisplayFab 1.3.5
+July 07, 2017
+
+- Fixed typos and removed certain Debug.Log messages.
+- *Editor* Updated Autodetection to auto-detect more Unity.UI components including DropDown, Scrollbar, Toggle.
+- *Editor* Updated Autodetection to auto-detect 'TextMeshProUGUI' text property. 
+
+----------------------------------------------------------------------------
+
+DisplayFab 1.3.4
+July 05, 2017
+
+- Fixed minor issues.
+- *NEW* Experimental feature that lets you hide any target UI when the source data is null, zero or of default value. This feature is useful to automatically hide any UI when there is no data to display. For example, you may want to hide a Scrollable UI when there is no data to display. A new checkbox 'HT?' is now available in the 'Link-ups' tab under DusplayFabSystem inspector to use this new feature. 
+
+----------------------------------------------------------------------------
+DisplayFab 1.3.3
+December 24, 2016
+
+<p> 1.3.3</p>
+ ** New features ** 
+1. *New* Binding Notification Feature: Any changes to your properties or methods can trigger an update to your UI view by triggering an Notification. This is done via DisplayFabLinkUpGroup as it now has the ability to register and listen for Notifications. Notifications are dispatched from the code using a simple 'SendMessage("DSFNotifyGroup","GroupName"); Check the _Examples/Three-Way Binding Example/3-WayBindingExample_NotificationMethod.
+
+2. *New* ExposedVariable Passer: Using this new component, you can now pass ExposedVariables from one DisplayFab to another. If this component is on a prefab or template that gets populated by DisplayFabInstantiator module, then the Passer will be executed by the Instantiator module.  
+3. *New* OnInstantiate Event: You can now call custom events whenever a new entry gets instantiated or populated, using DisplayFabInstantiator. The events will get executed before the entry's DisplayFab link-up list gets executed.
+
+4.*New Features* DisplayFab Instantiator: Five new properties added: 
+a. You now have the ability to display a 'default' placeholder when the Instantiator has 0 items to instantiate. The placeholder has to be a gameObject within the ScrollRect Container.
+b. Backward instantiation option: You can now Instantiate X items from the end of a list or array.
+c. 'Script-controlled Iterator Mode': You can now use Instantiator without 'ExposedVariable'. You may control your own iterator via script and simply let DisplayFab Instantiator instantiate X times. 
+d. 'Prevent further calls until previous instantiation completed': This will ignore any further instantiation requests if there's one already under progress.
+e.'Complete previous instantiation before invoking next': This will basically queue instantiation calls such that it will complete the previous instantiation request before calling the next in queue.
+
+
+5. On-Screen Log: You can now view DisplayFab Console Log within your application by attaching DisplayFabOnScreenLog component to a GameObject. 
+
+
+**Improvements**
+1. You can now add more than one field/property of same name if it is an array or a list.
+2. Link-Ups with undetected conversion will now automatically select a converter if it is the only converter available for that type of conversion.
+3. Added 'Unconstrained' type to an array iterator. This option will allow you to let your iterator go out of bounds. (Useful in certain cases).
+4. Enums will now be automatically converted to string. If you have a custom converter for the enum to convert to string, it will be used instead. 
+5. Search Components & Scripts: You can now search for a component in the component picker using name.
+6. DisplayFab Instantiator Debug Monitor: Let's you monitor the status of the Instantiator to help you in debugging.
+
+ *** Bug Fixes *** 
+1. DisplayFab Events Editor Bug: Fixed an editor bug that occurs when multiple DisplayFab Event components are added on a single gameObject. That causes Editor errors and sometimes makes the Component Inspector unusable. This has been fixed.
+2. DisplayFab Instantiator: Changed property name from 'end range index' to 'Total Count'. Earlier, mis-interpretation of this property resulted in an unintentional bug that would cause array/list out of range exception (since the end range was interpreted as total count to instantiate, starting from the startRange Index).
+
+** New Demos/Examples **
+1. Added new demo on 3-way binding (see under Examples folder).
+2. Added a new sub-example of Tutorial 1.
+3. Updated Tutorial 3 example to show how to update bind text in real-time as you type (using DisplayFab OnEditValueChanged event and custom converter to convert the typed text to uppercase).
+4. Re-named the 'How-to examples' folder to just 'Examples'.
+
+
+------------------------------------------------------------------
+
+DisplayFab 1.2.3
+November 30, 2016
+
+**Bug fixes**
+1. Fixed:  Executor 'On Every X Seconds' will not update execute every X Seconds previously, other than at start. This update fixes it.
+
+
+
+------------------------------------------------------------------
+
+DisplayFab 1.2.2
+November 22, 2016
+
+**Bug fixes**
+1. Fixed: A specific scenario using an Array/IList would result in a Console error. This has been fixed.
+Scenario:
+In the below scenario, accessing data from "someArray" would work but accessing data from "anotherArray" would throw a compiler error. That was happening due to an editor internal error. This has been fixed in this version.
+
+public AnotherClass
+{
+	public string[] anotherArray;
+}
+
+public MainClass: MonoBehaviour{
+	public AnotherClass classObj;
+	public string[] someArray;
+}
+
+
+2. "Quick-Peek" tool would display an array's count, instead of the value at the Array's index. This has been fixed. 
+3. Editor Console errors occur every-time the compiler reloads, while a DisplayFab component is open in the Inspector panel. This shouldn't happen now. 
+Link-Up list: Link-up list will now properly delete/move-up/move-down even on Prefabs. Earlier, an internal error prevented it from deleting everytime you tried to do these operations on a prefab. Note: Undo won't work on prefabs if you delete or move link-ups.
+
+
+------------------------------------------------------------------
+
+DisplayFab 1.2.0
+
+
+DisplayFab Event Executor:
+-Enabled support for 0-argument functions from displayfab event executors
+-Added support for Displayfab event executors of other arguments. Now you can pass arguments of types/basetypes of 'UnityEngine.Object', 'Component', MonoBehaviour, GameObject, Prefab, Texture.
+-Added double, char and Quaternion
+ Previously, only primitive types (int, floatenum, bool, string, Vector2,Vector3, Color,Texture2D were supported)
+
+DisplayFab:
+-Function arguments can now be retrieved from another source value within the same DisplayFab. (Tutorial 5 uses this technique.)
+
+DisplayFab Console:
+-Added a button to enable 'Debug Logs' in Unity's console window. Warning: This must be used for sending logs to the Developer for troubleshooting purposes only. Keeping this option ON will drastically slow down the performance.
+
+Known issues:
+-Changing event executor while in runtime, duplicates the event execution list. Therefore, making changes to the event execution list is disabled while running the game.

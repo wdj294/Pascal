@@ -12,7 +12,7 @@ Material:
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -23,7 +23,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Color:
-        m_Texture: {fileID: 2800000, guid: 4dcf2bf9fc1585c44bca3e44e702b377, type: 3}
+        m_Texture: {fileID: 2800000, guid: dcea4b79353f60e468b622fce2a0cdab, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -63,7 +63,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape:
-        m_Texture: {fileID: 2800000, guid: bff256c64b8ccc24ea4f8d54094df10e, type: 3}
+        m_Texture: {fileID: 2800000, guid: e6b491e00b1d725479aff38291fdd6ed, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Shape1:
@@ -83,8 +83,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _Attenuation_Exponent: 0.8
-    - _Attenuation_Strength: 1
+    - _Attenuation_Exponent: 1.42
+    - _Attenuation_Strength: 6.92
     - _BumpScale: 1
     - _Color_Multiplier: 1
     - _Cutoff: 0.5
@@ -93,7 +93,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Glossiness: 0.5
-    - _LensEffect_Distance: 1
+    - _LensEffect_Distance: 2.02
     - _LensEffect_DistanceExponent: 3
     - _Metallic: 0
     - _Mode: 0
@@ -107,10 +107,10 @@ Material:
     - _Use_Decay: 0
     - _Use_LensEffect: 0
     - _VariationShift: 0
-    - _Variation_Shift: 268.97
+    - _Variation_Shift: 0
     - _ZWrite: 1
     m_Colors:
     - _Camera_Position: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.28676468, g: 0.49827582, b: 1, a: 1}
-    - _Color_Tint: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_Tint: {r: 0.20588237, g: 0.20588237, b: 0.20588237, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

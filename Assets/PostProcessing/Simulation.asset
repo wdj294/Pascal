@@ -103,8 +103,8 @@ MonoBehaviour:
         intensity: 2
         threshold: 1.1
         softKnee: 0.5
-        radius: 5.24
-        antiFlicker: 1
+        radius: 4
+        antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
@@ -120,12 +120,12 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 0.6
-        temperature: 0
+        postExposure: 1
+        temperature: -12
         tint: 0
         hueShift: 0
-        saturation: 1
-        contrast: 1
+        saturation: 0.78
+        contrast: 1.4
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -149,6 +149,12 @@ MonoBehaviour:
             - serializedVersion: 2
               time: 0
               value: 0
+              inSlope: 1
+              outSlope: 1
+              tangentMode: 0
+            - serializedVersion: 2
+              time: 0.5759717
+              value: 0.280303
               inSlope: 1
               outSlope: 1
               tangentMode: 0
@@ -278,8 +284,8 @@ MonoBehaviour:
   userLut:
     m_Enabled: 0
     m_Settings:
-      lut: {fileID: 2800000, guid: ce603d0e52a82984fb463b7e7c80e621, type: 3}
-      contribution: 1
+      lut: {fileID: 2800000, guid: 5b60ca35e5def164993b8b9bdd347525, type: 3}
+      contribution: 0
   chromaticAberration:
     m_Enabled: 0
     m_Settings:
@@ -288,9 +294,9 @@ MonoBehaviour:
   grain:
     m_Enabled: 0
     m_Settings:
-      colored: 1
-      intensity: 0.5
-      size: 1
+      colored: 0
+      intensity: 0.833
+      size: 1.85
       luminanceContribution: 0.8
   vignette:
     m_Enabled: 1
@@ -302,7 +308,7 @@ MonoBehaviour:
       smoothness: 1
       roundness: 1
       mask: {fileID: 2800000, guid: 22c1c24e13b47475c95b19526a4e2b62, type: 3}
-      opacity: 0.88
+      opacity: 0.5
       rounded: 1
   dithering:
     m_Enabled: 0

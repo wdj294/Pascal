@@ -1,0 +1,1319 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112844
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22419456}
+  - component: {fileID: 22233156}
+  - component: {fileID: 11436582}
+  - component: {fileID: 11484198}
+  m_Layer: 5
+  m_Name: Text_StrengthPercentage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &145392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22489480}
+  - component: {fileID: 11481286}
+  m_Layer: 5
+  m_Name: Slider_Strength
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &149374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22498258}
+  - component: {fileID: 22278714}
+  - component: {fileID: 11400258}
+  - component: {fileID: 11423066}
+  - component: {fileID: 11439798}
+  - component: {fileID: 11454664}
+  m_Layer: 5
+  m_Name: TeamItemFinal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &153080
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22400890}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &155930
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22403320}
+  - component: {fileID: 22227578}
+  - component: {fileID: 11447496}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &160882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22433554}
+  - component: {fileID: 22251072}
+  - component: {fileID: 11460216}
+  - component: {fileID: 11477596}
+  m_Layer: 5
+  m_Name: Text_TeamName
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &186502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22487438}
+  - component: {fileID: 22265546}
+  - component: {fileID: 11446296}
+  m_Layer: 5
+  m_Name: Image_Logo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &194440
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 22451318}
+  - component: {fileID: 22258148}
+  - component: {fileID: 11422158}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &11400258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 12fa21b4fb698fd43b20cfa3d5480f64, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &11422158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.125, g: 0.5293104, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &11423066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1679637790, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: 200
+  m_MinHeight: 200
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &11436582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 16
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: '%'
+--- !u!114 &11439798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -234403039, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 0.9558824, g: 0.9558824, b: 0.9558824, a: 0.866}
+    m_HighlightedColor: {r: 0.5808823, g: 0.9132859, b: 1, a: 1}
+    m_PressedColor: {r: 0.9632353, g: 0.9632353, b: 0.9632353, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 11400258}
+--- !u!114 &11446296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &11447496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.6691177, g: 0.90415823, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!114 &11454664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 229648826, guid: c5baac1e9c7dab645ab3351d057cda95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dispFabSystem:
+    isUseThisAsPrefab: 1
+    _targetInfos:
+    - isAutoDetect: 1
+      _tsUID: 0
+      compInfo:
+        componentSystemType:
+          m_Name: Text
+          m_AssemblyQualifiedName: UnityEngine.UI.Text, UnityEngine.UI, Version=1.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        isReferencePullAtRT: 0
+        isUseStaticClass: 0
+        eSearchGOType: 0
+        goStringToSearchBy: 
+        compRef: {fileID: 11460216}
+        goRef: {fileID: 160882}
+      _autofpmUID: 0
+      _autoExposedVarsUID: -1
+      _allFPMEntries:
+      - _fpmUID: 0
+        _statementBuildUp:
+        - subPathType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          varName: text
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 2
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 0
+        parentEntryUID: -1
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 1
+            targTSUID: -1
+            targFPMUID: -1
+        isMinimizeChildren: 1
+      _exposedValues: []
+      isFoldOut: 1
+    - isAutoDetect: 1
+      _tsUID: 1
+      compInfo:
+        componentSystemType:
+          m_Name: Image
+          m_AssemblyQualifiedName: UnityEngine.UI.Image, UnityEngine.UI, Version=1.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        isReferencePullAtRT: 0
+        isUseStaticClass: 0
+        eSearchGOType: 0
+        goStringToSearchBy: 
+        compRef: {fileID: 11446296}
+        goRef: {fileID: 186502}
+      _autofpmUID: 0
+      _autoExposedVarsUID: -1
+      _allFPMEntries:
+      - _fpmUID: 0
+        _statementBuildUp:
+        - subPathType:
+            m_Name: Sprite
+            m_AssemblyQualifiedName: UnityEngine.Sprite, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_AssemblyName: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          varName: sprite
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 2
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 0
+        parentEntryUID: -1
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 0
+            targTSUID: -1
+            targFPMUID: -1
+        isMinimizeChildren: 1
+      _exposedValues: []
+      isFoldOut: 1
+    - isAutoDetect: 1
+      _tsUID: 2
+      compInfo:
+        componentSystemType:
+          m_Name: Text
+          m_AssemblyQualifiedName: UnityEngine.UI.Text, UnityEngine.UI, Version=1.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        isReferencePullAtRT: 0
+        isUseStaticClass: 0
+        eSearchGOType: 0
+        goStringToSearchBy: 
+        compRef: {fileID: 11436582}
+        goRef: {fileID: 112844}
+      _autofpmUID: 0
+      _autoExposedVarsUID: -1
+      _allFPMEntries:
+      - _fpmUID: 0
+        _statementBuildUp:
+        - subPathType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          varName: text
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 2
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 0
+        parentEntryUID: -1
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 2
+            targTSUID: -1
+            targFPMUID: -1
+        isMinimizeChildren: 1
+      _exposedValues: []
+      isFoldOut: 1
+    - isAutoDetect: 1
+      _tsUID: 3
+      compInfo:
+        componentSystemType:
+          m_Name: Slider
+          m_AssemblyQualifiedName: UnityEngine.UI.Slider, UnityEngine.UI, Version=1.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+        isReferencePullAtRT: 0
+        isUseStaticClass: 0
+        eSearchGOType: 0
+        goStringToSearchBy: 
+        compRef: {fileID: 11481286}
+        goRef: {fileID: 145392}
+      _autofpmUID: 0
+      _autoExposedVarsUID: -1
+      _allFPMEntries:
+      - _fpmUID: 0
+        _statementBuildUp:
+        - subPathType:
+            m_Name: Single
+            m_AssemblyQualifiedName: System.Single, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          varName: value
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 2
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 0
+        parentEntryUID: -1
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 3
+            targTSUID: -1
+            targFPMUID: -1
+        isMinimizeChildren: 1
+      _exposedValues: []
+      isFoldOut: 1
+    _sourceInfos:
+    - isAutoDetect: 0
+      _tsUID: 4
+      compInfo:
+        componentSystemType:
+          m_Name: TeamsDBManager
+          m_AssemblyQualifiedName: TeamsDBManager, Assembly-CSharp, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        isReferencePullAtRT: 0
+        isUseStaticClass: 0
+        eSearchGOType: 0
+        goStringToSearchBy: 
+        compRef: {fileID: 11406072, guid: 4be7e0cda189d5b4eb95883201263707, type: 2}
+        goRef: {fileID: 170884, guid: 4be7e0cda189d5b4eb95883201263707, type: 2}
+      _autofpmUID: 3
+      _autoExposedVarsUID: 0
+      _allFPMEntries:
+      - _fpmUID: 0
+        _statementBuildUp:
+        - subPathType:
+            m_Name: TeamInfo
+            m_AssemblyQualifiedName: TeamInfo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+              PublicKeyToken=null
+            m_AssemblyName: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          varName: teamData
+          isArrayOrListType: 1
+          isPrimitiveType: 0
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 1
+            arrayIndexNumber: 0
+            isExposed: 1
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 1
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 0
+        parentEntryUID: -1
+        _childUIDs: 010000000200000003000000
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 0
+            eventLinkUIDRef: -1
+            targTSUID: -1
+            targFPMUID: -1
+        isMinimizeChildren: 0
+      - _fpmUID: 1
+        _statementBuildUp:
+        - subPathType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          varName: teamName
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 1
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 1
+        parentEntryUID: 0
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 1
+            targTSUID: 0
+            targFPMUID: 0
+        isMinimizeChildren: 1
+      - _fpmUID: 2
+        _statementBuildUp:
+        - subPathType:
+            m_Name: Int32
+            m_AssemblyQualifiedName: System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          varName: teamStrength
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 1
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 1
+        parentEntryUID: 0
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 2
+            targTSUID: 2
+            targFPMUID: 0
+          - eLinkState: 1
+            eventLinkUIDRef: 3
+            targTSUID: 3
+            targFPMUID: 0
+        isMinimizeChildren: 1
+      - _fpmUID: 3
+        _statementBuildUp:
+        - subPathType:
+            m_Name: Sprite
+            m_AssemblyQualifiedName: UnityEngine.Sprite, UnityEngine, Version=0.0.0.0,
+              Culture=neutral, PublicKeyToken=null
+            m_AssemblyName: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          varName: teamLogo
+          isArrayOrListType: 0
+          isPrimitiveType: 1
+          eErrorValidity: 0
+          methodClassType:
+            m_Name: 
+            m_AssemblyQualifiedName: 
+            m_AssemblyName: 
+          _methodArgs: []
+          arrayInfo:
+            e_arrayIndexType: 0
+            arrayIndexNumber: 0
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eClampingBehaviour: 0
+            indexRefForExpressionLink: 0
+          eFieldPropOrMethod: 1
+        isAutoBind: 0
+        eErrorValidity: 0
+        isThisChild: 1
+        parentEntryUID: 0
+        _childUIDs: 
+        _multiLinkerInfo:
+          _links:
+          - eLinkState: 1
+            eventLinkUIDRef: 0
+            targTSUID: 1
+            targFPMUID: 0
+        isMinimizeChildren: 1
+      _exposedValues:
+      - _exposedUID: 0
+        _fpmUID: 0
+        _statementIndex: 0
+        _isArg: 0
+        _argIndex: 0
+        _isIterator: 1
+      isFoldOut: 0
+    _linkUpInfos:
+    - linkUpUID: 0
+      isLinkBroken: 0
+      targetTSuid: 1
+      sourceTSuid: 4
+      targetfpmUID: 0
+      sourcefpmUID: 3
+      converterInfo:
+        eConverterType: 0
+        eConversionStatus: 1
+        isConverterError: 0
+        isConversionRequired: 0
+        converterFuncs: []
+        srcType:
+          m_Name: Sprite
+          m_AssemblyQualifiedName: UnityEngine.Sprite, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        targType:
+          m_Name: Sprite
+          m_AssemblyQualifiedName: UnityEngine.Sprite, UnityEngine, Version=0.0.0.0,
+            Culture=neutral, PublicKeyToken=null
+          m_AssemblyName: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      isHideTargetOnNoData: 0
+      defaultNoDataValue: 0
+    - linkUpUID: 1
+      isLinkBroken: 0
+      targetTSuid: 0
+      sourceTSuid: 4
+      targetfpmUID: 0
+      sourcefpmUID: 1
+      converterInfo:
+        eConverterType: 2
+        eConversionStatus: 5
+        isConverterError: 0
+        isConversionRequired: 0
+        converterFuncs:
+        - methodReturnType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          methodName: ToUppercase
+          methodClassType:
+            m_Name: DSFStringExtensions
+            m_AssemblyQualifiedName: Techooka.DisplayFab.Addons.DSFStringExtensions,
+              Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+            m_AssemblyName: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          _methArgInfo:
+          - isDataEntered: 0
+            eArgumentSelectionType: 0
+            isPrimitive: 0
+            primitiveArg:
+              argumentInt: 0
+              argumentFloat: 0
+              argumentDouble: 0
+              argumentString: 
+              argumentBool: 0
+              argumentColor:
+                r: 0
+                g: 0
+                b: 0
+                a: 0
+              argumentVector2:
+                x: 0
+                y: 0
+              argumentVector3:
+                x: 0
+                y: 0
+                z: 0
+              ePrimitiveType: 0
+            argType:
+              m_Name: String
+              m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+                PublicKeyToken=b77a5c561934e089
+              m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+            isOptional: 0
+            argRefPointTo_tsUID: -1
+            argRefPointTo_fpmUID: -1
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eArgError: 0
+        srcType:
+          m_Name: String
+          m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        targType:
+          m_Name: String
+          m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      isHideTargetOnNoData: 0
+      defaultNoDataValue: 0
+    - linkUpUID: 2
+      isLinkBroken: 0
+      targetTSuid: 2
+      sourceTSuid: 4
+      targetfpmUID: 0
+      sourcefpmUID: 2
+      converterInfo:
+        eConverterType: 2
+        eConversionStatus: 1
+        isConverterError: 0
+        isConversionRequired: 1
+        converterFuncs:
+        - methodReturnType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          methodName: ToString
+          methodClassType:
+            m_Name: Convert
+            m_AssemblyQualifiedName: System.Convert, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          _methArgInfo:
+          - isDataEntered: 0
+            eArgumentSelectionType: 0
+            isPrimitive: 0
+            primitiveArg:
+              argumentInt: 0
+              argumentFloat: 0
+              argumentDouble: 0
+              argumentString: 
+              argumentBool: 0
+              argumentColor:
+                r: 0
+                g: 0
+                b: 0
+                a: 0
+              argumentVector2:
+                x: 0
+                y: 0
+              argumentVector3:
+                x: 0
+                y: 0
+                z: 0
+              ePrimitiveType: 0
+            argType:
+              m_Name: Int32
+              m_AssemblyQualifiedName: System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral,
+                PublicKeyToken=b77a5c561934e089
+              m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+            isOptional: 0
+            argRefPointTo_tsUID: -1
+            argRefPointTo_fpmUID: -1
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eArgError: 0
+        - methodReturnType:
+            m_Name: String
+            m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+              PublicKeyToken=b77a5c561934e089
+            m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+          methodName: ToStringWithSuffix
+          methodClassType:
+            m_Name: DSFStringExtensions
+            m_AssemblyQualifiedName: Techooka.DisplayFab.Addons.DSFStringExtensions,
+              Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+            m_AssemblyName: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+          _methArgInfo:
+          - isDataEntered: 0
+            eArgumentSelectionType: 0
+            isPrimitive: 0
+            primitiveArg:
+              argumentInt: 0
+              argumentFloat: 0
+              argumentDouble: 0
+              argumentString: 
+              argumentBool: 0
+              argumentColor:
+                r: 0
+                g: 0
+                b: 0
+                a: 0
+              argumentVector2:
+                x: 0
+                y: 0
+              argumentVector3:
+                x: 0
+                y: 0
+                z: 0
+              ePrimitiveType: 0
+            argType:
+              m_Name: String
+              m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+                PublicKeyToken=b77a5c561934e089
+              m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+            isOptional: 0
+            argRefPointTo_tsUID: -1
+            argRefPointTo_fpmUID: -1
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eArgError: 0
+          - isDataEntered: 1
+            eArgumentSelectionType: 1
+            isPrimitive: 1
+            primitiveArg:
+              argumentInt: 0
+              argumentFloat: 0
+              argumentDouble: 0
+              argumentString: '%'
+              argumentBool: 0
+              argumentColor:
+                r: 0
+                g: 0
+                b: 0
+                a: 0
+              argumentVector2:
+                x: 0
+                y: 0
+              argumentVector3:
+                x: 0
+                y: 0
+                z: 0
+              ePrimitiveType: 6
+            argType:
+              m_Name: String
+              m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+                PublicKeyToken=b77a5c561934e089
+              m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+            isOptional: 0
+            argRefPointTo_tsUID: -1
+            argRefPointTo_fpmUID: -1
+            isExposed: 0
+            exposedVarUIDRef: 0
+            eArgError: 0
+        srcType:
+          m_Name: Int32
+          m_AssemblyQualifiedName: System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        targType:
+          m_Name: String
+          m_AssemblyQualifiedName: System.String, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      isHideTargetOnNoData: 0
+      defaultNoDataValue: 0
+    - linkUpUID: 3
+      isLinkBroken: 0
+      targetTSuid: 3
+      sourceTSuid: 4
+      targetfpmUID: 0
+      sourcefpmUID: 2
+      converterInfo:
+        eConverterType: 4
+        eConversionStatus: 4
+        isConverterError: 0
+        isConversionRequired: 1
+        converterFuncs: []
+        srcType:
+          m_Name: Int32
+          m_AssemblyQualifiedName: System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+        targType:
+          m_Name: Single
+          m_AssemblyQualifiedName: System.Single, mscorlib, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+          m_AssemblyName: mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089
+      isHideTargetOnNoData: 0
+      defaultNoDataValue: 0
+    _lastVerifiedTimeUTC: 4/22/2016 12:04:10 PM
+    _tsAutoUID: 7
+    _linkUpAutoUID: 3
+--- !u!114 &11460216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 13
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: TEAM NAME
+--- !u!114 &11477596
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &11481286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -113659843, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 0
+  m_Colors:
+    m_NormalColor: {r: 0.9044118, g: 0.9044118, b: 0.9044118, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_DisabledTrigger: Disabled
+  m_Interactable: 0
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 22403320}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 100
+  m_WholeNumbers: 0
+  m_Value: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+--- !u!114 &11484198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!222 &22227578
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155930}
+--- !u!222 &22233156
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112844}
+--- !u!222 &22251072
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160882}
+--- !u!222 &22258148
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194440}
+--- !u!222 &22265546
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186502}
+--- !u!222 &22278714
+CanvasRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+--- !u!224 &22400890
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153080}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22403320}
+  m_Father: {fileID: 22489480}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: -5, y: 0}
+  m_SizeDelta: {x: -20, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22403320
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155930}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22400890}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22419456
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 112844}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22498258}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 10.5}
+  m_SizeDelta: {x: 0, y: 18.9}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!224 &22433554
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22498258}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -48.049976}
+  m_SizeDelta: {x: 200, y: 22.35}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!224 &22451318
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22489480}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22487438
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 22498258}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.000008583069, y: 2.9000306}
+  m_SizeDelta: {x: 96.9, y: 98.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22489480
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145392}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22451318}
+  - {fileID: 22400890}
+  m_Father: {fileID: 22498258}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -1.4000001, y: 39.2}
+  m_SizeDelta: {x: 160, y: 29.2}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &22498258
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 149374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 22487438}
+  - {fileID: 22433554}
+  - {fileID: 22489480}
+  - {fileID: 22419456}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 120, y: -126.5}
+  m_SizeDelta: {x: 200, y: 200}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 149374}
+  m_IsPrefabParent: 1
