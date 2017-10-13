@@ -8,7 +8,7 @@ PlayerSettings:
   AndroidProfiler: 0
   defaultScreenOrientation: 4
   targetDevice: 2
-  useOnDemandResources: 0
+  useOnDemandResources: 1
   accelerometerFrequency: 60
   companyName: Virgil
   productName: Virgil
@@ -59,7 +59,7 @@ PlayerSettings:
   tizenShowActivityIndicatorOnLoading: -1
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 0
-  iosAllowHTTPDownload: 1
+  iosAllowHTTPDownload: 0
   allowedAutorotateToPortrait: 1
   allowedAutorotateToPortraitUpsideDown: 1
   allowedAutorotateToLandscapeRight: 1
@@ -150,7 +150,7 @@ PlayerSettings:
     iOS: com.virgilonline.virgil
     tvOS: com.Company.ProductName
   buildNumber:
-    iOS: 0
+    iOS: 7.4
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
@@ -169,11 +169,11 @@ PlayerSettings:
     serializedVersion: 2
     m_Bits: 238
   iPhoneSdkVersion: 988
-  iOSTargetOSVersionString: 8.0
+  iOSTargetOSVersionString: 9.0
   tvOSSdkVersion: 0
   tvOSRequireExtendedGameController: 0
   tvOSTargetOSVersionString: 9.0
-  uIPrerenderedIcon: 0
+  uIPrerenderedIcon: 1
   uIRequiresPersistentWiFi: 0
   uIRequiresFullScreen: 1
   uIStatusBarHidden: 1
@@ -240,7 +240,7 @@ PlayerSettings:
   - m_BuildTarget: 
     m_Icons:
     - serializedVersion: 2
-      m_Icon: {fileID: 2800000, guid: 506665e688e61417eb4e8c6cb3d6cd87, type: 3}
+      m_Icon: {fileID: 2800000, guid: 60ca6f22fa6504329b23602c3be8c0b3, type: 3}
       m_Width: 128
       m_Height: 128
   m_BuildTargetBatching: []
@@ -345,7 +345,8 @@ PlayerSettings:
   enableInternalProfiler: 0
   logObjCUncaughtExceptions: 1
   enableCrashReportAPI: 0
-  cameraUsageDescription: Test
+  cameraUsageDescription: We need access to your camera to launch the experience,
+    hold it steady!
   locationUsageDescription: 
   microphoneUsageDescription: 
   switchNetLibKey: 

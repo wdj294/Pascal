@@ -120,12 +120,12 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 1
-        temperature: -12
+        postExposure: 0
+        temperature: -6
         tint: 0
         hueShift: 0
-        saturation: 0.78
-        contrast: 1.4
+        saturation: 1
+        contrast: 1.2
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}
@@ -148,15 +148,21 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 2
               time: 0
-              value: 0
+              value: 0.03636366
+              inSlope: 0
+              outSlope: 0
+              tangentMode: 0
+            - serializedVersion: 2
+              time: 0.33714285
+              value: 0.22424245
               inSlope: 1
               outSlope: 1
               tangentMode: 0
             - serializedVersion: 2
-              time: 0.5759717
-              value: 0.280303
-              inSlope: 1
-              outSlope: 1
+              time: 0.6542857
+              value: 0.72727275
+              inSlope: 1.2175001
+              outSlope: 1.2175001
               tangentMode: 0
             - serializedVersion: 2
               time: 1
@@ -285,7 +291,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       lut: {fileID: 2800000, guid: 5b60ca35e5def164993b8b9bdd347525, type: 3}
-      contribution: 0
+      contribution: 0.587
   chromaticAberration:
     m_Enabled: 0
     m_Settings:
@@ -308,7 +314,7 @@ MonoBehaviour:
       smoothness: 1
       roundness: 1
       mask: {fileID: 2800000, guid: 22c1c24e13b47475c95b19526a4e2b62, type: 3}
-      opacity: 0.5
+      opacity: 0.7
       rounded: 1
   dithering:
     m_Enabled: 0
