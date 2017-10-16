@@ -121,7 +121,7 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0
-        temperature: -6
+        temperature: -12
         tint: 0
         hueShift: 0
         saturation: 1
@@ -305,7 +305,7 @@ MonoBehaviour:
       size: 1.85
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       mode: 1
       color: {r: 0, g: 0, b: 0, a: 1}

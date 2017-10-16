@@ -208,7 +208,7 @@ public class Atom : MonoBehaviour {
         proton.transform.position = pos;
         proton.AddComponent<Rigidbody>();
         proton.GetComponent<Rigidbody>().useGravity = false;
-		proton.GetComponent<Rigidbody>().mass = 1f;
+		proton.GetComponent<Rigidbody>().mass = 10f;
         proton.AddComponent<Nucleon>();
 
         proton.transform.SetParent(transform.Find("Nucleus"));
@@ -224,7 +224,7 @@ public class Atom : MonoBehaviour {
         neutron.transform.position = pos;
         neutron.AddComponent<Rigidbody>();
         neutron.GetComponent<Rigidbody>().useGravity = false;
-		neutron.GetComponent<Rigidbody>().mass = 1f;
+		neutron.GetComponent<Rigidbody>().mass = 10f;
         //neutron.GetComponent<Renderer>().material.SetColor("_Color", new Color32(255, 28, 28, 255));
         neutron.AddComponent<Nucleon>();
 
@@ -255,7 +255,7 @@ public class Atom : MonoBehaviour {
     {
 		GameObject electron = (GameObject)Instantiate(Resources.Load("Electron"));
         electron.name = "Electron";
-        electron.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        electron.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         electron.transform.position = pos;
         electron.transform.parent = GameObject.Find("Shell " + shell).transform;
         GameObject.Destroy(electron.GetComponent<SphereCollider>());
