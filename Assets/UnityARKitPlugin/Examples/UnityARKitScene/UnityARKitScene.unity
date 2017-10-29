@@ -122,7 +122,6 @@ GameObject:
   - component: {fileID: 11}
   - component: {fileID: 8}
   - component: {fileID: 14}
-  - component: {fileID: 15}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -223,24 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce437cef046e841aabd6070890e79d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &15
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 7}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08baa3d19a3754108af85534c7824251, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TreatMousePointerAsFinger: 1
-  SimulateMouseWithTouches: 0
-  PassThroughObjects: []
-  ShowTouches: 0
-  TouchCircles: []
-  DefaultDPI: 200
-  ClearGesturesOnLevelLoad: 1
 --- !u!1 &16
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +420,6 @@ GameObject:
   - component: {fileID: 732268496}
   - component: {fileID: 732268495}
   - component: {fileID: 732268494}
-  - component: {fileID: 922811257}
   m_Layer: 0
   m_Name: RandomCube
   m_TagString: Untagged
@@ -447,31 +427,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &922811257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 922811256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 718bac4243f118048a7dbde6110bf929, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GestureCallback:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: DigitalRubyShared.GestureRecognizerComponentEvent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  GestureView: {fileID: 922811256}
-  MinimumNumberOfTouchesToTrack: 1
-  MaximumNumberOfTouchesToTrack: 1
-  AllowSimultaneousExecutionWith: []
-  AllowSimultaneousExecutionWithAllGestures: 0
-  ZoomSpeed: 3
-  ThresholdUnits: 0.15
-  ScaleThresholdPercent: 0.01
-  ScaleFocusMoveThresholdUnits: 0.04
 --- !u!1 &985089623
 GameObject:
   m_ObjectHideFlags: 0

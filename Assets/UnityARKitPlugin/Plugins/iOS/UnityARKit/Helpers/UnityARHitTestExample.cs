@@ -26,7 +26,7 @@ namespace UnityEngine.XR.iOS
 		void Update () {
 			if (Input.touchCount > 0 && m_HitTransform != null)
 			{
-				var touch = Input.GetTouch(0);
+				var touch = Input.GetTouch(1);
 				if (touch.phase == TouchPhase.Began || touch.phase == TouchPhase.Moved)
 				{
 					var screenPosition = Camera.main.ScreenToViewportPoint(touch.position);
