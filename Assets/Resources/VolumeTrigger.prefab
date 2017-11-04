@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33986277244962148}
   - component: {fileID: 23301152318330284}
   - component: {fileID: 135878042241000204}
-  - component: {fileID: 114350118922517970}
+  - component: {fileID: 114065068946685362}
   m_Layer: 0
   m_Name: VolumeTrigger
   m_TagString: VolumeTrigger
@@ -49,7 +49,7 @@ MeshRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1386262083007120}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_MotionVectors: 1
@@ -82,7 +82,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1386262083007120}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114350118922517970
+--- !u!114 &114065068946685362
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -90,14 +90,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1386262083007120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec9f253d65f93d499cda658d90030b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 6941ec02ead994c9b848d640887441f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 20962332111074370, guid: d6a0e5f34e3c74f15bb02ef036bd0031, type: 2}
-  BringToFront: 0
-  PanMinimumTouchCount: 1
-  AllowExecutionWithAllGestures: 1
-  SetPlatformSpecificView: 0
+  m_HitTransform: {fileID: 4984879205696914}
 --- !u!135 &135878042241000204
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -108,5 +104,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
