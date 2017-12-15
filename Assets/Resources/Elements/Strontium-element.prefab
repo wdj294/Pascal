@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 23955908017694172}
   - component: {fileID: 114008363702618134}
   - component: {fileID: 54125584737186850}
-  - component: {fileID: 114431025040080752}
-  - component: {fileID: 114448713991137158}
   - component: {fileID: 114606991128185188}
   - component: {fileID: 114576635373887162}
   - component: {fileID: 114562208388800748}
@@ -115,37 +113,6 @@ MonoBehaviour:
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114431025040080752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1337149097696560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bfb1d3dd33d1443bdea6dd00ce03d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mass: 1
---- !u!114 &114448713991137158
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1337149097696560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d549a6d22824f5d4cbea92231a125bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distribution: 0
-  Radius: 1
-  Frequency: 1
-  Strength: 0
-  Offset: 0
-  OffsetSpeed: 0
-  HoleSize: 0
-  HolePower: 10
 --- !u!114 &114562208388800748
 MonoBehaviour:
   m_ObjectHideFlags: 1

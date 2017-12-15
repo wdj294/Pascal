@@ -23,8 +23,6 @@ GameObject:
   - component: {fileID: 23219189363484594}
   - component: {fileID: 114589417217403120}
   - component: {fileID: 54671724081185942}
-  - component: {fileID: 114872718979117716}
-  - component: {fileID: 114346318476551660}
   - component: {fileID: 114825993695277564}
   - component: {fileID: 114372704954047712}
   - component: {fileID: 114969646257382604}
@@ -104,25 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114346318476551660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1180157291139140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d549a6d22824f5d4cbea92231a125bb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Distribution: 0
-  Radius: 1
-  Frequency: 1
-  Strength: 0
-  Offset: 0
-  OffsetSpeed: 0
-  HoleSize: 0
-  HolePower: 10
 --- !u!114 &114372704954047712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,18 +135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114872718979117716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1180157291139140}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4bfb1d3dd33d1443bdea6dd00ce03d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Mass: 1
 --- !u!114 &114969646257382604
 MonoBehaviour:
   m_ObjectHideFlags: 1
