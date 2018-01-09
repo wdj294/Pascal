@@ -23,9 +23,6 @@ GameObject:
   - component: {fileID: 23949340208113196}
   - component: {fileID: 114357766400001216}
   - component: {fileID: 54663941108798588}
-  - component: {fileID: 114689411802151464}
-  - component: {fileID: 114573732942585798}
-  - component: {fileID: 114479891128126424}
   m_Layer: 0
   m_Name: Lutetium-element
   m_TagString: Element
@@ -172,17 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114479891128126424
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114517544695829106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,25 +190,3 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
---- !u!114 &114573732942585798
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114689411802151464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

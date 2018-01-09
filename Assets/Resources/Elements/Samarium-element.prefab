@@ -23,9 +23,6 @@ GameObject:
   - component: {fileID: 23760709372781588}
   - component: {fileID: 114112327600253140}
   - component: {fileID: 54395281955820136}
-  - component: {fileID: 114977663325188048}
-  - component: {fileID: 114133756321920218}
-  - component: {fileID: 114889105035764094}
   m_Layer: 0
   m_Name: Samarium-element
   m_TagString: Element
@@ -172,17 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114133756321920218
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1051887020240228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114348336974731450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,25 +190,3 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
---- !u!114 &114889105035764094
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1051887020240228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114977663325188048
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1051887020240228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

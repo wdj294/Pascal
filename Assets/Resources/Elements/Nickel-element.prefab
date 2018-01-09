@@ -23,9 +23,6 @@ GameObject:
   - component: {fileID: 23804315000896778}
   - component: {fileID: 114959036529604306}
   - component: {fileID: 54874349229100396}
-  - component: {fileID: 114290011392819586}
-  - component: {fileID: 114151980000373546}
-  - component: {fileID: 114041760737183284}
   m_Layer: 0
   m_Name: Nickel-element
   m_TagString: Element
@@ -161,39 +158,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114041760737183284
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1421305802428366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114151980000373546
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1421305802428366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114290011392819586
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1421305802428366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114656158013407108
 MonoBehaviour:
   m_ObjectHideFlags: 1

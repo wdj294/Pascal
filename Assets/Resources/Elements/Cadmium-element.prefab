@@ -38,9 +38,6 @@ GameObject:
   - component: {fileID: 23609253630607672}
   - component: {fileID: 114900711922300660}
   - component: {fileID: 54628578185972006}
-  - component: {fileID: 114156392668333362}
-  - component: {fileID: 114336917576307752}
-  - component: {fileID: 114640185459904774}
   m_Layer: 0
   m_Name: Cadmium-element
   m_TagString: Element
@@ -161,28 +158,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114156392668333362
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583916317826472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114336917576307752
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583916317826472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114419683865918022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,17 +179,6 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
---- !u!114 &114640185459904774
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583916317826472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114900711922300660
 MonoBehaviour:
   m_ObjectHideFlags: 1

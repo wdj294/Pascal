@@ -23,9 +23,6 @@ GameObject:
   - component: {fileID: 23935486261910136}
   - component: {fileID: 114348928809151314}
   - component: {fileID: 54387954596496438}
-  - component: {fileID: 114300587425319842}
-  - component: {fileID: 114501604145117750}
-  - component: {fileID: 114115668094694712}
   m_Layer: 0
   m_Name: Osmium-element
   m_TagString: Element
@@ -161,28 +158,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &114115668094694712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1580362923440958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114300587425319842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1580362923440958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114348928809151314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,17 +167,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114501604145117750
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1580362923440958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114876602487592858

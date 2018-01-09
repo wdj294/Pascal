@@ -23,9 +23,6 @@ GameObject:
   - component: {fileID: 23949340208113196}
   - component: {fileID: 114357766400001216}
   - component: {fileID: 54663941108798588}
-  - component: {fileID: 114689411802151464}
-  - component: {fileID: 114573732942585798}
-  - component: {fileID: 114479891128126424}
   m_Layer: 0
   m_Name: Lithium-element
   m_TagString: Element
@@ -42,7 +39,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4318101288409238}
   - component: {fileID: 114320813292649842}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Lithium-atom
   m_TagString: Atom
   m_Icon: {fileID: 0}
@@ -57,7 +54,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4442284400691992}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Nucleus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +111,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -179,7 +176,7 @@ MonoBehaviour:
   protonCount: 3
   neutronCount: 4
   electronConfiguration: 0200000001000000
-  electronShellSpacing: 0.1
+  electronShellSpacing: 0.25
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
 --- !u!114 &114357766400001216
@@ -191,38 +188,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114479891128126424
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114573732942585798
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114689411802151464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1254336103247834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

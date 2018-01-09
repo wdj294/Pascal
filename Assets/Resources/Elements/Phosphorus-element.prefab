@@ -39,9 +39,6 @@ GameObject:
   - component: {fileID: 23204084702842240}
   - component: {fileID: 114731449539137188}
   - component: {fileID: 54241751810288708}
-  - component: {fileID: 114897583997124612}
-  - component: {fileID: 114790991380236420}
-  - component: {fileID: 114389299596351040}
   m_Layer: 0
   m_Name: Phosphorus-element
   m_TagString: Element
@@ -182,17 +179,6 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
---- !u!114 &114389299596351040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129534024368234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114731449539137188
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,27 +188,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114790991380236420
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129534024368234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114897583997124612
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1129534024368234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

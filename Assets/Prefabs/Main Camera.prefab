@@ -20,12 +20,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4056275371093046}
   - component: {fileID: 20962332111074370}
-  - component: {fileID: 92665288663628546}
   - component: {fileID: 124640999573685824}
-  - component: {fileID: 81627799563687428}
-  m_Layer: 0
+  - component: {fileID: 114957706426107178}
+  m_Layer: 5
   m_Name: Main Camera-UI
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,12 +38,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4707761128683424}
   - component: {fileID: 20323256779738758}
-  - component: {fileID: 92241838637738462}
   - component: {fileID: 124047269657362872}
   - component: {fileID: 81297700762719480}
-  - component: {fileID: 114249327138759576}
-  - component: {fileID: 114907980262276872}
-  - component: {fileID: 114190727364156656}
+  - component: {fileID: 114062705200854576}
+  - component: {fileID: 114972044102146534}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -104,7 +101,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967263
-  m_RenderingPath: -1
+  m_RenderingPath: 3
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -114,7 +111,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!20 &20962332111074370
 Camera:
   m_ObjectHideFlags: 1
@@ -134,7 +130,7 @@ Camera:
   near clip plane: 0.01
   far clip plane: 30
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 100
   m_Depth: 1
   m_CullingMask:
@@ -150,7 +146,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
 --- !u!81 &81297700762719480
 AudioListener:
   m_ObjectHideFlags: 1
@@ -158,28 +153,49 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441209395523900}
   m_Enabled: 1
---- !u!81 &81627799563687428
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1057511395784442}
-  m_Enabled: 1
---- !u!92 &92241838637738462
-Behaviour:
+--- !u!114 &114062705200854576
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441209395523900}
   m_Enabled: 1
---- !u!92 &92665288663628546
-Behaviour:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28dc0e77eac45a34b845e50615bf9bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OrbitTarget: {fileID: 0}
+  Orbiter: {fileID: 0}
+  MinZoomDistance: 0.1
+  MaxZoomDistance: 3
+  ZoomSpeed: 1.5
+  OrbitXSpeed: 10
+  OrbitXMaxDegrees: 15
+  OrbitYSpeed: 10
+  OrbitYMaxDegrees: 0
+  AllowOrbitWhileZooming: 1
+  OrbitInertia: 0.234
+  RequireOrbitGesturesToStartOnTarget: 0
+--- !u!114 &114957706426107178
+MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057511395784442}
   m_Enabled: 1
---- !u!114 &114190727364156656
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee01e66702087b4798e633ca34c7956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxUpdateRate: Infinity
+  preview: 0
+  size: 7
+  iteration: 3
+  maxDepth: 4
+  downsample: 0
+  lastDownsample: 0
+  strength: 19.6
+--- !u!114 &114972044102146534
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -191,29 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 11400000, guid: d563cfece8aeb4e77ba7fd3148818ac9, type: 2}
---- !u!114 &114249327138759576
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1441209395523900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58ecea7a196242dd879c814ac05084c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ClearMaterial: {fileID: 2100000, guid: f1d9352050a75486f878ab19fa578f16, type: 2}
---- !u!114 &114907980262276872
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1441209395523900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce437cef046e841aabd6070890e79d41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &124047269657362872
 Behaviour:
   m_ObjectHideFlags: 1

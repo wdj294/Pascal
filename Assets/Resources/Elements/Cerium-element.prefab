@@ -53,9 +53,6 @@ GameObject:
   - component: {fileID: 33147099897205318}
   - component: {fileID: 23591640369200950}
   - component: {fileID: 54656108806080324}
-  - component: {fileID: 114508540952703844}
-  - component: {fileID: 114961100639441844}
-  - component: {fileID: 114519896472409590}
   m_Layer: 0
   m_Name: Cerium-element
   m_TagString: Element
@@ -181,36 +178,3 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
---- !u!114 &114508540952703844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940684174924850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e628c6313b6734e38be4550a67164dd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114519896472409590
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940684174924850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 969fc9726f5be4b5e80c021520b5bf9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114961100639441844
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1940684174924850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59e5946b0311e4dcebd44168ed996add, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

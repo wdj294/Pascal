@@ -71,17 +71,17 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 3.95
-      aperture: 1.5
-      focalLength: 50
+      focusDistance: 0.76
+      aperture: 4.8
+      focalLength: 116
       useCameraFov: 1
       kernelSize: 1
   motionBlur:
     m_Enabled: 0
     m_Settings:
-      shutterAngle: 179
+      shutterAngle: 270
       sampleCount: 10
-      frameBlending: 0.43
+      frameBlending: 0
   eyeAdaptation:
     m_Enabled: 0
     m_Settings:
@@ -116,15 +116,15 @@ MonoBehaviour:
         neutralBlackIn: 0.02
         neutralWhiteIn: 10
         neutralBlackOut: 0
-        neutralWhiteOut: 10
-        neutralWhiteLevel: 5.3
+        neutralWhiteOut: 8.13
+        neutralWhiteLevel: 12.74
         neutralWhiteClip: 10
       basic:
-        postExposure: 0
-        temperature: -12
+        postExposure: 1
+        temperature: -9
         tint: 0
         hueShift: 0
-        saturation: 1
+        saturation: 0.81
         contrast: 1.2
       channelMixer:
         red: {x: 1, y: 0, z: 0}
@@ -148,7 +148,7 @@ MonoBehaviour:
             m_Curve:
             - serializedVersion: 2
               time: 0
-              value: 0.03636366
+              value: 0.0047619343
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -298,23 +298,23 @@ MonoBehaviour:
       spectralTexture: {fileID: 0}
       intensity: 0.1
   grain:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       colored: 0
-      intensity: 0.833
-      size: 1.85
+      intensity: 0.1
+      size: 1
       luminanceContribution: 0.8
   vignette:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
-      mode: 1
+      mode: 0
       color: {r: 0, g: 0, b: 0, a: 1}
       center: {x: 0.5, y: 0.5}
-      intensity: 0.5
+      intensity: 0.135
       smoothness: 1
       roundness: 1
       mask: {fileID: 2800000, guid: 22c1c24e13b47475c95b19526a4e2b62, type: 3}
-      opacity: 0.7
+      opacity: 0.441
       rounded: 1
   dithering:
     m_Enabled: 0

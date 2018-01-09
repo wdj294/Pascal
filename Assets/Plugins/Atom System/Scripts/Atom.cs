@@ -175,36 +175,36 @@ public class Atom : MonoBehaviour {
         }
     }
 
-    public void drawCircle(float radius, LineRenderer lr)
-    {
-        lr.SetVertexCount(361);
-        lr.useWorldSpace = false;
-        lr.SetWidth(0.0005f, 0.0005f);
-        lr.materials[0] = new Material(Shader.Find("Diffuse"));
-        lr.materials[0].SetColor("_Color", new Color32(255, 255, 255, 255));
+    //public void drawCircle(float radius, LineRenderer lr)
+  //  {
+    //    lr.SetVertexCount(361);
+      //  lr.useWorldSpace = false;
+        //lr.SetWidth(0.0005f, 0.0005f);
+       // lr.materials[0] = new Material(Shader.Find("Diffuse"));
+        //lr.materials[0].SetColor("_Color", new Color32(255, 255, 255, 255));
 
-        float x;
-        float y = 0;
-        float z;
+       // float x;
+        //float y = 0;
+        //float z;
 
-        float angle = 0;
+        //float angle = 0;
 
-        for (int i = 0; i < 361; i++)
-        {
-            x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
-            z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
+        //for (int i = 0; i < 361; i++)
+        //{
+          //  x = Mathf.Sin(Mathf.Deg2Rad * angle) * radius;
+            //z = Mathf.Cos(Mathf.Deg2Rad * angle) * radius;
 
-            lr.SetPosition(i, new Vector3(x, y, z));
+            //lr.SetPosition(i, new Vector3(x, y, z));
 
-            angle += 1;
-        }
-    }
+            //angle += 1;
+        //}
+    //}
 
     public GameObject generateProton(Vector3 pos)
     {
 		GameObject proton = (GameObject)Instantiate(Resources.Load("Proton"));
         proton.name = "Proton";
-		proton.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+		proton.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         proton.transform.position = pos;
         proton.AddComponent<Rigidbody>();
         proton.GetComponent<Rigidbody>().useGravity = false;
@@ -220,7 +220,7 @@ public class Atom : MonoBehaviour {
     {
 		GameObject neutron = (GameObject)Instantiate(Resources.Load("Neutron"));
         neutron.name = "Neutron";
-		neutron.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+		neutron.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         neutron.transform.position = pos;
         neutron.AddComponent<Rigidbody>();
         neutron.GetComponent<Rigidbody>().useGravity = false;
@@ -243,8 +243,8 @@ public class Atom : MonoBehaviour {
             shell.name = "Shell " + (loop+1);
             shell.transform.parent = transform;
             shell.transform.localPosition = transform.Find("Nucleus").localPosition;
-            LineRenderer lr = shell.AddComponent<LineRenderer>();
-            drawCircle(electronShellSpacing * (loop + 1), lr);
+          //  LineRenderer lr = shell.AddComponent<LineRenderer>();
+//            drawCircle(electronShellSpacing * (loop + 1), lr);
             shells.Add(shell);
         }
 
