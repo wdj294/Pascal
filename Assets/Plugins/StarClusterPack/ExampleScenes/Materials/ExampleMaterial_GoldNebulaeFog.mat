@@ -8,7 +8,7 @@ Material:
   m_PrefabInternal: {fileID: 0}
   m_Name: ExampleMaterial_GoldNebulaeFog
   m_Shader: {fileID: 4800000, guid: 11ddb99c595e44545824258a586fe00d, type: 3}
-  m_ShaderKeywords: _USE_CAMERA_POSITION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -103,7 +103,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _Use_Attenuation: 0
-    - _Use_Camera_Position: 1
+    - _Use_Camera_Position: 0
     - _Use_Decay: 0
     - _Use_LensEffect: 0
     - _VariationShift: 0
