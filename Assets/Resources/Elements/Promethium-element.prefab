@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 23403875586981642}
   - component: {fileID: 114831705305958246}
   - component: {fileID: 54923103681133306}
+  - component: {fileID: 114055687686791966}
   m_Layer: 0
   m_Name: Promethium-element
   m_TagString: Element
@@ -158,6 +159,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114055687686791966
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758359813899850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c733b29819524598908d2e593abf7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  rotateVec3: {x: 0, y: 0, z: 0}
 --- !u!114 &114395784951492410
 MonoBehaviour:
   m_ObjectHideFlags: 1

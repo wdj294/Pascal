@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 23277250707764764}
   - component: {fileID: 114531648787325258}
   - component: {fileID: 54998792776328138}
+  - component: {fileID: 114722673158463348}
   m_Layer: 0
   m_Name: Caesium-element
   m_TagString: Element
@@ -190,3 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: -664232604, guid: e743331561ef77147ae48cda9bcb8209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114722673158463348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1900353096798222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c733b29819524598908d2e593abf7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  rotateVec3: {x: 0, y: 0, z: 0}

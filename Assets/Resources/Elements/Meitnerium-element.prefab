@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 23321268585244526}
   - component: {fileID: 114611819162925128}
   - component: {fileID: 54917425521709170}
+  - component: {fileID: 114017931756518212}
   m_Layer: 0
   m_Name: Meitnerium-element
   m_TagString: Element
@@ -158,6 +159,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114017931756518212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1373354349439480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c733b29819524598908d2e593abf7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  rotateVec3: {x: 0, y: 0, z: 0}
 --- !u!114 &114221382319399184
 MonoBehaviour:
   m_ObjectHideFlags: 1

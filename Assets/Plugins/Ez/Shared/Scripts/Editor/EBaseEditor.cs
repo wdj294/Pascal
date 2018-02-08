@@ -59,6 +59,12 @@ namespace Ez
         public const int SPACE_16 = 16;
         #endregion
 
+        public bool requiresContantRepaint = false;
+        public override bool RequiresConstantRepaint()
+        {
+            return requiresContantRepaint;
+        }
+
         public Dictionary<string, EGUI.InfoMessage> help, info, warning, error;
 
         public void DrawHeader(Texture texture)

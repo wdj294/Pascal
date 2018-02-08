@@ -18,8 +18,8 @@ namespace Ez
         /// </summary>
         public static void MarkSceneDirty(bool markAllScenesDirty = false)
         {
-            if (EditorApplication.isPlaying) { return; }
-            if (markAllScenesDirty) { EditorSceneManager.MarkAllScenesDirty(); }
+            if(EditorApplication.isPlaying) { return; }
+            if(markAllScenesDirty) { EditorSceneManager.MarkAllScenesDirty(); }
             else { EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene()); }
         }
         #endregion
@@ -98,7 +98,7 @@ namespace Ez
         /// <returns>Returns false if it's a scene object.</returns>
         public static bool IsPersistent(Object target)
         {
-            if (target == null) { return false; }
+            if(target == null) { return false; }
             return EditorUtility.IsPersistent(target);
         }
         #endregion
@@ -253,7 +253,7 @@ namespace Ez
         /// </summary>
         public static void DrawTexture(Texture texture)
         {
-            if (texture == null) { Debug.Log("[Doozy] Texture is null!"); return; }
+            if(texture == null) { Debug.Log("[Doozy] Texture is null!"); return; }
             Rect rect = GUILayoutUtility.GetRect(0f, 0f);
             rect.width = texture.width;
             rect.height = texture.height;
@@ -265,7 +265,7 @@ namespace Ez
         /// </summary>
         public static void DrawTexture(Texture texture, float width, float height)
         {
-            if (texture == null) { Debug.Log("[Doozy] Texture is null!"); return; }
+            if(texture == null) { Debug.Log("[Doozy] Texture is null!"); return; }
             Rect rect = GUILayoutUtility.GetRect(0f, 0f);
             rect.width = width;
             rect.height = height;
@@ -387,7 +387,16 @@ namespace Ez
         /// <param name="text">Text to display on the button.</param>
         /// <param name="style">The style to use.</param>
         /// <returns>Returns true when the users clicks the button.</returns>
-        public static bool Button(string text, GUIStyle style) { if (GUILayout.Button(text, style)) { ResetKeyboardFocus(); return true; } return false; }
+        public static bool Button(string text, GUIStyle style) { if(GUILayout.Button(text, style)) { ResetKeyboardFocus(); return true; } return false; }
+        /// <summary>
+        ///  Make a single press button. The user clicks them and something happens immediately.
+        /// </summary>
+        /// <param name="text">Text to display on the button.</param>
+        /// <param name="style">The style to use.</param>
+        /// <param name="width">Set the button's width.</param>
+        /// <returns></returns>
+        public static bool Button(string text, GUIStyle style, float width) { if(GUILayout.Button(text, style, GUILayout.Width(width))) { ResetKeyboardFocus(); return true; } return false; }
+
         /// <summary>
         ///  Make a single press button. The user clicks them and something happens immediately.
         /// </summary>
@@ -396,13 +405,13 @@ namespace Ez
         /// <param name="width">Set the button's width.</param>
         /// <param name="height">Set the button's height.</param>
         /// <returns></returns>
-        public static bool Button(string text, GUIStyle style, float width, float height) { if (GUILayout.Button(text, style, GUILayout.Width(width), GUILayout.Height(height))) { ResetKeyboardFocus(); return true; } return false; }
+        public static bool Button(string text, GUIStyle style, float width, float height) { if(GUILayout.Button(text, style, GUILayout.Width(width), GUILayout.Height(height))) { ResetKeyboardFocus(); return true; } return false; }
         /// <summary>
         /// Make a single press button. The user clicks them and something happens immediately.
         /// </summary>
         /// <param name="style">The style to use.</param>
         /// <returns>Returns true when the users clicks the button.</returns>
-        public static bool Button(GUIStyle style) { if (GUILayout.Button(GUIContent.none, style)) { ResetKeyboardFocus(); return true; } return false; }
+        public static bool Button(GUIStyle style) { if(GUILayout.Button(GUIContent.none, style)) { ResetKeyboardFocus(); return true; } return false; }
         /// <summary>
         /// Make a single press button. The user clicks them and something happens immediately.
         /// </summary>
@@ -410,31 +419,135 @@ namespace Ez
         /// <param name="width">Set the button's width.</param>
         /// <param name="height">Set the button's height.</param>
         /// <returns>Returns true when the users clicks the button.</returns>
-        public static bool Button(GUIStyle style, float width, float height) { if (GUILayout.Button(GUIContent.none, style, GUILayout.Width(width), GUILayout.Height(height))) { ResetKeyboardFocus(); return true; } return false; }
+        public static bool Button(GUIStyle style, float width, float height) { if(GUILayout.Button(GUIContent.none, style, GUILayout.Width(width), GUILayout.Height(height))) { ResetKeyboardFocus(); return true; } return false; }
         #endregion
 
         #region ButtonPlus / ButtonMinus
         /// <summary>
-        /// Make a single '+' green button that is 16x16 pixels. The user clicks them and something happens immediately.
+        /// Make a single '+' green button that is 18x18 pixels. The user clicks them and something happens immediately.
         /// </summary>
         /// <returns>Returns true when the users clicks the button.</returns>
         public static bool ButtonPlus()
         {
-            return Button("\uf067", EStyles.GetStyle(EStyles.ButtonStyle.ButtonPlus), 18, 19);
+            return Button("\uf067", EStyles.GetStyle(EStyles.ButtonStyle.ButtonPlus), 18, 18);
         }
 
         /// <summary>
-        /// Make a single '-' red button that is 16x16 pixels. The user clicks them and something happens immediately.
+        /// Make a single '-' red button that is 18x18 pixels. The user clicks them and something happens immediately.
         /// </summary>
         /// <returns>Returns true when the users clicks the button.</returns>
         public static bool ButtonMinus()
         {
-            return Button("\uf068", EStyles.GetStyle(EStyles.ButtonStyle.ButtonMinus), 18, 19);
+            return Button("\uf068", EStyles.GetStyle(EStyles.ButtonStyle.ButtonMinus), 18, 18);
         }
 
+        /// <summary>
+        /// Make a single 'reset symbol' dark grey button that is 18x18 pixels. The user clicks them and something happens immediately.
+        /// </summary>
+        /// <returns>Returns true when the users clicks the button.</returns>
         public static bool ButtonReset()
         {
-            return Button("\uf021", EStyles.GetStyle(EStyles.ButtonStyle.ButtonReset), 20, 19);
+            return Button("\uf021", EStyles.GetStyle(EStyles.ButtonStyle.ButtonReset), 18, 18);
+        }
+        #endregion
+
+        #region DrawSeparator
+        /// <summary>
+        /// Draws a horizontal line with the given texture. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="texture">The texture you want drawn.</param>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparator(Texture texture, float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            BeginHorizontal(width);
+            {
+                Space(spacePrefix);
+                DrawTexture(texture, width - spacePrefix - spaceSufix, 2);
+                Space(spaceSufix);
+            }
+            EndHorizontal();
+        }
+        /// <summary>
+        /// Draws a green horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorGreen(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonGreen.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a blue horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorBlue(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonBlue.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a purple horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorPurple(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonPurple.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws an orange horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorOrange(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonOrange.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a red horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorRed(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonRed.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a light grey horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorGreyLight(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonGreyLight.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a mild grey horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorGreyMild(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonGreyMild.normal, width, spacePrefix, spaceSufix);
+        }
+        /// <summary>
+        /// Draws a dark grey horizontal line. The line has a height of 2 pixels.
+        /// </summary>
+        /// <param name="width">Separator's width.</param>
+        /// <param name="spacePrefix">Adds a set number of empty pixels in front (indent)</param>
+        /// <param name="spaceSufix">Adds a set number of empty pixels at the end</param>
+        public static void DrawSeparatorGreyDark(float width, float spacePrefix = 0, float spaceSufix = 0)
+        {
+            DrawSeparator(EResources.ButtonGreyDark.normal, width, spacePrefix, spaceSufix);
         }
         #endregion
 
@@ -677,7 +790,6 @@ namespace Ez
         {
             serializedProperty.enumValueIndex = EditorGUILayout.Popup(serializedProperty.enumValueIndex, serializedProperty.enumDisplayNames);
         }
-
         /// <summary>
         /// Make a generic popup selection field.
         /// Takes the currently selected index as a parameter and returns the index selected
@@ -688,6 +800,31 @@ namespace Ez
         public static void Popup(SerializedProperty serializedProperty, float width)
         {
             serializedProperty.enumValueIndex = EditorGUILayout.Popup(serializedProperty.enumValueIndex, serializedProperty.enumDisplayNames, GUILayout.Width(width));
+        }
+        /// <summary>
+        /// Make a generic popup selection field.
+        /// Takes the currently selected index as a parameter and returns the index selected
+        /// by the user.Create a primitive depending on the option selected.
+        /// </summary>
+        /// <param name="selectedIndex">The current selectedIndex.</param>
+        /// <param name="displayedOptions">The popup's selection options.</param>
+        /// <returns>The new selectedIndex value.</returns>
+        public static int Popup(int selectedIndex, string[] displayedOptions)
+        {
+            return EditorGUILayout.Popup(selectedIndex, displayedOptions);
+        }
+        /// <summary>
+        /// Make a generic popup selection field.
+        /// Takes the currently selected index as a parameter and returns the index selected
+        /// by the user.Create a primitive depending on the option selected.
+        /// </summary>
+        /// <param name="selectedIndex">The current selectedIndex.</param>
+        /// <param name="displayedOptions">The popup's selection options.</param>
+        /// <param name="width">Set the popup's width.</param>
+        /// <returns>The new selectedIndex value.</returns>
+        public static int Popup(int selectedIndex, string[] displayedOptions, float width)
+        {
+            return EditorGUILayout.Popup(selectedIndex, displayedOptions, GUILayout.Width(width));
         }
         #endregion
 
@@ -1131,6 +1268,72 @@ namespace Ez
         }
         #endregion
 
+        #region TextField
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="text">The text to edit.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(string text)
+        {
+            return EditorGUILayout.TextField(text);
+        }
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="text">The text to edit.</param>
+        /// <param name="width">The field's width.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(string text, float width)
+        {
+            return EditorGUILayout.TextField(text, GUILayout.Width(width));
+        }
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="text">The text to edit.</param>
+        /// <param name="width">The field's width.</param>
+        /// <param name="height">The field's height.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(string text, float width, float height)
+        {
+            return EditorGUILayout.TextField(text, GUILayout.Width(width), GUILayout.Height(height));
+        }
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="label">Adds a label in front of the text field.</param>
+        /// <param name="text">The text to edit.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(GUIContent label, string text)
+        {
+            return EditorGUILayout.TextField(label, text);
+        }
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="label">Adds a label in front of the text field.</param>
+        /// <param name="text">The text to edit.</param>
+        /// <param name="width">The field's width.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(GUIContent label, string text, float width)
+        {
+            return EditorGUILayout.TextField(label, text, GUILayout.Width(width));
+        }
+        /// <summary>
+        /// Make a text field.
+        /// </summary>
+        /// <param name="label">Adds a label in front of the text field.</param>
+        /// <param name="text">The text to edit.</param>
+        /// <param name="width">The field's width.</param>
+        /// <param name="height">The field's height.</param>
+        /// <returns>The edited text value.</returns>
+        public static string TextField(GUIContent label, string text, float width, float height)
+        {
+            return EditorGUILayout.TextField(label, text, GUILayout.Width(width), GUILayout.Height(height));
+        }
+        #endregion
+
         #region InfoMessage / DrawInfoMessage
         /// <summary>
         /// Stores an AnimBool (used for show/hide animation), a title (optional), and a message.
@@ -1181,7 +1384,7 @@ namespace Ez
         public static void DrawInfoMessage(InfoMessage im, float width, InfoMessageType type)
         {
             string message = (string.IsNullOrEmpty(im.title) ? "" : "<b>" + im.title + "</b> - ") + im.message;
-            switch (type)
+            switch(type)
             {
                 case InfoMessageType.Help: DrawInfoMessage(im.show, "\uf059 " + message, EStyles.GetStyle(EStyles.TextStyle.Help), width); break;
                 case InfoMessageType.Info: DrawInfoMessage(im.show, "\uf05a " + message, EStyles.GetStyle(EStyles.TextStyle.Info), width); break;
@@ -1198,7 +1401,7 @@ namespace Ez
         public static void DrawInfoMessage(InfoMessage im, InfoMessageType type, float width)
         {
             string message = (string.IsNullOrEmpty(im.title) ? "" : "<b>" + im.title + "</b> - ") + im.message;
-            switch (type)
+            switch(type)
             {
                 case InfoMessageType.Help: DrawInfoMessage(im.show, "\uf059 " + message, EStyles.GetStyle(EStyles.TextStyle.Help), width); break;
                 case InfoMessageType.Info: DrawInfoMessage(im.show, "\uf05a " + message, EStyles.GetStyle(EStyles.TextStyle.Info), width); break;
@@ -1211,8 +1414,8 @@ namespace Ez
         /// </summary>
         private static void DrawInfoMessage(AnimBool show, string message, GUIStyle style, float width)
         {
-            if (!show.value) { return; }
-            if (EditorGUILayout.BeginFadeGroup(show.faded))
+            if(!show.value) { return; }
+            if(EditorGUILayout.BeginFadeGroup(show.faded))
             {
                 EditorGUILayout.LabelField(message, style, GUILayout.Width(width));
             }

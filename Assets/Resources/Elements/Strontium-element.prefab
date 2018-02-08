@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23955908017694172}
   - component: {fileID: 114008363702618134}
   - component: {fileID: 54125584737186850}
+  - component: {fileID: 114639788927881892}
   m_Layer: 0
   m_Name: Strontium-element
   m_TagString: Element
@@ -190,3 +191,16 @@ MonoBehaviour:
   electronShellSpacing: 0.1
   spinElectrons: 1
   freezeNucleusMovementAfter5Seconds: 0
+--- !u!114 &114639788927881892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1337149097696560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c733b29819524598908d2e593abf7db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 1
+  rotateVec3: {x: 0, y: 0, z: 0}

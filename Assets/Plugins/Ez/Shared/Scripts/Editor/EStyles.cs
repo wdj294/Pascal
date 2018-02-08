@@ -2,19 +2,20 @@
 // This code can only be used under the standard Unity Asset Store End User License Agreement
 // A Copy of the EULA APPENDIX 1 is available at http://unity3d.com/company/legal/as_terms
 
+using Ez.Internal;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 namespace Ez
 {
-    public class EStyles
+    public static class EStyles
     {
         public static GUIStyle GetStyle(TextStyle style) { return Skin.GetStyle(style.ToString()); }
         public static GUIStyle GetStyle(ButtonStyle style) { return Skin.GetStyle(style.ToString()); }
 
         private static GUISkin skin;
-        private static GUISkin Skin { get { if (skin == null) { skin = GetSkin(); } return skin; } }
+        private static GUISkin Skin { get { if(skin == null) { skin = GetSkin(); } return skin; } }
 
         private static GUISkin GetSkin()
         {
@@ -103,6 +104,14 @@ namespace Ez
             ButtonGreyLight,
             ButtonGreyMild,
             ButtonGreyDark,
+            LeftButtonBlue,
+            LeftButtonGreen,
+            LeftButtonOrange,
+            LeftButtonPurple,
+            LeftButtonRed,
+            LeftButtonGreyLight,
+            LeftButtonGreyMild,
+            LeftButtonGreyDark,
             ToggleOn,
             ToggleOff,
             ButtonPlus,
@@ -113,19 +122,32 @@ namespace Ez
         private static List<GUIStyle> GetButtonStyles()
         {
             List<GUIStyle> buttonStyles = new List<GUIStyle>();
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonBlue, EResources.ButtonBlue, EColor.Blue, EResources.ButtonBlueActive, EColor.BlueDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreen, EResources.ButtonGreen, EColor.Green, EResources.ButtonGreenActive, EColor.GreenDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonOrange, EResources.ButtonOrange, EColor.Orange, EResources.ButtonOrangeActive, EColor.OrangeDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonPurple, EResources.ButtonPurple, EColor.Purple, EResources.ButtonPurpleActive, EColor.PurpleDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonRed, EResources.ButtonRed, EColor.Red, EResources.ButtonRedActive, EColor.RedDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyLight, EResources.ButtonGreyLight, EColor.UnityDark, EResources.ButtonGreyLightActive, EColor.UnityDark, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyMild, EResources.ButtonGreyMild, EColor.UnityLight, EResources.ButtonGreyMildActive, EColor.UnityLight, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyDark, EResources.ButtonGreyDark, EColor.UnityLight, EResources.ButtonGreyDarkActive, EColor.UnityLight, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0)));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonBlue, EResources.ButtonBlue, EColor.Blue, EColor.Blue, EColor.BlueMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreen, EResources.ButtonGreen, EColor.Green, EColor.Green, EColor.GreenMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonPurple, EResources.ButtonPurple, EColor.Purple, EColor.Purple, EColor.PurpleMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonOrange, EResources.ButtonOrange, EColor.Orange, EColor.Orange, EColor.OrangeMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonRed, EResources.ButtonRed, EColor.Red, EColor.Red, EColor.RedMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyLight, EResources.ButtonGreyLight, EColor.UnityDark, EColor.UnityDark, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyMild, EResources.ButtonGreyMild, EColor.UnityLight, EColor.UnityLight, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonGreyDark, EResources.ButtonGreyDark, EColor.UnityLight, EColor.UnityLight, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonBlue, EResources.ButtonBlue, EColor.Blue, EColor.Blue, EColor.BlueMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonGreen, EResources.ButtonGreen, EColor.Green, EColor.Green, EColor.GreenMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonPurple, EResources.ButtonPurple, EColor.Purple, EColor.Purple, EColor.PurpleMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonOrange, EResources.ButtonOrange, EColor.Orange, EColor.Orange, EColor.OrangeMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonRed, EResources.ButtonRed, EColor.Red, EColor.Red, EColor.RedMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonGreyLight, EResources.ButtonGreyLight, EColor.UnityDark, EColor.UnityDark, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonGreyMild, EResources.ButtonGreyMild, EColor.UnityLight, EColor.UnityLight, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.LeftButtonGreyDark, EResources.ButtonGreyDark, EColor.UnityLight, EColor.UnityLight, EColor.UnityMild, 12, FontStyle.Bold, TextAnchor.MiddleLeft, new RectOffset(2, 2, 1, 2), new RectOffset(8, 8, 8, 8), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+
+
             buttonStyles.Add(GetButtonStyle(ButtonStyle.ToggleOn, EResources.ButtonCheckboxEnabled, EColor.WhiteDark, EResources.ButtonCheckboxPressed, EColor.WhiteLight, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(2, 2, 2, 2), new RectOffset(0, 0, 0, 0)));
             buttonStyles.Add(GetButtonStyle(ButtonStyle.ToggleOff, EResources.ButtonCheckboxDisabled, EColor.WhiteDark, EResources.ButtonCheckboxPressed, EColor.WhiteLight, 12, FontStyle.Bold, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(2, 2, 1, 2), new RectOffset(2, 2, 2, 2), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonPlus, EResources.ButtonGreen, EColor.Green, EResources.ButtonGreenActive, EColor.GreenDark, 10, FontStyle.Normal, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonMinus, EResources.ButtonRed, EColor.Red, EResources.ButtonRedActive, EColor.RedDark, 10, FontStyle.Normal, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0)));
-            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonReset, EResources.ButtonGreyDark, EColor.UnityLight, EResources.ButtonGreyDarkActive, EColor.UnityLight, 12, FontStyle.Normal, TextAnchor.MiddleCenter, EResources.FontAwesome, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0)));
+
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonPlus, EResources.ButtonGreen, EColor.Green, EColor.Green, EColor.GreenDark, 10, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonMinus, EResources.ButtonRed, EColor.Red, EColor.Red, EColor.RedDark, 10, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+            buttonStyles.Add(GetButtonStyle(ButtonStyle.ButtonReset, EResources.ButtonGreyDark, EColor.UnityLight, EColor.UnityLight, EColor.UnityLight, 10, FontStyle.Bold, TextAnchor.MiddleCenter, new RectOffset(1, 1, 1, 1), new RectOffset(4, 4, 4, 4), new RectOffset(0, 0, 0, 0), EResources.FontAwesome));
+
             return buttonStyles;
         }
 
@@ -151,6 +173,65 @@ namespace Ez
                 border = border,
                 margin = margin
             };
+        }
+
+        private static GUIStyle GetButtonStyle(ButtonStyle s, GTexture t, Color cNormal, Color cHover, Color cActive, int fontSize, FontStyle fontStyle, TextAnchor alignment, RectOffset padding, RectOffset border, RectOffset margin, Font font)
+        {
+            GUIStyle style = new GUIStyle();
+            style.name = s.ToString();
+            style.normal = new GUIStyleState { background = t.normal2D, textColor = cNormal };
+            style.onNormal = new GUIStyleState { background = t.normal2D, textColor = cNormal };
+            if(t.HasHover)
+            {
+                style.hover = new GUIStyleState { background = t.hover2D, textColor = cHover };
+                style.onHover = new GUIStyleState { background = t.hover2D, textColor = cHover };
+            }
+            if(t.HasActive)
+            {
+                style.active = new GUIStyleState { background = t.active2D, textColor = cActive };
+                style.onActive = new GUIStyleState { background = t.active2D, textColor = cActive };
+            }
+            style.fontSize = fontSize;
+            style.alignment = alignment;
+            style.padding = padding;
+            style.border = border;
+            style.margin = margin;
+            style.font = font;
+            return style;
+        }
+
+        public static GUIStyle Copy(this GUIStyle style)
+        {
+            GUIStyle copy = new GUIStyle
+            {
+                name = style.name,
+                normal = style.normal,
+                onNormal = style.onNormal,
+                hover = style.hover,
+                onHover = style.onHover,
+                active = style.active,
+                onActive = style.onActive,
+                focused = style.focused,
+                onFocused = style.onFocused,
+                alignment = style.alignment,
+                border = style.border,
+                clipping = style.clipping,
+                contentOffset = style.contentOffset,
+                fixedHeight = style.fixedHeight,
+                fixedWidth = style.fixedWidth,
+                font = style.font,
+                fontSize = style.fontSize,
+                fontStyle = style.fontStyle,
+                imagePosition = style.imagePosition,
+                margin = style.margin,
+                overflow = style.overflow,
+                padding = style.padding,
+                richText = style.richText,
+                stretchHeight = style.stretchHeight,
+                stretchWidth = style.stretchWidth,
+                wordWrap = style.wordWrap
+            };
+            return copy;
         }
     }
 }

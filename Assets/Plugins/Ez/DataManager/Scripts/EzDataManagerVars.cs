@@ -15,120 +15,40 @@ namespace Ez.DataManager
 
         #region Variable Examples
         public string CTGSTRT_0 = "Variable Examples";
-        public AnimationCurve vAnimationCurve;
-        public AudioClip vAudioClip;
-        public bool vBool;
-        public Color vColor;
-        public Color32 vColor32;
-        public double vDouble;
-        public float vFloat;
-        public GameObject vGameObject;
-        public int vInt;
-        public long vLong;
-        public Material vMaterial;
-        public Mesh vMesh;
-        public Object vObject;
-        public ParticleSystem vParticleSystem;
-        public Quaternion vQuaternion;
-        public Rect vRect;
-        public RectTransform vRectTransform;
-        public Sprite vSprite;
-        public string vString;
-        public TerrainData vTerrainData;
-        public Texture vTexture;
-        public Transform vTransform;
-        public Vector2 vVector2;
-        public Vector3 vVector3;
-        public Vector4 vVector4;
-        public readonly int CTGEND_0 = 25;
-        #endregion
-
-        #region Arrays Example
-        public string CTGSTRT_1 = "Arrays Example";
-        public AnimationCurve[] aAnimationCurve;
-        public AudioClip[] aAudioClip;
-        public bool[] aBool;
-        public Color[] aColor;
-        public Color32[] aColor32;
-        public double[] aDouble;
-        public float[] aFloat;
-        public GameObject[] aGameObject;
-        public int[] aInt;
-        public long[] aLong;
-        public Material[] aMaterial;
-        public Mesh[] aMesh;
-        public Object[] aObject;
-        public ParticleSystem[] aParticleSystem;
-        public Quaternion[] aQuaternion;
-        public Rect[] aRect;
-        public RectTransform[] aRectTransform;
-        public Sprite[] aSprite;
-        public string[] aString;
-        public TerrainData[] aTerrainData;
-        public Texture[] aTexture;
-        public Transform[] aTransform;
-        public Vector2[] aVector2;
-        public Vector3[] aVector3;
-        public Vector4[] aVector4;
-        public readonly int CTGEND_1 = 25;
-        #endregion
-
-        #region Lists Example
-        public string CTGSTRT_2 = "Lists Example";
-        public List<AnimationCurve> lAnimationCurve;
-        public List<AudioClip> lAudioClip;
-        public List<bool> lBool;
-        public List<Color> lColor;
-        public List<Color32> lColor32;
-        public List<double> lDouble;
-        public List<float> lFloat;
-        public List<GameObject> lGameObject;
-        public List<int> lInt;
-        public List<long> lLong;
-        public List<Material> lMaterial;
-        public List<Mesh> lMesh;
-        public List<Object> lObject;
-        public List<ParticleSystem> lParticleSystem;
-        public List<Quaternion> lQuaternion;
-        public List<Rect> lRect;
-        public List<RectTransform> lRectTransform;
-        public List<Sprite> lSprite;
-        public List<string> lString;
-        public List<TerrainData> lTerrainData;
-        public List<Texture> lTexture;
-        public List<Transform> lTransform;
-        public List<Vector2> lVector2;
-        public List<Vector3> lVector3;
-        public List<Vector4> lVector4;
-        public readonly int CTGEND_2 = 25;
-        #endregion
-
-        #region Game Settings Example
-        public string CTGSTRT_3 = "Game Settings Example";
         public bool soundOn;
         public float soundVolume;
         public bool musicOn;
         public float musicVolume;
-        public readonly int CTGEND_3 = 4;
+        public readonly int CTGEND_0 = 4;
         #endregion
 
-        #region Player Settings Example
-        public string CTGSTRT_4 = "Player Settings Example";
+        #region Arrays Example
+        public string CTGSTRT_1 = "Arrays Example";
         public string playerName;
         public long playerScore;
         public int[] levels;
-        public readonly int CTGEND_4 = 3;
+        public readonly int CTGEND_1 = 3;
         #endregion
 
-        #region albertEinstein
-        public string CTGSTRT_5 = "albertEinstein";
+        #region Albert-Einstein
+        public string CTGSTRT_2 = "Albert-Einstein";
         public string albertEinsteinName;
         public string albertEinsteinBirthDate;
         public Texture albertEinsteinCountryTexture;
         public Texture albertEinsteinImage;
         public string albertEinsteinQuote;
         public string albertEinsteinBio;
-        public readonly int CTGEND_5 = 6;
+        public readonly int CTGEND_2 = 6;
+        #endregion
+
+        #region Europium
+        public string CTGSTRT_3 = "Europium";
+        public string europiumName;
+        public string europiumSymbol;
+        public int europiumAtomicNumber;
+        public Texture europiumImage;
+        public float europiumAtomicMass;
+        public readonly int CTGEND_3 = 5;
         #endregion
 
         #region Getter/Setter Functions
@@ -139,14 +59,14 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vFloat":
-                    value = EzDataManager.Instance.vFloat;
-                    return true;
                 case "soundVolume":
                     value = EzDataManager.Instance.soundVolume;
                     return true;
                 case "musicVolume":
                     value = EzDataManager.Instance.musicVolume;
+                    return true;
+                case "europiumAtomicMass":
+                    value = EzDataManager.Instance.europiumAtomicMass;
                     return true;
                 default:
                     return false;
@@ -158,14 +78,14 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vFloat":
-                    EzDataManager.Instance.vFloat =  value ;
-                    return true;
                 case "soundVolume":
                     EzDataManager.Instance.soundVolume =  value ;
                     return true;
                 case "musicVolume":
                     EzDataManager.Instance.musicVolume =  value ;
+                    return true;
+                case "europiumAtomicMass":
+                    EzDataManager.Instance.europiumAtomicMass =  value ;
                     return true;
                 default:
                     return false;
@@ -178,8 +98,8 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vInt":
-                    value = EzDataManager.Instance.vInt;
+                case "europiumAtomicNumber":
+                    value = EzDataManager.Instance.europiumAtomicNumber;
                     return true;
                 default:
                     return false;
@@ -191,8 +111,8 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vInt":
-                    EzDataManager.Instance.vInt =  value ;
+                case "europiumAtomicNumber":
+                    EzDataManager.Instance.europiumAtomicNumber =  value ;
                     return true;
                 default:
                     return false;
@@ -205,9 +125,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vBool":
-                    value = EzDataManager.Instance.vBool;
-                    return true;
                 case "soundOn":
                     value = EzDataManager.Instance.soundOn;
                     return true;
@@ -224,9 +141,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vBool":
-                    EzDataManager.Instance.vBool =  value ;
-                    return true;
                 case "soundOn":
                     EzDataManager.Instance.soundOn =  value ;
                     return true;
@@ -244,9 +158,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vGameObject":
-                    value = EzDataManager.Instance.vGameObject;
-                    return true;
                 default:
                     return false;
             }
@@ -257,9 +168,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vGameObject":
-                    EzDataManager.Instance.vGameObject =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -271,9 +179,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vString":
-                    value = EzDataManager.Instance.vString;
-                    return true;
                 case "playerName":
                     value = EzDataManager.Instance.playerName;
                     return true;
@@ -289,6 +194,12 @@ namespace Ez.DataManager
                 case "albertEinsteinBio":
                     value = EzDataManager.Instance.albertEinsteinBio;
                     return true;
+                case "europiumName":
+                    value = EzDataManager.Instance.europiumName;
+                    return true;
+                case "europiumSymbol":
+                    value = EzDataManager.Instance.europiumSymbol;
+                    return true;
                 default:
                     return false;
             }
@@ -299,9 +210,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vString":
-                    EzDataManager.Instance.vString =  value ;
-                    return true;
                 case "playerName":
                     EzDataManager.Instance.playerName =  value ;
                     return true;
@@ -317,6 +225,12 @@ namespace Ez.DataManager
                 case "albertEinsteinBio":
                     EzDataManager.Instance.albertEinsteinBio =  value ;
                     return true;
+                case "europiumName":
+                    EzDataManager.Instance.europiumName =  value ;
+                    return true;
+                case "europiumSymbol":
+                    EzDataManager.Instance.europiumSymbol =  value ;
+                    return true;
                 default:
                     return false;
             }
@@ -328,9 +242,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vVector2":
-                    value = EzDataManager.Instance.vVector2;
-                    return true;
                 default:
                     return false;
             }
@@ -341,9 +252,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vVector2":
-                    EzDataManager.Instance.vVector2 =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -355,9 +263,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vVector3":
-                    value = EzDataManager.Instance.vVector3;
-                    return true;
                 default:
                     return false;
             }
@@ -368,9 +273,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vVector3":
-                    EzDataManager.Instance.vVector3 =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -382,9 +284,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vColor":
-                    value = EzDataManager.Instance.vColor;
-                    return true;
                 default:
                     return false;
             }
@@ -395,9 +294,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vColor":
-                    EzDataManager.Instance.vColor =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -409,9 +305,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vRect":
-                    value = EzDataManager.Instance.vRect;
-                    return true;
                 default:
                     return false;
             }
@@ -422,9 +315,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vRect":
-                    EzDataManager.Instance.vRect =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -436,9 +326,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vMaterial":
-                    value = EzDataManager.Instance.vMaterial;
-                    return true;
                 default:
                     return false;
             }
@@ -449,9 +336,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vMaterial":
-                    EzDataManager.Instance.vMaterial =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -463,14 +347,14 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vTexture":
-                    value = EzDataManager.Instance.vTexture;
-                    return true;
                 case "albertEinsteinCountryTexture":
                     value = EzDataManager.Instance.albertEinsteinCountryTexture;
                     return true;
                 case "albertEinsteinImage":
                     value = EzDataManager.Instance.albertEinsteinImage;
+                    return true;
+                case "europiumImage":
+                    value = EzDataManager.Instance.europiumImage;
                     return true;
                 default:
                     return false;
@@ -482,14 +366,14 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vTexture":
-                    EzDataManager.Instance.vTexture =  value ;
-                    return true;
                 case "albertEinsteinCountryTexture":
                     EzDataManager.Instance.albertEinsteinCountryTexture =  value ;
                     return true;
                 case "albertEinsteinImage":
                     EzDataManager.Instance.albertEinsteinImage =  value ;
+                    return true;
+                case "europiumImage":
+                    EzDataManager.Instance.europiumImage =  value ;
                     return true;
                 default:
                     return false;
@@ -502,9 +386,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vQuaternion":
-                    value = EzDataManager.Instance.vQuaternion;
-                    return true;
                 default:
                     return false;
             }
@@ -515,9 +396,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vQuaternion":
-                    EzDataManager.Instance.vQuaternion =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -529,9 +407,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vObject":
-                    value = EzDataManager.Instance.vObject;
-                    return true;
                 default:
                     return false;
             }
@@ -542,9 +417,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "vObject":
-                    EzDataManager.Instance.vObject =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -556,81 +428,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(arrayName)) return false;
             switch(arrayName)
             {
-                case "aAnimationCurve":
-                    array = EzDataManager.Instance.aAnimationCurve;
-                    return true;
-                case "aAudioClip":
-                    array = EzDataManager.Instance.aAudioClip;
-                    return true;
-                case "aBool":
-                    array = EzDataManager.Instance.aBool;
-                    return true;
-                case "aColor":
-                    array = EzDataManager.Instance.aColor;
-                    return true;
-                case "aColor32":
-                    array = EzDataManager.Instance.aColor32;
-                    return true;
-                case "aDouble":
-                    array = EzDataManager.Instance.aDouble;
-                    return true;
-                case "aFloat":
-                    array = EzDataManager.Instance.aFloat;
-                    return true;
-                case "aGameObject":
-                    array = EzDataManager.Instance.aGameObject;
-                    return true;
-                case "aInt":
-                    array = EzDataManager.Instance.aInt;
-                    return true;
-                case "aLong":
-                    array = EzDataManager.Instance.aLong;
-                    return true;
-                case "aMaterial":
-                    array = EzDataManager.Instance.aMaterial;
-                    return true;
-                case "aMesh":
-                    array = EzDataManager.Instance.aMesh;
-                    return true;
-                case "aObject":
-                    array = EzDataManager.Instance.aObject;
-                    return true;
-                case "aParticleSystem":
-                    array = EzDataManager.Instance.aParticleSystem;
-                    return true;
-                case "aQuaternion":
-                    array = EzDataManager.Instance.aQuaternion;
-                    return true;
-                case "aRect":
-                    array = EzDataManager.Instance.aRect;
-                    return true;
-                case "aRectTransform":
-                    array = EzDataManager.Instance.aRectTransform;
-                    return true;
-                case "aSprite":
-                    array = EzDataManager.Instance.aSprite;
-                    return true;
-                case "aString":
-                    array = EzDataManager.Instance.aString;
-                    return true;
-                case "aTerrainData":
-                    array = EzDataManager.Instance.aTerrainData;
-                    return true;
-                case "aTexture":
-                    array = EzDataManager.Instance.aTexture;
-                    return true;
-                case "aTransform":
-                    array = EzDataManager.Instance.aTransform;
-                    return true;
-                case "aVector2":
-                    array = EzDataManager.Instance.aVector2;
-                    return true;
-                case "aVector3":
-                    array = EzDataManager.Instance.aVector3;
-                    return true;
-                case "aVector4":
-                    array = EzDataManager.Instance.aVector4;
-                    return true;
                 case "levels":
                     array = EzDataManager.Instance.levels;
                     return true;
@@ -646,106 +443,6 @@ namespace Ez.DataManager
             {
                 switch(arrayName)
                 {
-                case "aAnimationCurve":
-                    System.Array.Resize(ref EzDataManager.Instance.aAnimationCurve, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aAnimationCurve, array.Length);
-                    return true;
-                case "aAudioClip":
-                    System.Array.Resize(ref EzDataManager.Instance.aAudioClip, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aAudioClip, array.Length);
-                    return true;
-                case "aBool":
-                    System.Array.Resize(ref EzDataManager.Instance.aBool, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aBool, array.Length);
-                    return true;
-                case "aColor":
-                    System.Array.Resize(ref EzDataManager.Instance.aColor, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aColor, array.Length);
-                    return true;
-                case "aColor32":
-                    System.Array.Resize(ref EzDataManager.Instance.aColor32, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aColor32, array.Length);
-                    return true;
-                case "aDouble":
-                    System.Array.Resize(ref EzDataManager.Instance.aDouble, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aDouble, array.Length);
-                    return true;
-                case "aFloat":
-                    System.Array.Resize(ref EzDataManager.Instance.aFloat, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aFloat, array.Length);
-                    return true;
-                case "aGameObject":
-                    System.Array.Resize(ref EzDataManager.Instance.aGameObject, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aGameObject, array.Length);
-                    return true;
-                case "aInt":
-                    System.Array.Resize(ref EzDataManager.Instance.aInt, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aInt, array.Length);
-                    return true;
-                case "aLong":
-                    System.Array.Resize(ref EzDataManager.Instance.aLong, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aLong, array.Length);
-                    return true;
-                case "aMaterial":
-                    System.Array.Resize(ref EzDataManager.Instance.aMaterial, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aMaterial, array.Length);
-                    return true;
-                case "aMesh":
-                    System.Array.Resize(ref EzDataManager.Instance.aMesh, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aMesh, array.Length);
-                    return true;
-                case "aObject":
-                    System.Array.Resize(ref EzDataManager.Instance.aObject, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aObject, array.Length);
-                    return true;
-                case "aParticleSystem":
-                    System.Array.Resize(ref EzDataManager.Instance.aParticleSystem, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aParticleSystem, array.Length);
-                    return true;
-                case "aQuaternion":
-                    System.Array.Resize(ref EzDataManager.Instance.aQuaternion, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aQuaternion, array.Length);
-                    return true;
-                case "aRect":
-                    System.Array.Resize(ref EzDataManager.Instance.aRect, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aRect, array.Length);
-                    return true;
-                case "aRectTransform":
-                    System.Array.Resize(ref EzDataManager.Instance.aRectTransform, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aRectTransform, array.Length);
-                    return true;
-                case "aSprite":
-                    System.Array.Resize(ref EzDataManager.Instance.aSprite, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aSprite, array.Length);
-                    return true;
-                case "aString":
-                    System.Array.Resize(ref EzDataManager.Instance.aString, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aString, array.Length);
-                    return true;
-                case "aTerrainData":
-                    System.Array.Resize(ref EzDataManager.Instance.aTerrainData, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aTerrainData, array.Length);
-                    return true;
-                case "aTexture":
-                    System.Array.Resize(ref EzDataManager.Instance.aTexture, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aTexture, array.Length);
-                    return true;
-                case "aTransform":
-                    System.Array.Resize(ref EzDataManager.Instance.aTransform, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aTransform, array.Length);
-                    return true;
-                case "aVector2":
-                    System.Array.Resize(ref EzDataManager.Instance.aVector2, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aVector2, array.Length);
-                    return true;
-                case "aVector3":
-                    System.Array.Resize(ref EzDataManager.Instance.aVector3, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aVector3, array.Length);
-                    return true;
-                case "aVector4":
-                    System.Array.Resize(ref EzDataManager.Instance.aVector4, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.aVector4, array.Length);
-                    return true;
                 case "levels":
                     System.Array.Resize(ref EzDataManager.Instance.levels, array.Length);
                     System.Array.Copy(array, EzDataManager.Instance.levels, array.Length);
