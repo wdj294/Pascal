@@ -13,42 +13,13 @@ namespace Ez.DataManager
     {
 #pragma warning disable 0649
 
-        #region Variable Examples
-        public string CTGSTRT_0 = "Variable Examples";
+        #region Settings
+        public string CTGSTRT_0 = "Settings";
         public bool soundOn;
         public float soundVolume;
         public bool musicOn;
         public float musicVolume;
         public readonly int CTGEND_0 = 4;
-        #endregion
-
-        #region Arrays Example
-        public string CTGSTRT_1 = "Arrays Example";
-        public string playerName;
-        public long playerScore;
-        public int[] levels;
-        public readonly int CTGEND_1 = 3;
-        #endregion
-
-        #region Albert-Einstein
-        public string CTGSTRT_2 = "Albert-Einstein";
-        public string albertEinsteinName;
-        public string albertEinsteinBirthDate;
-        public Texture albertEinsteinCountryTexture;
-        public Texture albertEinsteinImage;
-        public string albertEinsteinQuote;
-        public string albertEinsteinBio;
-        public readonly int CTGEND_2 = 6;
-        #endregion
-
-        #region Europium
-        public string CTGSTRT_3 = "Europium";
-        public string europiumName;
-        public string europiumSymbol;
-        public int europiumAtomicNumber;
-        public Texture europiumImage;
-        public float europiumAtomicMass;
-        public readonly int CTGEND_3 = 5;
         #endregion
 
         #region Getter/Setter Functions
@@ -64,9 +35,6 @@ namespace Ez.DataManager
                     return true;
                 case "musicVolume":
                     value = EzDataManager.Instance.musicVolume;
-                    return true;
-                case "europiumAtomicMass":
-                    value = EzDataManager.Instance.europiumAtomicMass;
                     return true;
                 default:
                     return false;
@@ -84,9 +52,6 @@ namespace Ez.DataManager
                 case "musicVolume":
                     EzDataManager.Instance.musicVolume =  value ;
                     return true;
-                case "europiumAtomicMass":
-                    EzDataManager.Instance.europiumAtomicMass =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -98,9 +63,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "europiumAtomicNumber":
-                    value = EzDataManager.Instance.europiumAtomicNumber;
-                    return true;
                 default:
                     return false;
             }
@@ -111,9 +73,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "europiumAtomicNumber":
-                    EzDataManager.Instance.europiumAtomicNumber =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -179,27 +138,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "playerName":
-                    value = EzDataManager.Instance.playerName;
-                    return true;
-                case "albertEinsteinName":
-                    value = EzDataManager.Instance.albertEinsteinName;
-                    return true;
-                case "albertEinsteinBirthDate":
-                    value = EzDataManager.Instance.albertEinsteinBirthDate;
-                    return true;
-                case "albertEinsteinQuote":
-                    value = EzDataManager.Instance.albertEinsteinQuote;
-                    return true;
-                case "albertEinsteinBio":
-                    value = EzDataManager.Instance.albertEinsteinBio;
-                    return true;
-                case "europiumName":
-                    value = EzDataManager.Instance.europiumName;
-                    return true;
-                case "europiumSymbol":
-                    value = EzDataManager.Instance.europiumSymbol;
-                    return true;
                 default:
                     return false;
             }
@@ -210,27 +148,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "playerName":
-                    EzDataManager.Instance.playerName =  value ;
-                    return true;
-                case "albertEinsteinName":
-                    EzDataManager.Instance.albertEinsteinName =  value ;
-                    return true;
-                case "albertEinsteinBirthDate":
-                    EzDataManager.Instance.albertEinsteinBirthDate =  value ;
-                    return true;
-                case "albertEinsteinQuote":
-                    EzDataManager.Instance.albertEinsteinQuote =  value ;
-                    return true;
-                case "albertEinsteinBio":
-                    EzDataManager.Instance.albertEinsteinBio =  value ;
-                    return true;
-                case "europiumName":
-                    EzDataManager.Instance.europiumName =  value ;
-                    return true;
-                case "europiumSymbol":
-                    EzDataManager.Instance.europiumSymbol =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -347,15 +264,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "albertEinsteinCountryTexture":
-                    value = EzDataManager.Instance.albertEinsteinCountryTexture;
-                    return true;
-                case "albertEinsteinImage":
-                    value = EzDataManager.Instance.albertEinsteinImage;
-                    return true;
-                case "europiumImage":
-                    value = EzDataManager.Instance.europiumImage;
-                    return true;
                 default:
                     return false;
             }
@@ -366,15 +274,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(varName)) return false;
             switch(varName)
             {
-                case "albertEinsteinCountryTexture":
-                    EzDataManager.Instance.albertEinsteinCountryTexture =  value ;
-                    return true;
-                case "albertEinsteinImage":
-                    EzDataManager.Instance.albertEinsteinImage =  value ;
-                    return true;
-                case "europiumImage":
-                    EzDataManager.Instance.europiumImage =  value ;
-                    return true;
                 default:
                     return false;
             }
@@ -428,9 +327,6 @@ namespace Ez.DataManager
             if(string.IsNullOrEmpty(arrayName)) return false;
             switch(arrayName)
             {
-                case "levels":
-                    array = EzDataManager.Instance.levels;
-                    return true;
                 default:
                     return false;
             }
@@ -443,10 +339,6 @@ namespace Ez.DataManager
             {
                 switch(arrayName)
                 {
-                case "levels":
-                    System.Array.Resize(ref EzDataManager.Instance.levels, array.Length);
-                    System.Array.Copy(array, EzDataManager.Instance.levels, array.Length);
-                    return true;
                     default:
                         return false;
                 }

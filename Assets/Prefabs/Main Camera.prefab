@@ -68,14 +68,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1441209395523900}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.13052616, y: 0, z: 0, w: 0.9914449}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4056275371093046}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15, y: 0, z: 0}
 --- !u!20 &20323256779738758
 Camera:
   m_ObjectHideFlags: 1
@@ -84,7 +84,7 @@ Camera:
   m_GameObject: {fileID: 1441209395523900}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -94,14 +94,14 @@ Camera:
     height: 1
   near clip plane: 0.01
   far clip plane: 30
-  field of view: 60
+  field of view: 44
   orthographic: 0
   orthographic size: 100
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967263
-  m_RenderingPath: 3
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
@@ -167,14 +167,14 @@ MonoBehaviour:
   OrbitTarget: {fileID: 0}
   Orbiter: {fileID: 0}
   MinZoomDistance: 0.1
-  MaxZoomDistance: 3
+  MaxZoomDistance: 15
   ZoomSpeed: 1.5
   OrbitXSpeed: 10
-  OrbitXMaxDegrees: 15
+  OrbitXMaxDegrees: 90
   OrbitYSpeed: 10
   OrbitYMaxDegrees: 0
   AllowOrbitWhileZooming: 1
-  OrbitInertia: 0.234
+  OrbitInertia: 0
   RequireOrbitGesturesToStartOnTarget: 0
 --- !u!114 &114957706426107178
 MonoBehaviour:
@@ -189,12 +189,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxUpdateRate: Infinity
   preview: 0
-  size: 7
-  iteration: 3
+  size: 4.6875
+  iteration: 7
   maxDepth: 4
   downsample: 0
   lastDownsample: 0
-  strength: 19.6
+  strength: 600
 --- !u!114 &114972044102146534
 MonoBehaviour:
   m_ObjectHideFlags: 1

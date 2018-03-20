@@ -1,34 +1,24 @@
 using System;
 using UnityEngine;
 
-namespace LeTai.Asset.TranslucentImage.Demo
+namespace UnityStandardAssets.Utility
 {
     public class AutoMoveAndRotate : MonoBehaviour
     {
         public Vector3andSpace moveUnitsPerSecond;
         public Vector3andSpace rotateDegreesPerSecond;
-        public bool ignoreTimescale, lateUpdate;
-        float m_LastRealTime;
+        public bool ignoreTimescale;
+        private float m_LastRealTime;
 
 
-        void Start()
+        private void Start()
         {
             m_LastRealTime = Time.realtimeSinceStartup;
         }
 
-        void Update()
-        {
-            if (!lateUpdate)
-                DoWork();
-        }
 
-        void LateUpdate()
-        {
-            if (lateUpdate)
-                DoWork();
-        }
-
-        void DoWork()
+        // Update is called once per frame
+        private void Update()
         {
             float deltaTime = Time.deltaTime;
             if (ignoreTimescale)
@@ -36,8 +26,8 @@ namespace LeTai.Asset.TranslucentImage.Demo
                 deltaTime = (Time.realtimeSinceStartup - m_LastRealTime);
                 m_LastRealTime = Time.realtimeSinceStartup;
             }
-            transform.Translate(moveUnitsPerSecond.value * deltaTime, moveUnitsPerSecond.space);
-            transform.Rotate(rotateDegreesPerSecond.value * deltaTime, moveUnitsPerSecond.space);
+            transform.Translate(moveUnitsPerSecond.value*deltaTime, moveUnitsPerSecond.space);
+            transform.Rotate(rotateDegreesPerSecond.value*deltaTime, moveUnitsPerSecond.space);
         }
 
 
