@@ -79,13 +79,15 @@ namespace UI.Pagination
                 scrollRectAnimation_InitialPosition.x = 0;
             }
 
-            float timeStartedMoving = Time.realtimeSinceStartup;
+            //float timeStartedMoving = Time.realtimeSinceStartup;
+            DateTime timeStartedMoving = System.DateTime.Now;
             while (percentageComplete < 1f)
             {
-                float timeSinceStarted = Time.realtimeSinceStartup - timeStartedMoving;
+                //float timeSinceStarted = Time.realtimeSinceStartup - timeStartedMoving;
+                float timeSinceStarted = (float)(System.DateTime.Now - timeStartedMoving).TotalSeconds;
                 percentageComplete = timeSinceStarted / (0.25f / AnimationSpeed);
 
-                ScrollRect.content.anchoredPosition = Vector2.Lerp(scrollRectAnimation_InitialPosition, scrollRectAnimation_DesiredPosition, percentageComplete);                
+                ScrollRect.content.anchoredPosition = Vector2.Lerp(scrollRectAnimation_InitialPosition, scrollRectAnimation_DesiredPosition, percentageComplete);
 
                 yield return null;
             }
@@ -102,8 +104,8 @@ namespace UI.Pagination
         {
             Dictionary<int, float> pageDistances = new Dictionary<int, float>();
             var pageContainer = Viewport.transform as RectTransform;
-            var childCount = pageContainer.childCount;            
-                           
+            var childCount = pageContainer.childCount;
+
             int pagePosition = 0;
             float pageSize = ScrollRect.horizontal ? sizingTransform.rect.width : sizingTransform.rect.height;
             float halfPageSize = pageSize / 2f;
@@ -119,18 +121,21 @@ namespace UI.Pagination
 
                 float pageScale = ScrollRect.horizontal ? page.transform.localScale.x : page.transform.localScale.y;
 
-                pageDistances.Add(page.PageNumber, Mathf.Abs(scrollRectPosition - basePosition - (halfPageSize * pageScale)));                
+                pageDistances.Add(page.PageNumber, Mathf.Abs(scrollRectPosition - basePosition - (halfPageSize * pageScale)));
 
                 pagePosition++;
                 basePosition += ((pageSize * pageScale) + SpaceBetweenPages);
-            }            
-                
+            }
+
             return pageDistances;
         }
 
         protected float GetDesiredScrollRectOffset()
         {
-            return GetPageOffset(GetCurrentPage());
+            var currentPage = GetCurrentPage();
+            if (currentPage == null) return 0f;
+
+            return GetPageOffset(currentPage);
         }
 
         public float GetPageOffset(Page page)
@@ -148,9 +153,9 @@ namespace UI.Pagination
             else
             {
                 offset += (pageSize.height + SpaceBetweenPages) * pagesBeforeDesiredPage;
-            }
+            }            
 
             return offset;
-        }
+        }        
     }
 }

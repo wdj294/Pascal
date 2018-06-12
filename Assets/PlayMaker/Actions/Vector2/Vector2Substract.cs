@@ -11,7 +11,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Vector2 operand")]
 		public FsmVector2 vector2Variable;
 		[RequiredField]
-		[Tooltip("The vector2 to substract with")]
+		[Tooltip("The vector2 to subtract with")]
 		public FsmVector2 subtractVector;
 		
 		[Tooltip("Repeat every frame")]

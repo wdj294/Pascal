@@ -29,6 +29,10 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Only include objects with a Z coordinate (depth) less than this value. leave to none")]
 		public FsmInt maxDepth;
 		
+        [Tooltip("If you want to reset the iteration, raise this flag to true when you enter the state, it will indicate you want to start from the beginning again")]
+        [UIHint(UIHint.Variable)]
+        public FsmBool resetFlag;
+
 		[ActionSection("Filter")] 
 		
 		[UIHint(UIHint.Layer)]
@@ -85,7 +89,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			layerMask = new FsmInt[0];
 			invertMask = false;
-			
+            resetFlag = null;
 			collidersCount = null;
 			storeNextCollider = null;
 			storeNextHitPoint = null;
@@ -97,11 +101,13 @@ namespace HutongGames.PlayMaker.Actions
 		
 		public override void OnEnter()
 		{
-			if (hits == null)
+			if (hits == null || resetFlag.Value)
 			{
+                nextColliderIndex = 0;
 				hits = GetLineCastAll();
 				colliderCount = hits.Length;
 				collidersCount.Value = colliderCount;
+                resetFlag.Value = false;
 			}
 			
 			DoGetNextCollider();
@@ -118,7 +124,7 @@ namespace HutongGames.PlayMaker.Actions
 			
 			if (nextColliderIndex >= colliderCount)
 			{
-				hits = new RaycastHit2D[0];
+				hits = null;
 				nextColliderIndex = 0;
 				Fsm.Event(finishedEvent);
 				return;

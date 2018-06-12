@@ -10,7 +10,7 @@
 
 namespace HutongGames.PlayMakerEditor
 {
-    internal class FsmEventsWindow : GlobalEventsWindow
+    public class FsmEventsWindow : GlobalEventsWindow
     {
     }
 }

@@ -10,7 +10,7 @@
 
 namespace HutongGames.PlayMakerEditor
 {
-    class FsmLogWindow : FsmLogger
+    public class FsmLogWindow : FsmLogger
     {
     }
 }

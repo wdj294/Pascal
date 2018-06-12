@@ -1,5 +1,21 @@
 #Ecosystem Change log
 
+###0.6.1
+**Release:** 28/03/2018 
+
+**New:** Support for Unity 2018 
+
+###0.6
+**Release:** 26/02/2018 
+
+**New:** Added new function to be able to auto search from another script. 
+**New:** New Scripting define symbols for `ECOSYSTEM` and `ECOSYSTEM_0_6`. 
+
+**Change:** string searchString = "";  TO static string searchString = ""; (to be able to access from another scrips).  
+**Change:** private List<PlayMakerEcosystemFilters> searchFilters;  TO  private static List<PlayMakerEcosystemFilters> searchFilters;  (to be able to access from another scrips)   
+
+**Update:** Scripting define symbols routine to mount and unmount updated ( taken from Playmaker Editor Utils)
+
 ###0.5.3
 **Release:** 03/08/2017  
 

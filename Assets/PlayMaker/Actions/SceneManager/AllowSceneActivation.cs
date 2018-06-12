@@ -9,8 +9,7 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Scene)]
-	[Tooltip("Allow scenes to be activated as soon as it is ready.")]
-	[Obsolete("Use LoadSceneAsynch instead")]
+	[Tooltip("Allow scenes to be activated. Use this after LoadSceneAsynch where you did not activated the scene upon loading")]
 	public class AllowSceneActivation : FsmStateAction
 	{
 		[RequiredField]
@@ -18,12 +17,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The name of the new scene. It cannot be empty or null, or same as the name of the existing scenes.")]
 		public FsmInt aSynchOperationHashCode;
 
-		[Tooltip("Allow the scene to be activated as soon as it's ready")]
+		[Tooltip("Allow the scene to be activated")]
 		public FsmBool allowSceneActivation;
-	
-		[Tooltip("useful if activation will be set during update")]
-		public bool everyframe;
-
 
 		[ActionSection("Result")]
 
@@ -44,8 +39,7 @@ namespace HutongGames.PlayMaker.Actions
 		public override void Reset()
 		{
 			aSynchOperationHashCode = null;
-			allowSceneActivation = null;
-			everyframe = false;
+			allowSceneActivation = true;
 
 			progress = null;
 			isDone = null;
@@ -56,15 +50,23 @@ namespace HutongGames.PlayMaker.Actions
 		public override void OnEnter()
 		{
 			DoAllowSceneActivation ();
-			if (!everyframe) {
-				Finish();
-			}
-
 		}
 
 		public override void OnUpdate()
 		{
-			DoAllowSceneActivation ();
+			if (!progress.IsNone)
+				progress.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].progress;
+			
+			if (!isDone.IsNone) {
+				isDone.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone;
+			}
+
+			if (LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone) {
+				LoadSceneAsynch.aSyncOperationLUT.Remove (aSynchOperationHashCode.Value);
+				Fsm.Event (doneEvent);
+				Finish ();
+				return;
+			}
 		}
 
 
@@ -79,22 +81,8 @@ namespace HutongGames.PlayMaker.Actions
 				Finish();
 				return;
 			}
-
-			if (!progress.IsNone)
-				progress.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].progress;
-
-
-			if (!isDone.IsNone) {
-				isDone.Value = LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone;
-				if (LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].isDone) {
-					LoadSceneAsynch.aSyncOperationLUT.Remove (aSynchOperationHashCode.Value);
-					Fsm.Event (doneEvent);
-					Finish ();
-					return;
-				}
-			}
-
-			LoadSceneAsynch.aSyncOperationLUT[aSynchOperationHashCode.Value].allowSceneActivation = allowSceneActivation.Value;
+				
+			LoadSceneAsynch.aSyncOperationLUT [aSynchOperationHashCode.Value].allowSceneActivation = allowSceneActivation.Value;
 		}
 	}
 }

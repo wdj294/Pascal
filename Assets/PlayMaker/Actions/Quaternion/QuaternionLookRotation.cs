@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Quaternion)]
-	[Tooltip("Creates a rotation that looks along forward with the the head upwards along upwards.")]
+	[Tooltip("Creates a rotation that looks along forward with the head upwards along upwards.")]
 	public class QuaternionLookRotation : QuaternionBaseAction
 	{
 		[RequiredField]

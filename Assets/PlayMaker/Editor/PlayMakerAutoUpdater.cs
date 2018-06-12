@@ -2,12 +2,17 @@
 #define UNITY_PRE_5_4
 #endif
 
+#if UNITY_5_3_OR_NEWER || UNITY_5 || UNITY_5_0
+#define UNITY_5_OR_NEWER
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEditor;
 
-#if UNITY_5_0 || UNITY_5
+#if UNITY_5_OR_NEWER
 
 namespace HutongGames.PlayMakerEditor
 {
@@ -36,52 +41,34 @@ namespace HutongGames.PlayMakerEditor
             BuildTarget.Android,
 #if UNITY_PRE_5_4
             BuildTarget.BlackBerry,
-#endif
-            BuildTarget.StandaloneLinux,
-            BuildTarget.StandaloneLinux64,
-            BuildTarget.StandaloneLinuxUniversal,
-            BuildTarget.StandaloneOSXIntel,
-            BuildTarget.StandaloneOSXIntel64,
-            BuildTarget.StandaloneOSXUniversal,
-            BuildTarget.StandaloneWindows,
-            BuildTarget.StandaloneWindows64,
-#if UNITY_PRE_5_4
             BuildTarget.WebPlayer,
             BuildTarget.WebPlayerStreamed,
 #endif
+
+#if !UNITY_2017_3_OR_NEWER
+            BuildTarget.StandaloneOSXIntel,
+            BuildTarget.StandaloneOSXIntel64,
+#else
+            BuildTarget.StandaloneOSX,
+#endif
+
+            BuildTarget.StandaloneLinux,
+            BuildTarget.StandaloneLinux64,
+            BuildTarget.StandaloneLinuxUniversal,
+            BuildTarget.StandaloneWindows,
+            BuildTarget.StandaloneWindows64,
             BuildTarget.iOS
         };
 
         // static constructor called on load
         static PlayMakerAutoUpdater()
         {
-            if (ShouldUpdate())
+            if (EditorStartupPrefs.AutoUpdateProject)
             {
                 // Can't call assetdatabase here, so use update callback
                 EditorApplication.update -= RunAutoUpdate;
                 EditorApplication.update += RunAutoUpdate;
             }
-        }
-
-        // TODO: Use PlayMakerPrefs for project specific prefs instead of EditorPrefs
-        static bool ShouldUpdate()
-        {
-            if (string.IsNullOrEmpty(Application.dataPath)) return false;
-            if (EditorPrefs.GetString("PlayMaker.LastAutoUpdate", "") != GetUpdateSignature())
-            {
-                // save auto update settings
-                // so we don't get caught in infinite loop when re-importing
-                EditorPrefs.SetString("PlayMaker.LastAutoUpdate", GetUpdateSignature());
-                return true;
-            }
-            return false;
-        }
-
-        // Get a unique signature for this update to avoid repeatedly updating the same project
-        // NOTE: might be a better way to do this. Currently doesn't catch project changes like imports...
-        static string GetUpdateSignature()
-        {
-            return Application.unityVersion + "__" + Application.dataPath + "__" + VersionInfo.AssemblyVersion;
         }
 
         // Check pre-requisites for auto updating
@@ -157,6 +144,11 @@ namespace HutongGames.PlayMakerEditor
                 updateList.Add("Fix duplicate Playmaker dlls from previous install.");
             }
 
+            if (HasOldEditorLanguageResources())
+            {
+                updateList.Add("Rename old Playmaker language resource files.");
+            }
+
             return updateList.Count > 0;
         }
 
@@ -169,7 +161,7 @@ namespace HutongGames.PlayMakerEditor
             if (string.IsNullOrEmpty(playmakerPath))
                 return false;
             var playmakerDirectory = Path.GetDirectoryName(playmakerPath);
-            return playmakerDirectory != PlaymakerPluginDirectory;
+            return !playmakerDirectory.Equals(PlaymakerPluginDirectory, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>
@@ -185,6 +177,30 @@ namespace HutongGames.PlayMakerEditor
                 return false;
             var playmakerFilename = Path.GetFileName(playmakerPath);
             return playmakerFilename != "PlayMaker.dll"; // E.g. PlayMaker 1.dll
+        }
+
+        /// <summary>
+        /// Unity 5+ changed the way language resource dlls were loaded.
+        /// Resource dlls formatted for Unity 4.x create duplicate resource errors in Unity 5.x
+        /// So if a user upgrades a Unity 4.x project to Unity 5.x these language resources need to be fixed.
+        /// Unfortunately the resulting error blocks this auto-update script from running! 
+        /// Including this anyway, in case this is "fixed" in a future Unity version...
+        /// </summary>
+        /// <returns></returns>
+        static bool HasOldEditorLanguageResources()
+        {
+            var languageCodes = new[] {"de"}; // add other languages here
+            foreach (var languageCode in languageCodes)
+            {
+                if (OldLanguageResourceExists(languageCode)) return true;
+            }
+            return false;
+        }
+
+        static bool OldLanguageResourceExists(string languageCode)
+        {
+            var resourceFile = AssetDatabase.FindAssets("PlayMakerEditor."+ languageCode +".resources.dll");
+            return resourceFile.Length > 0;
         }
 
         static void DoUpdate()
@@ -228,7 +244,8 @@ namespace HutongGames.PlayMakerEditor
             pluginImporter.SetCompatibleWithAnyPlatform(false);
             pluginImporter.SetCompatibleWithEditor(true);
             SetCompatiblePlatforms(pluginImporter, standardPlatforms);
-            AssetDatabase.Refresh();
+            pluginImporter.SaveAndReimport();
+            //AssetDatabase.Refresh();
         }
 
         static void FixPlayMakerMetroPluginSettings(string pluginPath)
@@ -246,7 +263,8 @@ namespace HutongGames.PlayMakerEditor
 
             pluginImporter.SetCompatibleWithAnyPlatform(false);
             pluginImporter.SetCompatibleWithPlatform(BuildTarget.WSAPlayer, true);
-            AssetDatabase.Refresh();
+            pluginImporter.SaveAndReimport();
+            //AssetDatabase.Refresh();
         }
 
         static void SetCompatiblePlatforms(PluginImporter pluginImporter, IEnumerable<BuildTarget> platforms)

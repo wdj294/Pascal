@@ -97,37 +97,42 @@ public class PlayMakerGUIInspector : Editor
 		}
 	}
 
-	void CheckForDuplicateComponents()
+    private void CheckForDuplicateComponents()
 	{
-		var components = FindObjectsOfType(typeof(PlayMakerGUI));
+		var components = Resources.FindObjectsOfTypeAll<PlayMakerGUI>();
+	    if (components.Length <= 1) return;
 
-		if (components.Length > 1)
-		{
-			if (EditorUtility.DisplayDialog(Strings.ProductName, Strings.Error_Multiple_PlayMakerGUI_components, Strings.Yes, Strings.No))
-			{
-				foreach (Object component in components)
-				{
-					if (component != target)
-					{
-						var behavior = (PlayMakerGUI)component as Behaviour;
-						
-						// Delete the game object if it only has the PlayMakerGUI component?
+        // Confirm if user wants to delete the extra PlayMakerGUI components
 
-						if (behavior.gameObject.GetComponents(typeof(Component)).Length == 2) // every game object has a transform component
-						{
-                            if (EditorUtility.DisplayDialog(Strings.ProductName, string.Format(Strings.Dialog_Delete_Extra_PlayMakerGUI_GameObject, behavior.gameObject.name), Strings.Yes, Strings.No))
-							{
-								DestroyImmediate(behavior.gameObject);
-							}
-						}
-						else
-						{
-							DestroyImmediate(component);
-						}
-					}
-				}
-			}
-		}
+	    if (!EditorUtility.DisplayDialog(Strings.ProductName,
+	        Strings.Error_Multiple_PlayMakerGUI_components, 
+	        Strings.Yes, Strings.No))
+	        return;
+
+        // Delete extra PlayMakerGUIs
+
+	    foreach (var component in components)
+	    {
+	        if (component == target) continue; // keep me!
+
+	        // Delete the game object if it only has the PlayMakerGUI component?
+
+	        if (component.gameObject.GetComponents(typeof(Component)).Length == 2) // every game object has a transform component
+	        {
+	            if (EditorUtility.DisplayDialog(Strings.ProductName, 
+	                string.Format(Strings.Dialog_Delete_Extra_PlayMakerGUI_GameObject, component.gameObject.name), 
+	                Strings.Yes, Strings.No))
+	            {
+                    // Delete the GameObject 
+	                DestroyImmediate(component.gameObject);
+	            }
+	        }
+	        else
+	        {
+                // Delete the component only, keep the GameObject it was on
+	            DestroyImmediate(component);
+	        }
+	    }
 	}
 
 }

@@ -10,7 +10,7 @@
 
 namespace HutongGames.PlayMakerEditor
 {
-    internal class FsmGlobalsWindow : GlobalVariablesWindow
+    public class FsmGlobalsWindow : GlobalVariablesWindow
     {
     }
 }

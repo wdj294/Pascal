@@ -57,7 +57,16 @@ namespace HutongGames.PlayMaker.Actions
         private void DoCheckContainsValue()
         {
             value.UpdateValue();
-            var _id = Array.IndexOf(array.Values, value.GetValue());
+
+			int _id =-1;
+			
+			if (value.GetValue() == null ||  value.GetValue().Equals(null))
+			{
+				_id =Array.FindIndex(array.Values,x => x==null || x.Equals(null));
+			}else{
+				
+				_id = Array.IndexOf(array.Values, value.GetValue());
+			}
 
             var _iscontained = _id != -1;
             isContained.Value = _iscontained;

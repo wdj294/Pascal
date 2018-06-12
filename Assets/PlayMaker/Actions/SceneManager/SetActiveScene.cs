@@ -24,7 +24,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The build index of the scene to activate.")]
 		public FsmInt sceneAtBuildIndex;
 
-		[Tooltip("The index of the scene to activae.")]
+		[Tooltip("The index of the scene to activate.")]
 		public FsmInt sceneAtIndex;
 
 		[Tooltip("The scene Path.")]
@@ -36,11 +36,11 @@ namespace HutongGames.PlayMaker.Actions
 
 		[ActionSection("Result")]
 
-		[Tooltip("True if set active succedded")]
+		[Tooltip("True if set active succeeded")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool success;
 
-		[Tooltip("Event sent if setActive succedded ")]
+		[Tooltip("Event sent if setActive succeeded ")]
 		public FsmEvent successEvent;
 
 		[Tooltip("True if SceneReference resolves to a scene")]

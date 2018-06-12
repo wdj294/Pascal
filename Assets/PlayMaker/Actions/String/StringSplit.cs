@@ -11,10 +11,10 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Characters used to split the string.\nUse '\\n' for newline\nUse '\\t' for tab")]
         public FsmString separators;
 
-        [Tooltip("Remove all leading and trailing white-space characters from each seperated string.")]
+        [Tooltip("Remove all leading and trailing white-space characters from each separated string.")]
         public FsmBool trimStrings;
 
-        [Tooltip("Optional characters used to trim each seperated string.")]
+        [Tooltip("Optional characters used to trim each separated string.")]
         public FsmString trimChars;
 
         [UIHint(UIHint.Variable)]

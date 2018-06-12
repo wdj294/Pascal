@@ -43,7 +43,7 @@ namespace UI.Pagination
             {
                 // Slightly different logic if we're on the first or last pages
                 var pagePosition = GetPagePosition(CurrentPage);
-                if (pagePosition == 1 || pagePosition == NumberOfPages)
+                if (NumberOfPages >= 3 && (pagePosition == 1 || pagePosition == NumberOfPages))
                 {                    
                     if (direction == DeltaDirection.Next)
                     {

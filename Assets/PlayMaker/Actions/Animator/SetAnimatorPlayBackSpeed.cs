@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Target. An Animator component is required")]
 		public FsmOwnerDefault gameObject;
 		
-		[Tooltip("If true, automaticly stabilize feet during transition and blending")]
+		[Tooltip("If true, automatically stabilize feet during transition and blending")]
 		public FsmFloat playBackSpeed;
 		
 		[Tooltip("Repeat every frame. Useful for changing over time.")]

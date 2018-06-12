@@ -9,7 +9,7 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("Array of string to join into a single string.")]
         public FsmArray stringArray;
 
-        [Tooltip("Seperator to add between each string.")]
+        [Tooltip("Separator to add between each string.")]
         public FsmString separator;
 
         [UIHint(UIHint.Variable)]

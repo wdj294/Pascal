@@ -20,8 +20,6 @@ namespace HutongGames.PlayMaker.Actions
 		[UIHint(UIHint.Variable)]
 		[Tooltip("The avatar delta position for the last evaluated frame")]
 		public FsmQuaternion deltaRotation;
-
-		private Transform _transform;
 		
 		private Animator _animator;
 		

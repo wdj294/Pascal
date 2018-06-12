@@ -225,8 +225,10 @@ namespace HutongGames.PlayMakerEditor
             if (component == "constantForce") return FixFsmProperty(gameObject, fsmProperty, typeof(ConstantForce));
             if (component == "renderer") return FixFsmProperty(gameObject, fsmProperty, typeof(Renderer));
             if (component == "audio") return FixFsmProperty(gameObject, fsmProperty, typeof(AudioSource));
+#if !UNITY_2017_2_OR_NEWER
             if (component == "guiText") return FixFsmProperty(gameObject, fsmProperty, typeof(GUIText));
             if (component == "guiTexture") return FixFsmProperty(gameObject, fsmProperty, typeof(GUITexture));
+#endif
             if (component == "collider") return FixFsmProperty(gameObject, fsmProperty, typeof(Collider));
             if (component == "collider2D") return FixFsmProperty(gameObject, fsmProperty, typeof(Collider2D));
             if (component == "hingeJoint") return FixFsmProperty(gameObject, fsmProperty, typeof(HingeJoint));

@@ -135,5 +135,10 @@ namespace UI.Pagination
         {
             return horizontal ? PagedRect.sizingTransform.rect.width : PagedRect.sizingTransform.rect.height;
         }
+
+        protected override void LateUpdate()
+        {
+            base.LateUpdate();
+        }
     }
 }

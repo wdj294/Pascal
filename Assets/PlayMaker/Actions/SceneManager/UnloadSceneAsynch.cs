@@ -12,7 +12,7 @@ using UnityEngine.SceneManagement;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Scene)]
-	[Tooltip("Unload a scene asynchronously by its name or index in Build Settings. Destroyes all GameObjects associated with the given scene and removes the scene from the SceneManager.")]
+	[Tooltip("Unload a scene asynchronously by its name or index in Build Settings. Destroys all GameObjects associated with the given scene and removes the scene from the SceneManager.")]
 	public class UnloadSceneAsynch : FsmStateAction
 	{
 		

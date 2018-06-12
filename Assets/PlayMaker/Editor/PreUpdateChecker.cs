@@ -22,7 +22,8 @@ namespace HutongGames.PlayMakerEditor
 		    "Physics2D Add-on",
 		    "Trigonometry Actions",
 		    "Vector2 Actions",
-		    "Quaternion Actions"
+		    "Quaternion Actions",
+            "RectTransform Actions"
 	    };
 
         // Where official actions are installed
@@ -32,11 +33,13 @@ namespace HutongGames.PlayMakerEditor
 		    "PlayMaker/Actions/Physics2D", 
 		    "PlayMaker/Actions/Trigonometry", 
 		    "PlayMaker/Actions/Vector2", 
-		    "PlayMaker/Actions/Quaternion"
+		    "PlayMaker/Actions/Quaternion",
+            "PlayMaker/Actions/RectTransform"
 	    };
 	    
         
         // Files to check for in each category
+        // dos cmd: dir *.cs /b >files.txt
         private readonly string[] checkFiles =
         {
             "AnimatorCrossFade.cs,AnimatorInterruptMatchTarget.cs,AnimatorMatchTarget.cs,AnimatorPlay.cs,AnimatorStartPlayback.cs,AnimatorStartRecording.cs,AnimatorStopPlayback.cs,AnimatorStopRecording.cs,GetAnimatorApplyRootMotion.cs,GetAnimatorBody.cs,GetAnimatorBoneGameObject.cs,GetAnimatorBool.cs,GetAnimatorCullingMode.cs,GetAnimatorCurrentStateInfo.cs,GetAnimatorCurrentStateInfoIsName.cs,GetAnimatorCurrentStateInfoIsTag.cs,GetAnimatorCurrentTransitionInfo.cs,GetAnimatorCurrentTransitionInfoIsName.cs,GetAnimatorCurrentTransitionInfoIsUserName.cs,GetAnimatorDelta.cs,GetAnimatorFeetPivotActive.cs,GetAnimatorFloat.cs,GetAnimatorGravityWeight.cs,GetAnimatorHumanScale.cs,GetAnimatorIKGoal.cs,GetAnimatorInt.cs,GetAnimatorIsHuman.cs,GetAnimatorIsLayerInTransition.cs,GetAnimatorIsMatchingTarget.cs,GetAnimatorIsParameterControlledByCurve.cs,GetAnimatorLayerCount.cs,GetAnimatorLayerName.cs,GetAnimatorLayersAffectMassCenter.cs,GetAnimatorLayerWeight.cs,GetAnimatorLeftFootBottomHeight.cs,GetAnimatorNextStateInfo.cs,GetAnimatorPivot.cs,GetAnimatorPlayBackSpeed.cs,GetAnimatorPlaybackTime.cs,GetAnimatorRightFootBottomHeight.cs,GetAnimatorRoot.cs,GetAnimatorSpeed.cs,GetAnimatorTarget.cs,NavMeshAgentAnimatorSynchronizer.cs,SetAnimatorApplyRootMotion.cs,SetAnimatorBody.cs,SetAnimatorBool.cs,SetAnimatorCullingMode.cs,SetAnimatorFeetPivotActive.cs,SetAnimatorFloat.cs,SetAnimatorIKGoal.cs,SetAnimatorInt.cs,SetAnimatorLayersAffectMassCenter.cs,SetAnimatorLayerWeight.cs,SetAnimatorLookAt.cs,SetAnimatorPlayBackSpeed.cs,SetAnimatorPlaybackTime.cs,SetAnimatorSpeed.cs,SetAnimatorStabilizeFeet.cs,SetAnimatorTarget.cs,SetAnimatorTrigger.cs,AnimatorFrameUpdateSelector.cs,GetAnimatorAnimatorRootActionEditor.cs,GetAnimatorBoneGameObjectActionEditor.cs,GetAnimatorBoolActionEditor.cs,GetAnimatorCurrentStateInfoActionEditor.cs,GetAnimatorCurrentStateInfoIsNameActionEditor.cs,GetAnimatorCurrentStateInfoIsTagActionEditor.cs,GetAnimatorCurrentTransitionInfoActionEditor.cs,GetAnimatorCurrentTransitionInfoIsNameActionEditor.cs,GetAnimatorCurrentTransitionInfoIsUserNameActionEditor.cs,GetAnimatorDeltaActionEditor.cs,GetAnimatorFloatActionEditor.cs,GetAnimatorGravityWeightActionEditor.cs,GetAnimatorIKGoalActionEditor.cs,GetAnimatorIntActionEditor.cs,GetAnimatorIsLayerInTransitionActionEditor.cs,GetAnimatorIsMatchingTargetActionEditor.cs,GetAnimatorLayerWeightActionEditor.cs,GetAnimatorNextStateInfoActionEditor.cs,GetAnimatorPivotActionEditor.cs,GetAnimatorSpeedActionEditor.cs,GetAnimatorTargetActionEditor.cs,SetAnimatorBoolActionEditor.cs,SetAnimatorFloatActionEditor.cs,SetAnimatorIntActionEditor.cs,OnAnimatorUpdateActionEditorBase.cs"
@@ -44,6 +47,7 @@ namespace HutongGames.PlayMakerEditor
             ,"GetACosine.cs,GetASine.cs,GetAtan.cs,GetAtan2.cs,GetAtan2FromVector2.cs,GetAtan2FromVector3.cs,GetCosine.cs,GetSine.cs,GetTan.cs"
             ,"DebugVector2.cs,GetVector2Length.cs,GetVector2XY.cs,SelectRandomVector2.cs,SetVector2Value.cs,SetVector2XY.cs,Vector2Add.cs,Vector2AddXY.cs,Vector2ClampMagnitude.cs,Vector2HighPassFilter.cs,Vector2Interpolate.cs,Vector2Invert.cs,Vector2Lerp.cs,Vector2LowPassFilter.cs,Vector2MoveTowards.cs,Vector2Multiply.cs,Vector2Normalize.cs,Vector2Operator.cs,Vector2PerSecond.cs,Vector2RotateTowards.cs,Vector2Substract.cs"
             ,"QuaternionCompare.cs,GetQuaternionEulerAngles.cs,GetQuaternionFromRotation.cs,GetQuaternionMultipliedByQuaternion.cs,GetQuaternionMultipliedByVector.cs,QuaternionAngleAxis.cs,QuaternionBaseAction.cs,QuaternionEuler.cs,QuaternionInverse.cs,QuaternionLerp.cs,QuaternionLookRotation.cs,QuaternionLowPassFilter.cs,QuaternionRotateTowards.cs,QuaternionSlerp.cs,GetQuaternionEulerAnglesCustomEditor.cs,GetQuaternionFromRotationCustomEditor.cs,GetQuaternionMultipliedByQuaternionCustomEditor.cs,GetQuaternionMultipliedByVectorCustomEditor.cs,QuaternionAngleAxisCustomEditor.cs,QuaternionCustomEditorBase.cs,QuaternionEulerCustomEditor.cs,QuaternionInverseCustomEditor.cs,QuaternionLerpCustomEditor.cs,QuaternionLookRotationCustomEditor.cs,QuaternionLowPassFilterCustomEditor.cs,QuaternionRotateTowardsCustomEditor.cs,QuaternionSlerpCustomEditor.cs"
+            ,"RectTransformContainsScreenPoint.cs,RectTransformFlipLayoutAxes.cs,RectTransformGetAnchoredPosition.cs,RectTransformGetAnchorMax.cs,RectTransformGetAnchorMin.cs,RectTransformGetAnchorMinAndMax.cs,RectTransformGetLocalPosition.cs,RectTransformGetLocalRotation.cs,RectTransformGetOffsetMax.cs,RectTransformGetOffsetMin.cs,RectTransformGetPivot.cs,RectTransformGetRect.cs,RectTransformGetSizeDelta.cs,RectTransformPixelAdjustPoint.cs,RectTransformPixelAdjustRect.cs,RectTransformScreenPointToLocalPointInRectangle.cs,RectTransformScreenPointToWorldPointInRectangle.cs,RectTransformSetAnchoredPosition.cs,RectTransformSetAnchorMax.cs,RectTransformSetAnchorMin.cs,RectTransformSetAnchorMinAndMax.cs,RectTransformSetAnchorRectPosition.cs,RectTransformSetLocalPosition.cs,RectTransformSetLocalRotation.cs,RectTransformSetOffsetMax.cs,RectTransformSetOffsetMin.cs,RectTransformSetPivot.cs,RectTransformSetSizeDelta.cs,RectTransformWorldToScreenPoint.cs"    
         };
 
         /* TODO use these
@@ -100,12 +104,12 @@ namespace HutongGames.PlayMakerEditor
             GUILayout.Label("PROJECT SCAN", EditorStyles.boldLabel);
             if (failedCategories.Count > 0)
             {
-                var output = "The scan found these addons in your project:\n";
+                var output = "The scan found these add-ons in your project:\n";
                 foreach (var category in failedCategories)
                 {
                     output += "\n- " + category;
                 }
-                output += "\n\nThese addons are now included in the main install. See Update Notes below for more info.\n";
+                output += "\n\nThese add-ons are now included in the main install. See Update Notes below for more info.\n";
 
                 ConsoleTextArea(output);
             }
@@ -118,6 +122,26 @@ namespace HutongGames.PlayMakerEditor
 
             EditorGUILayout.HelpBox("Always BACKUP projects before updating!" +
                                     "\nUse Version Control to track changes.", MessageType.Warning);
+
+            // Version 1.9.0
+
+            GUILayout.Label("Version 1.9.0", EditorStyles.boldLabel);
+
+            EditorGUILayout.HelpBox(
+                "\nPlayMaker 1.9.0 integrates UI actions and events." +
+                "\n",
+                MessageType.Info);
+
+            // Version 1.8.6
+
+            GUILayout.Label("Version 1.8.6", EditorStyles.boldLabel);
+
+            EditorGUILayout.HelpBox(
+                "\nPlayMaker 1.8.6 is more strict about changes allowed in Prefab Instances: "+
+                "If a Prefab Instance is modified in a way that is incompatible with the Prefab Parent it will be disconnected. " +
+                "You can reconnect Instances using Apply or Revert." +
+                "\n",
+                MessageType.Warning);
 
             // Version 1.8.5
 

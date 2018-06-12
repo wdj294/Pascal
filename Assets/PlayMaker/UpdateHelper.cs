@@ -9,6 +9,10 @@
 #define UNITY_PRE_5_3
 #endif
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using UnityEngine;
 
 namespace HutongGames.PlayMaker
@@ -19,6 +23,31 @@ namespace HutongGames.PlayMaker
     /// </summary>
     public class UpdateHelper
     {
+        private static bool editorPrefLoaded;
+
+        // loading editorprefs can be slow (?) so cache setting
+        private static bool _doLog;
+        private static bool doLog
+        {
+            get
+            {
+#if UNITY_EDITOR
+                if (!editorPrefLoaded)
+                {
+                    // set by FsmEditorSettings
+                    _doLog = EditorPrefs.GetBool("PlayMaker.LogFsmUpdatedMessages", false);
+                    editorPrefLoaded = true;
+                }
+#endif
+
+                return _doLog;
+            }
+        }
+
+        /// <summary>
+        /// Helper that can be called by reflection from runtime class without referencing UnityEditor
+        /// E.g. When Fsm is loaded it can need fixing and then needs to be marked dirty
+        /// </summary>
         public static void SetDirty(Fsm fsm)
         {
 #if UNITY_EDITOR
@@ -28,7 +57,10 @@ namespace HutongGames.PlayMaker
 
             if (fsm == null || fsm.OwnerObject == null) return;
 
-            //Debug.Log("SetDirty: " + FsmUtility.GetFullFsmLabel(fsm));
+            if (doLog) 
+            {
+                Debug.Log("FSM Updated: " + FsmUtility.GetFullFsmLabel(fsm) + "\nPlease re-save the scene/project.", fsm.OwnerObject);
+            }
 
             fsm.Preprocessed = false; // force pre-process to run again
 

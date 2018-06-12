@@ -34,14 +34,13 @@ Shader "Hidden/EfficientBlur"
 		v2f vert(appdata_img v)
 		{
 			v2f o;
-			half2 halfPixel = half2(0.5h, 0.5h) * _MainTex_TexelSize.xy * size;
-			half2 invertY = half2(halfPixel.x, -halfPixel.y);
+			half4 offset = half2(0.5h, -0.5h).xxyy * _MainTex_TexelSize.xyxy * size;
 
 			o.vertex = UnityObjectToClipPos(v.vertex);
-			o.uv1 = UnityStereoScreenSpaceUVAdjust(v.texcoord - halfPixel, _MainTex_ST);
-			o.uv2 = UnityStereoScreenSpaceUVAdjust(v.texcoord + halfPixel, _MainTex_ST);
-			o.uv3 = UnityStereoScreenSpaceUVAdjust(v.texcoord + invertY, _MainTex_ST);
-			o.uv4 = UnityStereoScreenSpaceUVAdjust(v.texcoord - invertY, _MainTex_ST);
+			o.uv1 = UnityStereoScreenSpaceUVAdjust(v.texcoord + offset.xy, _MainTex_ST);
+			o.uv2 = UnityStereoScreenSpaceUVAdjust(v.texcoord + offset.zy, _MainTex_ST);
+			o.uv3 = UnityStereoScreenSpaceUVAdjust(v.texcoord + offset.xw, _MainTex_ST);
+			o.uv4 = UnityStereoScreenSpaceUVAdjust(v.texcoord + offset.zw, _MainTex_ST);
 
 			return o;
 		}

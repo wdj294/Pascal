@@ -36,7 +36,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		[ActionSection("Result")]
 
-		[Tooltip("Use this hash to activate the Scene if you have set 'AllowSceneActivation' to false, you'll need to use it in the action 'AllowSceneActivation' to effectivily load the scene.")]
+		[Tooltip("Use this hash to activate the Scene if you have set 'AllowSceneActivation' to false, you'll need to use it in the action 'AllowSceneActivation' to effectively load the scene.")]
 		[UIHint(UIHint.Variable)]
 		public FsmInt aSyncOperationHashCode;
 

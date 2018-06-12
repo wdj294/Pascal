@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("If true, automaticaly stabilize feet during transition and blending")]
+	[Tooltip("If true, automatically stabilize feet during transition and blending")]
 	public class SetAnimatorStabilizeFeet: FsmStateAction
 	{
 		[RequiredField]
@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Target. An Animator component is required")]
 		public FsmOwnerDefault gameObject;
 		
-		[Tooltip("If true, automaticaly stabilize feet during transition and blending")]
+		[Tooltip("If true, automatically stabilize feet during transition and blending")]
 		public FsmBool stabilizeFeet;
 		
 		private Animator _animator;

@@ -1,34 +1,34 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityStandardAssets.Utility
+namespace LeTai.Asset.TranslucentImage.Demo
 {
-    [RequireComponent(typeof (Text))]
+    [RequireComponent(typeof(Text))]
     public class FPSCounter : MonoBehaviour
     {
         const float fpsMeasurePeriod = 0.5f;
-        private int m_FpsAccumulator = 0;
-        private float m_FpsNextPeriod = 0;
-        private int m_CurrentFps;
-        const string display = "{0} FPS";
-        private Text m_Text;
+        int m_FpsAccumulator;
+        float m_FpsNextPeriod;
+        int m_CurrentFps;
+        string display = "{0} FPS";
+        Text m_Text;
 
 
-        private void Start()
+        void Start()
         {
             m_FpsNextPeriod = Time.realtimeSinceStartup + fpsMeasurePeriod;
             m_Text = GetComponent<Text>();
+            display = m_Text.text;
         }
 
 
-        private void Update()
+        void Update()
         {
             // measure average frames per second
             m_FpsAccumulator++;
             if (Time.realtimeSinceStartup > m_FpsNextPeriod)
             {
-                m_CurrentFps = (int) (m_FpsAccumulator/fpsMeasurePeriod);
+                m_CurrentFps = (int) (m_FpsAccumulator / fpsMeasurePeriod);
                 m_FpsAccumulator = 0;
                 m_FpsNextPeriod += fpsMeasurePeriod;
                 m_Text.text = string.Format(display, m_CurrentFps);

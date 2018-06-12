@@ -20,7 +20,7 @@ namespace UI.Pagination
             {
                 UpdateSeamlessPagePositions_PagePreviews();
                 return;
-            }            
+            }
 
             float pageSize = ScrollRect.GetPageSize();
 
@@ -32,38 +32,38 @@ namespace UI.Pagination
             //Debug.Log("Distance from start " + offset + ". Distance from end " + (totalSize - offset));
 
             // let's give it a bit more breathing room (if we have enough pages to do so)
-            if(NumberOfPages > 3) pageSize *= 1.5f;
+            if (NumberOfPages > 3) pageSize *= 1.5f;
 
             if (offset <= pageSize)
-            {                
+            {
                 MoveLastPageToStart();
             }
             else if (offset >= totalSize - pageSize)
-            {                
+            {
                 MoveFirstPageToEnd();
             }
         }
 
         void MoveFirstPageToEnd()
-        {            
-            var pageDistances = GetPageDistancesFromScrollRectCenter();            
+        {
+            var pageDistances = GetPageDistancesFromScrollRectCenter();
 
             var leftMostPageNumber = pageDistances.First().Key;
             var leftMostPage = GetPageByNumber(leftMostPageNumber);
             leftMostPage.transform.SetAsLastSibling();
 
-            AdjustScrollPositionAfterPageMoved(eDirection.Right);            
+            AdjustScrollPositionAfterPageMoved(eDirection.Right);
         }
 
         void MoveLastPageToStart()
-        {            
-            var pageDistances = GetPageDistancesFromScrollRectCenter();            
+        {
+            var pageDistances = GetPageDistancesFromScrollRectCenter();
 
             var rightMostPageNumber = pageDistances.Last().Key;
             var rightMostPage = GetPageByNumber(rightMostPageNumber);
             rightMostPage.transform.SetAsFirstSibling();
 
-            AdjustScrollPositionAfterPageMoved(eDirection.Left);            
+            AdjustScrollPositionAfterPageMoved(eDirection.Left);
         }
 
         void AdjustScrollPositionAfterPageMoved(eDirection directionMoved)
@@ -93,7 +93,7 @@ namespace UI.Pagination
         void UpdateSeamlessPagePositions_PagePreviews()
         {
             if (!Application.isPlaying) return;
-            if (!LoopSeamlessly) return;            
+            if (!LoopSeamlessly) return;
 
             // we need at least 3 pages for our positioning code to work properly,
             // so duplicate pages as necessary
@@ -118,7 +118,7 @@ namespace UI.Pagination
             var minPage = NumberOfPages >= 5 ? 2 : 1;
 
             if (pagePosition <= minPage)
-            {                
+            {
                 var pageToMove = Pages.Last();
                 pageToMove.transform.SetAsFirstSibling();
 
@@ -127,7 +127,7 @@ namespace UI.Pagination
                 pageMoved = true;
             }
             else if (NumberOfPages - pagePosition <= minPage)
-            {                
+            {
                 var pageToMove = Pages.First();
                 pageToMove.transform.SetAsLastSibling();
 
@@ -135,7 +135,7 @@ namespace UI.Pagination
             }
 
             if (pageMoved)
-            {                
+            {
                 ScrollRect.ResetDragOffset = true;
 
                 var directionVector = ScrollRect.GetDirectionVector();
@@ -151,6 +151,8 @@ namespace UI.Pagination
                     scrollRectAnimation_InitialPosition += adjustment;
                     scrollRectAnimation_DesiredPosition += adjustment;
                 }
+                
+                PagedRectTimer.DelayedCall(0, () => Viewport.GetComponent<PagedRect_LayoutGroup>().SetLayoutHorizontal(), this);
             }
         }
 

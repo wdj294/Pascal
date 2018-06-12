@@ -46,7 +46,7 @@ namespace HutongGames.PlayMaker.Actions
 				
 			}
 
-			// Knuth-Fisher-Yates algo
+			// Knuth-Fisher-Yates algorithm
 			
 			//	for (int i = proxy.arrayList.Count - 1; i > 0; i--)
 			for (int i = end; i > start; i--)

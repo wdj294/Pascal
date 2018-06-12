@@ -29,11 +29,22 @@ namespace UI.Pagination
 
             this.isDirty = true;
 
+            if (CurrentPage == 0) CurrentPage = 1;
+
             UpdateDisplay();
 
             if (UsingScrollRect)
             {
-                StartCoroutine(DelayedCall(0.1f, () => CenterScrollRectOnCurrentPage(true)));
+                // attempt to insert the new page in the correct position
+                var previousPage = GetPageByNumber(page.PageNumber - 1, false, true);
+                if (previousPage != null)
+                {
+                    page.transform.SetSiblingIndex(previousPage.transform.GetSiblingIndex() + 1);
+                    Pages = Pages.OrderBy(p => p.transform.GetSiblingIndex()).ToList();
+                }
+
+                CenterScrollRectOnCurrentPage(true);
+                PagedRectTimer.DelayedCall(0, () => CenterScrollRectOnCurrentPage(true), this);
             }
         }
 
@@ -56,6 +67,23 @@ namespace UI.Pagination
             return page;
         }
 
+        private void UpdatePageNumbers()
+        {
+            var currentPage = GetCurrentPage();
+            var pages = Pages.Where(p => p.PageNumber != 0)
+                             .OrderBy(p => p.PageNumber)
+                             .ToList();
+
+            int pageNumber = 1;
+
+            foreach (var page in pages)
+            {
+                page.PageNumber = pageNumber++;
+
+                if (page == currentPage) CurrentPage = page.PageNumber;
+            }
+        }
+
         /// <summary>
         /// Remove a Page from this PagedRect, and optionally destroy it
         /// </summary>
@@ -68,6 +96,18 @@ namespace UI.Pagination
                 page.ShowOnPagination = false;
                 Pages.Remove(page);
                 page.gameObject.SetActive(false);
+
+                // If we remove the current page, move to the previous page
+                if (page.PageNumber == CurrentPage)
+                {
+                    var pageToMoveTo = Pages.OrderByDescending(p => p.PageNumber)
+                                            .Where(p => p.PageNumber < CurrentPage)
+                                            .FirstOrDefault(p => p.PageEnabled && p.ShowOnPagination);
+
+                    if (pageToMoveTo != null) CurrentPage = pageToMoveTo.PageNumber;
+                    else CurrentPage = NumberOfPages;
+                    //if (CurrentPage != 1) PreviousPage();
+                }
 
                 if (destroyPageObject)
                 {
@@ -85,19 +125,31 @@ namespace UI.Pagination
                     page.gameObject.SetActive(false);
                 }
 
+                UpdatePageNumbers();
+
                 this.isDirty = true;
-                this.UpdatePages();
+                PagedRectTimer.DelayedCall(0, () => this.UpdatePages(true, true, true), this);
             }
         }
 
-        public void RemovePage(int pageNumber, bool destroyPageObject = false)
+        public void RemovePage(int pageNumber)
+        {
+            RemovePage(pageNumber, false);
+        }
+
+        public void RemoveCurrentPage()
+        {
+            RemovePage(CurrentPage, true);
+        }
+
+        public void RemovePage(int pageNumber, bool destroyPageObject)
         {
             RemovePage(GetPageByNumber(pageNumber), destroyPageObject);
         }
-        
+
         public void RemoveAllPages(bool destroyPageObjects = false)
         {
-            SetCurrentPage(1);
+            SetCurrentPage(1, true);
 
             var pages = this.Pages.ToList();
             foreach (var page in pages)
@@ -149,14 +201,14 @@ namespace UI.Pagination
         protected int GetPagePosition(int PageNumber)
         {
             var page = GetPageByNumber(CurrentPage);
-            
+
             return GetPagePosition(page);
         }
 
         protected int GetPagePosition(Page page)
         {
             var pageIndex = Pages.IndexOf(page);
-            var pagePosition = pageIndex + 1;            
+            var pagePosition = pageIndex + 1;
 
             return pagePosition;
         }
@@ -166,7 +218,7 @@ namespace UI.Pagination
 
         void MonitorPageCollection()
         {
-            if(!UsingScrollRect) return;
+            if (!UsingScrollRect) return;
 
             var tempPageCollection = new List<Page>();
             foreach (RectTransform childRectTransform in ScrollRect.content)

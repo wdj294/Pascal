@@ -85,18 +85,17 @@ namespace HutongGames.PlayMaker.Actions
 			{
 				_transform = _goal.transform;
 			}
-			
-			DoGetIKGoal();
-			
-			if (!everyFrame) 
-			{
-				Finish();
-			}
+
 		}
 	
 		public override void OnActionUpdate()
 		{
 			DoGetIKGoal();
+
+			if (!everyFrame) 
+			{
+				Finish();
+			}
 		}
 		
 	

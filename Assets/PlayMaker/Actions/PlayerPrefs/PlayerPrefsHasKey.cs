@@ -37,5 +37,14 @@ namespace HutongGames.PlayMaker.Actions
 
 			Fsm.Event(variable.Value ? trueEvent : falseEvent);
 		}
+
+#if UNITY_EDITOR
+
+	    public override string AutoName()
+	    {
+	        return ActionHelpers.AutoName(this, key);
+	    }
+
+#endif
 	}
 }

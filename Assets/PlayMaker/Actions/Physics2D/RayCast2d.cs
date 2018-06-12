@@ -61,7 +61,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmFloat storeHitDistance;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("Get the fraction along the ray to the hit point and store it in a variable. If the ray's direction vector is normalised then this value is simply the distance between the origin and the hit point. If the direction is not normalised then this distance is expressed as a 'fraction' (which could be greater than 1) of the vector's magnitude.")]
+		[Tooltip("Get the fraction along the ray to the hit point and store it in a variable. If the ray's direction vector is normalized then this value is simply the distance between the origin and the hit point. If the direction is not normalized then this distance is expressed as a 'fraction' (which could be greater than 1) of the vector's magnitude.")]
 		public FsmFloat storeHitFraction;
 		
 		[ActionSection("Filter")] 

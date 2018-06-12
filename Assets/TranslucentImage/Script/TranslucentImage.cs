@@ -53,6 +53,11 @@ namespace LeTai.Asset.TranslucentImage
 
             source = source ?? FindObjectOfType<TranslucentImageSource>();
             material.SetTexture("_BlurTex", source.BlurredScreen);
+
+
+#if UNITY_5_6_OR_NEWER
+            canvas.additionalShaderChannels |= AdditionalCanvasShaderChannels.TexCoord1;
+#endif
         }
 
         void PrepShader()
@@ -78,6 +83,7 @@ namespace LeTai.Asset.TranslucentImage
             {
                 Debug.LogError("Material using \"UI/TranslucentImage\" is required");
             }
+
             materialForRendering.SetTexture("_BlurTex", source.BlurredScreen);
 #if UNITY_EDITOR
             material.SetTexture("_BlurTex", source.BlurredScreen);

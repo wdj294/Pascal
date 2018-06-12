@@ -1,0 +1,4865 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!29 &1
+OcclusionCullingSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_OcclusionBakeSettings:
+    smallestOccluder: 5
+    smallestHole: 0.25
+    backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
+--- !u!104 &2
+RenderSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 9
+  m_Fog: 0
+  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_FogMode: 3
+  m_FogDensity: 0.01
+  m_LinearFogStart: 0
+  m_LinearFogEnd: 300
+  m_AmbientSkyColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientEquatorColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientGroundColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_AmbientIntensity: 1
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+  m_SkyboxMaterial: {fileID: 0}
+  m_HaloStrength: 0.5
+  m_FlareStrength: 1
+  m_FlareFadeSpeed: 3
+  m_HaloTexture: {fileID: 0}
+  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+  m_DefaultReflectionMode: 0
+  m_DefaultReflectionResolution: 128
+  m_ReflectionBounces: 1
+  m_ReflectionIntensity: 1
+  m_CustomReflection: {fileID: 0}
+  m_Sun: {fileID: 0}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
+--- !u!157 &4
+LightmapSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 11
+  m_GIWorkflowMode: 1
+  m_GISettings:
+    serializedVersion: 2
+    m_BounceScale: 1
+    m_IndirectOutputScale: 1
+    m_AlbedoBoost: 1
+    m_TemporalCoherenceThreshold: 1
+    m_EnvironmentLightingMode: 0
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
+  m_LightmapEditorSettings:
+    serializedVersion: 10
+    m_Resolution: 1
+    m_BakeResolution: 50
+    m_AtlasSize: 1024
+    m_AO: 0
+    m_AOMaxDistance: 1
+    m_CompAOExponent: 0
+    m_CompAOExponentDirect: 0
+    m_Padding: 2
+    m_LightmapParameters: {fileID: 0}
+    m_LightmapsBakeMode: 1
+    m_TextureCompression: 0
+    m_FinalGather: 0
+    m_FinalGatherFiltering: 1
+    m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
+    m_MixedBakeMode: 1
+    m_BakeBackend: 0
+    m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
+    m_PVRSampleCount: 500
+    m_PVRBounces: 2
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
+    m_PVRFilteringMode: 0
+    m_PVRCulling: 1
+    m_PVRFilteringGaussRadiusDirect: 1
+    m_PVRFilteringGaussRadiusIndirect: 5
+    m_PVRFilteringGaussRadiusAO: 2
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
+  m_LightingDataAsset: {fileID: 0}
+  m_UseShadowmask: 0
+--- !u!196 &5
+NavMeshSettings:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_BuildSettings:
+    serializedVersion: 2
+    agentTypeID: 0
+    agentRadius: 0.5
+    agentHeight: 2
+    agentSlope: 45
+    agentClimb: 0.4
+    ledgeDropHeight: 0
+    maxJumpAcrossDistance: 0
+    minRegionArea: 2
+    manualCellSize: 0
+    cellSize: 0.16666666
+    manualTileSize: 0
+    tileSize: 256
+    accuratePlacement: 0
+    debug:
+      m_Flags: 0
+  m_NavMeshData: {fileID: 0}
+--- !u!1 &381062481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 381062485}
+  - component: {fileID: 381062484}
+  - component: {fileID: 381062483}
+  - component: {fileID: 381062482}
+  m_Layer: 0
+  m_Name: Quads Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &381062482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381062481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4a628d95299b840acc71077c67b6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Quads: {fileID: 525894516}
+--- !u!33 &381062483
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381062481}
+  m_Mesh: {fileID: 0}
+--- !u!23 &381062484
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381062481}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!4 &381062485
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381062481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 525894517}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &463853544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 463853546}
+  - component: {fileID: 463853545}
+  m_Layer: 0
+  m_Name: Background Stars Big
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &463853545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 463853544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b537930795a684d8a38f26b2d54f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  Brightness: 1
+  MainTex: {fileID: 2800000, guid: f31561062f59d294d8abb0defa364e02, type: 3}
+  Layout: 0
+  LayoutColumns: 2
+  LayoutRows: 2
+  Rects:
+  - serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  RenderQueue: 1000
+  RenderQueueOffset: 0
+  Models:
+  - {fileID: 937703588}
+  startCalled: 1
+  FollowCameras: 1
+  Softness: 0
+  Wrap: 0
+  WrapSize: {x: 1, y: 1, z: 1}
+  Stretch: 0
+  StretchVector: {x: 0, y: 0, z: 0}
+  StretchScale: 1
+  FadeNear: 0
+  FadeNearTex: {fileID: 0}
+  FadeNearRadius: 1
+  FadeNearThickness: 2
+  FadeFar: 0
+  FadeFarTex: {fileID: 0}
+  FadeFarRadius: 10
+  FadeFarThickness: 2
+  Pulse: 1
+  PulseOffset: 0
+  PulseSpeed: 1
+  Seed: -2120599947
+  Radius: 101
+  Symmetry: 0.418
+  Offset: 0.556
+  Inverse: 0
+  StarCount: 5000
+  StarRadiusMin: 0
+  StarRadiusMax: 1
+  StarRadiusBias: 1
+  StarPulseMax: 1
+--- !u!4 &463853546
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 463853544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 937703591}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &525894515
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 525894517}
+  - component: {fileID: 525894516}
+  m_Layer: 0
+  m_Name: Background Stars Small
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &525894516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 525894515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1b537930795a684d8a38f26b2d54f0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  Brightness: 1
+  MainTex: {fileID: 2800000, guid: f31561062f59d294d8abb0defa364e02, type: 3}
+  Layout: 0
+  LayoutColumns: 2
+  LayoutRows: 2
+  Rects:
+  - serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  RenderQueue: 1000
+  RenderQueueOffset: 0
+  Models:
+  - {fileID: 381062482}
+  startCalled: 1
+  FollowCameras: 1
+  Softness: 0
+  Wrap: 0
+  WrapSize: {x: 1, y: 1, z: 1}
+  Stretch: 0
+  StretchVector: {x: 0, y: 0, z: 0}
+  StretchScale: 1
+  FadeNear: 0
+  FadeNearTex: {fileID: 0}
+  FadeNearRadius: 1
+  FadeNearThickness: 2
+  FadeFar: 0
+  FadeFarTex: {fileID: 0}
+  FadeFarRadius: 10
+  FadeFarThickness: 2
+  Pulse: 1
+  PulseOffset: 0
+  PulseSpeed: 1
+  Seed: -979675575
+  Radius: 101
+  Symmetry: 0.418
+  Offset: 0.556
+  Inverse: 0
+  StarCount: 15000
+  StarRadiusMin: 0
+  StarRadiusMax: 0.5
+  StarRadiusBias: 1
+  StarPulseMax: 1
+--- !u!4 &525894517
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 525894515}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 381062485}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &538902804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 538902808}
+  - component: {fileID: 538902807}
+  - component: {fileID: 538902806}
+  - component: {fileID: 538902805}
+  m_Layer: 0
+  m_Name: Quads Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &538902805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538902804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4a628d95299b840acc71077c67b6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Quads: {fileID: 664921110}
+--- !u!33 &538902806
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538902804}
+  m_Mesh: {fileID: 0}
+--- !u!23 &538902807
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538902804}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!4 &538902808
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538902804}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 664921111}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &664921108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 664921111}
+  - component: {fileID: 664921110}
+  - component: {fileID: 664921109}
+  m_Layer: 0
+  m_Name: Sine Starfield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &664921109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 664921108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9677ada1a2772d34a85cf9845eeff271, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Starfield: {fileID: 664921110}
+  Angle: 0
+  AngleStep: 5
+  AnglePerSecond: 50
+  Position: {x: -1.6, y: 0, z: 0}
+  PositionStep: {x: 0.016, y: 0, z: 0}
+  Amplitude: {x: 0, y: 0.5, z: 0}
+--- !u!114 &664921110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 664921108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b826ef84503a084e84eb953360da66c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Color: {r: 1, g: 1, b: 1, a: 1}
+  Brightness: 1
+  MainTex: {fileID: 2800000, guid: f31561062f59d294d8abb0defa364e02, type: 3}
+  Layout: 0
+  LayoutColumns: 2
+  LayoutRows: 2
+  Rects:
+  - serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  - serializedVersion: 2
+    x: 0.5
+    y: 0.5
+    width: 0.5
+    height: 0.5
+  RenderQueue: 3000
+  RenderQueueOffset: 0
+  Models:
+  - {fileID: 538902805}
+  startCalled: 1
+  FollowCameras: 0
+  Softness: 0
+  Wrap: 0
+  WrapSize: {x: 1, y: 1, z: 1}
+  Stretch: 0
+  StretchVector: {x: 0, y: 0, z: 0}
+  StretchScale: 1
+  FadeNear: 0
+  FadeNearTex: {fileID: 0}
+  FadeNearRadius: 1
+  FadeNearThickness: 2
+  FadeFar: 0
+  FadeFarTex: {fileID: 0}
+  FadeFarRadius: 10
+  FadeFarThickness: 2
+  Pulse: 0
+  PulseOffset: 0
+  PulseSpeed: 1
+  Stars:
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.6, y: 0, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.584, y: 0.04357787, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.568, y: 0.08682409, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.5519999, y: 0.12940952, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.5359999, y: 0.17101006, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.5199999, y: 0.21130913, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.5039998, y: 0.25, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4879998, y: 0.28678823, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4719998, y: 0.3213938, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4559997, y: 0.35355338, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4399997, y: 0.38302222, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4239997, y: 0.40957603, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.4079996, y: 0.43301272, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3919996, y: 0.4531539, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3759996, y: 0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3599995, y: 0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3439995, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3279995, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.3119994, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2959994, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2799994, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2639993, y: 0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2479993, y: 0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2319993, y: 0.45315388, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.2159992, y: 0.4330127, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.1999992, y: 0.409576, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.1839992, y: 0.38302222, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.1679991, y: 0.35355338, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.1519991, y: 0.32139382, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.1359991, y: 0.28678823, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.119999, y: 0.25000003, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.103999, y: 0.21130916, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.087999, y: 0.1710101, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.071999, y: 0.12940957, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.0559989, y: 0.08682415, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.0399989, y: 0.04357794, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.0239989, y: -0.00000004371139, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -1.0079988, y: -0.043577906, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.99199885, y: -0.08682411, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.9759989, y: -0.12940954, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.9599989, y: -0.17101008, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.94399893, y: -0.21130913, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.92799896, y: -0.24999999, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.911999, y: -0.2867882, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.895999, y: -0.3213938, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.87999904, y: -0.35355335, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.86399907, y: -0.38302228, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.8479991, y: -0.40957606, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.8319991, y: -0.43301272, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.81599915, y: -0.4531539, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.7999992, y: -0.46984634, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.7839992, y: -0.48296294, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.76799923, y: -0.4924039, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.75199926, y: -0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.7359993, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.7199993, y: -0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.70399934, y: -0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.68799937, y: -0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.6719994, y: -0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.6559994, y: -0.4531539, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.63999945, y: -0.43301272, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.6239995, y: -0.40957606, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.6079995, y: -0.38302225, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.59199953, y: -0.35355344, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.57599956, y: -0.32139388, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.5599996, y: -0.28678828, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.5439996, y: -0.2500001, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.52799964, y: -0.21130922, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.51199967, y: -0.17101018, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.49599966, y: -0.12940964, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.47999966, y: -0.08682422, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.46399966, y: -0.043578014, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.44799966, y: 0.00000008742278, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.43199965, y: 0.04357795, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.41599965, y: 0.08682416, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.39999965, y: 0.12940958, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.38399965, y: 0.17101012, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.36799964, y: 0.21130916, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.35199964, y: 0.25000003, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.33599964, y: 0.28678823, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.31999964, y: 0.32139382, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.30399963, y: 0.35355338, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.28799963, y: 0.38302222, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.27199963, y: 0.40957603, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.25599962, y: 0.4330127, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.23999962, y: 0.45315388, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.22399962, y: 0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.20799962, y: 0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.19199961, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.17599961, y: 0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.15999961, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.1439996, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.1279996, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.1119996, y: 0.48296294, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.0959996, y: 0.46984628, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.079999596, y: 0.45315394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.06399959, y: 0.43301263, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.04799959, y: 0.4095761, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.031999588, y: 0.38302216, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: -0.015999587, y: 0.3535535, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.00000041350722, y: 0.32139373, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.016000414, y: 0.28678834, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.032000415, y: 0.24999994, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.048000418, y: 0.2113093, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.06400042, y: 0.17101003, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.08000042, y: 0.12940972, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.096000426, y: 0.08682406, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.11200043, y: 0.04357809, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.12800042, y: -0.000000011924881, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.14400043, y: -0.043577638, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.16000043, y: -0.08682408, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.17600043, y: -0.12940928, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.19200043, y: -0.17101005, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.20800044, y: -0.21130888, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.22400044, y: -0.24999997, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.24000044, y: -0.28678837, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.25600043, y: -0.32139376, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.27200043, y: -0.3535535, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.28800043, y: -0.38302216, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.30400044, y: -0.40957612, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.32000044, y: -0.43301266, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.33600044, y: -0.45315394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.35200045, y: -0.46984628, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.36800045, y: -0.48296294, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.38400045, y: -0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.40000045, y: -0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.41600046, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.43200046, y: -0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.44800046, y: -0.4924039, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.46400046, y: -0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.48000047, y: -0.46984637, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.49600047, y: -0.45315388, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.51200044, y: -0.4330128, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.5280004, y: -0.409576, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.5440004, y: -0.38302237, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.56000036, y: -0.35355338, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.57600033, y: -0.321394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.5920003, y: -0.28678823, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.6080003, y: -0.2500002, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.62400025, y: -0.21130915, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.6400002, y: -0.17101032, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.6560002, y: -0.12940955, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.67200017, y: -0.08682437, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.68800014, y: -0.043577924, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.7040001, y: 0.00000017484555, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.7200001, y: 0.043577798, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.73600006, y: 0.086824246, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.75200003, y: 0.12940943, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.768, y: 0.1710102, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.784, y: 0.21130903, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.79999995, y: 0.25000012, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.8159999, y: 0.2867881, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.8319999, y: 0.32139388, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.8479999, y: 0.3535533, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.86399984, y: 0.38302228, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.8799998, y: 0.40957594, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.8959998, y: 0.43301272, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.91199976, y: 0.45315382, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.92799973, y: 0.46984634, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.9439997, y: 0.48296288, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.9599997, y: 0.4924039, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.97599965, y: 0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 0.9919996, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0079997, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0239997, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0399997, y: 0.48296297, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0559998, y: 0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0719998, y: 0.453154, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.0879998, y: 0.43301272, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.1039999, y: 0.40957618, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.1199999, y: 0.38302225, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.1359999, y: 0.35355327, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.152, y: 0.32139385, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.168, y: 0.28678808, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.184, y: 0.2500001, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2, y: 0.211309, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2160001, y: 0.17101017, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2320001, y: 0.1294094, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2480001, y: 0.08682421, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2640002, y: 0.043577764, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2800002, y: 0.00000013907092, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.2960002, y: -0.04357796, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3120003, y: -0.08682393, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3280003, y: -0.1294096, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3440003, y: -0.17101036, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3600004, y: -0.21130875, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3760004, y: -0.24999984, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.3920004, y: -0.28678825, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4080005, y: -0.321394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4240005, y: -0.35355306, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4400005, y: -0.38302207, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4560006, y: -0.40957603, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4720006, y: -0.4330128, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.4880006, y: -0.4531537, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5040007, y: -0.46984622, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5200007, y: -0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5360007, y: -0.49240392, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5520008, y: -0.4980973, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5680008, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.5840008, y: -0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.6000009, y: -0.49240384, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.6160009, y: -0.48296282, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.6320009, y: -0.46984643, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.648001, y: -0.45315394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.664001, y: -0.43301263, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.680001, y: -0.40957582, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.696001, y: -0.38302246, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7120011, y: -0.35355347, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7280011, y: -0.32139373, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7440012, y: -0.28678796, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7600012, y: -0.25000036, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7760012, y: -0.21130928, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.7920012, y: -0.17101002, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8080013, y: -0.12940924, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8240013, y: -0.08682452, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8400013, y: -0.043578077, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8560014, y: 0.000000023849761, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8720014, y: 0.043578126, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.8880014, y: 0.08682363, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9040015, y: 0.12940928, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9200015, y: 0.17101006, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9360015, y: 0.21130933, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9520016, y: 0.24999957, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9680016, y: 0.286788, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 1.9840016, y: 0.32139376, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0000017, y: 0.35355353, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0160017, y: 0.38302186, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0320017, y: 0.40957585, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0480018, y: 0.43301266, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0640018, y: 0.45315397, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0800018, y: 0.46984643, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.0960019, y: 0.48296282, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.112002, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.128002, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.144002, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.160002, y: 0.4980974, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.176002, y: 0.4924039, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.192002, y: 0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.208002, y: 0.46984622, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.2240021, y: 0.45315406, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.2400022, y: 0.43301278, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.2560022, y: 0.409576, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.2720022, y: 0.38302204, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.2880023, y: 0.3535537, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3040023, y: 0.32139397, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3200023, y: 0.28678823, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3360023, y: 0.24999979, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3520024, y: 0.21130957, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3680024, y: 0.17101032, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.3840024, y: 0.12940955, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4000025, y: 0.08682389, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4160025, y: 0.04357839, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4320025, y: 0.0000002900667, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4480026, y: -0.043577813, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4640026, y: -0.08682425, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4800026, y: -0.12940899, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.4960027, y: -0.17100976, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5120027, y: -0.21130905, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5280027, y: -0.25000012, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5440028, y: -0.28678852, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5600028, y: -0.32139352, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5760028, y: -0.3535533, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.5920029, y: -0.38302228, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.608003, y: -0.4095762, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.624003, y: -0.43301252, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.640003, y: -0.45315382, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.656003, y: -0.46984634, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.672003, y: -0.482963, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.688003, y: -0.4924038, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.704003, y: -0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.7200031, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.7360032, y: -0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.7520032, y: -0.49240395, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.7680032, y: -0.48296297, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.7840033, y: -0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8000033, y: -0.4531538, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8160033, y: -0.43301296, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8320034, y: -0.40957618, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8480034, y: -0.38302225, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8640034, y: -0.35355327, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8800035, y: -0.3213942, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.8960035, y: -0.28678846, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9120035, y: -0.25000006, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9280035, y: -0.21130899, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9440036, y: -0.17101061, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9600036, y: -0.12940985, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9760036, y: -0.08682419, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 2.9920037, y: -0.043577753, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0080037, y: 0.0000003496911, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0240037, y: 0.0435775, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0400038, y: 0.08682395, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0560038, y: 0.12940961, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0720038, y: 0.17101036, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.0880039, y: 0.21130876, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.104004, y: 0.24999985, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.120004, y: 0.28678825, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.136004, y: 0.32139403, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.152004, y: 0.3535531, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.168004, y: 0.38302207, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.184004, y: 0.40957603, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.200004, y: 0.4330128, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2160041, y: 0.4531537, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2320042, y: 0.46984622, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2480042, y: 0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2640042, y: 0.49240392, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2800043, y: 0.4980973, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.2960043, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3120043, y: 0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3280044, y: 0.49240384, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3440044, y: 0.48296306, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3600044, y: 0.46984643, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3760045, y: 0.45315394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.3920045, y: 0.43301263, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4080045, y: 0.40957582, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4240046, y: 0.38302246, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4400046, y: 0.35355347, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4560046, y: 0.32139373, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4720047, y: 0.28678796, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.4880047, y: 0.25000033, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5040047, y: 0.21130927, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5200047, y: 0.17101, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5360048, y: 0.12940924, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5520048, y: 0.08682451, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5680048, y: 0.043578066, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.5840049, y: -0.00000003577464, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.600005, y: -0.043578137, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.616005, y: -0.086823635, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.632005, y: -0.1294093, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.648005, y: -0.17101008, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.664005, y: -0.21130934, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.680005, y: -0.24999957, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.696005, y: -0.28678802, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7120051, y: -0.3213938, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7280052, y: -0.35355353, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7440052, y: -0.3830219, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7600052, y: -0.40957585, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7760053, y: -0.43301266, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.7920053, y: -0.45315397, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8080053, y: -0.46984613, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8240054, y: -0.48296282, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8400054, y: -0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8560054, y: -0.49809736, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8720055, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.8880055, y: -0.4980974, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9040055, y: -0.4924039, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9200056, y: -0.48296288, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9360056, y: -0.4698462, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9520056, y: -0.45315406, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9680057, y: -0.43301278, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 3.9840057, y: -0.409576, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.0000057, y: -0.38302204, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.0160055, y: -0.3535537, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.0320053, y: -0.32139397, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.048005, y: -0.2867882, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.064005, y: -0.24999978, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.0800047, y: -0.21130955, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.0960045, y: -0.1710103, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.1120043, y: -0.12940954, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.128004, y: -0.08682387, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.144004, y: -0.04357838, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.1600037, y: -0.00000027814184, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.1760035, y: 0.043577824, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.1920033, y: 0.08682427, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.208003, y: 0.129409, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.224003, y: 0.17100978, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.2400026, y: 0.21130906, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.2560024, y: 0.25000012, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.272002, y: 0.28678775, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.288002, y: 0.32139426, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.304002, y: 0.3535533, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.3200016, y: 0.38302168, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.3360014, y: 0.4095762, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.352001, y: 0.43301252, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.368001, y: 0.45315424, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.384001, y: 0.46984634, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.4000006, y: 0.48296276, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.4160004, y: 0.49240398, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.432, y: 0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.448, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.4639997, y: 0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.4799995, y: 0.49240395, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.4959993, y: 0.48296273, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.511999, y: 0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.527999, y: 0.4531542, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.5439987, y: 0.43301246, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.5599985, y: 0.40957618, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.5759983, y: 0.38302284, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.591998, y: 0.35355324, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.607998, y: 0.3213942, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.6239977, y: 0.2867877, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.6399975, y: 0.25000006, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.6559973, y: 0.21130985, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.671997, y: 0.1710097, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.687997, y: 0.12940983, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.7039967, y: 0.086825125, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.7199965, y: 0.043577738, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.7359962, y: 0.0000005920583, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.751996, y: -0.04357846, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.767996, y: -0.086823955, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.7839956, y: -0.1294087, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.7999954, y: -0.17101038, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.815995, y: -0.21130878, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.831995, y: -0.2500007, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.847995, y: -0.28678825, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.8639946, y: -0.3213933, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.8799944, y: -0.35355377, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.895994, y: -0.3830221, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.911994, y: -0.4095755, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.927994, y: -0.43301284, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.9439936, y: -0.4531537, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.9599934, y: -0.46984655, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.975993, y: -0.4829629, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 4.991993, y: -0.49240375, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.0079927, y: -0.4980974, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.0239925, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.0399923, y: -0.49809745, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.055992, y: -0.49240384, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.071992, y: -0.48296306, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.0879917, y: -0.4698461, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.1039915, y: -0.45315394, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.1199913, y: -0.4330131, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.135991, y: -0.4095758, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.151991, y: -0.38302243, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.1679907, y: -0.35355413, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.1839905, y: -0.32139373, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.1999903, y: -0.2867887, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.21599, y: -0.2499995, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.23199, y: -0.21130927, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.2479897, y: -0.1710109, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.2639894, y: -0.12940922, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.2799892, y: -0.08682449, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.295989, y: -0.0435771, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.311989, y: 0.000000047699523, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.3279886, y: 0.043577198, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.3439884, y: 0.08682459, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.359988, y: 0.12940931, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.375988, y: 0.17100918, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.391988, y: 0.21130934, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.4079876, y: 0.24999958, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.4239874, y: 0.2867888, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.439987, y: 0.3213938, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.455987, y: 0.35355288, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.471987, y: 0.38302252, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.4879866, y: 0.40957585, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.5039864, y: 0.4330122, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.519986, y: 0.45315397, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.535986, y: 0.46984613, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.5519857, y: 0.4829631, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.5679855, y: 0.49240386, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.5839853, y: 0.49809727, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.599985, y: 0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.615985, y: 0.4980974, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.6319847, y: 0.49240407, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.6479845, y: 0.48296288, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.6639843, y: 0.46984652, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.679984, y: 0.45315367, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.695984, y: 0.43301278, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.7119837, y: 0.40957654, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.7279835, y: 0.38302204, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.7439833, y: 0.35355368, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.759983, y: 0.32139322, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.775983, y: 0.2867882, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.7919827, y: 0.2500006, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.8079824, y: 0.21130869, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.8239822, y: 0.17101029, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.839982, y: 0.12941045, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.855982, y: 0.086823866, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.8719816, y: 0.043578364, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.8879814, y: -0.0000006874574, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.903981, y: -0.043577835, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.919981, y: -0.08682334, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.935981, y: -0.12940992, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.9519806, y: -0.1710098, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.9679804, y: -0.2113082, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.98398, y: -0.25000015, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 5.99998, y: -0.28678775, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.01598, y: -0.32139426, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.0319796, y: -0.35355332, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.0479794, y: -0.38302168, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.063979, y: -0.40957624, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.079979, y: -0.43301252, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.0959787, y: -0.45315343, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.1119785, y: -0.46984634, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.1279783, y: -0.48296276, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.143978, y: -0.49240398, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.159978, y: -0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.1759777, y: -0.5, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.1919775, y: -0.49809733, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.2079773, y: -0.49240395, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.223977, y: -0.48296273, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.239977, y: -0.4698463, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.2559767, y: -0.4531542, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.2719765, y: -0.43301246, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.2879763, y: -0.40957618, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.303976, y: -0.38302284, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.319976, y: -0.35355324, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.3359756, y: -0.3213942, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.3519754, y: -0.28678766, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.367975, y: -0.25000003, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+  - Variant: 0
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    Radius: 0.05
+    Angle: 0
+    Position: {x: 6.383975, y: -0.21130984, z: 0}
+    PulseSpeed: 0
+    PulseRange: 0
+    PulseOffset: 0
+--- !u!4 &664921111
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 664921108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 538902808}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &937703587
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 937703591}
+  - component: {fileID: 937703590}
+  - component: {fileID: 937703589}
+  - component: {fileID: 937703588}
+  m_Layer: 0
+  m_Name: Quads Model
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &937703588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937703587}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4a628d95299b840acc71077c67b6a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Quads: {fileID: 463853545}
+--- !u!33 &937703589
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937703587}
+  m_Mesh: {fileID: 0}
+--- !u!23 &937703590
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937703587}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!4 &937703591
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 937703587}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 463853546}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1596016399
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1596016400}
+  - component: {fileID: 1596016406}
+  - component: {fileID: 1596016405}
+  - component: {fileID: 1596016404}
+  - component: {fileID: 1596016403}
+  - component: {fileID: 1596016402}
+  - component: {fileID: 1596016401}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1596016400
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1815815718}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596016401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732c74e2a21775e4383d3ea19ea5f671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Header: This shows how you can make an editable copy of a starfield (via the starfield's
+    context menu) and modify the stars however you like via script
+  Footer: Click + Drag = Orbit
+--- !u!114 &1596016402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b991c54125aad014b967e97fbf640b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RollAngle: -0.08255944
+  RollQuaternion: {x: 0, y: 0, z: -0.00072046695, w: 0.99999976}
+  RollMatrix:
+    e00: 0.999999
+    e01: 0.0014409336
+    e02: 0
+    e03: 0
+    e10: -0.0014409336
+    e11: 0.999999
+    e12: -0
+    e13: 0
+    e20: -0
+    e21: 0
+    e22: 1
+    e23: 0
+    e30: 0
+    e31: 0
+    e32: 0
+    e33: 1
+--- !u!81 &1596016403
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+--- !u!124 &1596016404
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+--- !u!92 &1596016405
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+--- !u!20 &1596016406
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596016399}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0.019607844}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 0
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!1 &1815815716
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1815815718}
+  - component: {fileID: 1815815717}
+  m_Layer: 0
+  m_Name: Camera Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1815815717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815815716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec00c4f2866f4e1418e01669dca25edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 0}
+  Require: 323
+  Sensitivity: 2
+  Pitch: 20
+  Yaw: 0
+  Dampening: 10
+--- !u!4 &1815815718
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815815716}
+  m_LocalRotation: {x: 0.1736482, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1596016400}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

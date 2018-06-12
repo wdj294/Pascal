@@ -33,11 +33,9 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Event sent if the scene was loaded")]
 		public FsmEvent successEvent;
 
-		[Tooltip("Event sent if a problem occured, check log for information")]
+		[Tooltip("Event sent if a problem occurred, check log for information")]
 		public FsmEvent failureEvent;
 
-		Scene _scene;
-		bool _sceneFound;
 
 		public override void Reset()
 		{

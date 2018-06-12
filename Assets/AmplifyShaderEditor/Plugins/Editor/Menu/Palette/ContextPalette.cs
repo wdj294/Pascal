@@ -44,7 +44,7 @@ namespace AmplifyShaderEditor
 			//if ( !_isActive )
 			//	return;
 
-			if ( Event.current.type == EventType.mouseDown && !IsInside( Event.current.mousePosition ) )
+			if ( Event.current.type == EventType.MouseDown && !IsInside( Event.current.mousePosition ) )
 			{
 				Disable();
 				return;
@@ -81,11 +81,6 @@ namespace AmplifyShaderEditor
 		public void Disable()
 		{
 			m_isActive = false;
-		}
-
-		public bool IsActive
-		{
-			get { return m_isActive; }
 		}
 
 		public Vector2 StartDropPosition

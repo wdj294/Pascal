@@ -1,3 +1,40 @@
+v1.47
+-----------------------------------------------------------------------------
+- Fixed some page positioning issues with Unity 2018
+- PagedRect will no longer add 'Animator' components to pages when using a
+  ScrollRect (this was leading to some odd issues in Unity 2018). The 
+  Animator component is only necessary for Legacy PagedRects.
+- PagedRect_LayoutGroup now uses anchoredPosition rather than localPosition
+- Fixed an issue where, after removing a page, the Page collection
+  would sometimes still contain that page if Unity did not remove the
+  Page GameObject immediately
+-----------------------------------------------------------------------------
+
+v1.46
+-----------------------------------------------------------------------------
+- RemoveAllPages() will no longer trigger a PageChangedEvent
+- When adding a new page to an empty PagedRect, that page will now be set
+  as the current page
+- Drag and ScrollWheel events will no longer attempt to activate 
+  seamless looping functionality when the number of pages is lower than 3
+  (as per regular seamless looping)
+-----------------------------------------------------------------------------
+
+v1.45
+-----------------------------------------------------------------------------
+- Fixed an issue where 'SpaceBetweenPages' was not correctly being taken
+  into account when sizing the viewport (making the PagedRect sometimes
+  off-center on the final page)
+-----------------------------------------------------------------------------
+
+v1.44
+-----------------------------------------------------------------------------
+- If you remove the current page, PagedRect will now automatically move to
+  to the previous page, preventing a potential StackOverflow Exception
+- Improved handling of the addition of new pages and removing of existing
+  when using Seamless Looping
+-----------------------------------------------------------------------------
+
 v1.43
 -----------------------------------------------------------------------------
 - Fixed an issue where PagedRect would sometimes scroll endlessly even when

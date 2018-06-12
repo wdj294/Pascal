@@ -10,7 +10,7 @@
 
 namespace HutongGames.PlayMakerEditor
 {
-    internal class FsmSelectorWindow : FsmSelector
+    public class FsmSelectorWindow : FsmSelector
     {
     }
 }

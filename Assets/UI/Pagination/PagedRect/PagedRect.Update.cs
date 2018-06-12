@@ -68,8 +68,10 @@ namespace UI.Pagination
 
             if (force) this.isDirty = true;
 
-            var tempPages = Viewport.GetComponentsInChildren<Page>(!UsingScrollRect).Where(p => p != this.NewPageTemplate && p.transform.parent == Viewport.transform).ToList();
-            
+            var tempPages = Viewport.GetComponentsInChildren<Page>(!UsingScrollRect)
+                                    .Where(p => p != this.NewPageTemplate && p.transform.parent == Viewport.transform && (UsingScrollRect || p.ShowOnPagination))
+                                    .ToList();
+
             // avoid an unnecessary initial update (_pages is empty when we initialise)
             if (!_pages.Any())
             {
@@ -77,17 +79,17 @@ namespace UI.Pagination
             }
             else
             {
-                this.isDirty = this.isDirty || !tempPages.SequenceEqual<Page>(_pages);                
+                this.isDirty = this.isDirty || !tempPages.SequenceEqual<Page>(_pages);
             }
 
             Pages = _pages = tempPages;
             int pageNumber = 1;
             Pages.ForEach(p =>
-            {                
+            {
                 if (!p.Initialised) p.Initialise(this);
 
                 if (p.PageNumber == 0 || forceRenewPageNumbers)
-                {                    
+                {
                     p.PageNumber = pageNumber;
                 }
 
@@ -112,14 +114,14 @@ namespace UI.Pagination
             {
                 return;
             }
-
-            if (CurrentPage > NumberOfPages && NumberOfPages > 0)
-            {                
+            
+            /*if (CurrentPage > NumberOfPages && NumberOfPages > 0)
+            {
                 //SetCurrentPage(Math.Max(NumberOfPages - 1, 1));                
-                ShowLastPage();
-            }            
+                //ShowLastPage();
+            }*/
 
-            if(updatePagination) UpdatePagination();
+            if (updatePagination) UpdatePagination();
         }
 
         /// <summary>
@@ -127,7 +129,7 @@ namespace UI.Pagination
         /// </summary>
         /// <param name="deletedPageNumber"></param>
         void PageWasDeleted(int deletedPageNumber)
-        {            
+        {
             Pages.Where(p => p.PageNumber >= deletedPageNumber)
                  .ToList()
                  .ForEach(p => p.PageNumber--);
@@ -136,7 +138,7 @@ namespace UI.Pagination
 
             // deleting pages within the scrollrect will have moved us around a bit
             if (UsingScrollRect)
-            {                
+            {
                 CenterScrollRectOnCurrentPage(true);
             }
         }

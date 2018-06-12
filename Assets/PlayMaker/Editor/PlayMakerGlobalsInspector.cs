@@ -1,120 +1,103 @@
-﻿// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+﻿//-----------------------------------------------------------------------
+// <copyright file="PlayMakerGlobalsInspector.cs" company="Hutong Games LLC">
+// Copyright (c) Hutong Games LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
 using System.Collections.Generic;
 using HutongGames.PlayMaker;
 using UnityEditor;
 using UnityEngine;
-using HutongGames.PlayMakerEditor;
 
-[CustomEditor(typeof(PlayMakerGlobals))]
-class PlayMakerGlobalsInspector : Editor
+namespace HutongGames.PlayMakerEditor
 {
-	private PlayMakerGlobals globals;
-	private bool refresh;
+    [CustomEditor(typeof(PlayMakerGlobals))]
+    internal class PlayMakerGlobalsInspector : UnityEditor.Editor
+    {
+	    private PlayMakerGlobals globals;
+	    private List<FsmVariable> variableList;
 
-	private List<FsmVariable> variableList;
-
-	void OnEnable()
-	{
-		//Debug.Log("PlayMakerGlobalsInspector: OnEnable");
-
-		globals = target as PlayMakerGlobals;
-
-		BuildVariableList();
-	}
-
-	public override void OnInspectorGUI()
-	{
-        EditorGUILayout.HelpBox(Strings.Hint_GlobalsInspector_Shows_DEFAULT_Values, MessageType.Info);
-	
-		if (refresh)
-		{
-			Refresh();
-			return;
-		}
-
-		GUILayout.Label(Strings.Command_Global_Variables, EditorStyles.boldLabel);
-
-		if (variableList.Count > 0)
-		{
-
-            var currentCategory = 0;
-            for (var index = 0; index < variableList.Count; index++)
-            {
-                var fsmVariable = variableList[index];
-                var categoryID = fsmVariable.CategoryID;
-                if (categoryID > 0 && categoryID != currentCategory)
-                {
-                    currentCategory = categoryID;
-                    GUILayout.Label(globals.Variables.Categories[currentCategory], EditorStyles.boldLabel);
-                    //FsmEditorGUILayout.LightDivider();
-                }
-
-				var tooltip = fsmVariable.Name;
-
-				if (!string.IsNullOrEmpty(fsmVariable.Tooltip))
-				{
-					tooltip += "\n" + fsmVariable.Tooltip;
-				}
-
-                if (fsmVariable.Type == VariableType.Array)
-                {
-                    GUILayout.Label(fsmVariable.Name);
-                }
-				fsmVariable.DoEditorGUI(new GUIContent(fsmVariable.Name, tooltip), true);
-			}
-		}
-		else
-		{
-			GUILayout.Label(Strings.Label_None_In_Table);
-		}
-
-		GUILayout.Label(Strings.Label_Global_Events, EditorStyles.boldLabel);
-
-		if (globals.Events.Count > 0)
-		{
-			foreach (var eventName in globals.Events)
-			{
-				GUILayout.Label(eventName);
-			}
-		}
-		else
-		{
-			GUILayout.Label(Strings.Label_None_In_Table);
-		}
-
-        GUILayout.Space(5);
-
-	    if (GUILayout.Button("Refresh"))
+        public void OnEnable()
 	    {
-	        Refresh();
+		    globals = target as PlayMakerGlobals;
+		    BuildVariableList();
 	    }
 
-        GUILayout.Space(10);
+	    public override void OnInspectorGUI()
+	    {
+            FsmEditorStyles.Init();
 
-        //FsmEditorGUILayout.Divider();
+            DoGlobalVariablesGUI();
+	        DoGlobalEventsGUI();
 
-        if (GUILayout.Button(Strings.Command_Export_Globals))
+	        GUILayout.Space(5);
+
+	        if (GUILayout.Button("Refresh"))
+	            Refresh();
+
+            GUILayout.Space(10);
+
+            DoImportExportGUI();
+	    }
+
+        private void DoGlobalVariablesGUI()
         {
-            GlobalsAsset.Export();
+            EditorGUILayout.HelpBox(Strings.Hint_GlobalsInspector_Shows_DEFAULT_Values, MessageType.Info);
+
+            GUILayout.Label(Strings.Command_Global_Variables, EditorStyles.boldLabel);
+
+            if (variableList.Count > 0)
+            {
+                FsmVariable.DoVariableListGUI(variableList);
+            }
+            else
+            {
+                GUILayout.Label(Strings.Label_None_In_Table);
+            }
         }
 
-        if (GUILayout.Button(Strings.Command_Import_Globals))
+        private void DoGlobalEventsGUI()
         {
-            GlobalsAsset.Import();
+            GUILayout.Label(Strings.Label_Global_Events, EditorStyles.boldLabel);
+
+            if (globals.Events.Count > 0)
+            {
+                foreach (var eventName in globals.Events)
+                {
+                    GUILayout.Label(eventName);
+                }
+            }
+            else
+            {
+                GUILayout.Label(Strings.Label_None_In_Table);
+            }
         }
-        EditorGUILayout.HelpBox(Strings.Hint_Export_Globals_Notes, MessageType.None);
-	}
 
-	void Refresh()
-	{
-		refresh = false;
-		BuildVariableList();
-		Repaint();
-	}
+        private static void DoImportExportGUI()
+        {
+            if (GUILayout.Button(Strings.Command_Export_Globals))
+            {
+                GlobalsAsset.Export();
+            }
 
-	void BuildVariableList()
-	{
-		variableList = FsmVariable.GetFsmVariableList(globals);
-	}
+            if (GUILayout.Button(Strings.Command_Import_Globals))
+            {
+                GlobalsAsset.Import();
+            }
+
+            EditorGUILayout.HelpBox(Strings.Hint_Export_Globals_Notes, MessageType.None);
+        }
+
+        private void Refresh()
+	    {
+		    BuildVariableList();
+		    Repaint();
+	    }
+
+        private void BuildVariableList()
+	    {
+		    variableList = FsmVariable.GetFsmVariableList(globals);
+	    }
+    }
 }
+

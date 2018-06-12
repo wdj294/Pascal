@@ -4,15 +4,16 @@
 using UnityEngine;
 using UnityEngine.Sprites;
 
+[ExecuteInEditMode]
 public class SpriteMaskController : MonoBehaviour
 {
 	private SpriteRenderer m_spriteRenderer;
 	private Vector4 m_uvs;
 
-	void Start ()
+	void OnEnable ()
 	{
 		m_spriteRenderer = GetComponent<SpriteRenderer>();
 		m_uvs = DataUtility.GetInnerUV( m_spriteRenderer.sprite );
-		m_spriteRenderer.material.SetVector( "_CustomUVS", m_uvs );
+		m_spriteRenderer.sharedMaterial.SetVector( "_CustomUVS", m_uvs );
 	}
 }

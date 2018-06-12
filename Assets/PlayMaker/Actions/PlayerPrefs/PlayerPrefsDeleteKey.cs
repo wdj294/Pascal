@@ -20,5 +20,15 @@ namespace HutongGames.PlayMaker.Actions
 			if(!key.IsNone && !key.Value.Equals("")) PlayerPrefs.DeleteKey(key.Value);
 			Finish();
 		}
-	}
+
+#if UNITY_EDITOR
+
+	    public override string AutoName()
+	    {
+	        return ActionHelpers.AutoName("PlayerPrefsDelete", key);
+	    }
+
+#endif
+
+    }
 }

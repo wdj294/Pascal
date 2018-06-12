@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("Returns the culling of this Animator component. Optionnaly sends events.\n" +
+	[Tooltip("Returns the culling of this Animator component. Optionally sends events.\n" +
 		"If true ('AlwaysAnimate'): always animate the entire character. Object is animated even when offscreen.\n" +
 		 "If False ('BasedOnRenderers') animation is disabled when renderers are not visible.")]
 	public class GetAnimatorCullingMode : FsmStateAction

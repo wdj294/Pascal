@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -21,10 +21,10 @@ namespace UI.Pagination
         public Color PageIconColor = Color.white;
 
         [SerializeField, Tooltip("Should this page be accessible?")]
-        public bool PageEnabled = true;        
+        public bool PageEnabled = true;
 
         [SerializeField, Tooltip("Should this button be shown on pagination?")]
-        public bool ShowOnPagination = true;        
+        public bool ShowOnPagination = true;
 
         [SerializeField]
         public PageEvent OnShowEvent = new PageEvent();
@@ -64,7 +64,7 @@ namespace UI.Pagination
         public bool UsePageAnimationType = false;
         public PagedRect.eAnimationType AnimationType;
         public bool FlipAnimationDirection = false;
-        
+
         private LayoutElement m_layoutElement;
         public LayoutElement layoutElement
         {
@@ -72,7 +72,7 @@ namespace UI.Pagination
             {
                 if (m_layoutElement == null) m_layoutElement = this.GetComponent<LayoutElement>();
 
-                if (m_layoutElement == null) m_layoutElement = this.gameObject.AddComponent<LayoutElement>();                
+                if (m_layoutElement == null) m_layoutElement = this.gameObject.AddComponent<LayoutElement>();
 
                 return m_layoutElement;
             }
@@ -84,15 +84,15 @@ namespace UI.Pagination
             get
             {
                 if (m_pageOverlay == null)
-                {                    
+                {
                     var pageOverlayGameObject = PaginationUtilities.InstantiatePrefab("Page Overlay");
-                    
+
                     pageOverlayGameObject.transform.SetParent(this.transform);
 
                     m_pageOverlay = pageOverlayGameObject.GetComponent<PageOverlay>();
-                                        
-                    m_pageOverlay.Initialise(this, _pagedRect);                    
-                }       
+
+                    m_pageOverlay.Initialise(this, _pagedRect);
+                }
 
                 return m_pageOverlay;
             }
@@ -113,9 +113,9 @@ namespace UI.Pagination
 
         [HideInInspector]
         public Page OriginalPage = null;
-        
+
         public Vector3 DesiredScale = Vector3.one;
-        
+
 
         /// <summary>
         /// Initialise this Page object and attach it to its parent PagedRect.
@@ -135,30 +135,38 @@ namespace UI.Pagination
 
             if (Application.isPlaying)
             {
-                Animator = this.GetComponent<Animator>();
-
-                if (Animator == null)
+                if (!pagedRect.UsingScrollRect)
                 {
-                    // setup the animator for this page
-                    Animator = this.gameObject.AddComponent<Animator>();                    
+                    Animator = this.GetComponent<Animator>();
+
+                    if (Animator == null)
+                    {
+                        // setup the animator for this page
+                        Animator = this.gameObject.AddComponent<Animator>();
+                    }
+
+                    Animator.runtimeAnimatorController = Instantiate(pagedRect.AnimationControllerTemplate) as RuntimeAnimatorController;
+                }
+                else
+                {
+                    Animator = this.GetComponent<Animator>();
+                    if (Animator != null) Animator.enabled = false;
                 }
 
-                Animator.runtimeAnimatorController = Instantiate(pagedRect.AnimationControllerTemplate) as RuntimeAnimatorController;                
-
                 if (pagedRect.ShowPagePreviews)
-                {                    
+                {
                     PagedRectTimer.DelayedCall(0, () =>
                     {
                         if (pagedRect.CurrentPage != this.PageNumber) ShowOverlay();
                     }, this);
                 }
-            }                        
+            }
         }
 
         public void UpdateDimensions()
         {
             if (_pagedRect == null) return;
-            
+
             RectTransform rectTransform = _pagedRect.sizingTransform;
             if (rectTransform == null) rectTransform = (RectTransform)_pagedRect.transform;
 
@@ -179,7 +187,7 @@ namespace UI.Pagination
                 OnShowEvent.Invoke();
             }
 
-            HideOverlay();            
+            HideOverlay();
         }
 
         /// <summary>
@@ -194,16 +202,16 @@ namespace UI.Pagination
                 OnHideEvent.Invoke();
             }
 
-            if(_pagedRect.ShowPagePreviews) ShowOverlay();            
-        }        
+            if (_pagedRect.ShowPagePreviews) ShowOverlay();
+        }
 
         /// <summary>
         /// Show a Fade-In animation.
         /// </summary>
         public void FadeIn()
         {
-            gameObject.SetActive(true);            
-            PlayNewAnimation("FadeIn");            
+            gameObject.SetActive(true);
+            PlayNewAnimation("FadeIn");
         }
 
         /// <summary>
@@ -214,7 +222,7 @@ namespace UI.Pagination
             if (!this.gameObject.activeInHierarchy) return;
 
             PlayNewAnimation("FadeOut");
-            StartCoroutine(DisableWhenAnimationIsComplete());            
+            StartCoroutine(DisableWhenAnimationIsComplete());
         }
 
         /// <summary>
@@ -223,7 +231,7 @@ namespace UI.Pagination
         /// <param name="directionFrom"></param>
         /// <param name="vertical"></param>
         public void SlideIn(PagedRect.eDirection directionFrom, bool vertical = false)
-        {            
+        {
             gameObject.SetActive(true);
 
             var direction = directionFrom.ToString();
@@ -233,7 +241,7 @@ namespace UI.Pagination
                 direction = directionFrom == PagedRect.eDirection.Left ? "Top" : "Bottom";
             }
 
-            PlayNewAnimation("SlideIn_" + direction);            
+            PlayNewAnimation("SlideIn_" + direction);
         }
 
         /// <summary>
@@ -254,7 +262,7 @@ namespace UI.Pagination
 
             PlayNewAnimation("SlideOut_" + direction);
 
-            StartCoroutine(DisableWhenAnimationIsComplete());            
+            StartCoroutine(DisableWhenAnimationIsComplete());
         }
 
         /// <summary>
@@ -262,14 +270,14 @@ namespace UI.Pagination
         /// </summary>
         /// <returns></returns>
         protected IEnumerator DisableWhenAnimationIsComplete()
-        {            
+        {
             yield return new WaitForSeconds(1f / _pagedRect.AnimationSpeed);
 
             if (_pagedRect.GetCurrentPage() != this)    // if we are the current page, then the user has scrolled back to us
             {
                 gameObject.SetActive(false);
-                ResetPositionAndAlpha();                
-            }            
+                ResetPositionAndAlpha();
+            }
         }
 
         /// <summary>
@@ -277,13 +285,13 @@ namespace UI.Pagination
         /// </summary>
         /// <param name="animationName"></param>
         protected void PlayNewAnimation(string animationName)
-        {            
+        {
             Animator.updateMode = AnimatorUpdateMode.UnscaledTime;
             Animator.speed = _pagedRect.AnimationSpeed;
             Animator.enabled = true;
             Animator.StopPlayback();
 
-            Animator.Play(animationName);                        
+            Animator.Play(animationName);
         }
 
         public void LegacyReset()
@@ -338,7 +346,7 @@ namespace UI.Pagination
 
         public void ScaleToScale(Vector3 scale, float animationSpeed = 0.5f)
         {
-            if (scaleCoroutine != null) StopCoroutine(scaleCoroutine);            
+            if (scaleCoroutine != null) StopCoroutine(scaleCoroutine);
 
             if (scale == (Vector3)rectTransform.localScale) return;
 
@@ -481,10 +489,10 @@ namespace UI.Pagination
                 if (pagedRect != null)
                 {
                     UnityEditor.EditorApplication.delayCall += () =>
-                        {
-                            pagedRect.UpdateDisplay();
-                            pagedRect.ShowLastPage();
-                        };
+                    {
+                        pagedRect.UpdateDisplay();
+                        pagedRect.ShowLastPage();
+                    };
                 }
             }
         }

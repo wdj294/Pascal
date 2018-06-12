@@ -16,7 +16,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The gameObject to look at")]
 		public FsmGameObject target;
 		
-		[Tooltip("The lookat position. If Target GameObject set, targetPosition is used as an offset from Target")]
+		[Tooltip("The look-at position. If Target GameObject set, targetPosition is used as an offset from Target")]
 		public FsmVector3 targetPosition;
 		
 		[HasFloatSlider(0f,1f)]

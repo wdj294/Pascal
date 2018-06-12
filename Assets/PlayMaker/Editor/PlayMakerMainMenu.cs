@@ -276,19 +276,25 @@ internal static class PlayMakerMainMenu
     private const string helpRoot = MenuRoot + "Help/";
     private const int iHelp = 1; // iTools + 100;
 
-    [MenuItem(helpRoot + "Online Manual", false, iHelp)]
+    [MenuItem(helpRoot + "Guided Tour", false, iHelp)]
+    public static void GuidedTour()
+    {
+        PlayMakerGuidedTour.Open();
+    }
+
+    [MenuItem(helpRoot + "Online Manual", false, iHelp + 1)]
 	public static void OnlineManual()
 	{
 		EditorCommands.OpenWikiHelp();
 	}
 
-    [MenuItem(helpRoot + "YouTube Channel", false, iHelp + 1)]
+    [MenuItem(helpRoot + "YouTube Channel", false, iHelp + 2)]
 	public static void YouTubeChannel()
 	{
 		Application.OpenURL("http://www.youtube.com/user/HutongGamesLLC");
 	}
 
-    [MenuItem(helpRoot + "PlayMaker Forums", false, iHelp + 2)]
+    [MenuItem(helpRoot + "PlayMaker Forums", false, iHelp + 3)]
 	public static void PlayMakerForum()
 	{
 		Application.OpenURL("http://hutonggames.com/playmakerforum/");
@@ -301,7 +307,14 @@ internal static class PlayMakerMainMenu
         AssetStore.Open("content/368");
     }*/
 
-    [MenuItem(helpRoot + "About PlayMaker...", false, iHelp + 20)]
+
+    [MenuItem(helpRoot + "Submit Bug Report", false,  iHelp + 20)]
+    public static void SubmitBugFromHelp()
+    {
+        EditorWindow.GetWindow<PlayMakerBugReportWindow>(true);
+    }
+
+    [MenuItem(helpRoot + "About PlayMaker...", false, iHelp + 40)]
     public static void OpenAboutWindow()
     {
         EditorWindow.GetWindow<AboutWindow>(true);
@@ -323,7 +336,7 @@ internal static class PlayMakerMainMenu
         Application.OpenURL("https://hutonggames.fogbugz.com/default.asp?W714");
     }
 
-#if !(UNITY_5 || UNITY_5_0) 
+#if !(UNITY_5 || UNITY_5_0 || UNITY_5_3_OR_NEWER) 
 
     [MenuItem(addonsRoot + "Windows Phone 8 Addon", false, iAddons + 1)]
     public static void GetWindowsPhone8Addon()

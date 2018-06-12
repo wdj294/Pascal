@@ -22,13 +22,18 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[Tooltip("Event to send to get the next item.")]
 		public FsmEvent loopEvent;
-		
-		[Tooltip("Event to send when there are no more items.")]
+
+        [Tooltip("If you want to reset the iteration, raise this flag to true when you enter the state, it will indicate you want to start from the beginning again")]
+        [UIHint(UIHint.Variable)]
+        public FsmBool resetFlag;
+
+        [Tooltip("Event to send when there are no more items.")]
 		public FsmEvent finishedEvent;
 			
 		[ActionSection("Result")]
 
 		[MatchElementType("array")]
+		[UIHint(UIHint.Variable)]
 		public FsmVar result;
 
 		[UIHint(UIHint.Variable)]
@@ -42,13 +47,12 @@ namespace HutongGames.PlayMaker.Actions
 			array = null;
 			startIndex = null;
 			endIndex = null;
-
 			currentIndex = null;
-
 			loopEvent = null;
 			finishedEvent = null;
-			
-			result = null;
+            resetFlag = null;
+
+            result = null;
 		}
 		
 		public override void OnEnter()
@@ -60,8 +64,14 @@ namespace HutongGames.PlayMaker.Actions
 					nextItemIndex = startIndex.Value;
 				}
 			}
-			
-			DoGetNextItem();
+
+            if (resetFlag.Value)
+            {
+                nextItemIndex = startIndex.Value;
+                resetFlag.Value = false;
+            }
+
+            DoGetNextItem();
 			
 			Finish();
 		}

@@ -118,7 +118,7 @@ namespace UI.Pagination
             
             UpdatePagination();
 
-            if (PageChangedEvent != null)
+            if (!initial && PageChangedEvent != null)
             {
                 PageChangedEvent.Invoke(GetPageByNumber(CurrentPage), GetPageByNumber(previousPage));
             }

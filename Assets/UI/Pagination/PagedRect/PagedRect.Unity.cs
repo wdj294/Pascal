@@ -7,7 +7,7 @@ using UnityEngine;
 namespace UI.Pagination
 {
     public partial class PagedRect
-    {        
+    {
         void Awake()
         {
             CurrentPage = DefaultPage;
@@ -21,21 +21,23 @@ namespace UI.Pagination
                 ScrollRect.horizontalNormalizedPosition = 0;
                 ScrollRect.verticalNormalizedPosition = 0;
 
-                ScrollRect.content.anchoredPosition = Vector2.zero;                
+                ScrollRect.content.anchoredPosition = Vector2.zero;
             }
 
-            if(Application.isPlaying) InvalidateButtonPool();
+            if (Application.isPlaying) InvalidateButtonPool();
             OptimizePagination();
             InitializePaginationIcons();
+
+            PagedRectTimer.DelayedCall(0, SetFirstPage, this);
         }
 
-        void LateUpdate()
+        /*void LateUpdate()
         {
             if (!firstPageSet)
             {
                 SetFirstPage();
             }
-        }
+        }*/
 
         void SetFirstPage()
         {
@@ -44,17 +46,17 @@ namespace UI.Pagination
             firstPageSet = true;
 
             if (UsingScrollRect)
-            {                
+            {
                 CenterScrollRectOnCurrentPage(true);
-                
+
                 PagedRectTimer.DelayedCall(0.01f, () => CenterScrollRectOnCurrentPage(true), this);
 
-                PagedRectTimer.DelayedCall(0.05f, 
-                    () => 
-                    {
+                PagedRectTimer.DelayedCall(0.05f,
+                    () =>
+                    {                        
                         UpdatePages(true, false);
                         UpdateSeamlessPagePositions();
-                    }, this);                
+                    }, this);
             }
 
             UpdatePagination();
@@ -81,7 +83,7 @@ namespace UI.Pagination
         }
 
         void Start()
-        {            
+        {
             this.GetComponentInChildren<Viewport>().Initialise(this);
 
             if (UsingScrollRect)
@@ -110,14 +112,14 @@ namespace UI.Pagination
             {
                 SetupMouseEvents();
             }
-            
+
             if (NumberOfPages == 0)
             {
             }
             else if (Application.isPlaying)
             {
                 // Show the default first page 
-                if(DefaultPage <= NumberOfPages) SetCurrentPage(DefaultPage, true);
+                if (DefaultPage <= NumberOfPages) SetCurrentPage(DefaultPage, true);
             }
             else
             {
@@ -188,8 +190,8 @@ namespace UI.Pagination
                         AutomaticallyMoveToNextPage_Seamless();
                     }
                     else
-                    {                   
-                        NextPage();                        
+                    {
+                        NextPage();
                     }
                 }
             }
@@ -201,12 +203,12 @@ namespace UI.Pagination
             else
             {
                 ScrollWheelInput.enabled = UseScrollWheelInput;
-            }            
+            }
 
             CheckForDeletedPages();
 
-            if(lastEndDragData != null) lastEndDragData = null;
-        }        
+            if (lastEndDragData != null) lastEndDragData = null;
+        }
 
         void OnValidate()
         {
@@ -215,13 +217,13 @@ namespace UI.Pagination
             if (!gameObject.activeInHierarchy) return;
 
             PagedRectTimer.DelayedCall(0, () =>
+            {
+                if (this.isDirty)
                 {
-                    if(this.isDirty)
-                    {
-                        UpdateDisplay();
-                    }                    
+                    UpdateDisplay();
+                }
 
-                }, this);
-        }                
+            }, this);
+        }
     }
 }

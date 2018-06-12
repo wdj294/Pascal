@@ -81,17 +81,44 @@ namespace HutongGames.PlayMakerEditor
             get { return Instance.lastAutoUpdateSignature != GetProjectSignature(); }
         }
 
+        public static bool UseLegacyNetworking
+        {
+            get { return Instance.useLegacyNetworking; }
+            set { instance.useLegacyNetworking = value; Save(); }
+        }
+
+        /*
+        public static bool UseLegacyGUI
+        {
+            get { return Instance.useLegacyGUI; }
+            set { instance.useLegacyGUI = value; Save(); }
+        }
+
+        public static bool UseITween
+        {
+            get { return Instance.useITween; }
+            set { instance.useITween = value; Save(); }
+        }*/     
+
+        [Header("NOTE: Do not edit these parameters!")]
+
         [SerializeField] private string welcomeScreenVersion;
         [SerializeField] private string playmakerVersion;
         [SerializeField] private bool showWelcomeScreen = true;
         [SerializeField] private bool showUpgradeGuide;
         [SerializeField] private string lastAutoUpdateSignature;
+        [SerializeField] private bool useLegacyNetworking;
+        //[SerializeField] private bool useLegacyGUI;
+        //[SerializeField] private bool useITween;
 
         public static void ResetForExport()
         {
             ShowWelcomeScreen = true;
             PlaymakerVersion = string.Empty;
             WelcomeScreenVersion = string.Empty;
+            UseLegacyNetworking = false;
+            //UseLegacyGUI = false;
+            //UseITween = false;
         }
 
         public static void Save()

@@ -270,7 +270,7 @@ namespace UI.Pagination.Examples
         public void DynamicPageExample_RemoveLastPage()
         {
             var lastPage = DynamicPagesExample.Pages.LastOrDefault(l => l.PageTitle != "Main Page");
-
+                        
             if (lastPage != null)
             {
                 DynamicPagesExample.RemovePage(lastPage, true);

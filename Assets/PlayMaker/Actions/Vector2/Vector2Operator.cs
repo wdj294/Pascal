@@ -97,7 +97,7 @@ namespace HutongGames.PlayMaker.Actions
 					break;
 
 				case Vector2Operation.Multiply:
-					// I know... this is a far reach and not usefull in 99% of cases. 
+					// I know... this is a far reach and not useful in 99% of cases. 
 					// I do use it when I use vector2 as arrays recipients holding something else than a position in space.
 					var multResult = Vector2.zero;
 					multResult.x = v1.x * v2.x;
@@ -105,7 +105,7 @@ namespace HutongGames.PlayMaker.Actions
 					storeVector2Result.Value = multResult;
 					break;
 
-				case Vector2Operation.Divide: // I know... this is a far reach and not usefull in 99% of cases.
+				case Vector2Operation.Divide: // I know... this is a far reach and not useful in 99% of cases.
 					// I do use it when I use vector2 as arrays recipients holding something else than a position in space.
 					var divResult = Vector2.zero;
 					divResult.x = v1.x / v2.x;

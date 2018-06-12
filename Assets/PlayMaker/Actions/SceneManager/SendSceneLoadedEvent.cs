@@ -16,7 +16,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The event to send when a scene was loaded")]
 		public FsmEvent sceneLoaded;
 
-		[Tooltip("The event to send when a scene was loaded, with a one frame delay to make sure the scene content was indeed intitialized fully")]
+		[Tooltip("The event to send when a scene was loaded, with a one frame delay to make sure the scene content was indeed initialized fully")]
 		public FsmEvent sceneLoadedSafe;
 
 		public static Scene lastLoadedScene;

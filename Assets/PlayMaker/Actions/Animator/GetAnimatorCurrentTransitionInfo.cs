@@ -28,7 +28,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmInt nameHash;
 		
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The user-specidied name of the Transition")]
+		[Tooltip("The user-specified name of the Transition")]
 		public FsmInt userNameHash;
 
 		[UIHint(UIHint.Variable)]

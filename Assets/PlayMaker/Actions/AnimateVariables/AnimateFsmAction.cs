@@ -9,13 +9,13 @@ namespace HutongGames.PlayMaker.Actions
     /// </summary>
 	public abstract class AnimateFsmAction : FsmStateAction
 	{
-		[Tooltip("Define time to use your curve scaled to be stretched or shrinked.")]
+		[Tooltip("Define animation time, scaling the curve to fit.")]
 		public FsmFloat time;
 		
-        [Tooltip("If you define speed, your animation will be speeded up or slowed down.")]
+        [Tooltip("If you define speed, your animation will speed up or slow down.")]
 		public FsmFloat speed;
 		
-        [Tooltip("Delayed animimation start.")]
+        [Tooltip("Delayed animation start.")]
 		public FsmFloat delay;
 		
         [Tooltip("Animation curve start from any time. If IgnoreCurveOffset is true the animation starts right after the state become entered.")]
@@ -278,5 +278,22 @@ namespace HutongGames.PlayMaker.Actions
                 isRunning = !finishAction;
             }
         }
+
+
+		#if UNITY_EDITOR
+
+		public override float GetProgress()
+		{
+			float maxendtime = 0f;
+
+			for (int i = 0; i < endTimes.Length; i++)
+			{
+				maxendtime = Mathf.Max (maxendtime, endTimes [i]);
+			}
+
+			return Mathf.Min(currentTime/maxendtime , 1f);
+		}
+
+		#endif
     }
 }

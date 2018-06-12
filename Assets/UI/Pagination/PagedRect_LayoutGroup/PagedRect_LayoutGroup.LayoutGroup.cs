@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace UI.Pagination
-{    
+{
     public partial class PagedRect_LayoutGroup
     {
         public override void SetLayoutHorizontal()
-        {
+        {            
             SetChildrenAlongAxis(0, IsVertical);
         }
 
@@ -19,7 +19,7 @@ namespace UI.Pagination
         }
 
         protected void CalcAlongAxis(int axis, bool isVertical)
-        {                        
+        {
             float totalSize = 0f;
             for (int i = 0; i < rectChildren.Count; i++)
             {
@@ -29,19 +29,21 @@ namespace UI.Pagination
 
                 if (axis == 0)
                 {
-                    totalSize += page.layoutElement.preferredWidth * page.DesiredScale.x;
+                    totalSize += page.layoutElement.preferredWidth * page.DesiredScale.x + pagedRect.SpaceBetweenPages;
                 }
                 else
                 {
-                    totalSize += page.layoutElement.preferredHeight * page.DesiredScale.y;
+                    totalSize += page.layoutElement.preferredHeight * page.DesiredScale.y + pagedRect.SpaceBetweenPages;
                 }
-            }            
+            }
+
+            if (totalSize > 0) totalSize -= pagedRect.SpaceBetweenPages;
 
             SetLayoutInputForAxis(totalSize, totalSize, 1, axis);
         }
 
         protected void SetChildrenAlongAxis(int axis, bool isVertical)
-        {            
+        {
             if (!isVertical)
             {
                 SetChildrenHorizontal(axis);
@@ -49,8 +51,11 @@ namespace UI.Pagination
             else
             {
                 SetChildrenVertical(axis);
-            }            
+            }
         }
+        
+        private static Vector2 halfOne = new Vector2(0.5f, 1);
+        private static Vector2 zeroHalf = new Vector2(0, 0.5f);
 
         protected void SetChildrenHorizontal(int axis)
         {
@@ -60,18 +65,20 @@ namespace UI.Pagination
             {
                 var page = rectChildren[i].GetComponent<Page>();
 
-                if (page == null) continue; // ignore any non-page children
-                
+                if (page == null) continue; // ignore any non-page children                
+
                 if (axis == 1)
                 {
-                    SetChildAlongAxis(rectChildren[i], axis, 0, rectTransform.rect.height);                    
+                    SetChildAlongAxis(rectChildren[i], axis, 0, rectTransform.rect.height);
                 }
                 else
                 {
                     page.rectTransform.pivot = new Vector2(0, 0.5f);
+                    page.rectTransform.anchorMax = zeroHalf;
+                    page.rectTransform.anchorMin = zeroHalf;
 
-                    page.rectTransform.localPosition = new Vector2(offset, page.rectTransform.localPosition.y);
-                    page.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, page.layoutElement.preferredWidth);
+                    page.rectTransform.anchoredPosition = new Vector2(offset, 0);
+                    if (page.rectTransform.rect.width != page.layoutElement.preferredWidth) page.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, page.layoutElement.preferredWidth);
 
                     var actualWidth = page.layoutElement.preferredWidth * GetPageDesiredScale(page, 0);
 
@@ -91,20 +98,23 @@ namespace UI.Pagination
                 var page = rectChildren[i].GetComponent<Page>();
 
                 if (page == null) continue; // ignore any non-page children
-                
+
                 if (axis == 0)
                 {
-                    SetChildAlongAxis(rectChildren[i], axis, 0, rectTransform.rect.width);       
+                    SetChildAlongAxis(rectChildren[i], axis, 0, rectTransform.rect.width);
                 }
                 else
                 {
-                    page.rectTransform.pivot = new Vector2(0.5f, 1);
-                    page.rectTransform.localPosition = new Vector2(page.rectTransform.localPosition.x, offset);
-                    page.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, page.layoutElement.preferredHeight);
+                    page.rectTransform.pivot = halfOne;
+                    page.rectTransform.anchorMax = halfOne;
+                    page.rectTransform.anchorMin = halfOne;
+
+                    page.rectTransform.anchoredPosition = new Vector2(0, offset);
+                    if (page.rectTransform.rect.height != page.layoutElement.preferredHeight) page.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, page.layoutElement.preferredHeight);
 
                     var actualHeight = page.layoutElement.preferredHeight * GetPageDesiredScale(page, 1);
-                    
-                    offset -= actualHeight;                    
+
+                    offset -= actualHeight;
                 }
 
                 offset -= pagedRect.SpaceBetweenPages;
@@ -114,10 +124,10 @@ namespace UI.Pagination
         protected float GetPageDesiredScale(Page page, int axis)
         {
             if (pagedRect.ShowPagePreviews)
-            {                
+            {
                 if (axis == 0)
                 {
-                    return page.DesiredScale.x;       
+                    return page.DesiredScale.x;
                 }
                 else
                 {
@@ -128,4 +138,5 @@ namespace UI.Pagination
             return 1f;
         }
     }
+
 }

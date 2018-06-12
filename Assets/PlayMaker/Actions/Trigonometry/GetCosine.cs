@@ -17,7 +17,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The angle cosinus")]
+		[Tooltip("The angle cosine")]
 		public FsmFloat result;
 		
 		[Tooltip("Repeat every frame.")]

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.Animator)]
-	[Tooltip("If true, additionnal layers affects the mass center")]
+	[Tooltip("If true, additional layers affects the mass center")]
 	public class SetAnimatorLayersAffectMassCenter: FsmStateAction
 	{
 		[RequiredField]
@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("The Target. An Animator component is required")]
 		public FsmOwnerDefault gameObject;
 		
-		[Tooltip("If true, additionnal layers affects the mass center")]
+		[Tooltip("If true, additional layers affects the mass center")]
 		public FsmBool affectMassCenter;
 		
 		private Animator _animator;

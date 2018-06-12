@@ -44,9 +44,13 @@ namespace HutongGames.PlayMakerEditor
             // So we need to handle that case (e.g., don't show welcome window)
             // NOTE: This only matters during the startupTime. 
             // If we find a better way to do that we can remove this.
-
+#if UNITY_2017_2_OR_NEWER
+            EditorApplication.playModeStateChanged -= PlayModeChanged;
+            EditorApplication.playModeStateChanged += PlayModeChanged;
+#else
             EditorApplication.playmodeStateChanged -= PlayModeChanged;
             EditorApplication.playmodeStateChanged += PlayModeChanged;
+#endif
         }
 
         // Used to happen in PlayMakerGlobals constructor, 
@@ -91,10 +95,17 @@ namespace HutongGames.PlayMakerEditor
             EditorApplication.update -= DoWelcomeScreen;
         }
 
+#if UNITY_2017_2_OR_NEWER
+        private static void PlayModeChanged(PlayModeStateChange playMode)
+        {
+            EditorApplication.update -= DoWelcomeScreen;
+        }
+#else
         private static void PlayModeChanged()
         {
             EditorApplication.update -= DoWelcomeScreen;
         }
+#endif
 
         // Normally we would use ReflectionUtils.GetGlobalType but this code needs to be standalone
         // Instead of copy/pasting ReflectionUtils, decided to try this code from UnityAnswers:
