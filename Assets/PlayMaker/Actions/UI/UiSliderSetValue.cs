@@ -3,7 +3,7 @@
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Sets the value of a UGui Slider component.")]
+	[Tooltip("Sets the value of a UI Slider component.")]
 	public class UiSliderSetValue : ComponentAction<UnityEngine.UI.Slider>
 	{
 		[RequiredField]

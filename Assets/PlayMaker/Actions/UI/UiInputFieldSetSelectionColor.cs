@@ -14,7 +14,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[Tooltip("The color of the highlighter to show what characters are selected for the UGui InputField component.")]
+		[Tooltip("The color of the highlighter to show what characters are selected for the UI InputField component.")]
 		public FsmColor selectionColor;
 
 		[Tooltip("Reset when exiting this state.")]

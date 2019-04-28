@@ -3,7 +3,7 @@
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Gets the text value of a UGui InputField component as a float.")]
+	[Tooltip("Gets the text value of a UI InputField component as a float.")]
 	public class UiInputFieldGetTextAsFloat : ComponentAction<UnityEngine.UI.InputField>
 	{
 		[RequiredField]
@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The text value as a float of the UGui InputField component.")]
+		[Tooltip("The text value as a float of the UI InputField component.")]
 		public FsmFloat value;
 
 		[UIHint(UIHint.Variable)]

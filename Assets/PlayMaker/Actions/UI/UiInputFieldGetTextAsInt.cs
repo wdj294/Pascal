@@ -17,13 +17,13 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmInt value;
 
 		[UIHint(UIHint.Variable)]
-		[Tooltip("true if text resolves to an int")]
+		[Tooltip("True if text resolves to an int")]
 		public FsmBool isInt;
 
-		[Tooltip("true if text resolves to an int")]
+		[Tooltip("Event to send if text resolves to an int")]
 		public FsmEvent isIntEvent;
 
-		[Tooltip("Event sent if text does not resolves to an int")]
+		[Tooltip("Event to send if text does NOT resolve to an int")]
 		public FsmEvent isNotIntEvent;
 
 		public bool everyFrame;

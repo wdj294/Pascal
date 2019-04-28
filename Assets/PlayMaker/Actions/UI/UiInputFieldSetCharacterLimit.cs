@@ -12,7 +12,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[Tooltip("The maximum number of characters that the user can type into the UGui InputField component. 0 = infinite")]
+		[Tooltip("The maximum number of characters that the user can type into the UI InputField component. 0 = infinite")]
 		public FsmInt characterLimit;
 
 		[Tooltip("Reset when exiting this state.")]

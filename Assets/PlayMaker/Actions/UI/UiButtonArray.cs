@@ -52,6 +52,11 @@ namespace HutongGames.PlayMaker.Actions
 
 	    private void InitButtons()
 	    {
+            if (cachedGameObjects == null || cachedGameObjects.Length != gameObjects.Length)
+            {
+                OnPreprocess();
+            }
+
 	        for (var i = 0; i < gameObjects.Length; i++)
 	        {
 	            var go = gameObjects[i].Value;

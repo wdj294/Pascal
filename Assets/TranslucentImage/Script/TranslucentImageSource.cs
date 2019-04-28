@@ -22,9 +22,6 @@ namespace LeTai.Asset.TranslucentImage
         /// <summary>
         /// Maximum number of times to update the blurred image each second
         /// </summary>
-        [Tooltip(
-            "Maximum number of times that the blur algorithm can run per second." +
-            " Lower if you need more performance")]
         public float maxUpdateRate = float.PositiveInfinity;
 
         /// <summary>
@@ -44,6 +41,11 @@ namespace LeTai.Asset.TranslucentImage
         int iteration = 4;
 
         [SerializeField]
+        Rect blurRegion = new Rect(0, 0, 1, 1);
+
+        Rect lastBlurRegion = new Rect(0, 0, 1, 1);
+
+        [SerializeField]
         int maxDepth = 4;
 
         [SerializeField]
@@ -54,12 +56,14 @@ namespace LeTai.Asset.TranslucentImage
         float strength;
 
         float lastUpdate;
+
         //Disable non-sense warning from Unity
 #pragma warning disable 0108
         Camera camera;
 #pragma warning restore 0108
-        Shader shader;
+        Shader   shader;
         Material material;
+        Material previewMaterial;
 
         #endregion
 
@@ -73,9 +77,9 @@ namespace LeTai.Asset.TranslucentImage
         /// <summary>
         /// The Camera attached to the same GameObject. Cached in field 'camera'
         /// </summary>
-        public Camera Cam
+        Camera Cam
         {
-            get { return camera ?? (camera = GetComponent<Camera>()); }
+            get { return camera ? camera : camera = GetComponent<Camera>(); }
         }
 
         /// <summary>
@@ -125,6 +129,26 @@ namespace LeTai.Asset.TranslucentImage
         {
             get { return downsample; }
             set { downsample = Mathf.Max(0, value); }
+        }
+
+        /// <summary>
+        /// Define the rectangular area on screen that will be blurred.
+        /// </summary>
+        /// <value>
+        /// Between 0 and 1
+        /// </value>
+        public Rect BlurRegion
+        {
+            get { return blurRegion; }
+            set
+            {
+                Vector2 min = new Vector2(1 / (float) Cam.pixelWidth, 1 / (float) Cam.pixelHeight);
+                value.x      = Mathf.Clamp(value.x,      0,     1 - min.x);
+                value.y      = Mathf.Clamp(value.y,      0,     1 - min.y);
+                value.width  = Mathf.Clamp(value.width,  min.x, 1 - value.x);
+                value.height = Mathf.Clamp(value.height, min.y, 1 - value.y);
+                blurRegion   = value;
+            }
         }
 
         /// <summary>
@@ -178,8 +202,10 @@ namespace LeTai.Asset.TranslucentImage
                     Iteration--;
                     Size *= 2;
                 }
+
                 break;
             }
+
             while (Size > 8)
             {
                 Size /= 2;
@@ -187,96 +213,144 @@ namespace LeTai.Asset.TranslucentImage
             }
         }
 
+        static int _sizePropId;
+        static int _cropRegionPropId;
 
 #if UNITY_EDITOR
+        Texture2D previewCropTexture;
 
-        [InitializeOnLoadMethod]
+        void OnEnable()
+        {
+            if (!EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                Start();
+            }
+
+            if (!previewCropTexture)
+            {
+                previewCropTexture = new Texture2D(3, 3) {filterMode = FilterMode.Point};
+                previewCropTexture.SetPixels(new[]
+                                             {
+                                                 Color.yellow, Color.yellow, Color.yellow, Color.yellow, Color.clear,
+                                                 Color.yellow, Color.yellow, Color.yellow, Color.yellow,
+                                             });
+                previewCropTexture.Apply();
+            }
+        }
+
+        void OnGUI()
+        {
+            if (!preview)
+                return;
+
+            var pixelArea = new Rect(blurRegion);
+            pixelArea.x      *= Cam.pixelWidth;
+            pixelArea.width  *= Cam.pixelWidth;
+            pixelArea.y      *= Cam.pixelHeight;
+            pixelArea.y      =  Cam.pixelHeight - pixelArea.y;
+            pixelArea.height *= -Cam.pixelHeight;
+
+            var style = new GUIStyle(GUI.skin.box);
+            style.normal.background = previewCropTexture;
+            style.border            = new RectOffset(1, 1, 1, 1);
+
+            GUI.Box(pixelArea, GUIContent.none, style);
+        }
 #endif
+
         protected virtual void Start()
         {
             camera = Cam;
+
             shader = Shader.Find("Hidden/EfficientBlur");
             if (!shader.isSupported) enabled = false;
 
-            material = new Material(shader);
+            material        = new Material(shader);
+            previewMaterial = new Material(Shader.Find("Hidden/FillCrop"));
 
-            BlurredScreen = new RenderTexture(
-                                    Cam.pixelWidth >> Downsample,
-                                    Cam.pixelHeight >> Downsample,
-                                    0)
-                                {
-                                    filterMode = FilterMode.Bilinear
-                                };
+            _sizePropId       = Shader.PropertyToID("size");
+            _cropRegionPropId = Shader.PropertyToID("_CropRegion");
+
+            CreateNewBlurredScreen();
+
             lastDownsample = Downsample;
+        }
+
+        protected virtual void CreateNewBlurredScreen()
+        {
+            BlurredScreen = new RenderTexture(Mathf.RoundToInt(Cam.pixelWidth  * BlurRegion.width)  >> Downsample,
+                                              Mathf.RoundToInt(Cam.pixelHeight * BlurRegion.height) >> Downsample,
+                                              0) {filterMode = FilterMode.Bilinear};
         }
 
         /// <summary>
         /// Resize the source texture then run it through a shader before assign to target texure
         /// </summary>
-        /// <param name="source"></param>
+        /// <param name="sourceRt"></param>
         /// <param name="level">Resampling depth</param>
         /// <param name="target"></param>
-        protected virtual void ProgressiveResampling(RenderTexture source, int level, ref RenderTexture target)
+        protected virtual void ProgressiveResampling(int level, ref RenderTexture target)
         {
-            level = Mathf.Min(level, MaxDepth);
-            int rtW = source.width >> level + Downsample;
-            int rtH = source.height >> level + Downsample;
+            level = Mathf.Min(level + Downsample, MaxDepth);
+            int rtW = BlurredScreen.width  >> level;
+            int rtH = BlurredScreen.height >> level;
 
-            RenderTexture rt2 = RenderTexture.GetTemporary(rtW, rtH, 0, source.format);
-            rt2.filterMode = FilterMode.Bilinear;
+            RenderTexture tmpRt = RenderTexture.GetTemporary(rtW, rtH, 0, BlurredScreen.format);
+            tmpRt.filterMode = FilterMode.Bilinear;
 
-            Graphics.Blit(target, rt2, material, 0);
+            Graphics.Blit(target, tmpRt, material, 0);
             RenderTexture.ReleaseTemporary(target);
-            target = rt2;
+            target = tmpRt;
         }
 
-        protected virtual void ProgressiveBlur(RenderTexture source)
+        protected virtual void ProgressiveBlur(RenderTexture sourceRt)
         {
-            //Resize global texture if base downsample changed
-            if (Downsample != lastDownsample)
+            //Resize final texture if base downsample changed
+            if (Downsample != lastDownsample || !BlurRegion.Equals(lastBlurRegion))
             {
-                BlurredScreen = new RenderTexture(
-                    Cam.pixelWidth >> Downsample,
-                    Cam.pixelHeight >> Downsample,
-                    0);
-
+                CreateNewBlurredScreen();
                 lastDownsample = Downsample;
+                lastBlurRegion = BlurRegion;
             }
+
             if (BlurredScreen.IsCreated()) BlurredScreen.DiscardContents();
 
             //Relative blur size to maintain same look across multiple resolution
-            material.SetFloat("size", Size * ScreenSize);
+            material.SetFloat(_sizePropId, Size * ScreenSize);
 
-            int firstDownsampleFactor = iteration > 0 ? 1 : 0 + Downsample;
+            int firstDownsampleFactor = iteration > 0 ? 1 : 0;
 
-            //= width / (downsample + 1)^2
-            int rtW = source.width >> firstDownsampleFactor;
-            int rtH = source.height >> firstDownsampleFactor;
+            int rtW = BlurredScreen.width  >> firstDownsampleFactor; //= width / (downsample + 1)^2
+            int rtH = BlurredScreen.height >> firstDownsampleFactor;
 
-            RenderTexture rt = RenderTexture.GetTemporary(rtW, rtH, 0, source.format);
-            //Bilinear filtering mode increase blurriness when scaled
-            rt.filterMode = FilterMode.Bilinear;
-            source.filterMode = FilterMode.Bilinear;
+            RenderTexture tmpRt = RenderTexture.GetTemporary(rtW, rtH, 0, sourceRt.format);
+            tmpRt.filterMode    = FilterMode.Bilinear;
+            sourceRt.filterMode = FilterMode.Bilinear;
 
             //Initial downsample
-            Graphics.Blit(source, rt, material, 0);
+            material.SetVector(_cropRegionPropId,
+                               new Vector4(BlurRegion.xMin,
+                                           BlurRegion.yMin,
+                                           BlurRegion.xMax,
+                                           BlurRegion.yMax));
+
+            Graphics.Blit(sourceRt, tmpRt, material, 1);
 
             //Downsample. (iteration - 1) pass 
-            for (int i = 2; i < Iteration + 1; i++)
+            for (int i = 2; i <= iteration; i++)
             {
-                ProgressiveResampling(source, i, ref rt);
+                ProgressiveResampling(i, ref tmpRt);
             }
 
             //Upsample. (iteration - 1) pass 
-            for (int i = Iteration - 1; i > 0; i--)
+            for (int i = iteration - 1; i >= 1; i--)
             {
-                ProgressiveResampling(source, i, ref rt);
+                ProgressiveResampling(i, ref tmpRt);
             }
 
-            //Final upsample. Blit to blurredRt
-            Graphics.Blit(rt, BlurredScreen, material, 0);
-
-            RenderTexture.ReleaseTemporary(rt);
+            //Final upsample. Blit to blurredRt and release tmp
+            Graphics.Blit(tmpRt, BlurredScreen, material, 0);
+            RenderTexture.ReleaseTemporary(tmpRt);
         }
 
         protected virtual void OnRenderImage(RenderTexture source, RenderTexture destination)
@@ -299,9 +373,15 @@ namespace LeTai.Asset.TranslucentImage
 
             if (preview)
             {
-                Graphics.Blit(BlurredScreen, destination);
+                previewMaterial.SetVector("_CropRegion",
+                                          new Vector4(BlurRegion.xMin,
+                                                      BlurRegion.yMin,
+                                                      BlurRegion.xMax,
+                                                      BlurRegion.yMax));
+                Graphics.Blit(BlurredScreen, destination, previewMaterial);
                 return;
             }
+
             //Draw the screen unmodified
             Graphics.Blit(source, destination);
 

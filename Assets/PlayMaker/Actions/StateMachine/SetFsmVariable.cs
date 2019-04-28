@@ -91,6 +91,7 @@ namespace HutongGames.PlayMaker.Actions
                 return;
             }
 
+            setValue.UpdateValue();
             setValue.ApplyValueTo(targetVariable);
         }
 

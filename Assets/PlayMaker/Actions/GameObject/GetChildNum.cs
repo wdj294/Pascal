@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2013. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 using UnityEngine;
 
@@ -37,7 +37,8 @@ namespace HutongGames.PlayMaker.Actions
 
 		GameObject DoGetChildNum(GameObject go)
 		{
-			return go == null ? null : go.transform.GetChild(childIndex.Value % go.transform.childCount).gameObject;
+		    if (go == null || go.transform.childCount == 0 || childIndex.Value < 0) return null;
+			return go.transform.GetChild(childIndex.Value % go.transform.childCount).gameObject;
 		}
 	}
 }

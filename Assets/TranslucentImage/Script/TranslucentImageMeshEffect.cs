@@ -1,7 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor;
+
+#endif
 
 namespace LeTai.Asset.TranslucentImage
 {
@@ -19,10 +22,9 @@ namespace LeTai.Asset.TranslucentImage
             for (var i = 0; i < vertices.Count; i++)
             {
                 UIVertex moddedVertex = vertices[i];
-                moddedVertex.uv1 = new Vector2(
-                    spriteBlending,
-                    0 //No use for this yet
-                );
+                moddedVertex.uv1 = new Vector2(spriteBlending,
+                                               0 //No use for this yet
+                                              );
                 vertices[i] = moddedVertex;
             }
 
@@ -34,6 +36,12 @@ namespace LeTai.Asset.TranslucentImage
         {
             base.OnEnable();
             SetVerticesDirty();
+#if UNITY_EDITOR
+            if (!EditorApplication.isPlayingOrWillChangePlaymode)
+            {
+                Start();
+            }
+#endif
         }
 
         protected override void OnDisable()

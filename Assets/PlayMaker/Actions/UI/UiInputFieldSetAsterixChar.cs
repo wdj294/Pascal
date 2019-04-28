@@ -12,7 +12,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 
 		[RequiredField]
-		[Tooltip("The asterix Character used for password field type of the UGui InputField component. Only the first character will be used, the rest of the string will be ignored")]
+		[Tooltip("The asterix Character used for password field type of the UI InputField component. Only the first character will be used, the rest of the string will be ignored")]
 		public FsmString asterixChar;
 
 		[Tooltip("Reset when exiting this state.")]

@@ -157,6 +157,8 @@ namespace HutongGames.PlayMakerEditor
 
             if (Event.current.type == EventType.ExecuteCommand)
             {
+                RepaintAllWindows();
+
                 switch (Event.current.commandName)
                 {
                     /* replaced with Undo.undoRedoPerformed callback added in Unity 4.3
@@ -165,20 +167,27 @@ namespace HutongGames.PlayMakerEditor
                         break;
                     */
 
+                    // NOTE: OSX 2018.3 needs Event.current.Use();
+                    // otherwise e.g., it pastes twice #1814
+
                     case "Cut":
                         FsmEditor.Cut();
+                        Event.current.Use();
                         break;
 
                     case "Copy":
                         FsmEditor.Copy();
+                        Event.current.Use();
                         break;
 
                     case "Paste":
                         FsmEditor.Paste();
+                        Event.current.Use();
                         break;
 
                     case "SelectAll":
                         FsmEditor.SelectAll();
+                        Event.current.Use();
                         break;
 
                     case "OpenWelcomeWindow":
@@ -235,14 +244,17 @@ namespace HutongGames.PlayMakerEditor
 
                     case "AddFsmComponent":
                         PlayMakerMainMenu.AddFsmToSelected();
+                        Event.current.Use();
                         break;
 
                     case "RepaintAll":
                         RepaintAllWindows();
+                        Event.current.Use();
                         break;
 
                     case "ChangeLanguage":
                         ResetWindowTitles();
+                        Event.current.Use();
                         break;
                 }
 

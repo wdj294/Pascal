@@ -15,6 +15,7 @@ using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using HutongGames.PlayMaker.Actions;
+using HutongGames.PlayMaker.AnimationEnums;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -650,6 +651,30 @@ namespace HutongGames.PlayMaker
         public static void DebugLog(Fsm fsm, LogLevel logLevel, string text, bool sendToUnityLog = false)
         {
 #if FSM_LOG
+            // Logging is disabled in builds so we need to handle this
+            // case separately so actions log properly in builds
+
+            if (!Application.isEditor && sendToUnityLog)
+            {
+                var logText = FormatUnityLogString(text);
+
+                switch (logLevel)
+                {
+                    case LogLevel.Warning:
+                        Debug.LogWarning(logText);
+                        break;
+                    case LogLevel.Error:
+                        Debug.LogError(logText);
+                        break;
+                    default:
+                        Debug.Log(logText);
+                        break;
+                }	
+            }
+
+            // Note: FsmLog.LoggingEnabled is always false in builds!
+            // Maybe replace this with Fsm property so we can turn on/off per Fsm?
+
             if (!FsmLog.LoggingEnabled || fsm == null)
             {
                 return;
@@ -682,12 +707,41 @@ namespace HutongGames.PlayMaker
             DebugLog(FsmExecutionStack.ExecutingFsm, LogLevel.Warning, text, true);
         }
 
+        /// <summary>
+        /// Format a log string suitable for the Unity Log.
+        /// The Unity Log lacks some context, so we bake it into the log string.
+        /// </summary>
+        /// <param name="text">Text to log.</param>
+        /// <returns>String formatted for the Unity Log.</returns>
+        public static string FormatUnityLogString(string text)
+        {
+            if (FsmExecutionStack.ExecutingFsm == null) return text;
+
+            var logString = Fsm.GetFullFsmLabel(FsmExecutionStack.ExecutingFsm);
+
+            if (FsmExecutionStack.ExecutingState != null)
+            {
+                logString += " : " + FsmExecutionStack.ExecutingStateName;
+            }
+            
+            if (FsmExecutionStack.ExecutingAction != null)
+            {
+                logString += FsmExecutionStack.ExecutingAction.Name;
+            }
+            
+            logString += " : " + text;
+
+            return logString;
+        }
+
+
         #endregion
 
         #region AutoName helpers
   
         public static string GetValueLabel(INamedVariable variable)
         {
+#if UNITY_EDITOR
             if (variable == null) return "[null]";
             if (variable.IsNone) return "[none]";
             if (variable.UseVariable) return variable.Name;
@@ -695,16 +749,15 @@ namespace HutongGames.PlayMaker
             if (rawValue == null) return "null";
             if (rawValue is string) return "\"" + rawValue + "\"";
             if (rawValue is Array) return "Array";
-#if NETFX_CORE
-            if (rawValue.GetType().IsValueType()) return rawValue.ToString();
-#else
             if (rawValue.GetType().IsValueType) return rawValue.ToString();
-#endif
             var label = rawValue.ToString();
             var classIndex = label.IndexOf('(');
             if (classIndex > 0)
                 return label.Substring(0, label.IndexOf('('));
             return label;
+#else
+            return "";
+#endif
         }
 
         public static string GetValueLabel(Fsm fsm, FsmOwnerDefault ownerDefault)

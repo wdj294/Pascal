@@ -29,7 +29,7 @@ namespace HutongGames.PlayMaker.Actions
 #if UNITY_EDITOR
         public override string AutoName()
         {
-            return "Next Frame Event: " + sendEvent.Name;
+            return "Next Frame Event: " + (sendEvent != null ? sendEvent.Name : "[none]");
         }
 #endif
 	}

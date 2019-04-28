@@ -49,7 +49,7 @@ namespace HutongGames.PlayMaker.Actions
 
         void PickRandom()
         {
-            if (noRepeat.Value && max.Value != min.Value)
+			if (noRepeat.Value && max.Value != min.Value && (!inclusiveMax && (Mathf.Abs (max.Value - min.Value) > 1) ))
             {
                 do
                 {

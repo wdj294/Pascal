@@ -19,7 +19,7 @@ namespace HutongGames.PlayMakerEditor
     {
         // Remember to update version info since it's used by export scripts!
         public const string InstallCurrentVersion = "1.9.0";
-        public const string InstallAssemblyVersion = "1.9.0.f5";
+        public const string InstallAssemblyVersion = "1.9.0.p15";
         public const string InstallBetaVersion = "";
         public const string Version = InstallCurrentVersion + " " + InstallBetaVersion;
 
@@ -88,11 +88,39 @@ namespace HutongGames.PlayMakerEditor
             var window = GetWindow<PlayMakerWelcomeWindow>(true);
             window.SetPage(Page.Welcome);
             PlayMakerAddonManager.ResetView();
+
+            // give window a chance to draw first:
+            EditorApplication.update += CheckUnityVersion;
         }
 
         public static void Open()
         {
             OpenWelcomeWindow();
+        }
+
+        public static void CheckUnityVersion()
+        {
+            EditorApplication.update -= CheckUnityVersion;
+
+            DoUnityVersionCheck();
+        }
+
+        private static bool DoUnityVersionCheck()
+        {
+            if (!EditorStartupPrefs.IsUnityVersionCompatible())
+            {
+                DoFailedUnityVersionDialog();
+                return false;
+            }
+
+            return true;
+        }
+
+        private static void DoFailedUnityVersionDialog()
+        {
+            EditorUtility.DisplayDialog("PlayMaker",
+                "This installer is for Unity " + EditorStartupPrefs.UnityBuildVersion + " and higher!" +
+                "\n\nPlease re-download and import PlayMaker in the Asset Store to get the correct package for this version of Unity.", "OK");
         }
 
         public void OnEnable()
@@ -374,14 +402,14 @@ namespace HutongGames.PlayMakerEditor
             if (isStudentVersion)
             {
                 DrawLink(samplesIcon,
-                    "Install PlayMaker Student Version " + InstallCurrentVersion,
+                    "Install PlayMaker Student Version " + InstallAssemblyVersion,
                     "The current official release.",
                     InstallLatestStudent, null);
             }
             else
             {
                 DrawLink(samplesIcon,
-                    "Install PlayMaker " + InstallCurrentVersion,
+                    "Install PlayMaker " + InstallAssemblyVersion,
                     "The current official release.",
                     InstallLatest, null);
             }
@@ -594,12 +622,16 @@ namespace HutongGames.PlayMakerEditor
 
         private static void PreUpdateCheck(object userData)
         {
+            if (!DoUnityVersionCheck()) return;
+
             PreUpdateChecker.Open();
         }
 
         private static void InstallLatest(object userData)
         {
-            if (DisplayInstallDialog(InstallCurrentVersion, "The latest release version of PlayMaker." +
+            if (!DoUnityVersionCheck()) return;
+
+            if (DisplayInstallDialog(InstallAssemblyVersion, "The latest release version of PlayMaker." +
                                                         "\n\nNOTE: Projects saved with PlayMaker 1.8+ cannot be opened in older versions of PlayMaker!"))
             {
                 EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
@@ -609,7 +641,7 @@ namespace HutongGames.PlayMakerEditor
 
         private static void InstallLatestStudent(object userData)
         {
-            if (DisplayInstallDialog("Student Version " + InstallCurrentVersion, "The latest student version of PlayMaker." +
+            if (DisplayInstallDialog("Student Version " + InstallAssemblyVersion, "The latest student version of PlayMaker." +
                                                             "\n\nNOTE: The Student Version is limited to built in actions only."))
             {
                 EditorStartupPrefs.ShowUpgradeGuide = true; // show upgrade guide after importing
@@ -666,7 +698,7 @@ namespace HutongGames.PlayMakerEditor
             {
                 PreUpdateChecker.Open();
             }*/
-
+                
             // next page slides in from the right
             // welcome screen slides offscreen left
             // reversed if returning to the welcome screen

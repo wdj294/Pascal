@@ -79,10 +79,10 @@ namespace HutongGames.PlayMakerEditor
             if (!EditorApp.IsSourceCodeVersion && !AssetDatabase.IsValidFolder(PlaymakerPluginDirectory))
             {
                 EditorUtility.DisplayDialog("PlayMaker AutoUpdater",
-                    "Please import Playmaker for Unity 5." +
+                    "Please import Playmaker for Unity 5 or higher." +
                     "\n\nTo get the latest version, update in the Unity Asset Store " +
                     "or download from Hutong Games Store.", "OK");
-                Debug.Log("PlayMaker AutoUpdater: Please import Playmaker for Unity 5.");
+                Debug.Log("PlayMaker AutoUpdater: Please import Playmaker for Unity 5 or higher.");
                 EditorPrefs.DeleteKey("PlayMaker.LastAutoUpdate");
                 return false;
             }
@@ -106,6 +106,9 @@ namespace HutongGames.PlayMakerEditor
         {
             //Debug.Log("PlayMaker AutoUpdater " + version);
             EditorApplication.update -= RunAutoUpdate;
+
+            // we only want to run this once
+            EditorStartupPrefs.ProjectUpdated(true);
 
             if (!CheckRequirements())
             {
@@ -134,10 +137,12 @@ namespace HutongGames.PlayMakerEditor
         {
             updateList.Clear();
 
+            /* This is a very old check and it seems to suffer from false positives
+            // So removing it!
             if (PlaymakerDllsNeedMoving())
             {
                 updateList.Add("Move Playmaker dlls to Plugin folders.");
-            }
+            }*/
 
             if (DuplicatePlaymakerDllExists())
             {
@@ -161,6 +166,7 @@ namespace HutongGames.PlayMakerEditor
             if (string.IsNullOrEmpty(playmakerPath))
                 return false;
             var playmakerDirectory = Path.GetDirectoryName(playmakerPath);
+            playmakerDirectory = playmakerDirectory.Replace('\\', '/');
             return !playmakerDirectory.Equals(PlaymakerPluginDirectory, StringComparison.OrdinalIgnoreCase);
         }
 
@@ -207,7 +213,7 @@ namespace HutongGames.PlayMakerEditor
         {
             FixDuplicatePlaymakerDlls();
 
-            MovePlayMakerPlugin();
+            //MovePlayMakerPlugin();
             FixPlayMakerPluginSettings(PlaymakerPluginPath); //(note doing this before move doesn't seem to take)
 
             MovePlayMakerMetroPlugin();

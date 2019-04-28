@@ -28,7 +28,8 @@ namespace HutongGames.PlayMaker.Actions
 		[Tooltip("Repeat every frame.")]
 		public bool everyFrame;
 
-		GameObject goLastFrame;
+        private GameObject goLastFrame;
+        private string fsmNameLastFrame;
 		protected PlayMakerFSM fsm;
 
 		public override void Reset()
@@ -55,7 +56,7 @@ namespace HutongGames.PlayMaker.Actions
 			DoGetFsmVariable();
 		}
 
-		void DoGetFsmVariable()
+        private void DoGetFsmVariable()
 		{
 			var go = Fsm.GetOwnerDefaultTarget(gameObject);
 			if (go == null)
@@ -63,11 +64,11 @@ namespace HutongGames.PlayMaker.Actions
 				return;
 			}
 
-			// only get the fsm component if go has changed
-
-			if (go != goLastFrame)
-			{
-				goLastFrame = go;
+            if (go != goLastFrame || fsmName.Value != fsmNameLastFrame)
+            {
+                goLastFrame = go;
+                fsmNameLastFrame = fsmName.Value;
+                // only get the fsm component if go or fsm name has changed
 				fsm = ActionHelpers.GetGameObjectFsm(go, fsmName.Value);
 			}
 

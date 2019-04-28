@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The text value of the UGui Text component.")]
+		[Tooltip("The text value of the UI Text component.")]
 		public FsmString text;
 
 		[Tooltip("Runs every frame. Useful to animate values over time.")]

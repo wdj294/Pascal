@@ -93,7 +93,7 @@ namespace HutongGames.PlayMaker.Actions
 				break;
 			}
 			
-			if (lerpTime > 1)
+			if (lerpTime >= 1)
 			{
 				if (finishEvent != null)
 				{

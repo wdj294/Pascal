@@ -16,7 +16,7 @@ namespace LeTai.Asset.TranslucentImage
             material = AssetDatabase.LoadAssetAtPath<Material>(
                 "Assets/Le Tai's Asset/TranslucentImage/Material/Default-Translucent.mat");
             vibrancy = material.GetFloat("_Vibrancy");
-            source = source ?? FindObjectOfType<TranslucentImageSource>();
+            source   = source ? source : FindObjectOfType<TranslucentImageSource>();
 
             PrepShader();
         }
@@ -28,12 +28,6 @@ namespace LeTai.Asset.TranslucentImage
             SetVerticesDirty();
 
             Update();
-        }
-
-        [InitializeOnLoadMethod]
-        protected void Init()
-        {
-            Start();
         }
     }
 }

@@ -44,7 +44,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnEnter()
 		{
-			DoSetFsmBool();
+			DoSetFsmTexture();
 
 			if (!everyFrame)
 			{
@@ -52,7 +52,7 @@ namespace HutongGames.PlayMaker.Actions
 			}
 		}
 
-		void DoSetFsmBool()
+		void DoSetFsmTexture()
 		{
 			if (setValue == null)
 			{
@@ -95,7 +95,7 @@ namespace HutongGames.PlayMaker.Actions
 
 		public override void OnUpdate()
 		{
-			DoSetFsmBool();
+			DoSetFsmTexture();
 		}
 
 	}

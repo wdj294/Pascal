@@ -10,73 +10,96 @@ namespace HutongGames.PlayMaker.Actions
 	{
 		public static PointerEventData lastPointerEventData;
 
+        [Tooltip("Number of clicks in a row.")]
 		[UIHint(UIHint.Variable)]
 		public FsmInt clickCount;
 
+	    [Tooltip("The last time a click event was sent.")]
 		[UIHint(UIHint.Variable)]
 		public FsmFloat clickTime;
 
+	    [Tooltip("Pointer delta since last update.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector2 delta;
 
+	    [Tooltip("Is a drag operation currently occuring.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool dragging;
 
+	    [Tooltip("The InputButton for this event.")]
 		[UIHint(UIHint.Variable)]
 		[ObjectType(typeof(PointerEventData.InputButton))]
 		public FsmEnum inputButton;
 
+	    [Tooltip("Is the pointer being pressed? (Not documented by Unity)")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool eligibleForClick;
 
+	    [Tooltip("The camera associated with the last OnPointerEnter event.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject enterEventCamera;
 
+	    [Tooltip("The camera associated with the last OnPointerPress event.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject pressEventCamera;
 
+	    [Tooltip("Is the pointer moving.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool isPointerMoving;
 
+	    [Tooltip("Is scroll being used on the input device.")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool isScrolling;
 
+	    [Tooltip("The GameObject for the last press event.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject lastPress;
 
+	    [Tooltip("The object that is receiving OnDrag.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject pointerDrag;
 
+	    [Tooltip("The object that received \'OnPointerEnter\'.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject pointerEnter;
 
+	    [Tooltip("Id of the pointer (touch id).")]
 		[UIHint(UIHint.Variable)]
 		public FsmInt pointerId;
 
+	    [Tooltip("The GameObject that received the OnPointerDown.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject pointerPress;
 
+	    [Tooltip("Current pointer position.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector2 position;
 
+	    [Tooltip("Position of the press.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector2 pressPosition;
 
+	    [Tooltip("The object that the press happened on even if it can not handle the press event.")]
 		[UIHint(UIHint.Variable)]
 		public FsmGameObject rawPointerPress;
 
+	    [Tooltip("The amount of scroll since the last update.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector2 scrollDelta;
 
+	    [Tooltip("Is the event used?")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool used;
 
+	    [Tooltip("Should a drag threshold be used?")]
 		[UIHint(UIHint.Variable)]
 		public FsmBool useDragThreshold;
 
+	    [Tooltip("The normal of the last raycast in world coordinates.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector3 worldNormal;
 
+	    [Tooltip("The world position of the last raycast.")]
 		[UIHint(UIHint.Variable)]
 		public FsmVector3 worldPosition;
 

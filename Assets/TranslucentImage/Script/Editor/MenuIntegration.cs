@@ -26,7 +26,7 @@ namespace LeTai.Asset.TranslucentImage.Editor
 
             string uniqueName = GameObjectUtility.GetUniqueNameForSibling(parent.transform, element.name);
             element.name = uniqueName;
-            Undo.RegisterCreatedObjectUndo(element, "Create " + element.name);
+            Undo.RegisterCreatedObjectUndo(element, "Create "                      + element.name);
             Undo.SetTransformParent(element.transform, parent.transform, "Parent " + element.name);
             GameObjectUtility.SetParentAndAlign(element, parent);
             if (parent != menuCommand.context) // not a context click, so center in sceneview
@@ -59,7 +59,7 @@ namespace LeTai.Asset.TranslucentImage.Editor
         public static GameObject CreateNewUI()
         {
             // Root for the UI
-            var root = new GameObject("Canvas") {layer = LayerMask.NameToLayer("UI")};
+            var    root   = new GameObject("Canvas") {layer = LayerMask.NameToLayer("UI")};
             Canvas canvas = root.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             root.AddComponent<CanvasScaler>();
@@ -103,7 +103,7 @@ namespace LeTai.Asset.TranslucentImage.Editor
 
             // Create world space Plane from canvas position.
             Vector2 localPlanePosition;
-            Camera camera = sceneView.camera;
+            Camera  camera   = sceneView.camera;
             Vector3 position = Vector3.zero;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 canvasRTransform,
@@ -124,23 +124,23 @@ namespace LeTai.Asset.TranslucentImage.Editor
 
                 Vector3 minLocalPosition;
                 minLocalPosition.x = canvasRTransform.sizeDelta.x * (0 - canvasRTransform.pivot.x) +
-                                     itemTransform.sizeDelta.x * itemTransform.pivot.x;
+                                     itemTransform.sizeDelta.x    * itemTransform.pivot.x;
                 minLocalPosition.y = canvasRTransform.sizeDelta.y * (0 - canvasRTransform.pivot.y) +
-                                     itemTransform.sizeDelta.y * itemTransform.pivot.y;
+                                     itemTransform.sizeDelta.y    * itemTransform.pivot.y;
 
                 Vector3 maxLocalPosition;
                 maxLocalPosition.x = canvasRTransform.sizeDelta.x * (1 - canvasRTransform.pivot.x) -
-                                     itemTransform.sizeDelta.x * itemTransform.pivot.x;
+                                     itemTransform.sizeDelta.x    * itemTransform.pivot.x;
                 maxLocalPosition.y = canvasRTransform.sizeDelta.y * (1 - canvasRTransform.pivot.y) -
-                                     itemTransform.sizeDelta.y * itemTransform.pivot.y;
+                                     itemTransform.sizeDelta.y    * itemTransform.pivot.y;
 
                 position.x = Mathf.Clamp(position.x, minLocalPosition.x, maxLocalPosition.x);
                 position.y = Mathf.Clamp(position.y, minLocalPosition.y, maxLocalPosition.y);
             }
 
             itemTransform.anchoredPosition = position;
-            itemTransform.localRotation = Quaternion.identity;
-            itemTransform.localScale = Vector3.one;
+            itemTransform.localRotation    = Quaternion.identity;
+            itemTransform.localScale       = Vector3.one;
         }
     }
 }

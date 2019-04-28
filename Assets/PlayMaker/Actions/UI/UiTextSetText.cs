@@ -12,7 +12,7 @@ namespace HutongGames.PlayMaker.Actions
 		public FsmOwnerDefault gameObject;
 
 		[UIHint(UIHint.TextArea)]
-		[Tooltip("The text of the UGui Text component.")]
+		[Tooltip("The text of the UI Text component.")]
 		public FsmString text;
 
 		[Tooltip("Reset when exiting this state.")]

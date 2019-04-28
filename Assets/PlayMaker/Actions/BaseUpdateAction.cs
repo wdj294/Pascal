@@ -1,4 +1,4 @@
-// (c) Copyright HutongGames, LLC 2010-2018. All rights reserved.
+// (c) Copyright HutongGames, LLC. All rights reserved.
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -31,8 +31,12 @@ namespace HutongGames.PlayMaker.Actions
 		{
 			if (updateType == UpdateType.OnFixedUpdate)
 			{
-				   Fsm.HandleFixedUpdate = true;
+	            Fsm.HandleFixedUpdate = true;
 			}
+            else if (updateType == UpdateType.OnLateUpdate)
+            {
+                Fsm.HandleLateUpdate = true;
+            }
 		}
 		
 		public override void OnUpdate()

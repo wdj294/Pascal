@@ -27,6 +27,7 @@ namespace HutongGames.PlayMaker.Actions
         public bool everyFrame;
 
         private GameObject cachedGO;
+        private string cachedFsmName;
         private PlayMakerFSM sourceFsm;
         private INamedVariable[] sourceVariables;
         private NamedVariable[] targetVariables;
@@ -46,7 +47,7 @@ namespace HutongGames.PlayMaker.Actions
                 return;
             }
 
-            if (go != cachedGO)
+            if (go != cachedGO || cachedFsmName != fsmName.Value)
             {
                 sourceVariables = new INamedVariable[getVariables.Length];
                 targetVariables = new NamedVariable[getVariables.Length];
@@ -65,6 +66,7 @@ namespace HutongGames.PlayMaker.Actions
                     }
 
                     cachedGO = go;
+                    cachedFsmName = fsmName.Value;
                 }
             }
         }

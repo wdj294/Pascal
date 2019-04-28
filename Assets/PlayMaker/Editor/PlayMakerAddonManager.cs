@@ -1,4 +1,4 @@
-﻿﻿using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace HutongGames.PlayMakerEditor
@@ -151,7 +151,7 @@ namespace HutongGames.PlayMakerEditor
 	                        "\nPlayMaker\\Actions\\Network";
 	        if (GUILayout.Button(label, GUILayout.Width(100)))
 	        {
-                PlayMakerDefines.RemoveSymbolFromAllTargets("PLAYMAKER_LEGACY_NETWORK");
+                PlayMakerDefines.RemoveScriptingDefineSymbolFromAllTargets("PLAYMAKER_LEGACY_NETWORK");
     	        EditorStartupPrefs.UseLegacyNetworking = false;
 
 	            EditorUtility.DisplayDialog("PlayMaker Add-ons",

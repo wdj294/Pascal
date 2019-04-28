@@ -4,7 +4,7 @@ namespace LeTai.Asset.TranslucentImage.Demo
 {
     public class ChangeParams : MonoBehaviour
     {
-        TranslucentImageSource source;
+        TranslucentImageSource    source;
         public TranslucentImage[] translucentImages;
 
         // Use this for initialization

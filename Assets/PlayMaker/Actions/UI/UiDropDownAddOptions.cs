@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Add multiple options to the options of the Dropdown uGui Component")]
+	[Tooltip("Add multiple options to the options of the Dropdown UI Component")]
 	public class UiDropDownAddOptions : ComponentAction<UnityEngine.UI.Dropdown>
 	{
 		[RequiredField]

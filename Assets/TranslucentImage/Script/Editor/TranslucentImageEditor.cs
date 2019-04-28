@@ -17,11 +17,11 @@ namespace LeTai.Asset.TranslucentImage.Editor
         {
             base.OnEnable();
 
-            source = serializedObject.FindProperty("source");
+            source         = serializedObject.FindProperty("source");
             spriteBlending = serializedObject.FindProperty("spriteBlending");
-            vibrancy = serializedObject.FindProperty("vibrancy");
-            brightness = serializedObject.FindProperty("brightness");
-            flatten = serializedObject.FindProperty("flatten");
+            vibrancy       = serializedObject.FindProperty("vibrancy");
+            brightness     = serializedObject.FindProperty("brightness");
+            flatten        = serializedObject.FindProperty("flatten");
         }
 
         public override void OnInspectorGUI()
@@ -29,9 +29,11 @@ namespace LeTai.Asset.TranslucentImage.Editor
             base.OnInspectorGUI();
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(spriteBlending);
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(source);
+            EditorGUILayout.PropertyField(spriteBlending);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Shared settings", EditorStyles.centeredGreyMiniLabel);
             EditorGUILayout.PropertyField(vibrancy);
             EditorGUILayout.PropertyField(brightness);
             EditorGUILayout.PropertyField(flatten);

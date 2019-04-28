@@ -51,6 +51,12 @@ namespace HutongGames.PlayMakerEditor
             UpdateScenesInBuild();
         }
 
+        [MenuItem(MenuRoot + "Tools/Preprocess Prefab FSMs", false, 27)]
+        public static void PreprocessPrefabFSMs()
+        {
+            DoPreprocessPrefabFSMs();
+        }
+
         /*WIP
         [MenuItem(MenuRoot + "Tools/Scan Scenes", false, 33)]
         public static void ScanScenesInProject()
@@ -58,6 +64,38 @@ namespace HutongGames.PlayMakerEditor
             FindAllScenes();
         }
 */
+
+        private static void DoPreprocessPrefabFSMs()
+        {
+            Debug.Log("Preprocessing Prefab FSMs...");
+            var fsmList = Resources.FindObjectsOfTypeAll<PlayMakerFSM>();
+            foreach (var playMakerFSM in fsmList)
+            {
+                //Debug.Log(FsmEditorUtility.GetFullFsmLabel(playMakerFSM));
+
+                if (playMakerFSM == null || !FsmPrefabs.IsPrefab(playMakerFSM.Fsm)) continue;
+                
+#if UNITY_2018_3_OR_NEWER                
+
+                var assetPath = AssetDatabase.GetAssetPath(playMakerFSM);
+                var go = PrefabUtility.LoadPrefabContents(assetPath);
+
+                var prefabFSMs = go.GetComponents<PlayMakerFSM>();
+                foreach (var prefabFSM in prefabFSMs)
+                {
+                    prefabFSM.Preprocess();
+                    EditorUtility.SetDirty(prefabFSM);
+                }
+
+                PrefabUtility.SaveAsPrefabAsset(go, assetPath);
+                PrefabUtility.UnloadPrefabContents(go);
+#else
+                playMakerFSM.Preprocess();
+                EditorUtility.SetDirty(playMakerFSM);
+#endif
+
+            }
+        }
 
         private static void ReSaveAllLoadedFSMs()
         {

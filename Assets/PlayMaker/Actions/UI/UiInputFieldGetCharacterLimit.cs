@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("The maximum number of characters that the user can type into the UGui InputField component.")]
+		[Tooltip("The maximum number of characters that the user can type into the UI InputField component.")]
 		public FsmInt characterLimit;
 
 		[Tooltip("Event sent if limit is infinite (equal to 0)")]

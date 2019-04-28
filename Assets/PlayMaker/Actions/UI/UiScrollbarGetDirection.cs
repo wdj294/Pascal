@@ -3,7 +3,7 @@
 namespace HutongGames.PlayMaker.Actions
 {
 	[ActionCategory(ActionCategory.UI)]
-	[Tooltip("Gets the direction of a UGui Scrollbar component.")]
+	[Tooltip("Gets the direction of a UI Scrollbar component.")]
 	public class UiScrollbarGetDirection : ComponentAction<UnityEngine.UI.Scrollbar>
 	{
 		[RequiredField]

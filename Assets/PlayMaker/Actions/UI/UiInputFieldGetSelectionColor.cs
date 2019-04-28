@@ -13,7 +13,7 @@ namespace HutongGames.PlayMaker.Actions
 		
 		[RequiredField]
 		[UIHint(UIHint.Variable)]
-		[Tooltip("This is the color of the highlighter to show what characters are selected of the UGui InputField component.")]
+		[Tooltip("This is the color of the highlighter to show what characters are selected of the UI InputField component.")]
 		public FsmColor selectionColor;
 
 		[Tooltip("Repeats every frame")]

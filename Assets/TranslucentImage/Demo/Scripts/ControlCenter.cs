@@ -6,7 +6,7 @@ namespace LeTai.Asset.TranslucentImage.Demo
     public class ControlCenter : MonoBehaviour
     {
         public RectTransform handle;
-        RectTransform rt;
+        RectTransform        rt;
 
         void Start()
         {

@@ -36,9 +36,12 @@ namespace LeTai.Asset.TranslucentImage
 
 
         Shader correctShader;
-        int vibrancyPropId;
-        int brightnessPropId;
-        int flattenPropId;
+
+        static int _vibrancyPropId;
+        static int _brightnessPropId;
+        static int _flattenPropId;
+        static int _blurTexPropId;
+        static int _cropRegionPropId;
 
 
         protected override void Start()
@@ -47,12 +50,12 @@ namespace LeTai.Asset.TranslucentImage
 
             PrepShader();
 
-            oldVibrancy = vibrancy;
+            oldVibrancy   = vibrancy;
             oldBrightness = brightness;
-            oldFlatten = flatten;
+            oldFlatten    = flatten;
 
-            source = source ?? FindObjectOfType<TranslucentImageSource>();
-            material.SetTexture("_BlurTex", source.BlurredScreen);
+            source = source ? source : FindObjectOfType<TranslucentImageSource>();
+            material.SetTexture(_blurTexPropId, source.BlurredScreen);
 
 
 #if UNITY_5_6_OR_NEWER
@@ -62,20 +65,22 @@ namespace LeTai.Asset.TranslucentImage
 
         void PrepShader()
         {
-            correctShader = Shader.Find("UI/TranslucentImage");
-            vibrancyPropId = Shader.PropertyToID("_Vibrancy");
-            brightnessPropId = Shader.PropertyToID("_Brightness");
-            flattenPropId = Shader.PropertyToID("_Flatten");
+            correctShader     = Shader.Find("UI/TranslucentImage");
+            _vibrancyPropId   = Shader.PropertyToID("_Vibrancy");
+            _brightnessPropId = Shader.PropertyToID("_Brightness");
+            _flattenPropId    = Shader.PropertyToID("_Flatten");
+            _blurTexPropId    = Shader.PropertyToID("_BlurTex");
+            _cropRegionPropId = Shader.PropertyToID("_CropRegion");
         }
 
-        protected void LateUpdate()
+        void LateUpdate()
         {
             if (!source)
             {
-                Debug.LogError(
-                    "Source missing. Add TranslucentImageSource component to your main camera, then drag the camera to Source slot");
+                Debug.LogError("Source missing. Add TranslucentImageSource component to your main camera, then drag the camera to Source slot");
                 return;
             }
+
             if (!IsActive() || !source.BlurredScreen)
                 return;
 
@@ -84,24 +89,47 @@ namespace LeTai.Asset.TranslucentImage
                 Debug.LogError("Material using \"UI/TranslucentImage\" is required");
             }
 
-            materialForRendering.SetTexture("_BlurTex", source.BlurredScreen);
+            materialForRendering.SetTexture(_blurTexPropId, source.BlurredScreen);
+            materialForRendering.SetVector(_cropRegionPropId,
+                                           new Vector4(source.BlurRegion.xMin,
+                                                       source.BlurRegion.yMin,
+                                                       source.BlurRegion.xMax,
+                                                       source.BlurRegion.yMax));
+
 #if UNITY_EDITOR
-            material.SetTexture("_BlurTex", source.BlurredScreen);
+            material.SetTexture(_blurTexPropId, source.BlurredScreen);
+            material.SetVector(_cropRegionPropId,
+                               new Vector4(source.BlurRegion.xMin,
+                                           source.BlurRegion.yMin,
+                                           source.BlurRegion.xMax,
+                                           source.BlurRegion.yMax));
 #endif
         }
 
         void Update()
         {
-            if (vibrancyPropId == 0 || brightnessPropId == 0 || flattenPropId == 0)
+            if (_vibrancyPropId == 0 || _brightnessPropId == 0 || _flattenPropId == 0)
                 return;
 
-            SyncMaterialProperty(vibrancyPropId, ref vibrancy, ref oldVibrancy);
-            SyncMaterialProperty(brightnessPropId, ref brightness, ref oldBrightness);
-            SyncMaterialProperty(flattenPropId, ref flatten, ref oldFlatten);
+
+//            materialForRendering.SetTexture(_blurTexPropId, source.BlurredScreen);
+//#if UNITY_EDITOR
+//            material.SetTexture(_blurTexPropId, source.BlurredScreen);
+//#endif
+
+            SyncMaterialProperty(_vibrancyPropId,   ref vibrancy,   ref oldVibrancy);
+            SyncMaterialProperty(_brightnessPropId, ref brightness, ref oldBrightness);
+            SyncMaterialProperty(_flattenPropId,    ref flatten,    ref oldFlatten);
         }
 
         float oldVibrancy, oldBrightness, oldFlatten;
 
+        /// <summary>
+        /// Sync material property with instance
+        /// </summary>
+        /// <param name="propId">material property id</param>
+        /// <param name="value"></param>
+        /// <param name="oldValue"></param>
         void SyncMaterialProperty(int propId, ref float value, ref float oldValue)
         {
             float matProp = materialForRendering.GetFloat(propId);
@@ -117,6 +145,7 @@ namespace LeTai.Asset.TranslucentImage
                     value = matProp;
                 }
             }
+
             oldValue = value;
         }
     }

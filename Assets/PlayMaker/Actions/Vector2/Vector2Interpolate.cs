@@ -85,8 +85,8 @@ namespace HutongGames.PlayMaker.Actions
 			}
 
 			storeResult.Value = Vector2.Lerp(fromVector.Value, toVector.Value, weight);
-			
-			if (weight > 1)
+
+			if (weight >= 1)
 			{
 				if (finishEvent != null)
 					Fsm.Event(finishEvent);

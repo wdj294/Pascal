@@ -13,8 +13,8 @@ public class MigrationTool : EditorWindow
         {
             var oldColor = translucentImage.color;
             translucentImage.spriteBlending = oldColor.a;
-            oldColor.a = 1;
-            translucentImage.color = oldColor;
+            oldColor.a                      = 1;
+            translucentImage.color          = oldColor;
             translucentImage.SetAllDirty();
         }
     }
